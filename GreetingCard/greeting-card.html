@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/CreativeWork">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create custom birthday cards online with personal messages, photos, and social links. Free digital greeting card maker with instant download feature.">
+<meta name="keywords" content="online birthday card maker, custom greeting cards, digital birthday card creator, personalized ecards, free card generator">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aarifalam.life/GreetingCard/greeting-card.html">
+<meta property="og:title" content="Free Online Birthday Card Maker | Custom Digital Greetings">
+<meta property="og:description" content="Create personalized birthday cards with photos and messages. Instant download and sharing features. Make unique digital greetings in minutes!">
+<meta property="og:image" content="https://aarifalam.life/images/greeting-card.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Digital Birthday Card Creator - Make Custom Cards Online">
+<meta name="twitter:description" content="Free tool to design personalized birthday cards with photos and social links. Download or share digital greetings instantly.">
+<meta name="twitter:image" content="https://aarifalam.life/images/greeting-card-twitter.jpg">
+
+<title>Free Birthday Card Maker: Create Custom Digital Greetings Online</title>
+
+<!-- Preload Important Resources -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap" as="font" crossorigin>
+
+<link rel="canonical" href="https://aarifalam.life/GreetingCard/greeting-card.html">
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="robots" content="index, follow">
+
+
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Online Birthday Card Maker",
+  "description": "Digital tool for creating personalized birthday greeting cards",
+  "url": "https://aarifalam.life/GreetingCard/greeting-card.html",
+  "image": "https://aarifalam.life/images/greeting-card-schema.jpg",
+  "creator": {
+    "@type": "Person",
+    "name": "Aarif Alam",
+    "sameAs": "https://aarifalam.life"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<!-- css -->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/Bcard.css">
+<link rel="stylesheet" href="css/Bcard1.css">
+<link rel="stylesheet" href="css/Bcard2.css">
+<link rel="stylesheet" href="css/Bcard3.css">
+<link rel="stylesheet" href="css/f.css">
+<link rel="stylesheet" href="css/img-url-botton.css">
+<link rel="stylesheet" href="css/h.css">
+
+
+</head>
+<body>
+
+<!-- Header -->
+<header class="main-header">
+  <div class="header-container">
+    <a href="greeting-card.html" class="logo">
+   <i class="fas fa-bolt" data-logo-icon></i>
+      Aarif Alam
+    </a>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
+      <li><a href="../Knowledge/blogs.html"><i class="fas fa-brain"></i> BRAIN POWER </a></li>
+      <li><a href="../Game/game-page.html"><i class="fas fa-gamepad"></i> GAME ZOON </a></li>
+      <li><a href="../GreetingCard/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
+      <li><a href="../footer/contact-us/contact.html"><i class="fas fa-handshake"></i> contact-us</a></li>
+    </ul>
+  </div>
+</header>
+
+
+
+<div class="flip-card">
+<div class="flip-card-inner" id="card-container">
+<div class="flip-card-front" id="front-message">
+            🎉 HAPPY BIRTHDAY! 🎉
+        </div>
+<div class="flip-card-back" id="back-message">
+<img alt="Birthday Person" class="profile-image" id="profile-image" src="https://i.imgur.com/JqYeYn7.jpg">
+<div class="birthday-text">To My Amazing Friend!</div>
+<div id="back-text">
+                Wishing you a day filled with happiness and a year filled with joy! 
+                May all your dreams come true on this special day.
+            </div>
+<div class="social-icons" id="social-icons">
+<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+<a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+<a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+<div class="editor">
+<h3>Customize Birthday Card</h3>
+<div class="form-group">
+<label for="front-input">Front Message:</label>
+<input id="front-input" placeholder="Front Message" type="text" value="🎉 HAPPY BIRTHDAY! 🎉">
+</div>
+<div class="form-group">
+<label for="image-url">Profile Image URL:</label>
+<input id="image-url" placeholder="Paste image URL here" type="text" value="https://i.imgur.com/JqYeYn7.jpg">
+</div>
+<div class="form-group">
+<label for="back-title">Back Title:</label>
+<input id="back-title" placeholder="Back Title" type="text" value="To My Amazing Friend!">
+</div>
+<div class="form-group">
+<label for="back-input">Back Message:</label>
+<textarea id="back-input" placeholder="Back Message" rows="4">Wishing you a day filled with happiness and a year filled with joy! 
+May all your dreams come true on this special day.</textarea>
+</div>
+<div class="form-group">
+<label>Social Media Links:</label>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<input id="instagram" placeholder="Instagram" style="flex: 1;" type="text">
+<input id="facebook" placeholder="Facebook" style="flex: 1;" type="text">
+<input id="twitter" placeholder="Twitter" style="flex: 1;" type="text">
+<input id="youtube" placeholder="YouTube" style="flex: 1;" type="text">
+</div>
+</div>
+<button onclick="updateCard()">Update Card</button>
+<button onclick="downloadCard()">Download Card</button>
+<button onclick="addConfetti()">Add Confetti!</button>
+</div>
+
+
+<a href="img-to-url.html" class="luxury-button">
+  <span class="button-text">Convert Image to URL</span>
+  <span class="button-icon">➔</span>
+  <span class="button-glow"></span>
+  <span class="button-sparkles"></span>
+</a>
+
+
+
+<footer>
+  <div class="footer-links">
+    <a href="../footer/Terms.html">Terms of Service</a>
+    <a href="../footer/privacy-policy.html">Privacy Policy</a>
+    <a href="../footer/About.html">About Us</a>
+    <a href="../footer/contact-us/contact.html">Contact Us</a>
+
+
+  </div>
+  <div class="footer-text">
+    You can create unlimited greeting card for your friend and family , Birthday wise or other. Earn more by sharing!
+  </div>
+  <div class="footer-text">
+    &copy; 2025 Aarif Alam . All rights reserved.
+  </div>
+</footer>
+
+
+<script src="js/h1.js"></script>
+
+
+<script>
+    function updateCard() {
+        // Update front message
+        const frontMessage = document.getElementById('front-input').value;
+        document.getElementById('front-message').innerText = frontMessage;
+        
+        // Update profile image
+        const imageUrl = document.getElementById('image-url').value;
+        document.getElementById('profile-image').src = imageUrl;
+        
+        // Update back title
+        const backTitle = document.getElementById('back-title').value;
+        document.querySelector('.birthday-text').innerText = backTitle;
+        
+        // Update back message
+        const backMessage = document.getElementById('back-input').value;
+        document.getElementById('back-text').innerHTML = backMessage.replace(/\n/g, '<br>');
+        
+        // Update social media links
+        const instagram = document.getElementById('instagram').value;
+        const facebook = document.getElementById('facebook').value;
+        const twitter = document.getElementById('twitter').value;
+        const youtube = document.getElementById('youtube').value;
+        
+        const socialIcons = document.getElementById('social-icons');
+        socialIcons.innerHTML = '';
+        
+        if (instagram) {
+            socialIcons.innerHTML += `<a href="${instagram}" target="_blank"><i class="fab fa-instagram"></i></a>`;
+        }
+        if (facebook) {
+            socialIcons.innerHTML += `<a href="${facebook}" target="_blank"><i class="fab fa-facebook"></i></a>`;
+        }
+        if (twitter) {
+            socialIcons.innerHTML += `<a href="${twitter}" target="_blank"><i class="fab fa-twitter"></i></a>`;
+        }
+        if (youtube) {
+            socialIcons.innerHTML += `<a href="${youtube}" target="_blank"><i class="fab fa-youtube"></i></a>`;
+        }
+    }
+
+    function downloadCard() {
+        const frontMessage = document.getElementById('front-input').value;
+        const imageUrl = document.getElementById('image-url').value;
+        const backTitle = document.getElementById('back-title').value;
+        const backMessage = document.getElementById('back-input').value.replace(/\n/g, '<br>');
+        
+        const instagram = document.getElementById('instagram').value;
+        const facebook = document.getElementById('facebook').value;
+        const twitter = document.getElementById('twitter').value;
+        const youtube = document.getElementById('youtube').value;
+        
+        let socialIconsHTML = '';
+        if (instagram) socialIconsHTML += `<a href="${instagram}" target="_blank"><i class="fab fa-instagram"></i></a>`;
+        if (facebook) socialIconsHTML += `<a href="${facebook}" target="_blank"><i class="fab fa-facebook"></i></a>`;
+        if (twitter) socialIconsHTML += `<a href="${twitter}" target="_blank"><i class="fab fa-twitter"></i></a>`;
+        if (youtube) socialIconsHTML += `<a href="${youtube}" target="_blank"><i class="fab fa-youtube"></i></a>`;
+
+        const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffebee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('#');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .flip-card {
+            background-color: transparent;
+            width: 500px;
+            height: 600px;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        .flip-card-front {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #d32f2f;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            border: 5px solid #ffeb3b;
+        }
+        .flip-card-back {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            transform: rotateY(180deg);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+            border: 5px solid #4caf50;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #333;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #e91e63;
+        }
+        .birthday-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e91e63;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">${frontMessage}</div>
+        <div class="flip-card-back">
+            <img src="${imageUrl}" alt="Birthday Person" class="profile-image">
+            <div class="birthday-text">${backTitle}</div>
+            <div>${backMessage}</div>
+            <div class="social-icons">${socialIconsHTML}</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>`;
+
+        const blob = new Blob([htmlContent], { type: "text/html" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "birthday_card.html";
+        link.click();
+    }
+
+    function addConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation completes
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+
+    // Initialize the card
+    updateCard();
+</script>
+</body>
+</html>

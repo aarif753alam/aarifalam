@@ -1,0 +1,198 @@
+
+/* email-subscribe botton  */
+ /* Add these styles to your existing CSS */
+  .cta {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta p {
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  .signup-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+  }
+  
+  .form-input {
+    flex: 1;
+    min-width: 300px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus {
+    outline: 2px solid var(--accent);
+    box-shadow: 0 5px 20px rgba(57, 225, 227, 0.4);
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    background: var(--accent);
+    color: var(--dark);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(57, 225, 227, 0.4);
+  }
+  
+  .btn-icon {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-primary:hover .btn-icon {
+    transform: translateX(5px);
+  }
+  
+  /* Loading state */
+  .btn-primary.loading .btn-text {
+    visibility: hidden;
+  }
+  
+  .btn-primary.loading .btn-icon {
+    position: absolute;
+    margin: 0;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Success message */
+  .success-message {
+    display: none;
+    background: var(--success);
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+.scrolling-text {
+  white-space: nowrap;
+  animation: scroll 15s linear infinite;
+}
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+/* Subscription Message Styles */
+.subscription-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+  max-width: 90%;
+  width: 350px;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+
+.subscription-message.success {
+  background: linear-gradient(135deg, #11e901 0%, #9a00e7 100%);
+  color: white;
+}
+
+.subscription-message.error {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+/* Checkmark Animation */
+.checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: white;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: white;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Error Icon */
+.error-animation i {
+  font-size: 60px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Content Styling */
+.success-content h3, .error-content h3 {
+  margin-top: 15px;
+  font-size: 24px;
+}
+
+.success-content p, .error-content p {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+

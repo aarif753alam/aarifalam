@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play 1 to 25 Number Game – two player Challenge game</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="description" content="Play the fun 1 to 25 number game online. random 5 number cut any straight line. Challenge your friends now!">
+  <meta name="keywords" content="1 to 25 number game, number grid game, fast tap challenge, online brain game, number game for kids">
+  <link rel="canonical" href="https://aarifalam.life/Game/numbergame.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="1 to 25 Number Game – Fun Brain Challenge">
+  <meta property="og:description" content="Tap numbers 1 to 25 in order as fast as you can. A quick brain game for kids and adults.">
+  <meta property="og:url" content="https://aarifalam.life/numbergame.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://aarifalam.life/images/numbergame-thumbnail.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Play 1 to 25 Number Game Online">
+  <meta name="twitter:description" content="Challenge your mind with the 1 to 25 tap game – test your reflexes and enjoy!">
+  <meta name="twitter:image" content="https://aarifalam.life/images/numbergame-thumbnail.jpg">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    "name": "1 to 25 Number Game",
+    "description": "Tap numbers from 1 to 25 as fast as possible. Test your reflexes in this fun browser-based game.",
+    "url": "https://aarifalam.life/numbergame.html",
+    "inLanguage": "en",
+    "publisher": {
+      "@type": "Person",
+      "name": "Aarif Alam"
+    }
+  }
+  </script>
+
+  <!-- Fonts and CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
+
+
+    <style>
+        :root {
+            --player1-color: #3498db;
+            --player1-dark: #2980b9;
+            --player2-color: #e74c3c;
+            --player2-dark: #c0392b;
+            --primary-color: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary-color: #9b59b6;
+            --secondary-dark: #8e44ad;
+            --warning-color: #f39c12;
+            --warning-dark: #e67e22;
+            --success-color: #1abc9c;
+            --success-dark: #16a085;
+            --bg-color: #f8f9fa;
+            --card-color: #ffffff;
+            --text-color: #2c3e50;
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .game-container {
+            margin: 20px auto;
+            background-color: var(--card-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--player1-color), var(--player2-color));
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 30px auto;
+            max-width: 450px;
+        }
+        
+        .cell {
+            background-color: var(--card-color);
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px 0;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cell:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .player1 {
+            background-color: var(--player1-color);
+            color: white;
+            border-color: var(--player1-dark);
+        }
+        
+        .player2 {
+            background-color: var(--player2-color);
+            color: white;
+            border-color: var(--player2-dark);
+        }
+        
+        .controls {
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            min-width: 160px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+            z-index: -1;
+        }
+        
+        button:hover::after {
+            transform: translateX(0);
+        }
+        
+        button:active {
+            transform: translateY(2px);
+        }
+        
+        #start-btn { 
+            background-color: var(--primary-color); 
+            color: white; 
+        }
+        
+        #start-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        #your-player-btn { 
+            background-color: var(--secondary-color); 
+            color: white; 
+            display: none; 
+        }
+        
+        #your-player-btn:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        #shuffle-btn { 
+            background-color: var(--secondary-color); 
+            color: white; 
+        }
+        
+        #shuffle-btn:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        #reset-btn { 
+            background-color: var(--warning-color); 
+            color: white; 
+        }
+        
+        #reset-btn:hover {
+            background-color: var(--warning-dark);
+        }
+        
+        #fullscreen-btn { 
+            background-color: var(--success-color); 
+            color: white; 
+        }
+        
+        #fullscreen-btn:hover {
+            background-color: var(--success-dark);
+        }
+        
+        .score-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .score-display {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            background-color: var(--player1-color);
+            min-width: 140px;
+            font-size: 1.2rem;
+            box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .score-btn {
+            padding: 8px 8px;
+            font-size: 20px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        
+        .score-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .minus-btn { 
+            background-color: var(--player2-color); 
+            color: white;
+        }
+        
+        .minus-btn:hover {
+            background-color: var(--player2-dark);
+        }
+        
+        .plus-btn { 
+            background-color: var(--primary-color); 
+            color: white;
+        }
+        
+        .plus-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .game-status {
+            font-size: 1.1em;
+            font-weight: 500;
+            margin: 20px 0;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+        
+        .timer-container {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 5s linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .grid { 
+                max-width: 320px; 
+                gap: 8px; 
+            }
+            
+            .cell { 
+                padding: 15px 0; 
+                font-size: 18px; 
+            }
+            
+            .controls { 
+                flex-direction: column; 
+            }
+            
+            button { 
+                width: 100%; 
+                max-width: 280px; 
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animation for cell marking */
+        @keyframes pulse {
+            30% { transform: scale(1); }
+            60% { transform: scale(1.1); }
+            90% { transform: scale(1); }
+        }
+        
+        .marked {
+            animation: pulse 0.3s ease;
+        }
+        
+        /* Tooltip for buttons */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1> 1-25 NUMBER-GAME</h1>
+        <h3> PLAY THIS GAME AND ENJOY ' THANK YOU SO MUCH </h3>
+
+        <div class="game-status" id="game-status">Arrange the grid, then click 'Your Player' to start</div>
+        
+        <div class="timer-container" id="timer">Time: 00:00</div>
+        
+        <div class="score-container">
+            <button class="score-btn minus-btn tooltip" id="minus-btn">-<span class="tooltiptext">Decrease score</span></button>
+            <div class="score-display" id="score-display">0</div>
+            <button class="score-btn plus-btn tooltip" id="plus-btn">+<span class="tooltiptext">Increase score</span></button>
+        </div>
+
+        <div class="grid" id="game-grid"></div>
+
+        <div class="controls">
+            <button id="start-btn" class="tooltip">Start Game<span class="tooltiptext">Begin the game setup</span></button>
+            <button id="your-player-btn" class="tooltip">Your Player<span class="tooltiptext">Confirm you're Player 1</span></button>
+            <button id="shuffle-btn" class="tooltip">Random Shuffle<span class="tooltiptext">Randomize the numbers</span></button>
+            <button id="reset-btn" class="tooltip">Reset Game<span class="tooltiptext">Start a new game</span></button>
+            <button id="fullscreen-btn" class="tooltip">Fullscreen<span class="tooltiptext">Toggle fullscreen mode</span></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('game-grid');
+            const startBtn = document.getElementById('start-btn');
+            const yourPlayerBtn = document.getElementById('your-player-btn');
+            const shuffleBtn = document.getElementById('shuffle-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const scoreDisplay = document.getElementById('score-display');
+            const plusBtn = document.getElementById('plus-btn');
+            const minusBtn = document.getElementById('minus-btn');
+            const gameStatus = document.getElementById('game-status');
+            const timerDisplay = document.getElementById('timer');
+            
+            let currentPlayer = null;
+            let yourPlayer = null;
+            let numbers = [];
+            let markedCells = {};
+            let score = 0;
+            let gameStarted = false;
+            let gameActive = false;
+            let dragEnabled = true;
+            let draggedCell = null;
+            let startTime = null;
+            let timerInterval = null;
+            let gameId = null;
+
+            // Load game state from localStorage
+            function loadGameState() {
+                const savedGame = localStorage.getItem('gridColoringGame');
+                if (savedGame) {
+                    const gameState = JSON.parse(savedGame);
+                    
+                    if (confirm('Would you like to continue where you left off. Ok or no cancel ?' )) {
+                        numbers = gameState.numbers;
+                        markedCells = gameState.markedCells;
+                        score = gameState.score;
+                        gameStarted = gameState.gameStarted;
+                        gameActive = gameState.gameActive;
+                        currentPlayer = gameState.currentPlayer;
+                        yourPlayer = gameState.yourPlayer;
+                        startTime = gameState.startTime ? new Date(gameState.startTime) : null;
+                        gameId = gameState.gameId || Date.now().toString();
+                        
+                        renderGrid();
+                        updateScore();
+                        
+                        if (gameStarted) {
+                            startBtn.style.display = 'none';
+                            if (!gameActive) {
+                                yourPlayerBtn.style.display = 'inline-block';
+                                gameStatus.textContent = 'Click "Your Player" to begin';
+                            } else {
+                                yourPlayerBtn.style.display = 'none';
+                                dragEnabled = false;
+                                updateTurnDisplay();
+                                startTimer();
+                            }
+                        }
+                        
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Save game state to localStorage
+            function saveGameState() {
+                const gameState = {
+                    numbers: Array.from(grid.children).map(cell => parseInt(cell.textContent)),
+                    markedCells: markedCells,
+                    score: score,
+                    gameStarted: gameStarted,
+                    gameActive: gameActive,
+                    currentPlayer: currentPlayer,
+                    yourPlayer: yourPlayer,
+                    startTime: startTime,
+                    gameId: gameId || Date.now().toString()
+                };
+                localStorage.setItem('gridColoringGame', JSON.stringify(gameState));
+            }
+
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#1abc9c'];
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+
+            // Update timer display
+            function updateTimer() {
+                if (!startTime) return;
+                
+                const now = new Date();
+                const elapsed = new Date(now - startTime);
+                const minutes = elapsed.getUTCMinutes().toString().padStart(2, '0');
+                const seconds = elapsed.getUTCSeconds().toString().padStart(2, '0');
+                
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }
+
+            // Start the timer
+            function startTimer() {
+                if (!startTime) {
+                    startTime = new Date();
+                }
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+
+            // Stop the timer
+            function stopTimer() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+            }
+
+            // Render the grid based on current state
+            function renderGrid() {
+                grid.innerHTML = '';
+                
+                numbers.forEach(num => {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = num;
+                    cell.dataset.number = num;
+                    cell.draggable = !gameActive;
+                    
+                    if (markedCells[num]) {
+                        cell.classList.add(markedCells[num]);
+                    }
+                    
+                    cell.addEventListener('dragstart', handleDragStart);
+                    cell.addEventListener('dragover', handleDragOver);
+                    cell.addEventListener('drop', handleDrop);
+                    cell.addEventListener('dragend', handleDragEnd);
+                    
+                    cell.addEventListener('click', function() {
+                        if (gameActive && currentPlayer && !markedCells[num]) {
+                            cell.classList.add(currentPlayer, 'marked');
+                            markedCells[num] = currentPlayer;
+                            
+                            // Switch turns
+                            currentPlayer = currentPlayer === 'player1' ? 'player2' : 'player1';
+                            updateTurnDisplay();
+                            saveGameState();
+                            
+                            // Check for game completion
+                            checkGameCompletion();
+                        }
+                    });
+                    
+                    grid.appendChild(cell);
+                });
+            }
+
+            // Check if all cells are marked
+            function checkGameCompletion() {
+                const cells = Array.from(grid.children);
+                if (cells.every(cell => cell.classList.contains('player1') || cell.classList.contains('player2'))) {
+                    gameActive = false;
+                    stopTimer();
+                    
+                    // Calculate scores
+                    const player1Score = cells.filter(cell => cell.classList.contains('player1')).length;
+                    const player2Score = cells.filter(cell => cell.classList.contains('player2')).length;
+                    
+                    let winnerMessage;
+                    if (player1Score > player2Score) {
+                        winnerMessage = 'Player 1 wins!';
+                        createConfetti();
+                    } else if (player2Score > player1Score) {
+                        winnerMessage = 'Player 2 wins!';
+                        createConfetti();
+                    } else {
+                        winnerMessage = "It's a tie!";
+                    }
+                    
+                    gameStatus.textContent = `Game Over! ${winnerMessage} (${player1Score}-${player2Score})`;
+                    localStorage.removeItem('gridColoringGame');
+                }
+            }
+
+            function initGame() {
+                gameId = Date.now().toString();
+                numbers = Array.from({length: 25}, (_, i) => i + 1);
+                markedCells = {};
+                score = 0;
+                gameStarted = false;
+                gameActive = false;
+                currentPlayer = null;
+                yourPlayer = null;
+                startTime = null;
+                stopTimer();
+                timerDisplay.textContent = 'Time: 00:00';
+                
+                renderGrid();
+                updateScore();
+                updateTurnDisplay();
+                
+                startBtn.style.display = 'inline-block';
+                yourPlayerBtn.style.display = 'none';
+                gameStatus.textContent = 'Arrange the grid, then click "Your Player" to start';
+                dragEnabled = true;
+                
+                saveGameState();
+            }
+
+            function updateTurnDisplay() {
+                if (!gameActive) return;
+                
+                if (currentPlayer === yourPlayer) {
+                    gameStatus.textContent = 'Your turn - Click on numbers to color them';
+                    scoreDisplay.style.backgroundColor = 'var(--player1-color)';
+                } else {
+                    gameStatus.textContent = "Opponent's turn - Wait for your turn";
+                    scoreDisplay.style.backgroundColor = 'var(--player2-color)';
+                }
+            }
+
+            function updateScore() {
+                scoreDisplay.textContent = score;
+                saveGameState();
+            }
+
+            function handleDragStart(e) {
+                if (!dragEnabled) return;
+                draggedCell = e.target;
+                e.dataTransfer.setData('text/plain', e.target.dataset.number);
+                setTimeout(() => e.target.style.opacity = '0.4', 0);
+            }
+
+            function handleDragOver(e) {
+                if (!dragEnabled) return;
+                e.preventDefault();
+            }
+
+            function handleDrop(e) {
+                if (!dragEnabled) return;
+                e.preventDefault();
+                if (e.target.classList.contains('cell')) {
+                    const tempNum = draggedCell.dataset.number;
+                    const tempText = draggedCell.textContent;
+                    
+                    draggedCell.dataset.number = e.target.dataset.number;
+                    draggedCell.textContent = e.target.textContent;
+                    
+                    e.target.dataset.number = tempNum;
+                    e.target.textContent = tempText;
+                    
+                    saveGameState();
+                }
+            }
+
+            function handleDragEnd(e) {
+                e.target.style.opacity = '1';
+            }
+
+            function shuffleArray(array) {
+                const newArray = [...array];
+                for (let i = newArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                }
+                return newArray;
+            }
+
+            function shuffleGrid() {
+                if (gameStarted) return;
+                
+                const cells = Array.from(grid.children);
+                const currentNumbers = cells.map(cell => parseInt(cell.textContent));
+                const shuffledNumbers = shuffleArray(currentNumbers);
+                
+                cells.forEach((cell, index) => {
+                    cell.textContent = shuffledNumbers[index];
+                    cell.dataset.number = shuffledNumbers[index];
+                });
+                
+                saveGameState();
+            }
+
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        alert(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+
+            // Event listeners
+            startBtn.addEventListener('click', function() {
+                gameStatus.textContent = 'Click "Your Player" to begin';
+                startBtn.style.display = 'none';
+                yourPlayerBtn.style.display = 'inline-block';
+                gameStarted = true;
+                saveGameState();
+            });
+
+            yourPlayerBtn.addEventListener('click', function() {
+                yourPlayer = 'player1'; // You are always player1
+                currentPlayer = 'player1'; // Player 1 starts first
+                
+                gameStarted = true;
+                gameActive = true;
+                yourPlayerBtn.style.display = 'none';
+                dragEnabled = false;
+                document.querySelectorAll('.cell').forEach(cell => cell.draggable = false);
+                
+                startTime = new Date();
+                startTimer();
+                updateTurnDisplay();
+                saveGameState();
+            });
+
+            plusBtn.addEventListener('click', function() {
+                score++;
+                updateScore();
+            });
+
+            minusBtn.addEventListener('click', function() {
+                if (score > 0) score--;
+                updateScore();
+            });
+
+            shuffleBtn.addEventListener('click', shuffleGrid);
+            
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset the game? All progress will be lost.')) {
+                    localStorage.removeItem('gridColoringGame');
+                    initGame();
+                }
+            });
+            
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+            // Initialize game
+            if (!loadGameState()) {
+                initGame();
+            }
+
+            // Save game state before page unload
+            window.addEventListener('beforeunload', function(e) {
+                if (gameActive) {
+                    saveGameState();
+                    // Modern browsers don't allow custom messages
+                    e.preventDefault();
+                    e.returnValue = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

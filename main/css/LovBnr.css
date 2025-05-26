@@ -1,0 +1,27 @@
+/* Love Banner CSS - matches your existing style */
+  .love-banner {
+    background: linear-gradient(90deg, #1e96ff, #ff3de2, #4bec2f, #8a2aff);
+    background-size: 300% 300%;
+    padding: 0.4rem 0;
+    animation: gradientBG 8s ease infinite;
+    position: fixed;
+    top: 35px; /* Matches your header height */
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.2s ease;
+  }
+  
+  .love-banner marquee {
+    padding: 0.2rem 0;
+  }
+  
+  .love-banner strong {
+    font-size: 0.95rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
