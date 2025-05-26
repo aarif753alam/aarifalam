@@ -5,27 +5,23 @@
   color: white;
   padding: 4rem 0 2rem;
 }
-
 .footer-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 3rem;
   margin-bottom: 3rem;
 }
-
 .footer-logo {
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
 }
-
 .footer-logo-icon {
   font-size: 1.8rem;
   margin-right: 0.5rem;
   color: #4e9af1; /* Fallback for --accent */
   color: var(--accent);
 }
-
 .footer-logo-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
@@ -35,17 +31,14 @@
   background-clip: text;
   color: transparent;
 }
-
 .footer-about p {
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
 }
-
 .social-links {
   display: flex;
   gap: 1rem;
 }
-
 .social-link {
   display: inline-flex;
   align-items: center;
@@ -58,13 +51,11 @@
   transition: all 0.3s ease; /* Fallback for --transition */
   transition: var(--transition);
 }
-
 .social-link:hover {
   background: #4e9af1; /* Fallback for --accent */
   background: var(--accent);
   transform: translateY(-3px);
 }
-
 .footer-section h3 {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.3rem;
@@ -72,7 +63,6 @@
   position: relative;
   padding-bottom: 0.5rem;
 }
-
 .footer-section h3::after {
   content: '';
   position: absolute;
@@ -83,15 +73,12 @@
   background: #4e9af1; /* Fallback for --accent */
   background: var(--accent);
 }
-
 .footer-links {
   list-style: none;
 }
-
 .footer-links li {
   margin-bottom: 0.8rem;
 }
-
 .footer-links a {
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -100,18 +87,15 @@
   display: flex;
   align-items: center;
 }
-
 .footer-links a i {
   margin-right: 0.5rem;
   font-size: 0.8rem;
 }
-
 .footer-links a:hover {
   color: #4e9af1; /* Fallback for --accent */
   color: var(--accent);
   padding-left: 5px;
 }
-
 .copyright {
   text-align: center;
   padding-top: 2rem;
