@@ -404,18 +404,18 @@ const config = {
   heartIncrease: 2,
   coinReward: 100,
   bonusRewards: {
-    5:  " <h1>⚡2 SUBSCRIBERS 🔔!", 
-    10: "<h1>🫂5 LIKE 👍!",
-    15: "<h1>➡️ 5 COMMENT!💬",
-    20: "<h1>⚡5 SUBSCRIBERS 🔔!",
-    25: " <h1>➡️5 COMMENT!💬                  ",
-    30: "<h1> 5⚡ SUBSCRIBERS 🔔!"
+    5:  " <h1>⚡Thank You!!", 
+    10: "<h1> send your insta url with me!",
+    15: "<h1>➡ Join Our Friendship💬",
+    20: "<h1>⚡Create your Free Game with me!",
+    25: " <h1>You are unique and good 🫂                  ",
+    30: "<h1> 5⚡ I Love You ,You can reply through feedback!"
   }
 };
 
 // [PASTE YOUR 100 UNIQUE CODES HERE]
 const rewardCodes = [
-  "AARIF-0143-3753", "AABID-0143-1903", "RAHUL-0143-8878","your-surprises-reward",
+  "AARIF-0143-3753", "AABID-0143-1903","RAHUL-0143-8878","AABID-0143-1903","KHUSH-0143-0000","CHAND-0143-0657","GUDDU-0143-0000", "AARIF-0143-0753","your-surprises-reward",
   // ... add all 100 codes here ...
 ];
 
@@ -523,13 +523,13 @@ function initGame() {
     badGuyCount = currentLevel;
   } else if (currentLevel <= 10) {
     heartCount = 10;
-    badGuyCount = 4;
+    badGuyCount = 5;
   } else if (currentLevel <= 15) {
     heartCount = 20;
     badGuyCount = 4;
   } else if (currentLevel <= 20) {
     heartCount = 25;
-    badGuyCount = 3;
+    badGuyCount = 4;
   } else if (currentLevel <= 25) {
     heartCount = 30;
     badGuyCount = 3;
@@ -617,8 +617,6 @@ function moveHearts() {
     }
   });
 }
-
-
 
 
 // Generate bad guys
