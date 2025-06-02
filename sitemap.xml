@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
 
   <!-- Homepage and main sections -->
   <url>
     <loc>https://aarifalam.life/</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog-hindi"/>
   </url>
 
   <url>
@@ -31,26 +33,23 @@
     <priority>0.85</priority>
   </url>
 
-  
   <!-- Blog articles -->
-
-    <url>
+  <url>
     <loc>https://aarifalam.life/Value-of-time</loc>
     <lastmod>2025-06-02</lastmod>
-    <priority>0.80</priority>  <!-- English = higher priority -->
-    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog/Value-of-time"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog/Value-of-time-hindi"/>
-    <xhtml:link rel="alternate" hreflang="hi-Latn" href="https://aarifalam.life/blog/Value-of-time-roman-hindi"/>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/Value-of-time"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/Value-of-time-hindi"/>
+    <xhtml:link rel="alternate" hreflang="hi-Latn" href="https://aarifalam.life/Value-of-time-roman-hindi"/>
   </url>
 
   <url>
     <loc>https://aarifalam.life/blog-hindi</loc>
     <lastmod>2025-06-02</lastmod>
-    <priority>0.6</priority>  <!-- English = higher priority -->
-    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog/blog-hindi"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog"/>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog-hindi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog/"/>
   </url>
-  
 
   <!-- Games -->
   <url>
@@ -70,6 +69,7 @@
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.70</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/Game/numbergame</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
@@ -82,21 +82,25 @@
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.60</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/footer/contact-us/feedback</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.50</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/footer/privacy-policy</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.50</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/footer/terms</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.50</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/footer/about</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
@@ -109,6 +113,7 @@
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
     <priority>0.70</priority>
   </url>
+  
   <url>
     <loc>https://aarifalam.life/GreetingCard/img-to-url</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
