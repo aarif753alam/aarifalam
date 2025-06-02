@@ -3,12 +3,12 @@
     background: linear-gradient(90deg, #1e96ff, #ff3de2, #4bec2f, #8a2aff);
     background-size: 300% 300%;
     padding: 0.4rem 0;
-    animation: gradientBG 8s ease infinite;
+    animation: gradientBG 12s ease infinite;
     position: fixed;
     top: 35px; /* Matches your header height */
     width: 100%;
     z-index: 999;
-    transition: transform 0.2s ease;
+    transition: transform 4s ease;
   }
   
   .love-banner marquee {
