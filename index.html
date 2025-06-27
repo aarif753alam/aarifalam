@@ -9,9 +9,9 @@
   <!-- ======================== -->
   <title>Aarif Alam | Free Educational Games, Learning Tools & Creative Resources</title>
   <meta name="description" 
-        content="Boost learning with free educational games, AI-powered tools, and creative platforms for students & teachers. Memory games, digital whiteboard, greeting card maker, and learning blogs.">
+        content="Boost learning with free educational games, AI-powered tools, and creative platforms for students & teachers. Memory games, brain growth, greeting card maker, and learning blogs.">
   <meta name="keywords" 
-        content="educational games, free learning tools, online brain games, digital whiteboard, greeting card creator, student resources, teacher tools, Aarif Alam">
+        content="knowledgeable blog, free learning tools, online brain games, digital whiteboard, greeting card creator, student resources, creative tools, Aarif Alam">
 
   <!-- ======================== -->
   <!-- Social & Search Metadata -->
@@ -19,16 +19,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aarifalam.life">
-  <meta property="og:title" content="Aarif Alam | Free Educational Games & Digital Learning Tools">
+  <meta property="og:title" content="Aarif Alam | Free Educational & Digital Learning Tools">
   <meta property="og:description" 
-        content="Interactive learning platform with memory-boosting games, creative tools, and educational resources for all ages.">
+        content="Interactive learning platform with memory-boosting games, creative tools, and educational resources ">
   <meta property="og:image" content="https://aarifalam.life/images/home-page.jpg">
   <meta property="og:image:alt" content="Aarif Alam Educational Platform Interface">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@aarifalam0105">
-  <meta name="twitter:title" content="Aarif Alam | Free Learning Tools & Games">
+  <meta name="twitter:title" content="Aarif Alam | blog ,Free Learning Tools & Games">
   <meta name="twitter:description" 
         content="Enhance cognitive skills with our free educational games and creative digital tools.">
   <meta name="twitter:image" content="https://aarifalam.life/images/home-page.jpg">
@@ -119,7 +119,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="main/css/main.css">
-  <link rel="stylesheet" href="main/css/search.css">
   <link rel="stylesheet" href="main/css/FeaturesSection.css">
   <link rel="stylesheet" href="main/css/LovBnr.css">
   <link rel="stylesheet" href="main/css/subscribe-page.css">
@@ -128,6 +127,9 @@
 
 </head>
 <body>
+ <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <!-- Header Section -->
   <header class="main-header">
     <div class="container">
@@ -138,38 +140,36 @@
           </div>
           <span class="logo-text">AarifAlam</span>
         </a>
-
-
-
-
-        <!-- Search Box for SEO -->
-<!-- Update your header search div to this -->
-<div class="header-search">
-  <input type="text" id="searchInput" placeholder="Search knowledge..." aria-label="Search">
-  <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
-  <div class="search-results" id="searchResults"></div>
-</div>
-
-
-
-
         
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
+        <!-- Search Box -->
+        <div class="header-search">
+          <input type="text" id="searchInput" placeholder="Search knowledge..." aria-label="Search">
+          <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        
+        <!-- Mobile Search Toggle Button -->
+        <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Toggle search">
+          <i class="fas fa-search"></i>
         </button>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        
         <nav class="main-nav">
           <ul class="nav-links" id="navLinks">
-            
-           <li><a href="index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-           <li><a href="blog/index.html"><i class="fas fa-brain"></i> BRAIN POWER </a></li>
-           <li><a href="Game/game-page.html"><i class="fas fa-gamepad"></i> GAME ZOON </a></li>
-           <li><a href="GreetingCard/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
-          <li><a href="footer/contact-us/contact.html"><i class="fas fa-handshake"></i> contact-us</a></li>
+            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="blog/index.html"><i class="fas fa-brain"></i>BRAIN POWER</a></li>
+            <li><a href="Game/index.html"><i class="fas fa-gamepad"></i>GAME ZOON</a></li>
+            <li><a href="GreetingCard/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
+            <li><a href="footer/contact-us/contact.html"><i class="fas fa-handshake"></i>Contact Us</a></li>
           </ul>
         </nav>
       </div>
     </div>
   </header>
+
 
 
 <!-- Love Banner HTML -->
@@ -212,30 +212,47 @@
 
 
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-<h1 class="title">ONE WEBSITE, ENDLESS SOLUTIONS 🌐</h1> 
-      ONE WEBSITE, ENDLESS SOLUTIONS 🌐
+<!-- Hero Section -->
+<section class="hero bg-gray-900 py-20 relative overflow-hidden">
+  <div class="hero-content text-center text-white">
+    
+    <!-- Main Title -->
+    <h1 class="title text-4xl md:text-6xl font-extrabold">
+      “Learn Skills. Build Ideas. Play with Creativity.🫅”
+    </h1>
+
+    <!-- Info Text Below Title -->
+    <div class="text-white text-2xl font-bold mt-4">
+      Aarif Alam<br>
+      🚀 EDUCATIONAL Helper | ♾️ KNOWLEDGE | 💻 AI+Coding | 🎮 Games | 🪄 Creativity
     </div>
 
+    <!-- Call-to-Action Buttons -->
+    <div class="cta-buttons mt-10 flex justify-center gap-4">
+      <a href="#features" class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full">
+        <i class="fas fa-rocket"></i> Explore Features
+      </a>
+      <a href="#signup" class="btn btn-secondary bg-white text-blue-600 hover:bg-gray-200 px-6 py-3 rounded-full">
+        <i class="fas fa-user-plus"></i> Join Me
+      </a>
+    </div>
 
-  <!-- Info Text Below Image -->
-  <div class="text-white text-2xl font-bold mt-4 text-center">
-    Aarif Alam<br>
-     | EDUCATIONAL Helper 🚀| KNOWLEDGE | 💻 AI+Coding |
-
+<!-- Premium Clickable Circular Icons -->
+<div class="icon-links">
+  <a href="blog/index.html" class="icon-circle">
+    <img src="a.png" alt="BLOG" class="icon-img">
+    <span class="icon-label">MY BLOG</span>
+  </a>
+  <a href="Game/index.html" class="icon-circle">
+    <img src="b.png" alt="GAMES" class="icon-img">
+    <span class="icon-label">FUN GAME </span>
+  </a>
+  <a href="footer/contact-us/contact.html" class="icon-circle">
+    <img src="c.png" alt="EDITING" class="icon-img">
+    <span class="icon-label">EDITING </span>
+  </a>
 </div>
-      <p> Even your problem is tech AI,CODING,GUID,STUDY OR LIFE related </p>
-          <strong style="color:#ba95ff;">THANK YOU</strong> 
 
-
-
-      <div class="cta-buttons">
-        <a href="#features" class="btn btn-primary"><i class="fas fa-rocket"></i> Explore Features</a>
-        <a href="#signup" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Join Me </a>
-      </div>
-    
     <!-- Floating elements for visual interest -->
     <div class="floating-element floating-1"></div>
     <div class="floating-element floating-2"></div>
@@ -243,16 +260,16 @@
   </section>
 
 
+<div class="feature-card" data-aos="fade-up" data-aos-delay="200">✓ MY ALL SOCIAL MEDIA USER NAME ⇒ AarifAlam0105</div>
 
 
-  <!-- Features Section -->
+    <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
       <div class="section-title">
         <h2>Our Powerful Features ⚡</h2>
         <p>Everything you need to supercharge your exam preparation, improve your knowledge ,improve your skils,AI USE  etc </p>
       </div>
-
       
 <div class="features-grid">
   <!-- Example Feature Card -->
