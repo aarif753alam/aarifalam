@@ -23,31 +23,43 @@
     opacity: 0.9;
   }
   
-  .signup-form {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    position: relative;
-  }
-  
-  .form-input {
-    flex: 1;
-    min-width: 300px;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-  }
-  
-  .form-input:focus {
-    outline: 2px solid var(--accent);
-    box-shadow: 0 5px 20px rgba(57, 225, 227, 0.4);
-  }
+ /* Premium Form Styles */
+.signup-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.form-input {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255,255,255,0.9);
+}
+
+.form-input:focus {
+  outline: none;
+  box-shadow: 0 5px 25px rgba(57, 225, 227, 0.6);
+  transform: scale(1.02);
+  background: white;
+}
   
   .btn-primary {
     display: inline-flex;
