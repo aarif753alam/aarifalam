@@ -107,12 +107,21 @@
     gtag('config', 'G-XX2CV48SMH');
   </script>
 
- <!-- Favicon and Icons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
-  <link rel="manifest" href="images/logo/site.webmanifest">
-  <link rel="shortcut icon" href="images/logo/favicon.ico" type="image/x-icon">
+  <!-- ======================== -->
+  <!-- Performance Optimization -->
+  <!-- ======================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+<!-- ======================== -->
+<!-- END OF SEO CODE -->
+<!-- ======================== -->
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -122,8 +131,8 @@
   <link rel="stylesheet" href="main/css/FeaturesSection.css">
   <link rel="stylesheet" href="main/css/LovBnr.css">
   <link rel="stylesheet" href="main/css/subscribe-page.css">
+  <link rel="stylesheet" href="main/css/footer.css">
   <link rel="stylesheet" href="main/css/header.css">
-    <link rel="stylesheet" href="main/css/footer.css">
 
 
 
@@ -242,15 +251,15 @@
 <!-- Premium Clickable Circular Icons -->
 <div class="icon-links">
   <a href="blog/index.html" class="icon-circle">
-    <img src="a.png" alt="BLOG" class="icon-img">
+    <img src="main/blog.png" alt="BLOG" class="icon-img">
     <span class="icon-label">MY BLOG</span>
   </a>
   <a href="Game/index.html" class="icon-circle">
-    <img src="b.png" alt="GAMES" class="icon-img">
+    <img src="main/game-zone.png" alt="GAMES" class="icon-img">
     <span class="icon-label">FUN GAME </span>
   </a>
   <a href="footer/contact-us/contact.html" class="icon-circle">
-    <img src="c.png" alt="EDITING" class="icon-img">
+    <img src="main/editing.png" alt="EDITING" class="icon-img">
     <span class="icon-label">EDITING </span>
   </a>
 </div>
@@ -262,7 +271,7 @@
   </section>
 
 
-<div class="feature-card" data-aos="fade-up" data-aos-delay="200">✓ MY ALL SOCIAL MEDIA USER NAME ⇒ AarifAlam0105</div>
+<div class="feature-card" data-aos="fade-up" data-aos-delay="200"> ✓ MY ALL SOCIAL MEDIA USER NAME ⇒ AarifAlam0105</div>
 
 
     <!-- Features Section -->
@@ -616,9 +625,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 </script>
+  
+  <!-- At the bottom of your HTML -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true });
+</script>
 
 <script src="main/js/main.js"></script>
-  <script src="main/js/header.js"></script>
+<script src="main/js/header.js"></script>
   
 
 </body>
