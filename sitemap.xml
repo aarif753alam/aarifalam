@@ -16,15 +16,15 @@
   </url>
 
   <url>
-    <loc>https://aarifalam.life/blog/</loc>
+    <loc>https://aarifalam.life/blog</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.90</priority>
+    <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://aarifalam.life/Game/game-page</loc>
+    <loc>https://aarifalam.life/Game</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.85</priority>
+    <priority>0.90</priority>
   </url>
 
   <url>
@@ -46,7 +46,7 @@
   <url>
     <loc>https://aarifalam.life/blog-hindi</loc>
     <lastmod>2025-06-02</lastmod>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog-hindi"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog/"/>
   </url>
@@ -61,19 +61,19 @@
   <url>
     <loc>https://aarifalam.life/Game/Word-Meaning-Game</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.75</priority>
+    <priority>0.90</priority>
   </url>
 
   <url>
     <loc>https://aarifalam.life/Game/word-meaning-page2</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
   </url>
   
   <url>
     <loc>https://aarifalam.life/Game/numbergame</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.70</priority>
+    <priority>0.75</priority>
   </url>
   
   <!-- Footer pages -->
@@ -117,6 +117,7 @@
   <url>
     <loc>https://aarifalam.life/GreetingCard/img-to-url</loc>
     <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
   </url>
+      
 </urlset>
