@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // EmailJS Form Submission
   // ======================
   (function() {
-    emailjs.init('SMccSZnsGqNAjT-12');
+    emailjs.init('24sxryXs3Nz3gt--f');
   })();
 
   var form = document.getElementById('emailSignupForm');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       submitBtn.disabled = true;
       
-      emailjs.send('service_4pjd1c3', 'template_xw7g5ib', {
+      emailjs.send('service_ro4kggr', 'template_xw7g5ib', {
         email: email,
         date: new Date().toLocaleString()
       })
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .finally(function() {
         submitBtn.classList.remove('loading');
-        submitBtn.innerHTML = '<span class="btn-text">Join me 🩷</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
+        submitBtn.innerHTML = '<span class="btn-text"> Join me 🩷</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
         submitBtn.disabled = false;
         
         setTimeout(function() {
