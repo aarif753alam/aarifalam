@@ -1,0 +1,7 @@
+name = "time-tracker-worker"
+type = "javascript"
+account_id = "355165576c6389f55bf6d999ef57a8fe"
+workers_dev = true
+kv_namespaces = [
+  { binding = "STUDY_DATA", id = "597b4489c85c4bf4834fb2319dabd6d7" }
+]
