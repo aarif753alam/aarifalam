@@ -1,0 +1,833 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Meaning Game | Free Online Brain Challenge | Aarif Alam</title>
+  <meta name="description" content="Play the free Word Meaning Game by Aarif Alam – a fun and educational vocabulary challenge to improve your English skills. Enjoy this brain game online!">
+  <meta name="keywords" content="word meaning game, vocabulary game, brain game, educational game, play word puzzle, online learning game, aarif alam games">
+  <meta name="author" content="Aarif Alam">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aarifalam.life/Game/word-meaning-game.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Play Word Meaning Game Online | Vocabulary Challenge | Aarif Alam">
+  <meta property="og:description" content="Join the Word Meaning Game by Aarif Alam – build your vocabulary and challenge your brain in this fun, free online word puzzle.">
+  <meta property="og:url" content="https://aarifalam.life/Game/word-meaning-game.html">
+  <meta property="og:image" content="https://aarifalam.life/images/word-meaning-game-preview.jpg">
+  <meta property="og:image:alt" content="Word Puzzle Game Screenshot - Aarif Alam">
+  <meta property="og:site_name" content="Aarif Alam Game Zone">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Word Game – Boost Vocabulary Online | Aarif Alam">
+  <meta name="twitter:description" content="Improve your English with this fun online brain game. Play the Word Meaning Game free at AarifAlam.life.">
+  <meta name="twitter:image" content="https://aarifalam.life/images/word-meaning-game-preview.jpg">
+  <meta name="twitter:site" content="@aarifalam0105">
+  <meta name="twitter:creator" content="@aarifalam0105">
+    
+  <!-- Game Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Word Meaning Game",
+    "url": "https://aarifalam.life/Game/word-meaning-game.html",
+    "description": "A free vocabulary game to enhance English skills and word knowledge, created by Aarif Alam.",
+    "applicationCategory": "EducationalGame",
+    "operatingSystem": "Web Browser",
+    "keywords": ["word meaning game", "brain game", "free vocabulary game", "English puzzle", "student game"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Aarif Alam",
+      "url": "https://aarifalam.life"
+    },
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    }
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://aarifalam.life"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Game Zone",
+        "item": "https://aarifalam.life/Game/word-meaning-page.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Word Meaning Game",
+        "item": "https://aarifalam.life/Game/word-meaning-game.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+  <link rel="manifest" href="../images/logo/site.webmanifest">
+  <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XX2CV48SMH');
+  </script>
+
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2ed573;
+            --dark: #2f3542;
+            --light: #f1f2f6;
+            --accent: #ffa502;
+            --grid-size: 5;
+            --player1-color: rgba(46, 213, 115, 0.3);
+            --player2-color: rgba(255, 71, 87, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2f3542, #1e272e);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .game-container {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .game-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .grid-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .grid-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .grid-btn:hover {
+            background: var(--accent);
+        }
+
+        .grid-size {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .timer {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 80px;
+        }
+
+        .timer.urgent {
+            animation: pulse 1s infinite;
+            color: var(--accent);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .players {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .player {
+            flex: 1;
+            background: linear-gradient(145deg, rgba(255, 71, 87, 0.8), rgba(255, 71, 87, 0.5));
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player.active {
+            box-shadow: 0 0 0 2px var(--accent), 0 5px 15px rgba(255, 71, 87, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .player-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+        }
+
+        .player-points {
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .point-controls {
+            display: flex;
+            gap: 5px;
+            margin-top: 3px;
+        }
+
+        .point-btn {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .point-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-game-area {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .word-grid-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 0;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(var(--grid-size), 1fr);
+            grid-template-rows: repeat(var(--grid-size), 1fr);
+            gap: 4px;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            aspect-ratio: 1/1;
+            margin: 0 auto;
+        }
+
+        .grid-cell {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-cell.empty {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .grid-cell.player1 {
+            background: var(--player1-color);
+        }
+
+        .grid-cell.player2 {
+            background: var(--player2-color);
+        }
+
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .alphabet-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            padding: 5px;
+            overflow-y: auto;
+            max-height: 100px;
+        }
+
+        .alphabet-key {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .alphabet-key:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .alphabet-key:active {
+            transform: translateY(0);
+            background: var(--accent);
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 5px 0;
+        }
+
+        .control-btn {
+            background: linear-gradient(to right, var(--accent), #ff6348);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(255, 165, 2, 0.4);
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 165, 2, 0.6);
+        }
+
+        .control-btn:active {
+            transform: translateY(1px);
+        }
+
+        .fullscreen-btn {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .point-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            animation: floatUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            opacity: 0;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-over.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .result-card {
+            background: linear-gradient(145deg, #2f3542, #1e272e);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .winner-name {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .restart-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 165, 2, 0.4);
+        }
+
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) {
+            .game-container {
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            .header {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 0;
+            }
+            
+            .main-game-area {
+                flex-direction: row;
+                margin-top: 50px;
+            }
+            
+            .word-grid-container {
+                flex: 2;
+            }
+            
+            .controls-section {
+                flex: 1;
+                justify-content: center;
+            }
+            
+            .alphabet-selector {
+                max-height: none;
+                flex-wrap: wrap;
+                align-content: flex-start;
+            }
+            
+            .players {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .player {
+                width: 100%;
+            }
+        }
+
+        /* Portrait orientation adjustments */
+        @media (orientation: portrait) {
+            .game-container {
+                flex-direction: column;
+            }
+            
+            .main-game-area {
+                flex-direction: column;
+            }
+            
+            .word-grid-container {
+                flex: 1;
+            }
+            
+            .controls-section {
+                flex: 0;
+            }
+        }
+
+        /* Larger screens */
+        @media (min-width: 768px) {
+            .game-title {
+                font-size: 1.5rem;
+            }
+            
+            .grid-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .grid-size {
+                font-size: 1rem;
+            }
+            
+            .timer {
+                padding: 10px 20px;
+                font-size: 1.1rem;
+                min-width: 100px;
+            }
+            
+            .player {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .player-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .player-name {
+                font-size: 1.1rem;
+            }
+            
+            .player-points {
+                font-size: 0.9rem;
+            }
+            
+            .point-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 0.9rem;
+            }
+            
+            .grid-cell {
+                font-size: 1.8rem;
+                border-radius: 8px;
+            }
+            
+            .alphabet-key {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+      .word-grid-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+}
+
+.word-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), 1fr);
+    grid-template-rows: repeat(var(--grid-size), 1fr);
+    gap: 4px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Fullscreen specific adjustments */
+:fullscreen .word-grid-container {
+    padding: 20px;
+}
+
+:fullscreen .word-grid {
+    max-width: 90vh;
+    max-height: 90vh;
+}
+
+@media (orientation: landscape) {
+    :fullscreen .word-grid {
+        max-width: 90vw;
+        max-height: 90vw;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="game-title">Word-Meaning GAME</div>
+            <div class="grid-controls">
+                <button class="grid-btn" id="decrease-grid">-</button>
+                <span class="grid-size" id="grid-size-display">5x5</span>
+                <button class="grid-btn" id="increase-grid">+</button>
+            </div>
+        </div>
+        
+        <div class="main-game-area">
+            <div class="word-grid-container">
+                <div class="word-grid" id="word-grid"></div>
+            </div>
+            
+            <div class="controls-section">
+                <div class="timer-container">
+                    <div class="player-name" id="current-player-name">Player 1's Turn</div>
+                    <div class="timer" id="timer">01:00</div>
+                </div>
+                
+                <div class="players">
+                    <div class="player active" id="player1">
+                        <div class="player-avatar" id="player1-avatar">P1</div>
+                        <div class="player-name" id="player1-name">Player 1</div>
+                        <div class="player-points">
+                            <span>TOTAL <span id="player1-total">0</span></span>
+                            <div class="point-controls">
+                                <div class="point-btn" id="player1-decrease">-</div>
+                                <div class="point-btn" id="player1-increase">+</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player" id="player2">
+                        <div class="player-avatar" id="player2-avatar">P2</div>
+                        <div class="player-name" id="player2-name">Player 2</div>
+                        <div class="player-points">
+                            <span>TOTAL <span id="player2-total">0</span></span>
+                            <div class="point-controls">
+                                <div class="point-btn" id="player2-decrease">-</div>
+                                <div class="point-btn" id="player2-increase">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alphabet-selector" id="alphabet-selector"></div>
+                
+                <div class="game-controls">
+                    <button class="control-btn" id="submit-btn">SUBMIT WORD</button>
+                    <button class="control-btn" id="end-turn-btn">END TURN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fullscreen-btn" id="fullscreen-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+    </div>
+    
+    <div class="game-over" id="game-over">
+        <div class="result-card">
+            <h2 class="result-title">Game Over!</h2>
+            <div class="winner-name" id="winner-name">Player 1 Wins!</div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="p1-score">0</div>
+                    <div class="stat-label" id="p1-name">Player 1</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="p2-score">0</div>
+                    <div class="stat-label" id="p2-name">Player 2</div>
+                </div>
+            </div>
+            <button class="restart-btn" id="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+var _0x4c3ffd=_0x248a;function _0x248a(_0x50cce6,_0x32691f){var _0x3974a6=_0x3974();return _0x248a=function(_0x248a97,_0x21db68){_0x248a97=_0x248a97-0x8f;var _0x49aa0b=_0x3974a6[_0x248a97];return _0x49aa0b;},_0x248a(_0x50cce6,_0x32691f);}function _0x3974(){var _0x3a04be=['decrease-grid','turnTimeout','submit-btn','parentNode','--grid-size','minGridSize','zIndex','player2-decrease','selectedLetter','restartBtn','timer','No\x20valid\x20words\x20found!','add','background','click','rgba(0,\x200,\x200,\x200.8)','celebration-sound.mp3','charAt','fromCharCode','player1Decrease','social-media-msg','player1-total','Follow\x20me\x20on\x20social\x20media\x20<br>','length','.grid-cell[data-row=\x22','totalPoints','13766HJUchR','\x20points','.result-card','letters','querySelector','gameOver','confetti','player1-decrease','Audio\x20play\x20failed:','p1-name','translateX(-50%)','word-grid','10px\x2020px','height','setProperty','name','color','hsl(','DOMContentLoaded','log','alphabet-selector','maxGridSize','resultCard','wordGrid','empty','player2Total','\x0a\x20\x20\x20\x20\x20\x20\x20\x20@keyframes\x20fadeInOut\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x200%\x20{\x20opacity:\x200;\x20transform:\x20translate(-50%,\x20-20px);\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2020%\x20{\x20opacity:\x201;\x20transform:\x20translate(-50%,\x200);\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2080%\x20{\x20opacity:\x201;\x20transform:\x20translate(-50%,\x200);\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20100%\x20{\x20opacity:\x200;\x20transform:\x20translate(-50%,\x20-20px);\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20','1rem','reduce','show','<path\x20d=\x22M8\x203H5a2\x202\x200\x200\x200-2\x202v3m18\x200V5a2\x202\x200\x200\x200-2-2h-3m0\x2018h3a2\x202\x200\x200\x200\x202-2v-3M3\x2016v3a2\x202\x200\x200\x200\x202\x202h3\x22></path>','20px','textAlign','870nUIuVK','player1Avatar','1000','insertBefore','4788WXcyOI','672ngbttu','div','createElement','resize','textContent','50%','639aCJwvn','endTurnBtn','decreaseGrid','increaseGrid','player2Avatar','notification','winner-name','3447TpNZEu','classList','player1-avatar','increase-grid','15px\x200','animation','774565EOouYq','animationDuration','alphabet-key','borderRadius','player1','exitFullscreen','minWordLength','width','position','player2El','letter','play','<svg\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22white\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22>','<path\x20d=\x22M8\x203v3a2\x202\x200\x200\x201-2\x202H3m18\x200h-3a2\x202\x200\x200\x201-2-2V3m0\x2018v-3a2\x202\x200\x200\x201\x202-2h3M3\x2016h3a2\x202\x200\x200\x201\x202\x202v3\x22></path>','p1Name','.confetti','212yFchvW','transform','.alphabet-key','left','center','player','alphabetSelector','gridSizeDisplay','13ScgPlc','\x27s\x20Turn','querySelectorAll','rgba(255,\x20255,\x20255,\x200.1)','appendChild','top','dataset','turnTime','fullscreen-btn','innerHTML','\x22][data-col=\x22','isGameOver','Audio\x20error:','0.9rem','addEventListener','\x22\x20found!\x20+','ABCDEFGHIJKLMNOPQRSTUVWXYZ','point-badge','active','Player\x201','95777IFlrSS','className','white','var(--accent)','p2-score','current-player-name','urgent','push','grid','grid-cell\x20empty','winnerName','volume','players','placedLetters','p1Score','Thank\x20you\x20for\x20playing!','p1-score','4546213EyyNGI','fullscreenBtn','p2Name','p2-name','6iEEqXQ','thank-you-msg','43890936nQuvSb','5px','restart-btn','documentElement','fullscreenchange','padding','player1El','fullscreenElement','player1Total','Word\x20\x22','style','end-turn-btn','currentPlayer','remove','player1Name','getElementById','fontSize','currentPlayerName','game-over','gridSize','indexOf','random','timeRemaining','player2-total','head','timeUsed','</svg>'];_0x3974=function(){return _0x3a04be;};return _0x3974();}(function(_0x3f6e41,_0x14d348){var _0x32c1bc=_0x248a,_0x1a2c6c=_0x3f6e41();while(!![]){try{var _0xb3bad8=parseInt(_0x32c1bc(0x118))/0x1*(-parseInt(_0x32c1bc(0xcf))/0x2)+-parseInt(_0x32c1bc(0x102))/0x3*(parseInt(_0x32c1bc(0xf4))/0x4)+-parseInt(_0x32c1bc(0x108))/0x5*(parseInt(_0x32c1bc(0x98))/0x6)+-parseInt(_0x32c1bc(0x94))/0x7+-parseInt(_0x32c1bc(0xf5))/0x8*(-parseInt(_0x32c1bc(0xfb))/0x9)+-parseInt(_0x32c1bc(0xf0))/0xa*(-parseInt(_0x32c1bc(0x134))/0xb)+parseInt(_0x32c1bc(0x9a))/0xc*(parseInt(_0x32c1bc(0x120))/0xd);if(_0xb3bad8===_0x14d348)break;else _0x1a2c6c['push'](_0x1a2c6c['shift']());}catch(_0xca77ba){_0x1a2c6c['push'](_0x1a2c6c['shift']());}}}(_0x3974,0xbef32),document['addEventListener'](_0x4c3ffd(0xe1),function(){var _0x1830ee=_0x4c3ffd,_0x1595ef={'minGridSize':0x3,'maxGridSize':0x8,'turnTime':0x2d,'letters':_0x1830ee(0x130),'minWordLength':0x3},_0x5ed230={'currentPlayer':0x1,'players':{0x1:{'name':_0x1830ee(0x133),'totalPoints':0x0,'timeUsed':0x0},0x2:{'name':'Player\x202','totalPoints':0x0,'timeUsed':0x0}},'grid':[],'gridSize':0x5,'selectedCell':null,'selectedLetter':null,'timer':null,'timeRemaining':_0x1595ef[_0x1830ee(0x127)],'isGameOver':![],'placedLetters':0x0,'turnTimeout':null},_0x59efe7={'wordGrid':document[_0x1830ee(0xa9)](_0x1830ee(0xda)),'timer':document[_0x1830ee(0xa9)]('timer'),'currentPlayerName':document['getElementById'](_0x1830ee(0x139)),'player1Name':document[_0x1830ee(0xa9)]('player1-name'),'player2Name':document[_0x1830ee(0xa9)]('player2-name'),'player1Avatar':document[_0x1830ee(0xa9)](_0x1830ee(0x104)),'player2Avatar':document[_0x1830ee(0xa9)]('player2-avatar'),'player1Total':document[_0x1830ee(0xa9)](_0x1830ee(0xca)),'player2Total':document['getElementById'](_0x1830ee(0xb1)),'player1Increase':document[_0x1830ee(0xa9)]('player1-increase'),'player1Decrease':document['getElementById'](_0x1830ee(0xd6)),'player2Increase':document[_0x1830ee(0xa9)]('player2-increase'),'player2Decrease':document[_0x1830ee(0xa9)](_0x1830ee(0xbc)),'submitBtn':document[_0x1830ee(0xa9)](_0x1830ee(0xb7)),'endTurnBtn':document[_0x1830ee(0xa9)](_0x1830ee(0xa5)),'player1El':document[_0x1830ee(0xa9)](_0x1830ee(0x10c)),'player2El':document[_0x1830ee(0xa9)]('player2'),'gameOver':document['getElementById'](_0x1830ee(0xac)),'winnerName':document['getElementById'](_0x1830ee(0x101)),'p1Score':document[_0x1830ee(0xa9)](_0x1830ee(0x93)),'p2Score':document[_0x1830ee(0xa9)](_0x1830ee(0x138)),'p1Name':document[_0x1830ee(0xa9)](_0x1830ee(0xd8)),'p2Name':document['getElementById'](_0x1830ee(0x97)),'restartBtn':document['getElementById'](_0x1830ee(0x9c)),'alphabetSelector':document[_0x1830ee(0xa9)](_0x1830ee(0xe3)),'increaseGrid':document[_0x1830ee(0xa9)](_0x1830ee(0x105)),'decreaseGrid':document[_0x1830ee(0xa9)](_0x1830ee(0xb5)),'gridSizeDisplay':document[_0x1830ee(0xa9)]('grid-size-display'),'fullscreenBtn':document[_0x1830ee(0xa9)](_0x1830ee(0x128)),'resultCard':document[_0x1830ee(0xd3)](_0x1830ee(0xd1))};function _0x29efe(){var _0x5eda7b=_0x1830ee;_0x5ed230['currentPlayer']=0x1,_0x5ed230['players'][0x1][_0x5eda7b(0xce)]=0x0,_0x5ed230[_0x5eda7b(0x8f)][0x2][_0x5eda7b(0xce)]=0x0,_0x5ed230[_0x5eda7b(0x8f)][0x1][_0x5eda7b(0xb3)]=0x0,_0x5ed230[_0x5eda7b(0x8f)][0x2][_0x5eda7b(0xb3)]=0x0,_0x5ed230[_0x5eda7b(0xad)]=0x5,_0x5ed230['selectedCell']=null,_0x5ed230['selectedLetter']=null,_0x5ed230[_0x5eda7b(0xb0)]=_0x1595ef[_0x5eda7b(0x127)],_0x5ed230['isGameOver']=![],_0x5ed230[_0x5eda7b(0x90)]=0x0,_0x5ed230[_0x5eda7b(0xbf)]&&clearInterval(_0x5ed230[_0x5eda7b(0xbf)]),_0x5ed230[_0x5eda7b(0xb6)]&&clearTimeout(_0x5ed230[_0x5eda7b(0xb6)]),_0x360cf8(),_0x26c26a(),_0x3f4e33(),_0x59623e(),_0x5d558b(),_0x59efe7[_0x5eda7b(0xd4)]['classList']['remove']('show'),_0x59efe7[_0x5eda7b(0x95)][_0x5eda7b(0x129)]=_0x5eda7b(0x114)+_0x5eda7b(0xed)+'</svg>';}function _0x360cf8(){var _0x36b199=_0x1830ee;_0x59efe7[_0x36b199(0xe6)]['innerHTML']='',_0x5ed230[_0x36b199(0x13c)]=[],_0x5ed230[_0x36b199(0x90)]=0x0,document[_0x36b199(0x9d)][_0x36b199(0xa4)][_0x36b199(0xdd)]('--grid-size',_0x5ed230[_0x36b199(0xad)]);for(var _0x65bfe0=0x0;_0x65bfe0<_0x5ed230['gridSize'];_0x65bfe0++){_0x5ed230['grid'][_0x65bfe0]=[];for(var _0x3d20e5=0x0;_0x3d20e5<_0x5ed230[_0x36b199(0xad)];_0x3d20e5++){_0x5ed230[_0x36b199(0x13c)][_0x65bfe0][_0x3d20e5]={'letter':'','player':0x0};var _0x58e182=document[_0x36b199(0xf7)](_0x36b199(0xf6));_0x58e182[_0x36b199(0x135)]=_0x36b199(0x13d),_0x58e182[_0x36b199(0x126)]['row']=_0x65bfe0,_0x58e182['dataset']['col']=_0x3d20e5,_0x58e182[_0x36b199(0x12e)](_0x36b199(0xc3),function(_0x544599,_0x5955b5){return function(){_0x283a36(_0x544599,_0x5955b5);};}(_0x65bfe0,_0x3d20e5)),_0x59efe7[_0x36b199(0xe6)][_0x36b199(0x124)](_0x58e182);}}}function _0x26c26a(){var _0x56ee30=_0x1830ee;_0x59efe7[_0x56ee30(0x11e)][_0x56ee30(0x129)]='';for(var _0x1a5c33=0x0;_0x1a5c33<_0x1595ef[_0x56ee30(0xd2)][_0x56ee30(0xcc)];_0x1a5c33++){var _0x4bf6e0=_0x1595ef[_0x56ee30(0xd2)][_0x1a5c33],_0xa52b39=document['createElement'](_0x56ee30(0xf6));_0xa52b39[_0x56ee30(0x135)]=_0x56ee30(0x10a),_0xa52b39[_0x56ee30(0xf9)]=_0x4bf6e0,_0xa52b39['dataset']['letter']=_0x4bf6e0,_0xa52b39['addEventListener'](_0x56ee30(0xc3),function(_0x11356f){return function(){var _0x2aa8c1=_0x248a;_0x5ed230[_0x2aa8c1(0xbd)]=_0x11356f;var _0x1658ee=document[_0x2aa8c1(0x122)](_0x2aa8c1(0x11a));for(var _0x105d13=0x0;_0x105d13<_0x1658ee[_0x2aa8c1(0xcc)];_0x105d13++){_0x1658ee[_0x105d13][_0x2aa8c1(0xa4)][_0x2aa8c1(0xc2)]='rgba(255,\x20255,\x20255,\x200.1)';}this[_0x2aa8c1(0xa4)]['background']=_0x2aa8c1(0x137);};}(_0x4bf6e0)),_0x59efe7[_0x56ee30(0x11e)][_0x56ee30(0x124)](_0xa52b39);}}function _0x283a36(_0x5f44f2,_0x3a9c20){var _0x5155d4=_0x1830ee;if(_0x5ed230[_0x5155d4(0xbd)]&&_0x5ed230[_0x5155d4(0x13c)][_0x5f44f2][_0x3a9c20][_0x5155d4(0x112)]===''){_0xd1ecc2(_0x5f44f2,_0x3a9c20,_0x5ed230['selectedLetter']),_0x5ed230['selectedLetter']=null;var _0x5b0a51=document[_0x5155d4(0x122)]('.alphabet-key');for(var _0x5f2cc6=0x0;_0x5f2cc6<_0x5b0a51[_0x5155d4(0xcc)];_0x5f2cc6++){_0x5b0a51[_0x5f2cc6][_0x5155d4(0xa4)][_0x5155d4(0xc2)]=_0x5155d4(0x123);}_0x5ed230[_0x5155d4(0x90)]===_0x5ed230[_0x5155d4(0xad)]*_0x5ed230[_0x5155d4(0xad)]?_0x146972():_0x57dac9();}}function _0xd1ecc2(_0x9dcc1b,_0x52a085,_0x2d1108){var _0xb534aa=_0x1830ee;_0x5ed230[_0xb534aa(0x13c)][_0x9dcc1b][_0x52a085][_0xb534aa(0x112)]=_0x2d1108,_0x5ed230['grid'][_0x9dcc1b][_0x52a085]['player']=_0x5ed230[_0xb534aa(0xa6)],_0x5ed230[_0xb534aa(0x90)]++;var _0x5ced56=document['querySelector'](_0xb534aa(0xcd)+_0x9dcc1b+_0xb534aa(0x12a)+_0x52a085+'\x22]');_0x5ced56[_0xb534aa(0xf9)]=_0x2d1108,_0x5ced56[_0xb534aa(0x103)][_0xb534aa(0xa7)](_0xb534aa(0xe7)),_0x5ced56[_0xb534aa(0x103)][_0xb534aa(0xc1)](_0xb534aa(0x11d)+_0x5ed230[_0xb534aa(0xa6)]);}function _0x57dac9(){var _0x4feb0d=_0x1830ee;_0x5ed230[_0x4feb0d(0xb6)]&&clearTimeout(_0x5ed230[_0x4feb0d(0xb6)]),_0x5ed230['turnTimeout']=setTimeout(function(){_0x49a54f();},0x5dc);}function _0xd39b27(){var _0x37bac5=_0x1830ee,_0x4e73ae=_0x10ac07();if(_0x4e73ae[_0x37bac5(0xcc)]>0x0){var _0x575525=_0x4e73ae[_0x37bac5(0xeb)](function(_0x10c1a7,_0x33874a){var _0x2d6196=_0x37bac5;return _0x33874a[_0x2d6196(0xcc)]>_0x10c1a7['length']?_0x33874a:_0x10c1a7;},''),_0x3328b8=_0x575525['length'];_0x272049(_0x5ed230[_0x37bac5(0xa6)],_0x3328b8),_0x8bec73(_0x37bac5(0xa3)+_0x575525+_0x37bac5(0x12f)+_0x3328b8+_0x37bac5(0xd0)),_0x57dac9();}else _0x8bec73(_0x37bac5(0xc0));}function _0x8bec73(_0xe948e5){var _0x28014b=_0x1830ee,_0x4159ac=document[_0x28014b(0xf7)](_0x28014b(0xf6));_0x4159ac[_0x28014b(0x135)]=_0x28014b(0x100),_0x4159ac['textContent']=_0xe948e5,_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x110)]='fixed',_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x125)]=_0x28014b(0xee),_0x4159ac['style']['left']=_0x28014b(0xfa),_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x119)]=_0x28014b(0xd9),_0x4159ac[_0x28014b(0xa4)]['backgroundColor']=_0x28014b(0xc4),_0x4159ac[_0x28014b(0xa4)]['color']=_0x28014b(0x136),_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x9f)]=_0x28014b(0xdb),_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x10b)]=_0x28014b(0x9b),_0x4159ac[_0x28014b(0xa4)][_0x28014b(0xbb)]=_0x28014b(0xf2),_0x4159ac[_0x28014b(0xa4)][_0x28014b(0x107)]='fadeInOut\x202.5s\x20ease-in-out',document['body'][_0x28014b(0x124)](_0x4159ac),setTimeout(function(){var _0x3e230f=_0x28014b;_0x4159ac[_0x3e230f(0xa7)]();},0x9c4);}function _0x10ac07(){var _0x317927=_0x1830ee,_0x49bb7f=[],_0x24a6da=[[0x1,0x0],[0x0,0x1],[0x1,0x1],[0x1,-0x1]];for(var _0x5298fc=0x0;_0x5298fc<_0x5ed230[_0x317927(0xad)];_0x5298fc++){for(var _0x338fb1=0x0;_0x338fb1<_0x5ed230[_0x317927(0xad)];_0x338fb1++){if(_0x5ed230[_0x317927(0x13c)][_0x5298fc][_0x338fb1][_0x317927(0x11d)]===_0x5ed230['currentPlayer'])for(var _0x4a8107=0x0;_0x4a8107<_0x24a6da[_0x317927(0xcc)];_0x4a8107++){var _0x101849=_0x24a6da[_0x4a8107][0x0],_0xfd02fd=_0x24a6da[_0x4a8107][0x1],_0x4ae75b='',_0x431235=_0x5298fc,_0x4b5b00=_0x338fb1;while(_0x431235>=0x0&&_0x431235<_0x5ed230['gridSize']&&_0x4b5b00>=0x0&&_0x4b5b00<_0x5ed230[_0x317927(0xad)]&&_0x5ed230[_0x317927(0x13c)][_0x431235][_0x4b5b00][_0x317927(0x11d)]===_0x5ed230[_0x317927(0xa6)]){_0x4ae75b+=_0x5ed230[_0x317927(0x13c)][_0x431235][_0x4b5b00][_0x317927(0x112)],_0x431235+=_0x101849,_0x4b5b00+=_0xfd02fd;}_0x4ae75b[_0x317927(0xcc)]>=_0x1595ef[_0x317927(0x10e)]&&(_0x49bb7f[_0x317927(0xae)](_0x4ae75b)===-0x1&&_0x49bb7f[_0x317927(0x13b)](_0x4ae75b));}}}return _0x49bb7f;}function _0x272049(_0x1bc3ca,_0x47222f){var _0x2eae04=_0x1830ee;_0x5ed230[_0x2eae04(0x8f)][_0x1bc3ca][_0x2eae04(0xce)]+=_0x47222f;var _0x5d39f1=document['createElement'](_0x2eae04(0xf6));_0x5d39f1[_0x2eae04(0x135)]=_0x2eae04(0x131),_0x5d39f1[_0x2eae04(0xf9)]='+'+_0x47222f,_0x1bc3ca===0x1?(_0x59efe7[_0x2eae04(0xa0)]['appendChild'](_0x5d39f1),_0x59efe7[_0x2eae04(0xa2)][_0x2eae04(0xf9)]=_0x5ed230[_0x2eae04(0x8f)][0x1][_0x2eae04(0xce)]):(_0x59efe7[_0x2eae04(0x111)][_0x2eae04(0x124)](_0x5d39f1),_0x59efe7[_0x2eae04(0xe8)][_0x2eae04(0xf9)]=_0x5ed230[_0x2eae04(0x8f)][0x2][_0x2eae04(0xce)]);}function _0x3f4e33(){var _0x1b420b=_0x1830ee;_0x59efe7[_0x1b420b(0xa8)]['textContent']=_0x5ed230['players'][0x1][_0x1b420b(0xde)],_0x59efe7['player2Name']['textContent']=_0x5ed230['players'][0x2][_0x1b420b(0xde)],_0x59efe7[_0x1b420b(0xf1)][_0x1b420b(0xf9)]=_0x5ed230[_0x1b420b(0x8f)][0x1][_0x1b420b(0xde)][_0x1b420b(0xc6)](0x0),_0x59efe7[_0x1b420b(0xff)][_0x1b420b(0xf9)]=_0x5ed230[_0x1b420b(0x8f)][0x2][_0x1b420b(0xde)]['charAt'](0x0),_0x59efe7[_0x1b420b(0xa2)]['textContent']=_0x5ed230[_0x1b420b(0x8f)][0x1]['totalPoints'],_0x59efe7[_0x1b420b(0xe8)][_0x1b420b(0xf9)]=_0x5ed230[_0x1b420b(0x8f)][0x2]['totalPoints'],_0x59efe7[_0x1b420b(0xab)][_0x1b420b(0xf9)]=_0x5ed230[_0x1b420b(0x8f)][_0x5ed230[_0x1b420b(0xa6)]][_0x1b420b(0xde)]+_0x1b420b(0x121),_0x5ed230[_0x1b420b(0xa6)]===0x1?(_0x59efe7[_0x1b420b(0xa0)][_0x1b420b(0x103)][_0x1b420b(0xc1)](_0x1b420b(0x132)),_0x59efe7[_0x1b420b(0x111)][_0x1b420b(0x103)][_0x1b420b(0xa7)]('active')):(_0x59efe7['player1El'][_0x1b420b(0x103)]['remove'](_0x1b420b(0x132)),_0x59efe7[_0x1b420b(0x111)][_0x1b420b(0x103)]['add']('active')),_0x59efe7[_0x1b420b(0x116)]['textContent']=_0x5ed230[_0x1b420b(0x8f)][0x1][_0x1b420b(0xde)],_0x59efe7[_0x1b420b(0x96)][_0x1b420b(0xf9)]=_0x5ed230[_0x1b420b(0x8f)][0x2][_0x1b420b(0xde)];}function _0x59623e(){var _0x2adc85=_0x1830ee;_0x59efe7[_0x2adc85(0x11f)][_0x2adc85(0xf9)]=_0x5ed230['gridSize']+'x'+_0x5ed230[_0x2adc85(0xad)];}function _0x5d558b(){var _0x9ac34a=_0x1830ee;_0x5ed230[_0x9ac34a(0xb0)]=_0x1595ef[_0x9ac34a(0x127)],_0x2d379f(),_0x5ed230['timer']&&clearInterval(_0x5ed230['timer']),_0x5ed230[_0x9ac34a(0xbf)]=setInterval(function(){var _0x5b862b=_0x9ac34a;_0x5ed230[_0x5b862b(0xb0)]--,_0x5ed230['players'][_0x5ed230[_0x5b862b(0xa6)]][_0x5b862b(0xb3)]++,_0x2d379f(),_0x5ed230[_0x5b862b(0xb0)]<=0x0&&(clearInterval(_0x5ed230[_0x5b862b(0xbf)]),_0x49a54f());},0x3e8);}function _0x2d379f(){var _0x11a24f=_0x1830ee,_0x4e1656=Math['floor'](_0x5ed230[_0x11a24f(0xb0)]/0x3c),_0x31e2aa=_0x5ed230[_0x11a24f(0xb0)]%0x3c;_0x59efe7[_0x11a24f(0xbf)][_0x11a24f(0xf9)]=(_0x4e1656<0xa?'0':'')+_0x4e1656+':'+(_0x31e2aa<0xa?'0':'')+_0x31e2aa,_0x5ed230['timeRemaining']<=0xa?_0x59efe7[_0x11a24f(0xbf)][_0x11a24f(0x103)][_0x11a24f(0xc1)](_0x11a24f(0x13a)):_0x59efe7[_0x11a24f(0xbf)]['classList'][_0x11a24f(0xa7)](_0x11a24f(0x13a));}function _0x49a54f(){var _0x1479d8=_0x1830ee;_0x5ed230[_0x1479d8(0xb6)]&&clearTimeout(_0x5ed230[_0x1479d8(0xb6)]);_0x5ed230[_0x1479d8(0xbd)]=null;var _0x492b00=document[_0x1479d8(0x122)]('.alphabet-key');for(var _0x2eee95=0x0;_0x2eee95<_0x492b00[_0x1479d8(0xcc)];_0x2eee95++){_0x492b00[_0x2eee95][_0x1479d8(0xa4)][_0x1479d8(0xc2)]=_0x1479d8(0x123);}_0x5ed230['currentPlayer']=_0x5ed230['currentPlayer']===0x1?0x2:0x1,_0x5ed230['timeRemaining']=_0x1595ef[_0x1479d8(0x127)],_0x3f4e33(),_0x5d558b();}function _0x146972(){var _0x264acc=_0x1830ee;clearInterval(_0x5ed230[_0x264acc(0xbf)]);_0x5ed230[_0x264acc(0xb6)]&&clearTimeout(_0x5ed230[_0x264acc(0xb6)]);_0x5ed230[_0x264acc(0x12b)]=!![];var _0x277f26=0x1;if(_0x5ed230[_0x264acc(0x8f)][0x2][_0x264acc(0xce)]>_0x5ed230[_0x264acc(0x8f)][0x1][_0x264acc(0xce)])_0x277f26=0x2;else _0x5ed230['players'][0x2][_0x264acc(0xce)]===_0x5ed230[_0x264acc(0x8f)][0x1][_0x264acc(0xce)]&&(_0x277f26=_0x5ed230[_0x264acc(0x8f)][0x1][_0x264acc(0xb3)]<=_0x5ed230[_0x264acc(0x8f)][0x2][_0x264acc(0xb3)]?0x1:0x2);_0x59efe7[_0x264acc(0x13e)][_0x264acc(0xf9)]=_0x5ed230[_0x264acc(0x8f)][_0x277f26]['name']+'\x20Wins!',_0x59efe7[_0x264acc(0x91)][_0x264acc(0xf9)]=_0x5ed230[_0x264acc(0x8f)][0x1]['totalPoints'],_0x59efe7['p2Score']['textContent']=_0x5ed230['players'][0x2]['totalPoints'];var _0x55b4e3=document[_0x264acc(0xf7)](_0x264acc(0xf6));_0x55b4e3['className']=_0x264acc(0xc9);var _0x1a5a47=String[_0x264acc(0xc7)](0x40,0x41,0x61,0x72,0x69,0x66,0x41,0x6c,0x61,0x6d,0x30,0x31,0x30,0x35);_0x55b4e3[_0x264acc(0x129)]=_0x264acc(0xcb)+_0x1a5a47,_0x55b4e3[_0x264acc(0xa4)][_0x264acc(0xef)]=_0x264acc(0x11c),_0x55b4e3['style']['margin']=_0x264acc(0x106),_0x55b4e3[_0x264acc(0xa4)][_0x264acc(0xaa)]=_0x264acc(0xea),_0x55b4e3[_0x264acc(0xa4)][_0x264acc(0xdf)]='rgba(255,\x20255,\x20255,\x200.8)';var _0x48e69e=document[_0x264acc(0xf7)]('div');_0x48e69e[_0x264acc(0x135)]=_0x264acc(0x99),_0x48e69e[_0x264acc(0xf9)]=_0x264acc(0x92),_0x48e69e[_0x264acc(0xa4)]['textAlign']=_0x264acc(0x11c),_0x48e69e[_0x264acc(0xa4)]['marginTop']='5px',_0x48e69e[_0x264acc(0xa4)][_0x264acc(0xaa)]=_0x264acc(0x12d),_0x48e69e['style'][_0x264acc(0xdf)]='rgba(255,\x20255,\x20255,\x200.6)',_0x59efe7[_0x264acc(0xe5)][_0x264acc(0xf3)](_0x55b4e3,_0x59efe7[_0x264acc(0xbe)]),_0x59efe7[_0x264acc(0xe5)]['insertBefore'](_0x48e69e,_0x59efe7[_0x264acc(0xbe)]),_0x59efe7[_0x264acc(0xd4)][_0x264acc(0x103)][_0x264acc(0xc1)](_0x264acc(0xec)),_0x1ec055(),_0x5c677a();}function _0x5c677a(){var _0x10d156=_0x1830ee;try{var _0x411e1a=new Audio(_0x10d156(0xc5));_0x411e1a[_0x10d156(0x13f)]=0.3,_0x411e1a[_0x10d156(0x113)]()['catch'](function(_0x20631c){var _0xd965da=_0x10d156;console[_0xd965da(0xe2)](_0xd965da(0xd7),_0x20631c);});}catch(_0x3be124){console[_0x10d156(0xe2)](_0x10d156(0x12c),_0x3be124);}}function _0x1ec055(){var _0x255160=_0x1830ee,_0x5c9da9=document['querySelectorAll'](_0x255160(0x117));_0x5c9da9['forEach'](function(_0x415cb6){var _0x48bf17=_0x255160;_0x415cb6[_0x48bf17(0xa7)]();});for(var _0x1ba649=0x0;_0x1ba649<0x96;_0x1ba649++){(function(_0x301189){setTimeout(function(){var _0x2ff149=_0x248a,_0x22ad82=document[_0x2ff149(0xf7)](_0x2ff149(0xf6));_0x22ad82[_0x2ff149(0x135)]=_0x2ff149(0xd5),_0x22ad82[_0x2ff149(0xa4)][_0x2ff149(0x11b)]=Math[_0x2ff149(0xaf)]()*0x64+'vw',_0x22ad82[_0x2ff149(0xa4)]['backgroundColor']=_0x2ff149(0xe0)+Math['random']()*0x168+',\x20100%,\x2050%)',_0x22ad82[_0x2ff149(0xa4)][_0x2ff149(0x109)]=Math[_0x2ff149(0xaf)]()*0x2+0x2+'s',_0x22ad82[_0x2ff149(0xa4)][_0x2ff149(0x10f)]=Math[_0x2ff149(0xaf)]()*0xa+0x5+'px',_0x22ad82[_0x2ff149(0xa4)][_0x2ff149(0xdc)]=Math[_0x2ff149(0xaf)]()*0xa+0x5+'px',_0x22ad82['style'][_0x2ff149(0x10b)]=Math[_0x2ff149(0xaf)]()>0.5?'50%':'0',document['body'][_0x2ff149(0x124)](_0x22ad82),setTimeout(function(){var _0x539ec6=_0x2ff149;_0x22ad82[_0x539ec6(0xb8)]&&_0x22ad82['remove']();},0xbb8);},Math['random']()*0x3e8);}(_0x1ba649));}}function _0x585ab2(){var _0x21ecc5=_0x1830ee;_0x59efe7['player1Increase'][_0x21ecc5(0x12e)](_0x21ecc5(0xc3),function(){var _0x6e1d0b=_0x21ecc5;_0x5ed230[_0x6e1d0b(0x8f)][0x1][_0x6e1d0b(0xce)]++,_0x59efe7[_0x6e1d0b(0xa2)][_0x6e1d0b(0xf9)]=_0x5ed230[_0x6e1d0b(0x8f)][0x1][_0x6e1d0b(0xce)];}),_0x59efe7[_0x21ecc5(0xc8)][_0x21ecc5(0x12e)]('click',function(){var _0x4e00e7=_0x21ecc5;_0x5ed230[_0x4e00e7(0x8f)][0x1]['totalPoints']>0x0&&(_0x5ed230[_0x4e00e7(0x8f)][0x1][_0x4e00e7(0xce)]--,_0x59efe7[_0x4e00e7(0xa2)]['textContent']=_0x5ed230[_0x4e00e7(0x8f)][0x1]['totalPoints']);}),_0x59efe7['player2Increase'][_0x21ecc5(0x12e)](_0x21ecc5(0xc3),function(){var _0x533a68=_0x21ecc5;_0x5ed230[_0x533a68(0x8f)][0x2][_0x533a68(0xce)]++,_0x59efe7[_0x533a68(0xe8)][_0x533a68(0xf9)]=_0x5ed230[_0x533a68(0x8f)][0x2][_0x533a68(0xce)];}),_0x59efe7['player2Decrease']['addEventListener']('click',function(){var _0x3e8095=_0x21ecc5;_0x5ed230['players'][0x2]['totalPoints']>0x0&&(_0x5ed230[_0x3e8095(0x8f)][0x2][_0x3e8095(0xce)]--,_0x59efe7[_0x3e8095(0xe8)][_0x3e8095(0xf9)]=_0x5ed230[_0x3e8095(0x8f)][0x2][_0x3e8095(0xce)]);});}function _0x4e5e04(){var _0x5bd0f5=_0x1830ee;_0x59efe7[_0x5bd0f5(0xfe)]['addEventListener'](_0x5bd0f5(0xc3),function(){var _0x45ed22=_0x5bd0f5;_0x5ed230[_0x45ed22(0xad)]<_0x1595ef[_0x45ed22(0xe4)]&&(_0x5ed230[_0x45ed22(0xad)]++,_0x360cf8(),_0x59623e());}),_0x59efe7[_0x5bd0f5(0xfd)][_0x5bd0f5(0x12e)](_0x5bd0f5(0xc3),function(){var _0x5482fb=_0x5bd0f5;_0x5ed230[_0x5482fb(0xad)]>_0x1595ef[_0x5482fb(0xba)]&&(_0x5ed230['gridSize']--,_0x360cf8(),_0x59623e());});}function _0x56e58a(){var _0x54a33b=_0x1830ee;_0x59efe7[_0x54a33b(0x95)][_0x54a33b(0x12e)](_0x54a33b(0xc3),_0x343452),document[_0x54a33b(0x12e)](_0x54a33b(0x9e),function(){var _0x13d0b6=_0x54a33b;!document['fullscreenElement']?_0x59efe7[_0x13d0b6(0x95)][_0x13d0b6(0x129)]='<svg\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22white\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22>'+_0x13d0b6(0xed)+_0x13d0b6(0xb4):_0x59efe7[_0x13d0b6(0x95)][_0x13d0b6(0x129)]=_0x13d0b6(0x114)+_0x13d0b6(0x115)+'</svg>';});}function _0x343452(){var _0x4dd812=_0x1830ee;!document[_0x4dd812(0xa1)]?document['documentElement']['requestFullscreen']()['catch'](function(_0x27a97a){console['log']('Error\x20attempting\x20to\x20enable\x20fullscreen:',_0x27a97a);}):document[_0x4dd812(0x10d)]&&document[_0x4dd812(0x10d)]();}var _0x28d8f2=document[_0x1830ee(0xf7)](_0x1830ee(0xa4));_0x28d8f2[_0x1830ee(0xf9)]=_0x1830ee(0xe9),document[_0x1830ee(0xb2)]['appendChild'](_0x28d8f2),_0x59efe7['submitBtn'][_0x1830ee(0x12e)](_0x1830ee(0xc3),_0xd39b27),_0x59efe7[_0x1830ee(0xfc)]['addEventListener'](_0x1830ee(0xc3),_0x49a54f),_0x59efe7[_0x1830ee(0xbe)][_0x1830ee(0x12e)]('click',_0x29efe),_0x585ab2(),_0x4e5e04(),_0x56e58a(),_0x29efe();}),window[_0x4c3ffd(0x12e)](_0x4c3ffd(0xf8),function(){var _0x22c96b=_0x4c3ffd;document[_0x22c96b(0x9d)][_0x22c96b(0xa4)]['getPropertyValue'](_0x22c96b(0xb9))&&document['documentElement'][_0x22c96b(0xa4)][_0x22c96b(0xdd)]('--grid-size',document[_0x22c96b(0x9d)][_0x22c96b(0xa4)]['getPropertyValue'](_0x22c96b(0xb9)));}));
+    </script>
+</body>
+</html>
