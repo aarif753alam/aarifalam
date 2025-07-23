@@ -71,32 +71,54 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../main/css/header.css">
+<link rel="stylesheet" href="../../blog/css/blogheader.css">
   <link rel="stylesheet" href="contact.css">
 </head>
 
 <body>
-<!-- Header -->
-<header class="main-header">
-  <div class="header-container">
-    <a href="contact.html" class="logo">
-      <i class="fas fa-bolt logo-icon"></i>
-      Aarif Alam
-    </a>
+<!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
-    </button>
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-container">
+        <a href="../index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <span class="logo-text">AarifAlam</span>
+        </a>
+        
+        <!-- Search Box -->
+        <div class="header-search">
+          <input type="text" id="searchInput" placeholder="Search knowledge..." aria-label="Search">
+          <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        
+        <!-- Mobile Search Toggle Button -->
+        <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Toggle search">
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav class="main-nav">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="../../blog/index.html"><i class="fas fa-brain"></i>BRAIN POWER</a></li>
+            <li><a href="../../Game/game-page.html"><i class="fas fa-gamepad"></i>GAME ZOON</a></li>
+            <li><a href="../../GreetingCard/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
+            <li><a href="contact.html"><i class="fas fa-handshake"></i>Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../../index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-      <li><a href="../../blog/index.html"><i class="fas fa-brain"></i> BRAIN POWER </a></li>
-      <li><a href="../../Game/index.html"><i class="fas fa-gamepad"></i> GAME ZOON </a></li>
-      <li><a href="../../GreetingCard/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
-      <li><a href="../../footer/contact-us/contact.html"><i class="fas fa-handshake"></i> contact-us</a></li>
-    </ul>
-  </div>
-</header>
 
 
   <!-- Contact Hero Section -->
@@ -123,9 +145,11 @@
         <div class="contact-icon">
           <i class="fas fa-phone-alt"></i>
         </div>
-        <h3>Call Us ON Telegrams </h3>
-        <p> you leave comment on my telegram i connect you </p>
-        <a href="https://t.me/aarifalam09" class="contact-link"> +91 ██████████</a>
+        <h3> Call Us </h3>
+        <p> Urgent call only </p>
+        <p> best option send sms </p>
+
+        <a href="+917394033753" class="contact-link"> +91 ██████████</a>
       </div>
     </div>
   </div>
@@ -167,7 +191,8 @@
         <p>मेरा सपना है कि मैं अपने देश और विश्व को शांतिपूर्ण बनाऊं और न्याय, दया और करुणा पर आधारित समाज का निर्माण करूं - जहां किसी पर अत्याचार न हो और सभी को अधिकार मिले, चाहे उनकी जाति कुछ भी हो! अंधकार को हटाकर उसके स्थान पर प्रकाश लाने का सपना है।</p>
                <p style="color: green ; font-weight: 500;">Education, Love, Kindness, Truth and Justice </p>
 
-        <p style="color: var(--primary-color); font-weight: 500;">THANK YOU SO MUCH 🫂 I LOVE EVERYONE ♥️ Do you love me? 🥺</p>
+        <p style="color: var(--primary-color); font-weight: 500;">
+DREAM ⇒ Truth first 🗣 | Justice always ⚖ | Mercy to all 🕊 | Help the helpless | Love all | Forgive often | Kindness daily | Learning forever</p>
       </div>
       <div class="about-image-container floating">
         <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1748020211/A-02_szmwdx.jpg" alt="Aarif Alam" class="about-image" loading="lazy">
@@ -213,7 +238,7 @@
       </div>
     </div>
   </footer>
-    <script src="../../main/js/header.js"></script>
+ <script src="feedbackheader.js"></script>
     <script src="contacts.js"></script>
 </body>
 </html>
