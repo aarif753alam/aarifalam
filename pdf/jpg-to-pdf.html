@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter | Free Online Tool - aarifalam.life</title>
+    <meta name="description" content="Convert JPG, PNG to PDF instantly with our free online tool. Merge multiple images into one PDF with customizable settings. No watermarks, no registration required - 100% free!">
+    <meta name="keywords" content="image to pdf, jpg to pdf, png to pdf, free pdf converter, online pdf tool, merge images to pdf, photo to pdf, convert to pdf online, aarifalam pdf tools, best pdf converter india">
+    <meta name="author" content="aarifalam">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aarifalam.life/pdf/jpg-to-pdf/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aarifalam.life/pdf/jpg-to-pdf">
+    <meta property="og:title" content="Image to PDF Converter | Free Online Tool - aarifalam.life">
+    <meta property="og:description" content="Convert JPG, PNG to PDF instantly with our free online tool. No registration required. Works on all devices.">
+    <meta property="og:image" content="https://aarifalam.life/images/pdf/jpg-to-pdf-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_IN">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aarifalam.life/pdf/jpg-to-pdf">
+    <meta property="twitter:title" content="Image to PDF Converter | Free Online Tool - aarifalam.life">
+    <meta property="twitter:description" content="Convert JPG, PNG to PDF instantly with our free online tool. No registration required. Works on all devices.">
+    <meta property="twitter:image" content="https://aarifalam.life/images/pdf/jpg-to-pdf-x.jpg">
+    
+    <!-- Geo Targeting for India -->
+    <meta name="geo.region" content="IN">
+    <meta name="geo.placename" content="India">
+    <meta name="geo.position" content="20.5937;78.9629">
+    <meta name="ICBM" content="20.5937, 78.9629">
+    
+    <!-- Favicon (keep existing) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#7d19f6">
+    
+    <!-- Fonts (keep existing) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/image-to-pdf-enhance.css">
+    <link rel="stylesheet" href="css/image-to-pdf-main.css">
+    <script src="js/lib/pdf-lib.min.js"></script>
+    <script src="js/lib/Sortable.min.js"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XX2CV48SMH');
+    </script>
+
+
+    <!-- Enhanced Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image to PDF Converter | aarifalam PDF Tools",
+      "url": "https://aarifalam.life/pdf/jpg-to-pdf",
+      "description": "Free online tool to convert JPG, PNG, and other image formats to PDF documents",
+      "applicationCategory": "DocumentUtility",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "aarifalam"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      }
+    }
+    </script>
+    <style>
+      :root {
+        /* Premium color palette */
+        --premium-primary: #7d19f6;
+        --premium-secondary: #ffffff;
+        --premium-accent: #d8dae8f1;
+        --premium-dark: #050f12;
+        --premium-light: #e4e7f5;
+        --premium-success: #010702;
+        --premium-warning: #c4b9a5;
+        --premium-danger: #ed0e0e;
+        --premium-info: #0687e9;
+        
+        /* Gradient backgrounds */
+        --gradient-primary: linear-gradient(135deg, var(--premium-primary) 0%, var(--premium-secondary) 100%);
+        --gradient-dark: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+        --gradient-light: linear-gradient(145deg, #003cffef 0%, #4a720fe3 100%);
+        --gradient-accent: linear-gradient(135deg, var(--premium-accent) 0%, #ff7675 100%);
+        
+        /* Premium shadows */
+        --shadow-sm: 0 8px 12px rgba(0, 0, 0, 0.371);
+        --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.704);
+        --shadow-lg: 0 10px 15px rgb(22, 4, 4);
+        --shadow-xl: 6px 12px 25px #060404e7, 1px 8px 12px #000000f3;
+        --shadow-inner: inset 0 4px 8px rgba(0, 0, 0, 0.06);
+        
+        /* Border radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --radius-full: 9999px;
+        
+        /* Transitions */
+        --transition-fast: all 0.15s ease;
+        --transition-normal: all 0.3s ease;
+        --transition-slow: all 0.5s ease;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: var(--gradient-light);
+        color: var(--premium-dark);
+        min-height: 100vh;
+        padding: 1rem;
+        margin: 0;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Premium glass container */
+      .converter-app {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Decorative elements */
+      .converter-app::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+        z-index: -1;
+      }
+
+      /* App header with animated gradient text */
+      .app-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        position: relative;
+      }
+
+      .app-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+        background: linear-gradient(90deg, 
+          var(--premium-primary), 
+          var(--premium-accent), 
+          var(--premium-secondary));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.2;
+        animation: gradientText 3s linear infinite;
+      }
+
+      @keyframes gradientText {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+
+      .subtitle {
+        color: rgba(45, 52, 54, 0.8);
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        margin-top: 0.5rem;
+        font-weight: 400;
+      }
+
+      /* Premium upload box with animated border */
+      .upload-section {
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .upload-box {
+        position: relative;
+        border: none;
+        border-radius: var(--radius-lg);
+        padding: 3rem 2rem;
+        text-align: center;
+        transition: var(--transition-normal);
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        z-index: 1;
+        cursor: pointer;
+        box-shadow: var(--shadow-md);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .upload-box::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, 
+          var(--premium-primary), 
+          var(--premium-accent), 
+          var(--premium-secondary), 
+          var(--premium-primary));
+        background-size: 400% 400%;
+        z-index: -1;
+        border-radius: var(--radius-lg);
+        animation: gradientBorder 6s ease infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes gradientBorder {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+
+      .upload-box:hover::before {
+        opacity: 1;
+      }
+
+      .upload-icon svg {
+        width: 60px;
+        height: 60px;
+        fill: var(--premium-primary);
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 5px 15px rgba(108, 92, 231, 0.3));
+      }
+
+      .upload-box h3 {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+        margin: 0 0 0.5rem;
+        color: var(--premium-dark);
+        font-weight: 600;
+      }
+
+      .upload-box p {
+        color: rgba(45, 52, 54, 0.7);
+        margin: 0.5rem 0;
+        font-size: clamp(0.9rem, 3vw, 1rem);
+      }
+
+      .browse-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--premium-primary);
+        border: 2px solid var(--premium-primary);
+        padding: 0.75rem 2rem;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-normal);
+        margin-top: 1.5rem;
+        min-height: 48px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 220px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .browse-btn:hover {
+        background: var(--premium-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* File preview section */
+      .preview-section {
+        margin-bottom: 2rem;
+      }
+
+      .preview-section h3 {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+        margin-bottom: 1.5rem;
+        color: var(--premium-dark);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .preview-section h3::before {
+        content: '';
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-sm);
+      }
+
+      #file-count {
+        font-size: 0.9rem;
+        color: rgba(45, 52, 54, 0.7);
+        font-weight: 400;
+        margin-left: auto;
+      }
+
+      .file-list {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        min-height: 180px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: rgba(45, 52, 54, 0.5);
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        gap: 1rem;
+      }
+
+      .empty-state svg {
+        width: 48px;
+        height: 48px;
+        fill: rgba(108, 92, 231, 0.3);
+      }
+
+      /* Premium thumbnail grid */
+      .thumbnail-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      @media (min-width: 480px) {
+        .thumbnail-container {
+          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+      }
+
+      @media (min-width: 768px) {
+        .thumbnail-container {
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+      }
+
+      .thumbnail-item {
+        position: relative;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        aspect-ratio: 1;
+        background: var(--gradient-light);
+        transition: var(--transition-normal);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .thumbnail-item:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--premium-primary);
+      }
+
+      .thumbnail-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: var(--transition-normal);
+      }
+
+      .thumbnail-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .thumbnail-actions {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 8px;
+        opacity: 0;
+        transition: var(--transition-normal);
+      }
+
+      .thumbnail-item:hover .thumbnail-actions {
+        opacity: 1;
+      }
+
+      .thumbnail-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-full);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition: var(--transition-fast);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .thumbnail-btn:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+      }
+
+      .rotate-btn::after {
+        content: "↻";
+      }
+
+      .delete-btn::after {
+        content: "×";
+      }
+
+           /* Download section */
+      .download-section {
+        text-align: center;
+        animation: fadeIn 0.5s ease;
+        display: none;
+        background: rgba(0, 184, 148, 0.1);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        border: 2px dashed var(--premium-success);
+      }
+
+      .download-section h3 {
+        font-size: clamp(1.3rem, 4vw, 1.8rem);
+        color: var(--premium-success);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+
+      .download-section h3::before {
+        content: '';
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        background: var(--premium-success);
+       
+      }
+
+      .download-btn {
+        background: var(--gradient-primary);
+        color: rgb(50, 84, 255);
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-normal);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        min-height: 56px;
+        font-size: 1.1rem;
+        width: 100%;
+        max-width: 280px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .download-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1));
+        z-index: -1;
+        transition: var(--transition-normal);
+        opacity: 0;
+      }
+
+      .download-btn:hover::before {
+        opacity: 1;
+      }
+
+      .download-btn::after {
+        content: '↓';
+        font-size: 1.2rem;
+        transition: var(--transition-normal);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .download-btn:hover::after {
+        transform: translateY(3px);
+      }
+
+      /* Toast notifications */
+      .toast {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius-md);
+        color: white;
+        font-weight: 500;
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+        transform: translateY(0);
+        font-size: 0.95rem;
+        max-width: 90%;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .toast::before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: white;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        flex-shrink: 0;
+      }
+
+      .toast-success {
+        background: rgba(0, 171, 11, 0.9);
+      }
+
+      .toast-success::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'%3E%3C/path%3E%3Cpolyline points='22 4 12 14.01 9 11.01'%3E%3C/polyline%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'%3E%3C/path%3E%3Cpolyline points='22 4 12 14.01 9 11.01'%3E%3C/polyline%3E%3C/svg%3E");
+      }
+
+      .toast-error {
+        background: rgba(252, 31, 23, 0.51);
+      }
+
+      .toast-error::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E");
+      }
+
+      .toast-info {
+        background: rgba(1, 250, 14, 0.9);
+      }
+
+      .toast-info::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='16' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'%3E%3C/line%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='16' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'%3E%3C/line%3E%3C/svg%3E");
+      }
+
+      .toast-warning {
+        background: rgba(255, 183, 49, 0.512);
+        color: var(--premium-dark);
+      }
+
+      .toast-warning::before {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'%3E%3C/path%3E%3Cline x1='12' y1='9' x2='12' y2='13'%3E%3C/line%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'%3E%3C/line%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'%3E%3C/path%3E%3Cline x1='12' y1='9' x2='12' y2='13'%3E%3C/line%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'%3E%3C/line%3E%3C/svg%3E");
+      }
+
+      .fade-out {
+        animation: fadeOut 0.3s ease-in;
+        opacity: 0;
+      }
+
+      @keyframes slideIn {
+        from { transform: translateY(100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .converter-app {
+          padding: 1.5rem;
+        }
+
+        .upload-box {
+          padding: 2rem 1rem;
+        }
+
+        .options-section {
+          padding: 1.25rem;
+        }
+
+        .file-list {
+          padding: 1rem;
+        }
+
+        .thumbnail-container {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .converter-app {
+          padding: 1.25rem;
+        }
+
+        .thumbnail-container {
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        }
+
+        .convert-btn, .clear-btn, .download-btn {
+          min-height: 48px;
+          font-size: 1rem;
+          padding: 0.75rem 1.5rem;
+        }
+      }
+
+      /* Prevent zooming on input focus on mobile */
+      @media screen and (max-width: 768px) {
+        input, select, textarea {
+          font-size: 16px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="converter-app">
+        <div class="app-header">
+            <h1>Image to PDF Converter</h1>
+            <p class="subtitle">Transform your images into professional PDF documents</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <div class="upload-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                    </svg>
+                </div>
+                <h3>Select or Drag & Drop images here</h3>
+                <p>or</p>
+                <button class="browse-btn">Browse Files</button>
+                <input type="file" id="file-input" accept="image/*" multiple style="display: none;">
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h3>Selected Files <span id="file-count" style="font-size: 0.9rem; color: #64748b;"></span></h3>
+            <div class="file-list">
+                <div class="thumbnail-container" id="thumbnailContainer"></div>
+                <div class="empty-state" id="emptyState">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <p>No files selected yet</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <h3>PDF Options</h3>
+            <div class="option-row">
+                <label for="page-size">Page Size:</label>
+                <select id="page-size">
+                    <option value="a4">A4</option>
+                    <option value="letter">Letter</option>
+                    <option value="a5">A5</option>
+                    <option value="auto">Auto (Image Size)</option>
+                </select>
+            </div>
+            <div class="option-row">
+                <label for="orientation">Orientation:</label>
+                <select id="orientation">
+                    <option value="portrait">Portrait</option>
+                    <option value="landscape">Landscape</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </div>
+            <div class="option-row">
+                <label for="margin">Margin (mm):</label>
+                <input type="number" id="margin" min="0" max="50" value="10">
+            </div>
+            <div class="option-row">
+                <label for="quality">Quality:</label>
+                <select id="quality">
+                    <option value="high">High (300dpi)</option>
+                    <option value="medium" selected>Medium (150dpi)</option>
+                    <option value="low">Low (72dpi)</option>
+                </select>
+            </div>
+            <div class="option-row">
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="compressPdf"> Compress PDF
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="addPageNumbers"> Page Numbers
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="convert-btn">Convert to PDF</button>
+            <button class="clear-btn">Clear All</button>
+        </div>
+
+        <div class="status-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="status-message">Ready to convert</p>
+        </div>
+
+        <div class="download-section" style="display: none;">
+            <h3>Conversion Complete!</h3>
+            <button class="download-btn">Download PDF</button>
+
+        <div class="tools-section">
+            <a href="/pdf/jpg-to-pdf" class="tool-item">
+                <i class="fas fa-file-image"></i> Image to PDF
+            </a>
+            <a href="/pdf/pdf-to-image" class="tool-item">
+                <i class="fas fa-file-pdf"></i> PDF to IMAGE
+            </a>
+            <a href="/pdf/merge-pdf" class="tool-item">
+                <i class="fas fa-object-group"></i> Merge PDF
+            </a>
+            <a href="/pdf/split-pdf" class="tool-item">
+                <i class="fas fa-cut"></i> Split PDF
+            </a>
+        </div>
+    </div>
+</div>
+<footer style="text-align: center; padding: 20px 0; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+    <div style="font-size: 14px; color: #fff;">
+        <p>© <span id="year"></span> aarifalam.life - Free Online image to pdf</p>
+        <p style="margin-top: 8px;">
+            <a href="../footer/terms.html" style="color: #0026FF; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+            <a href="../footer/privacy-policy.html" style="color: #0026FF; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+            <span style="color: #fff;">|</span>
+            <a href="../footer/about.html" style="color: #0026FF; text-decoration: none; margin: 0 10px;">About Us</a>
+
+        </p>
+    </div>
+</footer>
+
+    <script>document.addEventListener("DOMContentLoaded",()=>{let e=document.querySelector(".upload-box"),t=document.getElementById("file-input"),a=document.getElementById("thumbnailContainer"),n=document.getElementById("emptyState"),r=document.getElementById("file-count"),l=document.querySelector(".convert-btn"),i=document.querySelector(".clear-btn"),o=document.querySelector(".progress-fill"),d=document.querySelector(".status-message"),s=document.querySelector(".download-section"),c=document.querySelector(".download-btn"),g=[],u=null,m;function h(){e.addEventListener("dragover",y),e.addEventListener("dragleave",$),e.addEventListener("drop",b),e.addEventListener("click",()=>t.click()),e.addEventListener("touchstart",f,{passive:!0}),e.addEventListener("touchend",p,{passive:!0}),t.addEventListener("change",v),l.addEventListener("click",k),i.addEventListener("click",L),c.addEventListener("click",P)}function f(t){t.preventDefault(),e.style.borderColor="#6c5ce7",e.style.backgroundColor="rgba(108, 92, 231, 0.1)"}function p(a){a.preventDefault(),e.style.borderColor="#cbd5e1",e.style.backgroundColor="rgba(255, 255, 255, 0.2)",t.click()}function y(t){t.preventDefault(),t.stopPropagation(),e.style.borderColor="#6c5ce7",e.style.backgroundColor="rgba(108, 92, 231, 0.1)"}function $(t){t.preventDefault(),t.stopPropagation(),e.style.borderColor="#cbd5e1",e.style.backgroundColor="rgba(255, 255, 255, 0.2)"}function b(e){e.preventDefault(),e.stopPropagation(),$(e);let t=Array.from(e.dataTransfer.files);w(t)}function v(e){let t=Array.from(e.target.files);w(t),e.target.value=""}function w(e){let t=e.filter(e=>e.type.startsWith("image/"));if(0===t.length){B("Please select image files only","error");return}g=[...g,...t.map(e=>({file:e,rotation:0}))],E(),1===t.length?B("1 image added successfully","success"):B(`${t.length} images added successfully`,"success")}function E(){if(0===g.length){n.style.display="flex",a.innerHTML="",r.textContent="";return}n.style.display="none",a.innerHTML="",r.textContent=`(${g.length} files)`,g.forEach((e,t)=>{let{file:n,rotation:r}=e,l=document.createElement("div");l.className="thumbnail-item",l.draggable=!0,l.dataset.index=t;let i=document.createElement("img");i.src=URL.createObjectURL(n),i.alt=n.name,i.style.transform=`rotate(${r}deg)`;let o=document.createElement("div");o.className="thumbnail-actions";let d=document.createElement("button");d.className="thumbnail-btn rotate-btn",d.title="Rotate image",d.addEventListener("click",e=>{e.stopPropagation(),C(t)});let s=document.createElement("button");s.className="thumbnail-btn delete-btn",s.title="Remove image",s.addEventListener("click",e=>{e.stopPropagation(),_(t)}),o.appendChild(d),o.appendChild(s),l.appendChild(i),l.appendChild(o),a.appendChild(l)}),m&&m.destroy(),m=new Sortable(a,{animation:150,onEnd:function(){let e=Array.from(a.children).map(e=>parseInt(e.dataset.index)),t=e.map(e=>g[e]);g=t,E()}})}function C(e){g[e].rotation=(g[e].rotation+90)%360,E(),B("Image rotated","info")}function _(e){g.splice(e,1),E(),B("Image removed","info")}function L(){0!==g.length&&(g=[],E(),x(),B("All files cleared","info"))}async function k(){if(0===g.length){B("Please add images first","error");return}l.disabled=!0,I(0,"Preparing images...");try{let{PDFDocument:e,rgb:t}=window.PDFLib,a=await e.create(),n=document.getElementById("page-size").value,r=document.getElementById("orientation").value,i=parseInt(document.getElementById("margin").value)||10,o=document.getElementById("quality").value;document.getElementById("compressPdf").checked;let d=document.getElementById("addPageNumbers").checked;for(let c=0;c<g.length;c++){let{file:m,rotation:h}=g[c];I(c/g.length*100,`Processing ${c+1}/${g.length}...`);let f,p=2.83465*i;if("auto"===n){let y=await R(m),$=y.width,b=y.height;(90===h||270===h)&&([$,b]=[b,$]);let v=.75*$,w=.75*b;f=a.addPage([v,w])}else{let E,C;switch(n){case"a4":default:E=595,C=842;break;case"letter":E=612,C=792;break;case"a5":E=420,C=595}("landscape"===r||"auto"===r&&m.width>m.height)&&([E,C]=[C,E]),f=a.addPage([E,C])}await D(m);let _,L=await S(m,h),k;_="image/jpeg"===m.type?await a.embedJpg(k=await q(L,o)):"image/png"===m.type?await a.embedPng(k=L.toDataURL("image/png")):await a.embedJpg(k=await q(L,o));let P=f.getWidth(),x=f.getHeight(),j=P-2*p,O=x-2*p,U=_.width/_.height,N=j/O,A,T;U>N?(A=j,T=j/U):(T=O,A=O*U);let F=p+(j-A)/2,H=p+(O-T)/2;f.drawImage(_,{x:F,y:H,width:A,height:T}),d&&(a.getPageCount(),f.drawText(`Page ${c+1} of ${g.length}`,{x:P-p-40,y:p+10,size:10,color:t(.5,.5,.5)}))}I(95,"Generating PDF...");let M=await a.save();u=new Blob([M],{type:"application/pdf"}),I(100,"Conversion complete!"),setTimeout(()=>{s.style.display="block",l.disabled=!1},500),B("PDF created successfully!","success")}catch(z){console.error("Conversion error:",z),I(0,"Error occurred"),B("Conversion failed. Please try again.","error"),l.disabled=!1}}function P(){if(!u)return;let e=URL.createObjectURL(u),t=document.createElement("a");t.href=e,t.download=`images_${new Date().toISOString().slice(0,10)}.pdf`,document.body.appendChild(t),t.click(),document.body.removeChild(t),URL.revokeObjectURL(e),B("Download started","success")}function I(e,t){o.style.width=`${e}%`,d.textContent=t,100===e&&(o.style.background="linear-gradient(to right, var(--premium-success), var(--premium-info))")}function x(){o.style.width="0%",o.style.background="linear-gradient(to right, var(--premium-primary), var(--premium-secondary))",d.textContent="Ready to convert",s.style.display="none",u=null}function B(e,t){let a=document.createElement("div");a.className=`toast toast-${t}`,a.textContent=e,document.body.appendChild(a),setTimeout(()=>{a.classList.add("fade-out"),setTimeout(()=>a.remove(),300)},3e3)}function D(e){return new Promise((t,a)=>{let n=new FileReader;n.onload=()=>t(n.result),n.onerror=a,n.readAsArrayBuffer(e)})}function R(e){return new Promise((t,a)=>{let n=new Image;n.onload=()=>t(n),n.onerror=a,n.src=URL.createObjectURL(e)})}function S(e,t){return new Promise(a=>{let n=new Image;n.onload=function(){let e=document.createElement("canvas");90===t||270===t?(e.width=n.height,e.height=n.width):(e.width=n.width,e.height=n.height);let r=e.getContext("2d");r.save(),r.translate(e.width/2,e.height/2),r.rotate(t*Math.PI/180),r.drawImage(n,-n.width/2,-n.height/2),r.restore(),a(e)},n.src=URL.createObjectURL(e)})}function q(e,t){return new Promise(a=>{let n=.9;"high"===t&&(n=1),"medium"===t&&(n=.7),"low"===t&&(n=.5),e.toBlob(e=>{let t=new FileReader;t.onload=()=>a(t.result),t.readAsDataURL(e)},"image/jpeg",n)})}h()});
+    </script>
+<script src="js/enhance-ui.js"></script>
+</body>
+</html>
