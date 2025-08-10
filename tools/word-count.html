@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter | Free Online Tool</title>
+    <meta name="description" content="Count words, characters, sentences, and estimate reading & speaking time. Perfect for writers, students, and content creators.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --primary-dark: #4d44db;
+            --success: #00b894;
+            --success-light: rgba(0, 184, 148, 0.1);
+            --danger: #d63031;
+            --light: #f8f9fa;
+            --dark: #2d3436;
+            --gray: #636e72;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #dfe6f0 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .word-counter {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .counter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+        }
+
+        .counter-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .counter-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .counter-content {
+            padding: 25px;
+        }
+
+        .text-area-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        #text-input {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        #text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .placeholder-text {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--gray);
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        #text-input:focus + .placeholder-text,
+        #text-input:not(:empty) + .placeholder-text {
+            display: none;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            background: rgba(162, 155, 254, 0.05);
+        }
+
+        .upload-area.highlight {
+            border-color: var(--primary);
+            background: rgba(162, 155, 254, 0.1);
+        }
+
+        .upload-area i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        .upload-area .browse-text {
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .time-estimates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .time-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .time-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-card-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+            color: var(--dark);
+        }
+
+        .time-card-content p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background: var(--primary);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            color: var(--white);
+        }
+
+        .error-message {
+            color: var(--danger);
+            background: rgba(214, 48, 49, 0.1);
+            padding: 10px 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            display: none;
+            font-size: 0.85rem;
+        }
+
+        .word-frequency {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .word-frequency h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .frequency-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .frequency-table th, 
+        .frequency-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .frequency-table th {
+            background: rgba(108, 92, 231, 0.05);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .frequency-table tr:hover {
+            background: rgba(108, 92, 231, 0.03);
+        }
+
+        .options-section {
+            margin: 20px 0;
+        }
+
+        .options-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .option-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .option-item label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .option-item select,
+        .option-item input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-option label {
+            font-size: 0.85rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .word-counter {
+                max-width: 95%;
+            }
+            
+            .counter-header {
+                padding: 20px 15px;
+            }
+            
+            .counter-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .counter-content {
+                padding: 20px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .time-estimates {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-btns {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="word-counter">
+        <div class="counter-header">
+            <h1>Word Counter</h1>
+            <p>Count words, characters, sentences, and estimate reading & speaking time for your text.</p>
+        </div>
+
+        <div class="counter-content">
+            <div class="error-message" id="error-message"></div>
+            
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Text File</h3>
+                <p>Drag & drop your file here or <span class="browse-text">browse</span></p>
+                <input type="file" id="file-input" accept=".txt,.doc,.docx,.pdf">
+            </div>
+            
+            <div class="text-area-container">
+                <textarea id="text-input" placeholder=" "></textarea>
+                <div class="placeholder-text">Type or paste your text here...</div>
+            </div>
+            
+            <div class="options-section">
+                <h3 class="options-title">Options</h3>
+                
+                <div class="option-group">
+                    <div class="option-item">
+                        <label for="reading-speed">Reading Speed</label>
+                        <select id="reading-speed">
+                            <option value="200">Slow (200 wpm)</option>
+                            <option value="250" selected>Average (250 wpm)</option>
+                            <option value="300">Fast (300 wpm)</option>
+                            <option value="350">Very Fast (350 wpm)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-item">
+                        <label for="speaking-speed">Speaking Speed</label>
+                        <select id="speaking-speed">
+                            <option value="100">Slow (100 wpm)</option>
+                            <option value="130" selected>Average (130 wpm)</option>
+                            <option value="160">Fast (160 wpm)</option>
+                            <option value="200">Very Fast (200 wpm)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="checkbox-option">
+                    <input type="checkbox" id="count-spaces" checked>
+                    <label for="count-spaces">Include spaces in character count</label>
+                </div>
+                
+                <div class="checkbox-option">
+                    <input type="checkbox" id="show-frequency">
+                    <label for="show-frequency">Show word frequency analysis</label>
+                </div>
+            </div>
+            
+            <div class="stats-container" id="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="word-count">0</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="character-count">0</div>
+                    <div class="stat-label">Characters (with space)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="character-no-spaces">0</div>
+                    <div class="stat-label">Chars (no spaces count)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="sentence-count">0</div>
+                    <div class="stat-label">Sentences</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="paragraph-count">0</div>
+                    <div class="stat-label">Paragraphs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="page-count">0</div>
+                    <div class="stat-label">Pages (~500 words)</div>
+                </div>
+            </div>
+            
+            <div class="time-estimates">
+                <div class="time-card">
+                    <i class="fas fa-book-reader"></i>
+                    <div class="time-card-content">
+                        <h4>Reading Time</h4>
+                        <p id="reading-time">0 min</p>
+                    </div>
+                </div>
+                <div class="time-card">
+                    <i class="fas fa-comment-dots"></i>
+                    <div class="time-card-content">
+                        <h4>Speaking Time</h4>
+                        <p id="speaking-time">0 min</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="word-frequency" id="word-frequency">
+                <h3>Word Frequency</h3>
+                <table class="frequency-table">
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Count</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="frequency-table-body">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="action-btns">
+                <button class="btn btn-primary" id="copy-btn">
+                    <i class="fas fa-copy"></i> Copy Text
+                </button>
+                <button class="btn btn-secondary" id="clear-btn">
+                    <i class="fas fa-trash-alt"></i> Clear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const textInput = document.getElementById('text-input');
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            const copyBtn = document.getElementById('copy-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const errorMessage = document.getElementById('error-message');
+            const showFrequencyCheckbox = document.getElementById('show-frequency');
+            const wordFrequencySection = document.getElementById('word-frequency');
+            const frequencyTableBody = document.getElementById('frequency-table-body');
+            
+            // Stats elements
+            const wordCountEl = document.getElementById('word-count');
+            const charCountEl = document.getElementById('character-count');
+            const charNoSpacesEl = document.getElementById('character-no-spaces');
+            const sentenceCountEl = document.getElementById('sentence-count');
+            const paragraphCountEl = document.getElementById('paragraph-count');
+            const pageCountEl = document.getElementById('page-count');
+            const readingTimeEl = document.getElementById('reading-time');
+            const speakingTimeEl = document.getElementById('speaking-time');
+            
+            // Options elements
+            const readingSpeedEl = document.getElementById('reading-speed');
+            const speakingSpeedEl = document.getElementById('speaking-speed');
+            const countSpacesEl = document.getElementById('count-spaces');
+            
+            // Initialize PDF.js worker
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+            
+            // Handle drag and drop events
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.add('highlight');
+            });
+            
+            uploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('highlight');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('highlight');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileSelection(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Handle click to select file
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    handleFileSelection(fileInput.files[0]);
+                }
+            });
+            
+            // Text input event
+            textInput.addEventListener('input', () => {
+                updateStats();
+            });
+            
+            // Options change events
+            readingSpeedEl.addEventListener('change', updateStats);
+            speakingSpeedEl.addEventListener('change', updateStats);
+            countSpacesEl.addEventListener('change', updateStats);
+            showFrequencyCheckbox.addEventListener('change', function() {
+                wordFrequencySection.style.display = this.checked ? 'block' : 'none';
+                if (this.checked) {
+                    updateWordFrequency();
+                }
+            });
+            
+            // Copy button
+            copyBtn.addEventListener('click', () => {
+                if (textInput.value.trim() === '') {
+                    showError('No text to copy');
+                    return;
+                }
+                
+                textInput.select();
+                document.execCommand('copy');
+                
+                // Show temporary feedback
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+            
+            // Clear button
+            clearBtn.addEventListener('click', () => {
+                textInput.value = '';
+                fileInput.value = '';
+                updateStats();
+                hideError();
+            });
+            
+            // Helper functions
+            function handleFileSelection(file) {
+                const fileName = file.name.toLowerCase();
+                
+                if (fileName.endsWith('.txt')) {
+                    readTextFile(file);
+                } 
+                else if (fileName.endsWith('.pdf')) {
+                    readPdfFile(file);
+                }
+                else if (fileName.endsWith('.docx')) {
+                    readDocxFile(file);
+                }
+                else {
+                    showError('Unsupported file format. Please upload .txt, .pdf, or .docx files.');
+                }
+            }
+            
+            function readTextFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    textInput.value = e.target.result;
+                    updateStats();
+                };
+                reader.onerror = function() {
+                    showError('Error reading text file');
+                };
+                reader.readAsText(file);
+            }
+            
+            function readPdfFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const typedarray = new Uint8Array(e.target.result);
+                    
+                    // Load the PDF file
+                    pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+                        let fullText = '';
+                        
+                        // Extract text from each page
+                        const extractPageText = function(pageNum) {
+                            return pdf.getPage(pageNum).then(function(page) {
+                                return page.getTextContent().then(function(textContent) {
+                                    return textContent.items.map(function(item) {
+                                        return item.str;
+                                    }).join(' ');
+                                });
+                            });
+                        };
+                        
+                        // Extract all pages
+                        const pageTextPromises = [];
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            pageTextPromises.push(extractPageText(i));
+                        }
+                        
+                        // Combine all pages
+                        Promise.all(pageTextPromises).then(function(pages) {
+                            fullText = pages.join('\n\n');
+                            textInput.value = fullText;
+                            updateStats();
+                        });
+                    }).catch(function(error) {
+                        showError('Error reading PDF: ' + error.message);
+                    });
+                };
+                reader.readAsArrayBuffer(file);
+            }
+            
+            function readDocxFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const arrayBuffer = event.target.result;
+                    
+                    mammoth.extractRawText({arrayBuffer: arrayBuffer})
+                        .then(function(result) {
+                            textInput.value = result.value;
+                            updateStats();
+                        })
+                        .catch(function(error) {
+                            showError('Error reading DOCX file: ' + error.message);
+                        });
+                };
+                reader.onerror = function() {
+                    showError('Error reading DOCX file');
+                };
+                reader.readAsArrayBuffer(file);
+            }
+            
+            function updateStats() {
+                const text = textInput.value;
+                
+                // Word count (counts words separated by whitespace)
+                const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+                wordCountEl.textContent = wordCount.toLocaleString();
+                
+                // Character count (with and without spaces)
+                const charCount = text.length;
+                const charNoSpaces = text.replace(/\s+/g, '').length;
+                charCountEl.textContent = charCount.toLocaleString();
+                charNoSpacesEl.textContent = charNoSpaces.toLocaleString();
+                
+                // Sentence count (counts sentences ending with .!? followed by space or end of string)
+                const sentenceCount = text.trim() === '' ? 0 : text.split(/[.!?]+(?=\s|$)/).filter(Boolean).length;
+                sentenceCountEl.textContent = sentenceCount.toLocaleString();
+                
+                // Paragraph count (counts blocks of text separated by 2+ newlines)
+                const paragraphCount = text.trim() === '' ? 0 : text.split(/\n\s*\n/).length;
+                paragraphCountEl.textContent = paragraphCount.toLocaleString();
+                
+                // Page count (estimate based on ~500 words per page)
+                const pageCount = (wordCount / 500).toFixed(1);
+                pageCountEl.textContent = pageCount;
+                
+                // Reading time (based on selected reading speed)
+                const readingSpeed = parseInt(readingSpeedEl.value);
+                const readingMinutes = wordCount / readingSpeed;
+                readingTimeEl.textContent = formatTime(readingMinutes);
+                
+                // Speaking time (based on selected speaking speed)
+                const speakingSpeed = parseInt(speakingSpeedEl.value);
+                const speakingMinutes = wordCount / speakingSpeed;
+                speakingTimeEl.textContent = formatTime(speakingMinutes);
+                
+                // Update word frequency if shown
+                if (showFrequencyCheckbox.checked) {
+                    updateWordFrequency();
+                }
+            }
+            
+            function updateWordFrequency() {
+                const text = textInput.value.toLowerCase();
+                const words = text.match(/\b[\w']+\b/g) || [];
+                
+                // Count word frequencies
+                const frequencyMap = {};
+                words.forEach(word => {
+                    frequencyMap[word] = (frequencyMap[word] || 0) + 1;
+                });
+                
+                // Convert to array and sort by frequency
+                const frequencyArray = Object.entries(frequencyMap)
+                    .sort((a, b) => b[1] - a[1]);
+                
+                // Clear previous results
+                frequencyTableBody.innerHTML = '';
+                
+                // Add rows to table (limit to top 50 words)
+                const totalWords = words.length;
+                frequencyArray.slice(0, 50).forEach(([word, count]) => {
+                    const percentage = ((count / totalWords) * 100).toFixed(2);
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${word}</td>
+                        <td>${count}</td>
+                        <td>${percentage}%</td>
+                    `;
+                    frequencyTableBody.appendChild(row);
+                });
+            }
+            
+            function formatTime(minutes) {
+                if (minutes < 1) {
+                    return '< 1 min';
+                } else if (minutes < 60) {
+                    return Math.round(minutes) + ' min';
+                } else {
+                    const hours = Math.floor(minutes / 60);
+                    const mins = Math.round(minutes % 60);
+                    return hours + ' hr ' + mins + ' min';
+                }
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function hideError() {
+                errorMessage.style.display = 'none';
+            }
+            
+            // Initialize
+            updateStats();
+        });
+    </script>
+</body>
+</html>
