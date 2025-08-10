@@ -207,11 +207,12 @@
             }
         }
         
-        /* For screens 1400px and above - 5 cards */
+        /* For screens 1400px and above - 4 cards */
         @media (min-width: 1400px) {
             .tools-grid {
                 grid-template-columns: repeat(5, minmax(180px, 1fr));
                 max-width: 1000px;
                 margin: 0 auto 40px;
             }
+
         }
