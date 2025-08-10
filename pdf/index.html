@@ -48,8 +48,6 @@
 
     <!-- Favicon fonts css etc -->
     <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><!-- Fonts and Icons --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/pdf-header.css"><link rel="stylesheet" href="css/index-tagline.css"><meta name="robots" content="index, follow, max-image-preview:large">
-
-
     
   <!-- 2025 AI-Optimized Schema Markup -->
     <script type="application/ld+json">
@@ -344,6 +342,38 @@
                 right: -30px;
             }
         }
+        /* Watermark animation */
+@keyframes fadeWatermark {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Blocked page styling */
+.body-blocked {
+  pointer-events: none;
+  user-select: none;
+}
+
+.blocked-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  text-align: center;
+}
+
+.blocked-message h1 {
+  color: red;
+}
     </style>
 </head>
 <body>
@@ -427,14 +457,12 @@
     </div>
 </header>
 
-
     <div class="container">
     <section class="header" aria-label="Free PDF Tools">
         <h1>Free Online PDF Tools</h1>
         <p>100% free PDF tools to merge, split, compress, convert, edit, watermark and secure your documents. No registration required. Works on all devices.</p>
     </section>
 
-        
         <!-- High Priority Tools -->
         <section aria-labelledby="high-priority-tools">
             <div class="category-header">
@@ -442,7 +470,7 @@
             </div>
             <div class="tools-grid">
                 <!-- jpg to PDF -->
-                <a href="/pdf/jpg-to-pdf" class="tool-card" data-tool="pdf-to-jpg" aria-label="Convert JPG to PDF online">
+                <a href="/pdf/image-to-pdf" class="tool-card" data-tool="pdf-to-jpg" aria-label="Convert JPG to PDF online">
                     <div class="tool-icon tool-jpg">
                         <i class="fas fa-file-image" aria-hidden="true"></i>
                     </div>
@@ -542,7 +570,6 @@
                 </a>
             </div>
         </section>
-        
                 
         <!-- Tagline -->
         <div class="tagline" role="contentinfo">
@@ -561,6 +588,10 @@
         </p>
     </div>
 </footer>
+<!-- Do not remove this — the code will break 'this is my social media user name -->
+    <div id="creator-watermark" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:8px 12px;border-radius:4px;font-size:12px;z-index:9999;transition:opacity 0.5s;animation:fadeWatermark 2s forwards">
+  Created by @aarifalam0105
+</div>
 
 <script>
     // Auto-update year
@@ -570,35 +601,13 @@
 <script src="js/responsive.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track tool clicks for analytics
-            document.querySelectorAll('.tool-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    const toolId = this.dataset.tool;
-                    
-                    // In a real implementation, you would send this to analytics
-                    console.log(`Tool clicked: ${toolId}`);
-                    
-                    // You could use Google Analytics like:
-                    // gtag('event', 'tool_click', { 'tool_name': toolId });
-                });
-            });
-            
-            // Add hover effects for mobile touch devices
-            if ('ontouchstart' in window) {
-                document.querySelectorAll('.tool-card').forEach(card => {
-                    card.addEventListener('touchstart', function() {
-                        this.classList.add('hover');
-                    }, {passive: true});
-                    
-                    card.addEventListener('touchend', function() {
-                        setTimeout(() => {
-                            this.classList.remove('hover');
-                        }, 200);
-                    }, {passive: true});
-                });
-            }
-        });
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("click",function(e){let t=this.dataset.tool;console.log(`Tool clicked: ${t}`)})}),function(){let e={creatorName:"@aarifalam0105",requiredFiles:{css:"css/index-tagline.css",js:"js/pdf-header.js"},checkInterval:3e3,originalUrl:"https://aarifalam.life/"},t=()=>{let t=document.createElement("div");t.id="__css_valid_"+Math.random().toString(36).substr(2,9),t.setAttribute("data-creator",e.creatorName),t.style.display="none",document.body.appendChild(t);let r=document.createElement("div");r.id="__js_valid_"+Math.random().toString(36).substr(2,9),r.setAttribute("data-creator",e.creatorName),r.style.display="none",document.body.appendChild(r)},r=()=>{try{let t=!1;document.querySelectorAll('link[rel="stylesheet"]').forEach(r=>{r.href.includes(e.requiredFiles.css.split("/").pop())&&(t=!0)});let r=!1;return Array.from(document.scripts).forEach(t=>{t.src&&t.src.includes(e.requiredFiles.js.split("/").pop())&&(r=!0)}),t&&r}catch(a){return!1}},a=()=>{try{let t=document.getElementById("creator-watermark");return t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(r){return!1}},l=()=>{document.body.classList.add("body-blocked");let t=document.createElement("div");t.className="blocked-message",t.innerHTML=`
+      <h1>⚠️ Unauthorized Modification Detected</h1>
+      <p>This tool has been disabled due to unauthorized changes.</p>
+      <p>Please use the original version at:</p>
+      <p><a href="${e.originalUrl}" target="_blank">${e.originalUrl}</a></p>
+      <p>Created by ${e.creatorName}</p>
+    `,document.body.appendChild(t);let r=document.body.cloneNode(!0);document.body.parentNode.replaceChild(r,document.body)},s=()=>{if(t(),!r()||!a()){l();return}setInterval(()=>{r()&&a()||l()},e.checkInterval)};setTimeout(s,100)}(),"ontouchstart"in window&&document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("touchstart",function(){this.classList.add("hover")},{passive:!0}),e.addEventListener("touchend",function(){setTimeout(()=>{this.classList.remove("hover")},200)},{passive:!0})})});
     </script>
 </body>
 </html>
