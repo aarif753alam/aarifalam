@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter | Premium Tool</title>
+    <meta name="description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your images with customizable options. No registration required.">
+    <meta name="keywords" content="image to PDF, JPG to PDF, photo to PDF, convert images to PDF, PDF creator, PDF tool, online PDF converter">
+    <meta name="author" content="aarifalam">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aarifalam.life/pdf/image-to-pdf/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aarifalam.life/pdf/image-to-pdf">
+    <meta property="og:title" content="Image to PDF Converter | Create PDF from Images Online - aarifalam.life">
+    <meta property="og:description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your photos with customizable options.">
+    <meta property="og:image" content="https://aarifalam.life/images/pdf/image-to-pdf-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_IN">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aarifalam.life/pdf/image-to-pdf">
+    <meta property="twitter:title" content="Image to PDF Converter | Create PDF from Images Online - aarifalam.life">
+    <meta property="twitter:description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your photos with customizable options.">
+    <meta property="twitter:image" content="https://aarifalam.life/images/pdf/image-to-pdf-preview.jpg">
+    
+    <!-- Geo Targeting for India -->
+    <meta name="geo.region" content="IN">
+    <meta name="geo.placename" content="India">
+    <meta name="geo.position" content="20.5937;78.9629">
+    <meta name="ICBM" content="20.5937, 78.9629">
+    
+    <!-- Favicon and css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#6c5ce7">
+    <link rel="stylesheet" href="css/img-to-pdf-appear-rotate.css">
+
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image to PDF Converter | aarifalam PDF Tools",
+      "url": "https://aarifalam.life/pdf/image-to-pdf",
+      "description": "Free online tool to convert images to PDF documents with customizable options",
+      "applicationCategory": "DocumentUtility",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "aarifalam"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      }
+    }
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XX2CV48SMH');
+    </script>
+
+    <!-- PDF-lib for client-side PDF manipulation -->
+    <script src="js/lib/pdf-lib.min.js"></script>
+    <script src="js/lib/Sortable.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --primary-dark: #4d44db;
+            --accent: #fd79a8;
+            --success: #00b894;
+            --danger: #d63031;
+            --light: #f8f9fa;
+            --dark: #2d3436;
+            --gray: #636e72;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 8px;
+            --border-radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #dfe6f0 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .converter-app {
+            width: 100%;
+            max-width: 900px;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transform: translateY(0);
+            transition: var(--transition);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .app-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .converter-content {
+            padding: 25px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            position: relative;
+            background: rgba(162, 155, 254, 0.05);
+        }
+
+        .upload-area.highlight {
+            border-color: var(--primary);
+            background: rgba(162, 155, 254, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .upload-area i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .upload-area h3 {
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .upload-area .browse-text {
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .file-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .file-count {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .file-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            color: var(--danger);
+        }
+
+        .file-action-btn:hover {
+            opacity: 0.8;
+        }
+
+        .preview-section {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .thumbnail-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .thumbnail-container {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+
+        .thumbnail-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+        }
+
+        .thumbnail-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumbnail-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .thumbnail-item:hover .thumbnail-actions {
+            opacity: 1;
+        }
+
+        .thumbnail-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .thumbnail-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .options-section {
+            margin-top: 20px;
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .options-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .options-section h3 i {
+            font-size: 1.2rem;
+        }
+
+        .option-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .option-row {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .option-row label {
+            width: 100%;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .option-row label {
+                width: 180px;
+                margin-bottom: 0;
+            }
+        }
+
+        .option-row select,
+        .option-row input {
+            flex: 1;
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 1em;
+            padding-right: 2.5rem !important;
+        }
+
+        .option-row select:focus,
+        .option-row input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .checkbox-group {
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            appearance: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .checkbox-option input[type="checkbox"]:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-option input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .checkbox-option label {
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+            font-weight: 400;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-option:hover label {
+            color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(214, 48, 49, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            margin: 16px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: none;
+        }
+
+        .progress-bar {
+            height: 8px;
+            width: 0%;
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 0 10px rgba(142, 45, 226, 0.5);
+            border-radius: 12px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .status-message {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .output-section {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .download-container {
+            text-align: center;
+            padding: 18px;
+            background: rgba(0, 184, 148, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px dashed var(--success);
+        }
+
+        .download-title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .download-subtitle {
+            color: var(--gray);
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+        }
+
+        .error-message {
+            color: var(--danger);
+            background: rgba(214, 48, 49, 0.1);
+            padding: 10px 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+            font-size: 0.85rem;
+        }
+
+        .upload-status {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .converter-app {
+                max-width: 95%;
+            }
+            
+            .app-header {
+                padding: 20px 15px;
+            }
+            
+            .app-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .app-header p {
+                font-size: 0.9rem;
+            }
+            
+            .converter-content {
+                padding: 20px;
+            }
+            
+            .upload-area {
+                padding: 25px 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .thumbnail-container {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+
+        /* Prevent zooming on input focus on mobile */
+        @media screen and (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    /* Prevent zooming on input focus */
+    input, select, textarea {
+        font-size: 16px;
+    }
+    
+    /* Better touch targets for mobile */
+    .thumbnail-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    /* More padding for better touch */
+    .btn {
+        padding: 14px 20px;
+    }
+    
+    /* Fix for file input on Android */
+    #file-input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        top: 0;
+        left: 0;
+    }
+    
+    /* Prevent double-tap zoom on buttons */
+    button {
+        touch-action: manipulation;
+    }
+}
+
+/* Toast notifications for mobile */
+.toast {
+    position: fixed;
+    bottom: 10px;
+    left: 70%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 90%;
+    animation: slideUp 0.1s ease-out;
+}
+
+.toast i {
+    font-size: 1.0rem;
+}
+
+.toast-success {
+    background: var(--success);
+}
+
+.toast-error {
+    background: var(--danger);
+}
+
+.toast-info {
+    background: var(--primary);
+}
+
+.toast.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+/* Watermark animation */
+@keyframes fadeWatermark {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Blocked page styling */
+.body-blocked {
+  pointer-events: none;
+  user-select: none;
+}
+
+.blocked-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  text-align: center;
+}
+
+.blocked-message h1 {
+  color: red;
+}
+    </style>
+</head>
+<body>
+    <div class="converter-app">
+        <div class="app-header">
+            <h1>Image to PDF Converter</h1>
+            <p>Transform your images into professional PDF documents</p>
+        </div>
+
+        <div class="converter-content">
+            <div class="error-message" id="error-message"></div>
+            
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Select Image Files</h3>
+                <p>Drag & drop your images here or <span class="browse-text">browse</span></p>
+                <input type="file" id="file-input" accept="image/*" multiple>
+            </div>
+            
+            <div class="upload-status" id="upload-status"></div>
+            
+            <div class="file-info" id="file-info">
+                <i class="fas fa-images file-icon"></i>
+                <div class="file-details">
+                    <div class="file-name" id="file-name">Selected Images</div>
+                    <div class="file-count" id="file-count">0 files</div>
+                </div>
+                <button class="file-action-btn" id="remove-file-btn" title="Remove all images">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+            
+            <div class="preview-section" id="preview-section">
+                <div class="thumbnail-container" id="thumbnail-container"></div>
+            </div>
+
+            <div class="options-section">
+                <h3><i class="fas fa-cog"></i> PDF Options</h3>
+                <div class="option-row">
+                    <label for="page-size">Page Size:</label>
+                    <select id="page-size">
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                        <option value="a5">A5</option>
+                        <option value="auto">Auto (Image Size)</option>
+                    </select>
+                </div>
+                <div class="option-row">
+                    <label for="orientation">Orientation:</label>
+                    <select id="orientation">
+                        <option value="portrait">Portrait</option>
+                        <option value="landscape">Landscape</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </div>
+                <div class="option-row">
+                    <label for="margin">Margin (mm):</label>
+                    <input type="number" id="margin" min="0" max="50" value="10">
+                </div>
+                <div class="option-row">
+                    <label for="quality">Quality:</label>
+                    <select id="quality">
+                        <option value="high">High (300dpi)</option>
+                        <option value="medium" selected>Medium (150dpi)</option>
+                        <option value="low">Low (72dpi)</option>
+                    </select>
+                </div>
+                <div class="option-row">
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="compressPdf" checked> Compress PDF
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="addPageNumbers"> Add Page Numbers
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="convert-btn">
+                    <i class="fas fa-file-pdf"></i> Convert to PDF
+                </button>
+                <button class="btn btn-danger" id="clear-btn">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+            
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p class="status-message" id="status-message">Ready to convert</p>
+            
+            <div class="output-section" id="output-section">
+                <div class="download-container">
+                    <h3 class="download-title">Your PDF is ready!</h3>
+                    <p class="download-subtitle">Click below to download your document</p>
+                    <a href="#" class="btn btn-primary" id="download-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="creator-watermark" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:8px 12px;border-radius:4px;font-size:12px;z-index:9999;transition:opacity 0.5s;animation:fadeWatermark 10s forwards">
+  Created by @aarifalam0105
+</div>
+
+    <script>
+document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementById("upload-area"),t=document.getElementById("file-input"),a=document.getElementById("file-info");document.getElementById("file-name");let n=document.getElementById("file-count"),i=document.getElementById("remove-file-btn"),l=document.getElementById("preview-section"),r=document.getElementById("thumbnail-container"),s=document.getElementById("convert-btn"),d=document.getElementById("clear-btn"),o=document.getElementById("progress-container"),c=document.getElementById("progress-bar"),g=document.getElementById("status-message"),p=document.getElementById("output-section"),m=document.getElementById("download-btn"),h=document.getElementById("error-message"),u=document.getElementById("upload-status"),f=[],y=null,b;function $(){e.addEventListener("dragover",v),e.addEventListener("dragleave",E),e.addEventListener("drop",w),e.addEventListener("click",()=>{"1"!==e.dataset.pickerOpen&&(e.dataset.pickerOpen="1",t.click(),setTimeout(()=>{e.dataset.pickerOpen="0"},800))}),e.addEventListener("pointerdown",()=>e.classList.add("highlight")),e.addEventListener("pointerup",()=>e.classList.remove("highlight")),e.addEventListener("pointerleave",()=>e.classList.remove("highlight")),t.addEventListener("change",L),s.addEventListener("click",j),d.addEventListener("click",P),i.addEventListener("click",P),m.addEventListener("click",N)}function v(t){t.preventDefault(),t.stopPropagation(),e.classList.add("highlight")}function E(t){t.preventDefault(),t.stopPropagation(),e.classList.remove("highlight")}function w(t){t.preventDefault(),t.stopPropagation(),e.classList.remove("highlight");let a=Array.from(t.dataTransfer.files);k(a)}function L(e){let t=Array.from(e.target.files);t.length>0&&k(t),setTimeout(()=>{e.target.value=""},0)}function k(e){let t=e.filter(e=>e.type.startsWith("image/"));if(0===t.length){O("Please select image files only");return}f=[...f,...t.map(e=>({file:e,rotation:0}))],I(),C(),1===t.length?D("1 image added successfully","success"):D(`${t.length} images added successfully`,"success")}function I(){if(0===f.length){l.style.display="none",a.style.display="none",r.innerHTML="";return}l.style.display="block",a.style.display="flex",r.innerHTML="",f.forEach((e,t)=>{let{file:a,rotation:n}=e,i=document.createElement("div");i.className="thumbnail-item",i.draggable=!0,i.dataset.index=t;let l=document.createElement("img");l.src=URL.createObjectURL(a),l.alt=a.name,l.style.transform=`rotate(${n}deg)`;let s=document.createElement("div");s.className="thumbnail-actions";let d=document.createElement("button");d.className="thumbnail-btn",d.title="Rotate image",d.innerHTML='<i class="fas fa-redo"></i>',d.addEventListener("click",e=>{e.stopPropagation(),_(t)});let o=document.createElement("button");o.className="thumbnail-btn",o.title="Remove image",o.innerHTML='<i class="fas fa-times"></i>',o.addEventListener("click",e=>{e.stopPropagation(),B(t)}),s.appendChild(d),s.appendChild(o),i.appendChild(l),i.appendChild(s),r.appendChild(i)}),b&&b.destroy(),b=new Sortable(r,{animation:150,onEnd:function(){let e=Array.from(r.children).map(e=>parseInt(e.dataset.index)),t=e.map(e=>f[e]);f=t,I()}})}function _(e){f[e].rotation=(f[e].rotation+90)%360,I(),D("Image rotated","info")}function B(e){f.splice(e,1),I(),C(),D("Image removed","info")}function C(){n.textContent=`${f.length} ${1===f.length?"file":"files"}`}function P(){0!==f.length&&(f=[],I(),C(),U(),D("All files cleared","info"))}async function j(){if(0===f.length){O("Please add images first");return}s.disabled=!0,o.style.display="block",x(0,"Preparing images..."),R();try{let{PDFDocument:e,rgb:t}=PDFLib,a=await e.create(),n=document.getElementById("page-size").value,i=document.getElementById("orientation").value,l=parseInt(document.getElementById("margin").value)||10,r=document.getElementById("quality").value;document.getElementById("compressPdf").checked;let d=document.getElementById("addPageNumbers").checked;for(let c=0;c<f.length;c++){let{file:g,rotation:m}=f[c];x(c/f.length*90,`Processing ${c+1}/${f.length}...`);let h,u=2.83465*l;if("auto"===n){let b=await H(g),$=b.width,v=b.height;(90===m||270===m)&&([$,v]=[v,$]);let E=.75*$,w=.75*v;h=a.addPage([E,w])}else{let L,k;switch(n){case"a4":default:L=595,k=842;break;case"letter":L=612,k=792;break;case"a5":L=420,k=595}("landscape"===i||"auto"===i&&g.width>g.height)&&([L,k]=[k,L]),h=a.addPage([L,k])}await A(g);let I,_=await S(g,m),B;I="image/jpeg"===g.type?await a.embedJpg(B=await q(_,r)):"image/png"===g.type?await a.embedPng(B=_.toDataURL("image/png")):await a.embedJpg(B=await q(_,r));let C=h.getWidth(),P=h.getHeight(),j=C-2*u,N=P-2*u,U=I.width/I.height,T=j/N,M,F;U>T?(M=j,F=j/U):(F=N,M=N*U);let z=u+(j-M)/2,J=u+(N-F)/2;h.drawImage(I,{x:z,y:J,width:M,height:F}),d&&(a.getPageCount(),h.drawText(`Page ${c+1} of ${f.length}`,{x:C-u-40,y:u+10,size:10,color:t(.5,.5,.5)}))}x(95,"Generating PDF...");let W=await a.save();y=new Blob([W],{type:"application/pdf"}),x(100,"Conversion complete!"),setTimeout(()=>{p.style.display="block",s.disabled=!1,o.style.display="none",p.scrollIntoView({behavior:"smooth"})},500),D("PDF created successfully!","success")}catch(G){console.error("Conversion error:",G),x(0,"Error occurred"),O("Conversion failed. Please try again."),s.disabled=!1,o.style.display="none"}}function N(){if(!y)return;let e=URL.createObjectURL(y),t=document.createElement("a");t.href=e,t.download=`images_${new Date().toISOString().slice(0,10)}.pdf`,document.body.appendChild(t),t.click(),document.body.removeChild(t),URL.revokeObjectURL(e),D("Download started","success")}function x(e,t){c.style.width=`${e}%`,g.textContent=t}function U(){c.style.width="0%",g.textContent="Ready to convert",p.style.display="none",y=null,o.style.display="none"}function D(e,t){let a=document.createElement("div");a.className=`toast toast-${t}`,a.innerHTML=`<i class="fas ${"success"===t?"fa-check-circle":"error"===t?"fa-times-circle":"fa-info-circle"}"></i> ${e}`,document.body.appendChild(a),setTimeout(()=>{a.classList.add("fade-out"),setTimeout(()=>a.remove(),300)},3e3)}function O(e){h.textContent=e,h.style.display="block"}function R(){h.style.display="none"}function T(e){u.textContent=e,u.style.display="block"}function M(){u.style.display="none"}function A(e){return new Promise((t,a)=>{let n=new FileReader;n.onload=()=>t(n.result),n.onerror=a,n.readAsArrayBuffer(e)})}function H(e){return new Promise((t,a)=>{let n=new Image;n.onload=()=>t(n),n.onerror=a,n.src=URL.createObjectURL(e)})}function S(e,t){return new Promise(a=>{let n=new Image;n.onload=function(){let e=document.createElement("canvas");90===t||270===t?(e.width=n.height,e.height=n.width):(e.width=n.width,e.height=n.height);let i=e.getContext("2d");i.save(),i.translate(e.width/2,e.height/2),i.rotate(t*Math.PI/180),i.drawImage(n,-n.width/2,-n.height/2),i.restore(),a(e)},n.src=URL.createObjectURL(e)})}function q(e,t){return new Promise(a=>{let n=.9;"high"===t&&(n=1),"medium"===t&&(n=.7),"low"===t&&(n=.5),e.toBlob(e=>{let t=new FileReader;t.onload=()=>a(t.result),t.readAsDataURL(e)},"image/jpeg",n)})}$()}),function(){let e={creatorName:"@aarifalam0105",requiredFiles:{css:"css/img-to-pdf-appear-rotate.css",js:["js/lib/pdf-lib.min.js","js/lib/Sortable.min.js"]},checkInterval:3e3,originalUrl:"https://aarifalam.life/pdf/image-to-pdf/"},t=()=>{let t=document.createElement("div");t.id="__css_valid_"+Math.random().toString(36).substr(2,9),t.setAttribute("data-creator",e.creatorName),t.style.display="none",document.body.appendChild(t);let a=document.createElement("div");a.id="__js_valid_"+Math.random().toString(36).substr(2,9),a.setAttribute("data-creator",e.creatorName),a.style.display="none",document.body.appendChild(a)},a=()=>{try{let t=!1,a=document.querySelectorAll('link[rel="stylesheet"]');for(let n of a)if(n.href.includes(e.requiredFiles.css.split("/").pop())){t=!0;break}let i=!0,l=document.scripts;for(let r of e.requiredFiles.js){let s=!1,d=r.split("/").pop();for(let o of l)if(o.src&&o.src.includes(d)){s=!0;break}if(!s){i=!1;break}}return t&&i}catch(c){return!1}},n=()=>{try{let t=document.getElementById("creator-watermark");return t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(a){return!1}},i=()=>{document.body.classList.add("body-blocked");let t=document.createElement("div");t.className="blocked-message",t.innerHTML=`
+      <h1>⚠️ Unauthorized Modification Detected</h1>
+      <p>This tool has been disabled due to unauthorized changes.</p>
+      <p>Please use the original version at:</p>
+      <p><a href="${e.originalUrl}" target="_blank">${e.originalUrl}</a></p>
+      <p>Created by ${e.creatorName}</p>
+    `,document.body.appendChild(t);let a=document.body.cloneNode(!0);document.body.parentNode.replaceChild(a,document.body)},l=()=>{if(t(),!a()||!n()){i();return}setInterval(()=>{a()&&n()||i()},e.checkInterval)};setTimeout(l,100)}();    </script>
+</body>
+</html>
