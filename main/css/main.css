@@ -440,7 +440,7 @@
 }
 /* Add to your existing feature-card styles */
 .feature-card {
-  background: white;
+  background: #ffffffdd;
   border-radius: 15px;
   padding: 2rem;
   text-align: center;
@@ -514,7 +514,7 @@
   object-fit: contain;
   transition: transform 0.3s ease;
   z-index: 2;
-  filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.3));
+  filter: drop-shadow(0 0 3px rgba(0, 87, 137, 0.64));
 }
 
 /* Label below image, inside invisible circle */
@@ -522,10 +522,10 @@
   margin-top: 8px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: white;
+  color: rgb(1, 0, 0);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 6px rgba(0,255,255,0.8);
+  text-shadow: 0 0 6px rgba(194, 252, 48, 0.8);
   z-index: 2;
 }
 
@@ -535,7 +535,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 10%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 143, 232, 0.681) 10%, transparent 70%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
