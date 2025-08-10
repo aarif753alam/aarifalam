@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Professional Teaching Board ,digital board| Aarif Alam</title>
+  
+  <!-- Meta Description (max 160 chars) -->
+  <meta name="description" content="Join the Professional Teaching Board by Aarif Alam – resources, tips, and strategies for educators and learners to excel.">
+  
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="teaching board, Aarif Alam, education tips, online learning, teacher resources, student tools, professional education, academic growth, learning platform">
+  
+  <!-- Author -->
+  <meta name="author" content="Aarif Alam">
+  <meta name="copyright" content="AarifAlam.life">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://aarifalam.life/tools/drawing">
+
+  <!-- Open Graph (for Facebook, LinkedIn) -->
+  <meta property="og:title" content="Professional Teaching Board | Aarif Alam">
+  <meta property="og:description" content="A comprehensive teaching board with curated resources and strategies for modern education.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aarifalam.life/tools/drawing">
+  <meta property="og:image" content="https://aarifalam.life/images/drawing.jpg">
+  <meta property="og:site_name" content="Aarif Alam">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Professional Teaching Board | Aarif Alam">
+  <meta name="twitter:description" content="Discover educational tools and teaching strategies to succeed as an educator.">
+  <meta name="twitter:image" content="https://aarifalam.life/images/drawing.jpg">
+  <meta name="twitter:creator" content="@aarifalam0105">
+  <meta name="twitter:site" content="@aarifalam0105">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Professional Teaching Board",
+    "url": "https://aarifalam.life/tools/drawing",
+    "author": {
+      "@type": "Person",
+      "name": "Aarif Alam",
+      "url": "https://aarifalam.life"
+    },
+    "description": "Join the Professional Teaching Board by Aarif Alam – resources, tips, and strategies for educators and learners to excel.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aarif Alam",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aarifalam.life/images/logo/favicon-32x32.png"
+      }
+    }
+  }
+  </script>
+
+  <!-- Geo Targeting -->
+  <meta name="geo.region" content="IN">
+  <meta name="geo.placename" content="India">
+  <meta name="robots" content="index, follow">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XX2CV48SMH');
+  </script>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+  <link rel="manifest" href="../images/logo/site.webmanifest">
+  <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --danger-color: #ea4335;
+            --warning-color: #fbbc05;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --canvas-bg: #ffffff;
+            --toolbar-height: 70px;
+            --board-width: 1200px;
+            --board-height: 2000px;
+            --page-controls-height: 60px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-theme {
+            background-color: #121212;
+            color: var(--text-light);
+            --light-bg: #1e1e1e;
+            --canvas-bg: #2d2d2d;
+        }
+
+        /* Toolbar Styles */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--toolbar-height);
+            background-color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 0 20px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .toolbar-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .toolbar-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .toolbar-btn.active {
+            background-color: var(--primary-color);
+        }
+
+        .toolbar-btn.active.highlighter {
+            background-color: var(--warning-color);
+        }
+
+        .toolbar-btn.active.eraser {
+            background-color: var(--danger-color);
+        }
+
+        .toolbar-btn img {
+            width: 24px;
+            height: 24px;
+            filter: invert(1);
+        }
+
+        .toolbar-separator {
+            width: 1px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 5px;
+        }
+
+        .pen-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .pen-options label {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .pen-options input[type="color"] {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--text-light);
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .pen-options input[type="range"] {
+            width: 120px;
+            cursor: pointer;
+        }
+
+        /* Board Container */
+        .board-container {
+            position: absolute;
+            top: var(--toolbar-height);
+            left: 0;
+            right: 0;
+            bottom: var(--page-controls-height);
+            overflow: auto;
+            background-color: var(--light-bg);
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            touch-action: pinch-zoom;
+        }
+
+        .board-wrapper {
+            position: relative;
+            transform-origin: 0 0;
+            transition: transform 0.2s ease;
+        }
+
+        #teaching-board {
+            background-color: var(--canvas-bg);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            cursor: crosshair;
+            width: var(--board-width);
+            height: var(--board-height);
+            display: block;
+        }
+
+        /* Page Controls */
+        .page-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--page-controls-height);
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-btn img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        .page-indicator {
+            color: var(--text-light);
+            font-size: 16px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: calc(var(--page-controls-height) + 20px);
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background-color: var(--dark-bg);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-btn img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        /* Fullscreen styles */
+        body.fullscreen {
+            overflow: hidden;
+        }
+
+        body.fullscreen .toolbar {
+            display: none;
+        }
+
+        body.fullscreen .page-controls {
+            display: none;
+        }
+
+        body.fullscreen .board-container {
+            top: 0;
+            bottom: 0;
+            padding: 0;
+        }
+
+        body.fullscreen .nav-controls {
+            bottom: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .toolbar {
+                padding: 0 10px;
+                gap: 8px;
+                height: 60px;
+                flex-wrap: wrap;
+                overflow-x: auto;
+            }
+            
+            .toolbar-btn {
+                padding: 6px;
+                font-size: 0;
+            }
+            
+            .toolbar-btn img {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .pen-options {
+                gap: 5px;
+                margin-left: 0;
+            }
+            
+            .pen-options label {
+                display: none;
+            }
+            
+            .pen-options input[type="range"] {
+                width: 80px;
+            }
+
+            :root {
+                --board-width: 100%;
+                --board-height: 1500px;
+                --toolbar-height: 50px;
+            }
+
+            .page-controls {
+                height: 50px;
+            }
+
+            .page-btn {
+                padding: 6px 12px;
+                font-size: 0;
+            }
+
+            .page-btn img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .page-indicator {
+                min-width: 60px;
+                font-size: 14px;
+            }
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <!-- Drawing Tools -->
+        <button class="toolbar-btn active" id="pen-tool" title="Pen">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Pen">
+            <span>Pen</span>
+        </button>
+        
+        <button class="toolbar-btn" id="marker-tool" title="Highlighter">
+            <img src="https://cdn-icons-png.flaticon.com/512/3126/3126696.png" alt="Highlighter">
+            <span>Highlighter</span>
+        </button>
+        
+        <button class="toolbar-btn" id="calligraphy-tool" title="Calligraphy">
+            <img src="https://cdn-icons-png.flaticon.com/512/2503/2503659.png" alt="Calligraphy">
+            <span>Calligraphy</span>
+        </button>
+        
+        <button class="toolbar-btn" id="eraser" title="Eraser">
+            <img src="https://cdn-icons-png.flaticon.com/512/159/159469.png" alt="Eraser">
+            <span>Eraser</span>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Pen Options -->
+        <div class="pen-options">
+            <input type="color" id="pen-color" value="#000000" title="Pen Color">
+            <label for="pen-size">Size:</label>
+            <input type="range" id="pen-size" min="1" max="50" value="5">
+        </div>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Clear Button -->
+        <button class="toolbar-btn" id="clear-board" title="Clear Board">
+            <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="Clear">
+            <span>Clear</span>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Undo/Redo -->
+        <button class="toolbar-btn" id="undo-btn" title="Undo (Ctrl+Z)">
+            <img src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png" alt="Undo">
+            <span>Undo</span>
+        </button>
+        
+        <button class="toolbar-btn" id="redo-btn" title="Redo (Ctrl+Y)">
+            <img src="https://cdn-icons-png.flaticon.com/512/2961/2961957.png" alt="Redo">
+            <span>Redo</span>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Theme Selector -->
+        <select class="toolbar-btn" id="theme-changer" title="Change Theme">
+            <option value="light">Light Theme</option>
+            <option value="dark">Dark Theme</option>
+        </select>
+        
+        <!-- Fullscreen Toggle -->
+        <button class="toolbar-btn" id="fullscreen-btn" title="Toggle Fullscreen">
+            <img src="https://cdn-icons-png.flaticon.com/512/2089/2089679.png" alt="Fullscreen">
+            <span>Fullscreen</span>
+        </button>
+        
+        <!-- Download PDF -->
+        <button class="toolbar-btn" id="download-pdf" title="Download PDF">
+            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Download">
+            <span>Export PDF</span>
+        </button>
+    </div>
+
+    <!-- Board Container -->
+    <div class="board-container">
+        <div class="board-wrapper">
+            <canvas id="teaching-board"></canvas>
+        </div>
+    </div>
+
+    <!-- Page Controls -->
+    <div class="page-controls">
+        <button class="page-btn" id="prev-page">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709586.png" alt="Previous">
+            <span>Previous</span>
+        </button>
+        
+        <div class="page-indicator" id="page-indicator">Page 1 of 1</div>
+        
+        <button class="page-btn" id="next-page">
+            <span>Next</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709579.png" alt="Next">
+        </button>
+        
+        <button class="page-btn" id="add-page">
+            <img src="https://cdn-icons-png.flaticon.com/512/2997/2997933.png" alt="Add">
+            <span>Add Page</span>
+        </button>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="zoom-in" title="Zoom In">
+            <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="Zoom In">
+        </button>
+        <button class="nav-btn" id="zoom-out" title="Zoom Out">
+            <img src="https://cdn-icons-png.flaticon.com/512/748/748122.png" alt="Zoom Out">
+        </button>
+        <button class="nav-btn" id="zoom-reset" title="Reset Zoom">
+            <img src="https://cdn-icons-png.flaticon.com/512/660/660252.png" alt="Reset Zoom">
+        </button>
+    </div>
+
+    <script>
+        // DOM Elements
+        const board = document.getElementById('teaching-board');
+        const boardWrapper = document.querySelector('.board-wrapper');
+        const ctx = board.getContext('2d', { willReadFrequently: true });
+        const penToolBtn = document.getElementById('pen-tool');
+        const markerToolBtn = document.getElementById('marker-tool');
+        const calligraphyToolBtn = document.getElementById('calligraphy-tool');
+        const eraserBtn = document.getElementById('eraser');
+        const penColorPicker = document.getElementById('pen-color');
+        const penSizeSlider = document.getElementById('pen-size');
+        const clearBoardBtn = document.getElementById('clear-board');
+        const undoBtn = document.getElementById('undo-btn');
+        const redoBtn = document.getElementById('redo-btn');
+        const themeChanger = document.getElementById('theme-changer');
+        const downloadPdfBtn = document.getElementById('download-pdf');
+        const zoomInBtn = document.getElementById('zoom-in');
+        const zoomOutBtn = document.getElementById('zoom-out');
+        const zoomResetBtn = document.getElementById('zoom-reset');
+        const boardContainer = document.querySelector('.board-container');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const addPageBtn = document.getElementById('add-page');
+        const pageIndicator = document.getElementById('page-indicator');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        // Drawing State
+        let isDrawing = false;
+        let currentTool = 'pen'; // 'pen', 'marker', 'calligraphy', 'eraser'
+        let penColor = '#000000';
+        let penSize = 5;
+        let lastX = 0;
+        let lastY = 0;
+        let boardScale = 1;
+        let boardHistory = [];
+        let historyIndex = -1;
+        let currentPage = 0;
+        let pages = [];
+        let touchZoomInitialDistance = 0;
+        let touchZoomInitialScale = 1;
+
+        // Initialize Board
+        function initBoard() {
+            // Set board dimensions from CSS variables
+            const width = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--board-width'));
+            const height = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--board-height'));
+            
+            // Set canvas dimensions (accounting for device pixel ratio)
+            const dpr = window.devicePixelRatio || 1;
+            board.width = width * dpr;
+            board.height = height * dpr;
+            board.style.width = `${width}px`;
+            board.style.height = `${height}px`;
+            ctx.scale(dpr, dpr);
+            
+            // Set initial board background
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+            ctx.fillRect(0, 0, width, height);
+            
+            // Initialize pages array with first page
+            pages = [board.toDataURL('image/png', 1.0)];
+            updatePageIndicator();
+            
+            // Save initial state
+            saveBoardState();
+        }
+
+        // Drawing Tools
+        function setTool(tool) {
+            currentTool = tool;
+            
+            // Update button states
+            penToolBtn.classList.remove('active');
+            markerToolBtn.classList.remove('active', 'highlighter');
+            calligraphyToolBtn.classList.remove('active');
+            eraserBtn.classList.remove('active', 'eraser');
+            
+            switch(tool) {
+                case 'pen':
+                    penToolBtn.classList.add('active');
+                    break;
+                case 'marker':
+                    markerToolBtn.classList.add('active', 'highlighter');
+                    break;
+                case 'calligraphy':
+                    calligraphyToolBtn.classList.add('active');
+                    break;
+                case 'eraser':
+                    eraserBtn.classList.add('active', 'eraser');
+                    break;
+            }
+            
+            // Set appropriate drawing settings
+            ctx.globalCompositeOperation = tool === 'eraser' ? 'destination-out' : 'source-over';
+            ctx.globalAlpha = tool === 'marker' ? 0.5 : (tool === 'eraser' ? 0.7 : 1);
+        }
+
+        // High Quality Drawing with Pressure Sensitivity Simulation
+        function startDrawing(e) {
+            isDrawing = true;
+            
+            const rect = board.getBoundingClientRect();
+            lastX = (e.clientX - rect.left) / boardScale;
+            lastY = (e.clientY - rect.top) / boardScale;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            
+            // Enhanced drawing settings for better quality
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Different line widths based on tool
+            switch(currentTool) {
+                case 'pen':
+                    ctx.lineWidth = penSize;
+                    ctx.strokeStyle = penColor;
+                    ctx.shadowColor = penColor;
+                    ctx.shadowBlur = penSize / 2;
+                    break;
+                case 'marker':
+                    ctx.lineWidth = penSize * 2;
+                    ctx.strokeStyle = penColor;
+                    ctx.shadowColor = penColor;
+                    ctx.shadowBlur = penSize;
+                    break;
+                case 'calligraphy':
+                    ctx.lineWidth = penSize * 1.5;
+                    ctx.strokeStyle = penColor;
+                    ctx.shadowColor = penColor;
+                    ctx.shadowBlur = penSize / 3;
+                    break;
+                case 'eraser':
+                    ctx.lineWidth = penSize * 2;
+                    ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+                    ctx.shadowColor = 'transparent';
+                    break;
+            }
+            
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = board.getBoundingClientRect();
+            const currentX = (e.clientX - rect.left) / boardScale;
+            const currentY = (e.clientY - rect.top) / boardScale;
+            
+            // Simulate pressure sensitivity based on drawing speed
+            const dx = currentX - lastX;
+            const dy = currentY - lastY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const speed = Math.min(30, distance * 2);
+            
+            // Adjust line width based on speed (simulates pressure)
+            let pressureFactor = Math.max(0.3, Math.min(1, 1 - speed / 50));
+            
+            // Special handling for calligraphy pen
+            if (currentTool === 'calligraphy') {
+                const angle = Math.atan2(dy, dx);
+                ctx.lineWidth = penSize * (1 + Math.sin(angle) * 0.5) * pressureFactor;
+            } else {
+                ctx.lineWidth = penSize * pressureFactor;
+            }
+            
+            // Draw smooth line with quadratic curves
+            ctx.quadraticCurveTo(
+                lastX,
+                lastY,
+                (lastX + currentX) / 2,
+                (lastY + currentY) / 2
+            );
+            ctx.stroke();
+            
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                ctx.shadowColor = 'transparent'; // Clear shadow after drawing
+                saveBoardState();
+            }
+        }
+
+        // Zoom functionality
+        function updateZoom() {
+            boardWrapper.style.transform = `scale(${boardScale})`;
+            boardContainer.scrollLeft = (boardContainer.scrollWidth - boardContainer.clientWidth) / 2;
+            boardContainer.scrollTop = (boardContainer.scrollHeight - boardContainer.clientHeight) / 2;
+        }
+
+        zoomInBtn.addEventListener('click', () => {
+            boardScale = Math.min(3, boardScale * 1.2);
+            updateZoom();
+        });
+
+        zoomOutBtn.addEventListener('click', () => {
+            boardScale = Math.max(0.3, boardScale * 0.8);
+            updateZoom();
+        });
+
+        zoomResetBtn.addEventListener('click', () => {
+            boardScale = 1;
+            updateZoom();
+        });
+
+        // Touch zoom handling
+        boardContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                touchZoomInitialDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                touchZoomInitialScale = boardScale;
+            }
+        });
+
+        boardContainer.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                
+                if (touchZoomInitialDistance > 0) {
+                    boardScale = Math.max(0.3, Math.min(3, 
+                        touchZoomInitialScale * currentDistance / touchZoomInitialDistance
+                    ));
+                    updateZoom();
+                }
+            }
+        });
+
+        boardContainer.addEventListener('touchend', () => {
+            touchZoomInitialDistance = 0;
+        });
+
+        // Undo/Redo functionality
+        function saveBoardState() {
+            // Remove any states after current index
+            if (historyIndex < boardHistory.length - 1) {
+                boardHistory = boardHistory.slice(0, historyIndex + 1);
+            }
+            
+            // Limit history to 50 states
+            if (boardHistory.length >= 50) {
+                boardHistory.shift();
+            } else {
+                historyIndex++;
+            }
+            
+            boardHistory.push(board.toDataURL('image/png', 1.0));
+            updateUndoRedoButtons();
+            
+            // Save to current page
+            pages[currentPage] = board.toDataURL('image/png', 1.0);
+        }
+
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                restoreBoardState();
+                updateUndoRedoButtons();
+            }
+        }
+
+        function redo() {
+            if (historyIndex < boardHistory.length - 1) {
+                historyIndex++;
+                restoreBoardState();
+                updateUndoRedoButtons();
+            }
+        }
+
+        function restoreBoardState() {
+            const img = new Image();
+            img.src = boardHistory[historyIndex];
+            img.onload = () => {
+                ctx.clearRect(0, 0, board.width, board.height);
+                ctx.drawImage(img, 0, 0);
+            };
+        }
+
+        function updateUndoRedoButtons() {
+            undoBtn.disabled = historyIndex <= 0;
+            redoBtn.disabled = historyIndex >= boardHistory.length - 1;
+        }
+
+        // Page Management
+        function addNewPage() {
+            // Save current page
+            pages[currentPage] = board.toDataURL('image/png', 1.0);
+            
+            // Add new blank page
+            currentPage = pages.length;
+            pages.push('');
+            
+            // Clear board and reset history for new page
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+            ctx.fillRect(0, 0, board.width, board.height);
+            
+            boardHistory = [];
+            historyIndex = -1;
+            saveBoardState();
+            
+            updatePageIndicator();
+            updatePageNavigationButtons();
+        }
+
+        function goToPage(pageIndex) {
+            if (pageIndex >= 0 && pageIndex < pages.length) {
+                // Save current page
+                pages[currentPage] = board.toDataURL('image/png', 1.0);
+                
+                // Load new page
+                currentPage = pageIndex;
+                const img = new Image();
+                img.src = pages[currentPage] || '';
+                
+                img.onload = () => {
+                    ctx.clearRect(0, 0, board.width, board.height);
+                    if (pages[currentPage]) {
+                        ctx.drawImage(img, 0, 0);
+                    } else {
+                        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+                        ctx.fillRect(0, 0, board.width, board.height);
+                    }
+                };
+                
+                // Reset history for this page
+                boardHistory = [pages[currentPage] || board.toDataURL('image/png', 1.0)];
+                historyIndex = 0;
+                
+                updatePageIndicator();
+                updatePageNavigationButtons();
+                updateUndoRedoButtons();
+            }
+        }
+
+        function updatePageIndicator() {
+            pageIndicator.textContent = `Page ${currentPage + 1} of ${pages.length}`;
+        }
+
+        function updatePageNavigationButtons() {
+            prevPageBtn.disabled = currentPage === 0;
+            nextPageBtn.disabled = currentPage === pages.length - 1;
+        }
+
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+                document.body.classList.add('fullscreen');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    document.body.classList.remove('fullscreen');
+                }
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                document.body.classList.remove('fullscreen');
+            }
+        });
+
+        // PDF Export with jsPDF
+        downloadPdfBtn.addEventListener('click', async () => {
+            // Load jsPDF dynamically if not already loaded
+            if (!window.jspdf) {
+                await loadJsPDF();
+            }
+            
+            // Create a new PDF
+            const pdf = new window.jspdf.jsPDF({
+                orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
+                unit: 'mm'
+            });
+            
+            // Process each page
+            for (let i = 0; i < pages.length; i++) {
+                if (i > 0) pdf.addPage();
+                
+                const img = new Image();
+                img.src = pages[i];
+                
+                await new Promise((resolve) => {
+                    img.onload = () => {
+                        // Calculate dimensions to fit page
+                        const pageWidth = pdf.internal.pageSize.getWidth();
+                        const pageHeight = pdf.internal.pageSize.getHeight();
+                        
+                        // Maintain aspect ratio
+                        const imgRatio = img.width / img.height;
+                        const pageRatio = pageWidth / pageHeight;
+                        
+                        let width, height;
+                        if (imgRatio > pageRatio) {
+                            width = pageWidth;
+                            height = pageWidth / imgRatio;
+                        } else {
+                            height = pageHeight;
+                            width = pageHeight * imgRatio;
+                        }
+                        
+                        // Center on page
+                        const x = (pageWidth - width) / 2;
+                        const y = (pageHeight - height) / 2;
+                        
+                        // Add to PDF
+                        pdf.addImage(img, 'PNG', x, y, width, height);
+                        resolve();
+                    };
+                    
+                    // Handle case where page is blank
+                    if (!pages[i]) {
+                        resolve();
+                    }
+                });
+            }
+            
+            pdf.save('teaching-board.pdf');
+        });
+
+        // Load jsPDF dynamically
+        function loadJsPDF() {
+            return new Promise((resolve, reject) => {
+                if (window.jspdf) return resolve();
+                
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error('Failed to load jsPDF'));
+                document.head.appendChild(script);
+            });
+        }
+
+        // Event Listeners for Drawing
+        board.addEventListener('mousedown', startDrawing);
+        board.addEventListener('mousemove', draw);
+        board.addEventListener('mouseup', stopDrawing);
+        board.addEventListener('mouseout', stopDrawing);
+
+        // Touch support for drawing
+        board.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                board.dispatchEvent(mouseEvent);
+                e.preventDefault();
+            }
+        });
+
+        board.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                board.dispatchEvent(mouseEvent);
+                e.preventDefault();
+            }
+        });
+
+        board.addEventListener('touchend', (e) => {
+            const mouseEvent = new MouseEvent('mouseup', {});
+            board.dispatchEvent(mouseEvent);
+            e.preventDefault();
+        });
+
+        // Tool Buttons
+        penToolBtn.addEventListener('click', () => setTool('pen'));
+        markerToolBtn.addEventListener('click', () => setTool('marker'));
+        calligraphyToolBtn.addEventListener('click', () => setTool('calligraphy'));
+        eraserBtn.addEventListener('click', () => setTool('eraser'));
+
+        // Pen Options
+        penColorPicker.addEventListener('input', (e) => {
+            penColor = e.target.value;
+            setTool('pen'); // Switch to pen when color changes
+        });
+
+        penSizeSlider.addEventListener('input', (e) => {
+            penSize = parseInt(e.target.value);
+        });
+
+        // Clear Board
+        clearBoardBtn.addEventListener('click', () => {
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+            ctx.fillRect(0, 0, board.width, board.height);
+            saveBoardState();
+        });
+
+        // Undo/Redo Buttons
+        undoBtn.addEventListener('click', undo);
+        redoBtn.addEventListener('click', redo);
+
+        // Theme Changer
+        themeChanger.addEventListener('change', (e) => {
+            document.body.className = `${e.target.value}-theme`;
+            
+            // Update board background when theme changes
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg');
+            ctx.fillRect(0, 0, board.width, board.height);
+            
+            // Redraw the current content
+            if (pages[currentPage]) {
+                const img = new Image();
+                img.src = pages[currentPage];
+                img.onload = () => {
+                    ctx.drawImage(img, 0, 0);
+                };
+            }
+        });
+
+        // Page Navigation
+        prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
+        nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
+        addPageBtn.addEventListener('click', addNewPage);
+
+        // Fullscreen Toggle
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Z for undo
+            if (e.ctrlKey && e.key === 'z') {
+                undo();
+                e.preventDefault();
+            }
+            // Ctrl+Y for redo
+            else if (e.ctrlKey && e.key === 'y') {
+                redo();
+                e.preventDefault();
+            }
+            // Ctrl+N for new page
+            else if (e.ctrlKey && e.key === 'n') {
+                addNewPage();
+                e.preventDefault();
+            }
+            // Ctrl+ArrowLeft for previous page
+            else if (e.ctrlKey && e.key === 'ArrowLeft') {
+                goToPage(currentPage - 1);
+                e.preventDefault();
+            }
+            // Ctrl+ArrowRight for next page
+            else if (e.ctrlKey && e.key === 'ArrowRight') {
+                goToPage(currentPage + 1);
+                e.preventDefault();
+            }
+            // Escape to exit fullscreen
+            else if (e.key === 'Escape' && document.fullscreenElement) {
+                toggleFullscreen();
+            }
+        });
+
+        // Initialize the app
+        initBoard();
+        setTool('pen');
+        updatePageNavigationButtons();
+        updateUndoRedoButtons();
+    </script>
+</body>
+</html>
