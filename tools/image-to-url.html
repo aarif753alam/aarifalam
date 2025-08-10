@@ -13,8 +13,8 @@
   <meta property="og:title" content="Free Image URL Generator | Convert Images to Shareable Links">
   <meta property="og:description" content="Upload images and get permanent URLs instantly. Free image hosting service with direct linking. Perfect for forums, blogs, and social media!">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aarifalam.life/tools/img-to-url">
-  <meta property="og:image" content="https://aarifalam.life/images/og-image-uploader.jpg">
+  <meta property="og:url" content="https://aarifalam.life/tools/image-to-url">
+  <meta property="og:image" content="https://aarifalam.life/images/tools/og-image-uploader.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="1-Click Image to URL Converter - Free Online Tool">
   <meta name="twitter:description" content="Get instant image URLs for sharing. Free image hosting with 10MB file limit. No account needed!">
-  <meta name="twitter:image" content="https://aarifalam.life/images/twitter-image-uploader.jpg">
+  <meta name="twitter:image" content="https://aarifalam.life/images/tools/twitter-image-uploader.jpg">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -30,7 +30,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Image URL Converter",
-    "url": "https://aarifalam.life/tools/img-to-url",
+    "url": "https://aarifalam.life/tools/image-to-url",
     "applicationCategory": "ImageHostingApplication",
     "operatingSystem": "Web",
     "offers": {
@@ -44,7 +44,7 @@
       "bestRating": "5",
       "ratingCount": "2850"
     },
-    "image": "https://aarifalam.life/images/schema-image-uploader.jpg",
+    "image": "https://aarifalam.life/images/tools/schema-image-uploader.jpg",
     "description": "Free online tool for converting images to permanent URLs with sharing capabilities",
     "featureList": ["10MB File Support", "Instant URL Generation", "Social Media Sharing", "Referral Bonus System"]
   }
@@ -69,7 +69,7 @@
   </script>
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://aarifalam.life/tools/img-to-url.html">
+  <link rel="canonical" href="https://aarifalam.life/tools/image-to-url.html">
   <meta name="robots" content="index, follow">
  <!-- Favicon and Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
@@ -80,7 +80,6 @@
   
 </head>
 <body>
-
 <!-- Scroll Progress Indicator -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -272,11 +271,11 @@
   // Configuration
   const config = {
     imgbbApiKey: 'e6042729317f0432472342c81511d15a',
-    websiteUrl: 'https://aarifeditz.godaddysites.com/',
-    baseUploadLimit: 20,
-    bonusPerShare: 10,
-    immediateBonus: 5,
-    visitBonus: 5
+    websiteUrl: 'https://aarifalam.life/',
+    baseUploadLimit: 50,
+    bonusPerShare: 20,
+    immediateBonus: 20,
+    visitBonus: 50
   };
 
   // User State
@@ -349,7 +348,7 @@
           const referrer = JSON.parse(referrerMainState);
           referrer.bonusCredits += config.visitBonus;
           localStorage.setItem('pixhostUserState', JSON.stringify(referrer));
-          alert('Referral visit recorded! The sharer got 3 bonus credits.');
+          alert('Referral visit recorded! The sharer got 20 bonus credits.');
         }
       }
     }
@@ -582,3 +581,4 @@
 
 </body>
 </html>
+
