@@ -6,118 +6,252 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage and main sections -->
+  <!-- Main Tools (Highest Priority) -->
   <url>
     <loc>https://aarifalam.life/</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
+    <lastmod>2025-08-11</lastmod>
     <priority>1.00</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog-hindi"/>
+    <changefreq>daily</changefreq>
   </url>
 
   <url>
-    <loc>https://aarifalam.life/blog</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
+    <loc>https://aarifalam.life/pdf/</loc>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://aarifalam.life/Game</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
+    <loc>https://aarifalam.life/blog/</loc>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://aarifalam.life/GreetingCard/greeting-card</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
+    <loc>https://aarifalam.life/tools/image-to-url</loc>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.85</priority>
-  </url>
-
-  <!-- Blog articles -->
-  <url>
-    <loc>https://aarifalam.life/Value-of-time</loc>
-    <lastmod>2025-06-02</lastmod>
-    <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/Value-of-time"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/Value-of-time-hindi"/>
-    <xhtml:link rel="alternate" hreflang="hi-Latn" href="https://aarifalam.life/Value-of-time-roman-hindi"/>
+    <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://aarifalam.life/blog-hindi</loc>
-    <lastmod>2025-06-02</lastmod>
+    <loc>https://aarifalam.life/pdf/image-to-pdf</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/Game/</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/tools/compress-image</loc>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog-hindi"/>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/tools/word-count</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.80</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/tools/greeting-card</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.80</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- PDF Tools -->
+  <url>
+    <loc>https://aarifalam.life/pdf/pdf-to-image</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/merge-pdf</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/split-pdf</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/remove-pdf-page</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/pdf-reorder</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/text-to-pdf</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/pdf-image-watermark</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.65</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/pdf-text-watermark</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.65</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/pdf/jpg-to-pdf</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.65</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Blog Pages -->
+  <url>
+    <loc>https://aarifalam.life/blog/blog-hindi</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog/blog-hindi"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog/"/>
   </url>
 
-  <!-- Games -->
+  <url>
+    <loc>https://aarifalam.life/blog/Value-of-time</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aarifalam.life/blog/Value-of-time"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://aarifalam.life/blog/Value-of-time-hindi"/>
+    <xhtml:link rel="alternate" hreflang="hi-Latn" href="https://aarifalam.life/blog/Value-of-time-roman-hindi"/>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/blog/Value-of-time-hindi</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.55</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/blog/Value-of-time-roman-hindi</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.55</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Game Zone -->
+  <url>
+    <loc>https://aarifalam.life/Game/hi/</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/Game/word-meaning-page</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/Game/word-meaning-game</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://aarifalam.life/Game/hi/word-meaning-page</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.45</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
   <url>
     <loc>https://aarifalam.life/Game/Heart-Touch-game</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.45</priority>
+    <changefreq>monthly</changefreq>
   </url>
 
-  <url>
-    <loc>https://aarifalam.life/Game/Word-Meaning-Game</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.90</priority>
-  </url>
-
-  <url>
-    <loc>https://aarifalam.life/Game/word-meaning-page2</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  
   <url>
     <loc>https://aarifalam.life/Game/numbergame</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.75</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.45</priority>
+    <changefreq>monthly</changefreq>
   </url>
-  
-  <!-- Footer pages -->
+
+  <!-- Other Pages -->
   <url>
     <loc>https://aarifalam.life/footer/contact-us/contact</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.60</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.40</priority>
+    <changefreq>yearly</changefreq>
   </url>
-  
+
+  <url>
+    <loc>https://aarifalam.life/tools/drawing</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.40</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
   <url>
     <loc>https://aarifalam.life/footer/contact-us/feedback</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.50</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.35</priority>
+    <changefreq>yearly</changefreq>
   </url>
-  
+
   <url>
     <loc>https://aarifalam.life/footer/privacy-policy</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.50</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.35</priority>
+    <changefreq>yearly</changefreq>
   </url>
-  
+
   <url>
     <loc>https://aarifalam.life/footer/terms</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.50</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.35</priority>
+    <changefreq>yearly</changefreq>
   </url>
-  
+
   <url>
     <loc>https://aarifalam.life/footer/about</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.50</priority>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.35</priority>
+    <changefreq>yearly</changefreq>
   </url>
-  
-  <!-- Other important pages -->
-  <url>
-    <loc>https://aarifalam.life/main/smartboard</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-  
-  <url>
-    <loc>https://aarifalam.life/GreetingCard/img-to-url</loc>
-    <lastmod>2025-06-02T20:36:14+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-      
+
 </urlset>
