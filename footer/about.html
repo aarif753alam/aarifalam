@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Learn about AarifAlam.life – a joyful, privacy-first educational platform offering games, tools, and wisdom for students, parents, and seniors." />
+  <meta name="description" content="Learn about AarifAlam.life – a joyful, privacy-first educational platform offering games, arif alam, tools, and wisdom for students, parents, and seniors." />
   <title>About Us – AarifAlam.life</title>
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://aarifalam.life/footer/about" />
+  <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="About Us – AarifAlam.life" />
@@ -19,315 +20,367 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="About Us – AarifAlam.life" />
   <meta name="twitter:description" content="Learn about AarifAlam.life – a joyful, privacy-first educational platform offering games, tools, and wisdom for students, parents, and seniors." />
+ <!-- Favicon and Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+  <link rel="manifest" href="../images/logo/site.webmanifest">
+  <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
 
-  <style>
-    :root {
-      --primary: #3284ffd3;
-      --secondary: #ff6b00;
-      --light-bg: #f0f8ff;
-      --dark-text: #333;
-      --light-text: #555;
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XX2CV48SMH');
+</script>
+  
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+        }
+        .mission-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin: 40px 0;
+            color: #555;
+        }
+        .highlight {
+            background-color: #fffde7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+          .profile-section {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
     
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      line-height: 1.8;
-      padding: 20px;
-      max-width: 850px;
-      margin: auto;
-      background-color: #fff;
-      color: var(--dark-text);
-    }
-    
-    h1 {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
-      border-bottom: 3px solid var(--secondary);
-      padding-bottom: 1rem;
-      display: inline-block;
-    }
-    
-    h2 {
-      color: var(--primary);
-      margin-top: 3rem;
-      font-size: 1.8rem;
-      border-left: 5px solid var(--secondary);
-      padding-left: 15px;
-    }
-    
-    h3 {
-      color: var(--secondary);
-      margin-top: 2rem;
-      font-size: 1.4rem;
-    }
-    
-    .header-container {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    
-    section {
-      margin-bottom: 3rem;
-      background-color: var(--light-bg);
-      padding: 1.5rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    }
-    
-    ul {
-      padding-left: 1.2em;
-    }
-    
-    li {
-      margin-bottom: 0.8em;
-      position: relative;
-      padding-left: 1.5em;
-    }
-    
-    li:before {
-      content: "•";
-      color: var(--secondary);
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
-    
-    .highlight-box {
-      background-color: rgba(35, 226, 28, 0.277);
-      border: 2px solid var(--secondary);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 2rem 0;
-    }
-    
-    .emoji {
-      font-size: 1.2em;
-      margin-right: 0.3em;
-      vertical-align: middle;
-    }
-    
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-    
-    .feature-card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .feature-card h4 {
-      color: var(--primary);
-      margin-top: 0;
-    }
-    
-    .profile-section {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 2rem 0;
+    .profile-card {
+        display: flex;
+        flex-wrap: wrap;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
     }
     
     .profile-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid var(--primary);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        flex: 1;
+        min-width: 250px;
+        padding: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
     }
     
-    @media (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-      
-      section {
-        padding: 1rem;
-      }
-      
-      .profile-section {
-        flex-direction: column;
-        text-align: center;
-      }
+    .profile-pic {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        aspect-ratio: 1/1;
+        object-fit: cover;
     }
-  </style>
+    
+    .profile-content {
+        flex: 1;
+        min-width: 300px;
+        padding: 40px;
+    }
+    
+    .profile-name {
+        margin: 0 0 5px 0;
+        font-size: 1.8rem;
+        color: #262626;
+    }
+    
+    .profile-title {
+        margin: 0 0 20px 0;
+        color: #737373;
+        font-size: 1rem;
+    }
+    
+    .profile-intro p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #404040;
+        margin-bottom: 25px;
+    }
+    
+    .profile-stats {
+        display: flex;
+        gap: 30px;
+        margin: 25px 0;
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-number {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #3498db;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        color: #737373;
+    }
+    
+    .profile-highlight {
+        background: #f0f7ff;
+        padding: 18px;
+        border-radius: 12px;
+        margin: 30px 0;
+        font-weight: 500;
+        color: #2c3e50;
+        text-align: center;
+        border-left: 4px solid #3498db;
+    }
+    
+    .profile-quote {
+        font-style: italic;
+        padding: 20px;
+        text-align: center;
+        color: #555;
+        margin-top: 30px;
+        position: relative;
+    }
+    
+    .profile-quote:before,
+    .profile-quote:after {
+        content: '"';
+        font-size: 2rem;
+        color: #3498db;
+        opacity: 0.2;
+        position: absolute;
+    }
+    
+    .profile-quote:before {
+        top: 0;
+        left: 10px;
+    }
+    
+    .profile-quote:after {
+        bottom: -15px;
+        right: 10px;
+    }
+    
+    @media (max-width: 768px) {
+        .profile-card {
+            flex-direction: column;
+        }
+        
+        .profile-image {
+            padding: 30px;
+        }
+        
+        .profile-content {
+            padding: 30px;
+        }
+        
+        .profile-stats {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .profile-image,
+        .profile-content {
+            padding: 25px;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+        }
+        
+        .profile-stats {
+            gap: 20px;
+        }
+    }
+    </style>
 </head>
 <body>
+    <h1>About AarifAlam.life</h1>
+    <p class="quote">"Where learning meets joy, privacy is respected, and technology serves humanity"</p>
 
-  <div class="header-container">
-    <h1>Welcome to AarifAlam.life</h1>
-    <p style="font-size: 1.2rem; color: var(--light-text); max-width: 700px; margin: 0 auto;">
-      Where learning meets joy, privacy is respected, and technology serves humanity
-    </p>
-  </div>
-
-  <!-- Personal Profile Section with Image -->
-  <section>
-    <div class="profile-section">
-      <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1747883409/Aarif_Alam_2_wt2w2x.png" alt="Aarif Alam" class="profile-image">
-      <div>
-        <h2>About Aarif Alam</h2>
-        <p>Hello! I'm the founder and developer behind AarifAlam.life. As an educator ,guid-people, technologist and i am also a student, I believe in creating tools that make learning accessible and joyful for everyone.</p>
-        <p> My dream is to make my country and the world great and peaceful. Where no one is oppressed and everyone gets rights., I not only love my country but I love the whole world.  </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Our Story: Making Learning Joyful</h2>
-    <p>At <strong>AarifAlam.life</strong>, we believe education should spark joy like playtime and that technology should uplift, not divide. Founded in 2025, we are creating tools and ideas that help build a just, kind, and compassionate world - where no one is left behind.</p>
+   <div class="mission-box">
+    <h2>Our Vision</h2>
+    <p><span class="emoji">🌏</span> To create a peaceful world built on justice, kindness and compassion - where no one is oppressed and everyone has equal rights.</p>
     
-    <div class="highlight-box">
-      <p style="font-size: 1.1rem; margin: 0; text-align: center;">
-        <strong>Free, privacy-first educational tools—designed to delight children, earn parents' trust, and bring joy to seniors.</strong>
-      </p>
+    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 3px solid #3498db; text-align: center;">
+        <p style="margin: 0; font-style: italic; font-weight: 500;">
+            <span class="emoji">✨</span> <strong>DREAM ⇒</strong> Truth first 🗣 | Justice always ⚖ | Mercy to all 🕊 | Help the helpless | Love all | Forgive often | Kindness daily | Learning forever
+        </p>
+        <p style="margin: 10px 0 0 0; font-style: italic;">
+            <span class="emoji">💭</span> <strong>मेरा सपना:</strong> "मैं अपने देश और विश्व को शांतिपूर्ण बनाऊं - जहां किसी पर अत्याचार न हो और सभी को अधिकार मिले, चाहे उनकी जाति कुछ भी हो!"
+        </p>
     </div>
-  </section>
-
- <section>
-    <h2>What We Offer</h2>
     
+    <p><span class="emoji">💡</span> हमारा सपना है कि हम न्याय, दया और करुणा पर आधारित समाज का निर्माण करें - जहां किसी पर अत्याचार न हो और सभी को समान अधिकार मिले।</p>
+</div>
+  
+<div class="profile-section">
+    <div class="profile-card">
+        <div class="profile-image">
+            <img src="https://aarifalam.life/images/logo/apple-touch-icon.png" alt="Aarif Alam" class="profile-pic">
+        </div>
+        
+        <div class="profile-content">
+            <h2 class="profile-name">Aarif Alam</h2>
+            <p class="profile-title">Founder & Developer @AarifAlam0105</p>
+            
+            <div class="profile-intro">
+                <p>Educator, guide, and lifelong learner creating tools that make learning accessible and joyful for everyone.</p>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Free Tools</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">180+</span>
+                    <span class="stat-label">Learners</span>
+                </div>
+            </div>
+            
+            <div class="profile-highlight">
+                <p>"Technology should uplift humanity, not divide it"</p>
+            </div>
+            
+            <div class="profile-quote">
+                <p>Education is the light that dispels the darkness of ignorance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <h2>What Makes Us Different</h2>
     <div class="feature-grid">
-      <div class="feature-card">
-        <h3><span class="emoji">🎮</span> Educational Games</h3>
-        <ul>
-          <li><strong>Word Meaning Challenge</strong> – Vocabulary made fun</li>
-          <li><strong>Math Puzzles</strong> – Calculation adventures</li>
-          <li><strong>Science Quizzes</strong> – Curiosity sparkers</li>
-        </ul>
-        <p><em>All games work instantly in your browser – no downloads or accounts needed.</em></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3><span class="emoji">✏️</span> Creative Tools</h3>
-        <ul>
-          <li><strong>Image to URL Converter</strong> – Temporary hosting</li>
-          <li><strong>Drawing Pad</strong> – 100% local canvas</li>
-          <li><strong>Greeting Card Maker</strong> – Create and print</li>
-        </ul>
-        <p><em>Your creations never leave your device unless you choose to share.</em></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3><span class="emoji">📚</span> Life Wisdom</h3>
-        <ul>
-          <li>Study hacks for students</li>
-          <li>Digital parenting guides</li>
-          <li>Tech simplified for seniors</li>
-          <li>Inspiring global stories</li>
-        </ul>
-        <p><em>Practical knowledge for all ages and stages of life.</em></p>
-      </div>
+        <div class="feature-card">
+            <h3><span class="emoji">🔒</span> Privacy First</h3>
+            <p>No accounts needed. No hidden tracking. We follow strict guidelines from our <a href="/footer/privacy-policy">Privacy Policy</a> to protect all users.</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="emoji">🎯</span> Purpose-Driven</h3>
+            <p>Every tool is designed with clear educational goals, aligned with our <a href="/footer/terms">Terms of Service</a> to ensure safe, beneficial use.</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="emoji">🌱</span> Community Shaped</h3>
+            <p>Over 50% of our tools were created from user requests. We grow through your feedback and ideas.</p>
+        </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Our Privacy Promise</h2>
-    <p>In a world of data collection, we take a different approach:</p>
-    
+    <h2>Our Offerings</h2>
     <div class="feature-grid">
-      <div class="feature-card">
-        <h4><span class="emoji">🔒</span> No Accounts Needed</h4>
-        <p>Start playing and learning immediately without any sign-up process.</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">📝</span> Minimal Data</h4>
-        <p>We only process what you explicitly submit (feedback/images).</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">👶</span> Child-Safe</h4>
-        <p>No ads, no tracking, no inappropriate content - ever.</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">🌐</span> Transparent</h4>
-        <p>Our <a href="privacy-policy.html" style="color: var(--primary);">Privacy Policy</a> is simple and understandable.</p>
-      </div>
+        <div class="feature-card">
+            <h3><span class="emoji">🎮</span> Educational Games</h3>
+            <ul>
+                <li>Vocabulary builders</li>
+                <li>Math challenges</li>
+            </ul>
+            <p>All games work instantly in your browser - no downloads or accounts needed.</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="emoji">🛠️</span> Creative Tools</h3>
+            <ul>
+                <li>Image to URL converter</li>
+                <li>PDF utilities</li>
+                <li>image tools</li>
+            </ul>
+            <p>Your files remain yours - we process them temporarily as outlined in our <a href="/footer/terms">Terms</a>.</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="emoji">📚</span> Learning Resources</h3>
+            <ul>
+                <li>educational blog</li>
+                <li>Digital wellness guides</li>
+                <li>Tech simplified tutorials</li>
+            </ul>
+            <p>Content carefully crafted for all ages (13 to 95!).</p>
+        </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Why Families Love Us</h2>
-    <ul>
-      <li><strong>Local Processing:</strong> Most tools work entirely in your browser - nothing is sent to servers</li>
-      <li><strong>Temporary Storage:</strong> Uploaded files auto-delete after processing (usually within 1 hour)</li>
-      <li><strong>Plain Language:</strong> We avoid confusing legal jargon - straightforward communication</li>
-      <li><strong>Community Shaped:</strong> Over 50% of our tools were created from user requests</li>
-      <li><strong>Universal Design:</strong> Content carefully crafted to engage ages 5 to 95</li>
-    </ul>
-  </section>
-
-  <section>
     <h2>Our Technology Principles</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h4><span class="emoji">🖥️</span> Lightweight</h4>
-        <p>100% static website (HTML/CSS/JS) that loads in seconds</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">🔐</span> Secure</h4>
-        <p>HTTPS encrypted connections for all interactions</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">🤝</span> Ethical Services</h4>
-        <p>Only using:
-          <ul style="padding-left: 1em;">
-            <li>EmailJS for contact forms</li>
-            <li>imgbb for temporary images</li>
-          </ul>
-      </div>
-    </div>
-  </section>
-
-  <section style="text-align: center; background-color: var(--primary); color: white;">
-    <h2 style="color: white; border-left-color: var(--secondary);">Join Our Learning Movement</h2>
-    <p style="font-size: 1.2rem;">Every month, thousands enjoy our:</p>
-    <ul style="list-style: none; padding: 0; display: inline-block; text-align: left;">
-      <li><span class="emoji">🧠</span> Brain-boosting games</li>
-      <li><span class="emoji">💡</span> Practical life advice</li>
-      <li><span class="emoji">🛠️</span> Simple web tools</li>
+    <ul>
+        <li><span class="emoji">⚡</span> <strong>Lightweight:</strong> Fast-loading static pages (HTML/CSS/JS)</li>
+        <li><span class="emoji">🔐</span> <strong>Secure:</strong> HTTPS encryption for all connections</li>
+        <li><span class="emoji">🤝</span> <strong>Ethical Services:</strong> Only using trusted providers like EmailJS for contact forms and imgBB for image to url processing</li>
+        <li><span class="emoji">📊</span> <strong>Transparent Analytics:</strong> Google Analytics for anonymous usage data only</li>
     </ul>
-    <div class="highlight-box" style="background-color: rgba(255,255,255,0.2); border-color: white;">
-      <p style="font-size: 1.3rem; margin: 0;">
-        <strong>All completely free and private</strong>
-      </p>
-    </div>
-  </section>
 
-  <section>
-    <h2>Let's Connect</h2>
-    <p>We grow through your input and ideas:</p>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h4><span class="emoji">💌</span> Share Feedback</h4>
-        <p>Tell us what works and what could be better</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">💡</span> Suggest Features</h4>
-        <p>What tools or games would help you?</p>
-      </div>
-      
-      <div class="feature-card">
-        <h4><span class="emoji">🌱</span> Contribute</h4>
-        <p>Help translate or share educational content</p>
-      </div>
+    <div class="mission-box">
+        <h2>Join Our Movement</h2>
+        <p>Every month, thousands enjoy our free resources. Together, we're building a better internet - one joyful learning experience at a time.</p>
+        
+        <p><span class="emoji">💌</span> <strong>We'd love to hear from you:</strong></p>
+        <ul>
+            <li>Share feedback via our <a href="/footer/contact-us/feedback">Feedback Form</a></li>
+            <li>Suggest new tools or improvements</li>
+            <li>Help translate content to reach more learners</li>
+        </ul>
+        <p>Email: <a href="mailto:aarif753alam@gmail.com">aarif753alam@gmail.com</a></p>
     </div>
-    <p style="text-align: center; margin-top: 2rem; font-style: italic;">
-      Together, let's build a better internet - one joyful learning experience at a time.
-    </p>
-  </section>
+
+    <p style="text-align: center; margin-top: 40px; font-style: italic;">
+         ⇒ Truth first 🗣 | Justice always ⚖ | Mercy to all 🕊 | Help the helpless | Love all | Forgive often | Kindness daily | Learning forever | respect everyone
+  </p>
 </body>
-
 </html>
