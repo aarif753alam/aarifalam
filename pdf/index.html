@@ -377,7 +377,348 @@
         
 /*faq css*/      
 .faq-btn::after,.faq-btn::before{content:'';content:'';content:'';opacity:0}.lightbox{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);overflow:auto}.lightbox-content{background-color:#fefefe;margin:5% auto;padding:20px;border:1px solid #888;width:80%;max-width:800px;max-height:80vh;overflow-y:auto;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.2)}.close-btn{color:#6c757d;float:right;font-size:28px;font-weight:700;cursor:pointer;transition:color .2s}.close-btn:hover{color:#495057}.faq-btn-container{display:flex;justify-content:center;align-items:center;padding:20px 0;perspective:1000px}.faq-btn-wrapper{position:relative;width:320px;height:80px;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.175, .885, .32, 1.275)}.faq-btn,.faq-btn-backdrop,.faq-btn::before{height:100%;position:absolute}.faq-btn-wrapper:hover{transform:translateY(-5px) rotateX(5deg)}.faq-btn{width:100%;background:linear-gradient(135deg,#667eea 0,#764ba2 100%);color:#fff;border:none;border-radius:12px;padding:0 30px;cursor:pointer;font-size:18px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 10px 30px rgba(118,75,162,.3);transition:.4s cubic-bezier(.23, 1, .32, 1);display:flex;align-items:center;justify-content:space-between;backface-visibility:hidden;overflow:hidden;z-index:2}.faq-btn::before{top:0;left:0;width:100%;background:linear-gradient(135deg,#764ba2 0,#667eea 100%);transition:opacity .4s;z-index:-1}.faq-btn:hover{box-shadow:0 15px 40px rgba(118,75,162,.4);transform:translateY(-3px)}.faq-btn:hover::before{opacity:1}.faq-btn:active{transform:translateY(0);box-shadow:0 8px 20px rgba(118,75,162,.3)}.faq-btn .icon{font-size:24px;transition:transform .4s cubic-bezier(.68, -.55, .265, 1.55)}.faq-btn:hover .icon{transform:rotate(90deg) scale(1.1)}.faq-btn .text{flex-grow:1;text-align:center}.faq-btn-backdrop{width:calc(100% - 10px);background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border-radius:10px;transform:translateY(10px) translateZ(-10px);box-shadow:0 5px 15px rgba(0,0,0,.1);z-index:1}.faq-btn::after{transform:scale(0);transition:transform .6s cubic-bezier(.165, .84, .44, 1),opacity .4s;position:absolute;top:50%;left:50%;width:5px;height:5px;background:rgba(255,255,255,.5);border-radius:100%;transform:scale(1,1) translate(-50%);transform-origin:50% 50%}.faq-btn:hover::after{transform:scale(1.5);opacity:.6}@media (max-width:480px){.faq-btn-wrapper{width:280px;height:70px}.faq-btn{font-size:16px;padding:0 20px}}.faq-btn:focus:not(:active)::after{animation:1s ease-out ripple}@keyframes ripple{0%{transform:scale(0,0);opacity:.5}100%{transform:scale(20,20);opacity:0}}.faq-container{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.7;color:#343a40}.faq-title{color:#2c3e50;text-align:center;margin-bottom:25px;font-size:28px;font-weight:600;border-bottom:2px solid #e9ecef;padding-bottom:15px}.faq-intro{margin-bottom:30px;font-size:16px;color:#495057;text-align:center}.faq-section{margin-bottom:30px;border-bottom:1px solid #e9ecef;padding-bottom:25px}.faq-section h3{color:#1a73e8;margin-bottom:15px;font-size:20px;font-weight:600}.faq-section p{margin-bottom:12px;color:#495057}.faq-section ol,.faq-section ul{padding-left:25px;margin-bottom:15px}.faq-section li{margin-bottom:10px;color:#495057}.pro-tip{background-color:#e8f0fe;border-left:4px solid #4285f4;padding:12px 15px;margin:20px 0;border-radius:0 4px 4px 0}.pro-tip strong{color:#1a73e8}.faq-question{font-weight:600;color:#2c3e50}@media (max-width:768px){.lightbox-content{width:90%;margin:10% auto;padding:15px}.faq-title{font-size:24px}}
-    </style>
+
+  </style>
+
+    <!-- pdf tools blog css-->
+    <style>
+    /* Premium Toggle Button Styles */
+    .pdf-toggle-container {
+        position: relative;
+        display: inline-block;
+        margin: 30px 0;
+        perspective: 1000px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .pdf-toggle-wrapper {
+        position: relative;
+        display: inline-block;
+        transform-style: preserve-3d;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .pdf-toggle-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 50px;
+        filter: blur(8px);
+        opacity: 0.6;
+        transition: all 0.4s ease;
+        z-index: 0;
+    }
+
+    .pdf-toggle-btn {
+        position: relative;
+        padding: 16px 32px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 220px;
+        justify-content: center;
+    }
+
+    .pdf-toggle-btn .text {
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    .pdf-toggle-btn .icon {
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    .pdf-toggle-btn .hover-effect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    /* Content Animation */
+    .pdf-content {
+        animation: fadeIn 0.6s ease-out forwards;
+        margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hover Animations */
+    .pdf-toggle-container:hover .pdf-toggle-wrapper {
+        transform: translateY(-3px);
+    }
+
+    .pdf-toggle-container:hover .pdf-toggle-backdrop {
+        transform: translateY(6px) scale(0.95);
+        opacity: 0.4;
+    }
+
+    .pdf-toggle-btn:hover {
+        box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .pdf-toggle-btn:hover .hover-effect {
+        opacity: 1;
+    }
+
+    /* Active State (when content is visible) */
+    .pdf-toggle-btn.active {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .pdf-toggle-btn.active .icon {
+        transform: rotate(180deg);
+    }
+
+    .pdf-toggle-btn.active + .pdf-toggle-backdrop {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+</style>
+    <!-- pdf tools blog-->
+    <style>
+    :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4895ef;
+        --dark: #2b2d42;
+        --light: #f8f9fa;
+        --success: #4cc9f0;
+        --text: #495057;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .pdf-tools-article {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        line-height: 1.8;
+        max-width: 850px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        color: var(--text);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pdf-tools-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    h1 {
+        color: var(--dark);
+        font-size: 2.4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        line-height: 1.3;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 2px;
+    }
+
+    h2 {
+        color: var(--primary);
+        font-size: 1.6rem;
+        margin: 2.5rem 0 1.2rem;
+        font-weight: 600;
+        position: relative;
+        padding-left: 1.2rem;
+        transition: var(--transition);
+    }
+
+    h2:hover {
+        transform: translateX(5px);
+    }
+
+    h2::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 700;
+    }
+
+    .tool-section {
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+        transition: var(--transition);
+        border-left: 4px solid transparent;
+    }
+
+    .tool-section:hover {
+        background: rgba(67, 97, 238, 0.05);
+        border-left-color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    ul {
+        margin: 1.2rem 0;
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 1.8rem;
+    }
+
+    li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 0.8rem 1.8rem;
+        border-radius: 50px;
+        font-weight: 600;
+        margin-top: 1rem;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        opacity: 0;
+        transition: var(--transition);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+    }
+
+    .cta-button:hover::after {
+        opacity: 1;
+    }
+
+    .cta-button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .share-prompt {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        margin: 2rem 0;
+        color: var(--primary);
+        cursor: pointer;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        background: rgba(67, 97, 238, 0.1);
+        transition: var(--transition);
+    }
+
+    .share-prompt:hover {
+        background: rgba(67, 97, 238, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Animation for tool sections */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .tool-section {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    /* Delay animations for each section */
+    .tool-section:nth-child(1) { animation-delay: 0.1s; }
+    .tool-section:nth-child(2) { animation-delay: 0.2s; }
+    .tool-section:nth-child(3) { animation-delay: 0.3s; }
+    /* Continue for all 9 sections... */
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .pdf-tools-article {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        h2 {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+
 </head>
 <body>
 <!-- Scroll Progress Indicator -->
@@ -579,6 +920,155 @@
             <strong>Why choose our PDF tools?</strong> 100% free • No watermarks • No registration • Unlimited use • Works on all devices • Secure processing ( No your pdf file store )
         </div>
     </div>
+    
+<!--  pdf blog  -->
+<!-- Toggle Button of pdf blog -->
+<div class="pdf-toggle-container">
+  <div class="pdf-toggle-wrapper">
+    <div class="pdf-toggle-backdrop"></div>
+    <button class="pdf-toggle-btn" id="togglePdfTools">
+      <span class="text">World fastest PDF Tools- Blog</span>
+      <i class="icon fas fa-arrow-down"></i>
+      <span class="hover-effect"></span>
+    </button>
+  </div>
+</div>
+
+  <div class="pdf-content" id="pdfToolsContent" style="display: none;">
+
+    <!-- Paste your entire blog content here -->
+<article class="pdf-tools-article">
+        <h1>9 Extremely Useful PDF Tools You Can Use Right Now—Absolutely FREE!</h1>
+        
+        <div class="intro-section">
+            <p>Hi! Are you tired of downloading crappy PDF software that takes ages to install? You got it! 👉 All of these tools work 100% in your browser—no uploads, no data storage, just magic happening on your device. And the best part? They're all absolutely FREE! Let's find out...</p>
+            <div class="share-prompt">Share this blog.</div>
+        </div>
+
+        <section class="tool-section" id="image-to-pdf">
+            <h2>1. Image to PDF Converter</h2>
+            <p>Do you have a ton of JPG or PNG files to convert to PDF? This tool can save your life! Just drag your photos in, arrange them the way you like, and that's it! –You have a PDF. Perfect for converting:</p>
+            <ul>
+                <li>Phone photos to PDF reports</li>
+                <li>Screenshots of documents</li>
+                <li>Multiple images in a single portfolio file</li>
+            </ul>
+            <p>Why it's great: It's super fast, maintains the original quality, and you can rearrange the pages before converting.</p>
+            <div class="cta-button">Convert Images to PDF Now</div>
+        </section>
+
+        <section class="tool-section" id="pdf-to-image">
+            <h2>2. PDF to Image Converter</h2>
+            <p>Okay, this is my personal favorite and gets used more than I expected! Need to extract images from PDF or convert pages to JPG? This amazing tool handles it perfectly.</p>
+            <p>Real-world uses:</p>
+            <ul>
+                <li>Extract charts from boring reports for use in presentations.</li>
+                <li>Convert PDF pages to social media images.</li>
+                <li>Get high-resolution images from PDF portfolios.</li>
+            </ul>
+            <p>Works with all types of pages—scanned documents, digital PDFs, whatever you want. And again, everything stays in your browser—no awkward cloud storage!</p>
+            <div class="cta-button">Convert PDF to Images</div>
+        </section>
+
+        <section class="tool-section" id="merge-pdf">
+            <h2>3. Merge PDF Files</h2>
+            <p>Merging PDFs shouldn't be this easy, but here we are! Whether you're:</p>
+            <ul>
+                <li>Creating reports from multiple files</li>
+                <li>Combining scanned documents</li>
+                <li>Merging chapters into an eBook</li>
+            </ul>
+            <p>This tool lets you drag, drop, and rearrange pages however you want before merging. Extremely intuitive interface that just works.</p>
+            <div class="cta-button">Merge your PDF files now.</div>
+        </section>
+
+        <section class="tool-section" id="split-pdf">
+            <h2>4. Split PDF pages</h2>
+            <p>Just need one page from a 100-page document? This tool is great for:</p>
+            <ul>
+                <li>Extracting individual pages from contracts</li>
+                <li>Splitting large PDF files into smaller parts</li>
+                <li>Creating page ranges for submissions</li>
+            </ul>
+            <p>You can split them by page number or extract each page as separate files. This is very useful when you only need one important page!</p>
+            <div class="cta-button">Split PDF files here.</div>
+        </section>
+
+        <section class="tool-section" id="delete-pages">
+            <h2>5. Delete PDF pages</h2>
+            <p>Accidentally included the wrong page? No problem! This tool lets you:</p>
+            <ul>
+                <li>Delete specific pages with a single click.</li>
+                <li>Automatically delete blank pages.</li>
+                <li>Clean up scanned documents quickly.</li>
+            </ul>
+            <p>Very useful for fixing mistakes without recreating the whole document. Just delete what's not necessary and save the rest!</p>
+            <div class="cta-button">Delete pages now.</div>
+        </section>
+
+        <section class="tool-section" id="rearrange-pages">
+            <h2>6. Rearrange PDF pages</h2>
+            <p>Have you ever scanned something and the pages came out completely upside down? 🙄 This tool fixes it in just a few seconds!</p>
+            <p>Why you'll love it:</p>
+            <ul>
+                <li>Drag-and-drop interface (very easy!)</li>
+                <li>Rotate pages if they're upside down.</li>
+                <li>Save different page orders for different uses.</li>
+            </ul>
+            <p>Perfect for fixing scanned documents, creating custom page orders, or rearranging reports.</p>
+            <div class="cta-button">Rearrange your PDF files.</div>
+        </section>
+
+        <section class="tool-section" id="text-to-pdf">
+            <h2>7. Text to PDF Creator</h2>
+            <p>Do you need to quickly convert any text into a proper PDF file? This tool is even easier than Word!</p>
+            <ul>
+                <li>Paste any text and convert instantly.</li>
+                <li>Great for quickly creating documents to share</li>
+                <li>Preserves all your formatting</li>
+            </ul>
+            <p>I use this all the time to create simple PDFs from emails, notes, or web content. No fuss, just works.</p>
+            <div class="cta-button">Create PDF from text.</div>
+        </section>
+
+        <section class="tool-section" id="image-watermark">
+            <h2>8. Image Watermark Tool</h2>
+            <p>Do you want to add a logo or stamp to your PDF? This makes it super easy:</p>
+            <ul>
+                <li>Place the watermark exactly where you want it.</li>
+                <li>Adjust the transparency so the text remains readable.</li>
+                <li>Great for a "draft" stamp or company branding</li>
+            </ul>
+            <p>Much better than the paid tools I've used—and again, completely private because it all happens in your browser.</p>
+            <div class="cta-button">Add an image watermark.</div>
+        </section>
+
+        <section class="tool-section" id="text-watermark">
+            <h2>9. Text Watermark Tool</h2>
+            <p>Last but not least—do you need to add "confidential" or your name to pages? This tool is for you:</p>
+            <ul>
+                <li>Add custom text, fonts, and colors.</li>
+                <li>Position pages at any angle.</li>
+                <li>Perfect for copyright notices</li>
+            </ul>
+            <p>Very useful for protecting your documents before sharing them online or via email.</p>
+            <div class="cta-button">Add a text watermark.</div>
+        </section>
+
+        <section class="conclusion-section">
+            <h2>Why these tools are great 🤘</h2>
+            <p>In a nutshell, why these are better than other PDF tools:</p>
+            <ul>
+                <li>Zero data storage—everything happens in your browser.</li>
+                <li>No watermarks—unlike many "free" tools</li>
+                <li>No limits—use as much as you want.</li>
+                <li>No registration—just open and use.</li>
+            </ul>
+            <p>Hope you find these as useful as I did! If you do, please share this with your friends—it's really helpful.</p>
+            <div class="share-prompt">Share this blog.</div>
+        </section>
+    </article>
+ </div>
 
 <!-- FAQ Button -->
 <div class="faq-btn-container">
@@ -828,6 +1318,32 @@
 </script>
 <script src="js/pdf-header.js"></script>
 <script src="js/responsive.js"></script>
+
+      <!-- pdf blog js-->
+      <script>
+    document.getElementById('togglePdfTools').addEventListener('click', function() {
+        const content = document.getElementById('pdfToolsContent');
+        const btn = this;
+        const icon = btn.querySelector('.icon');
+        
+        if (content.style.display === 'none') {
+            // Show content
+            content.style.display = 'block';
+            btn.classList.add('active');
+            icon.classList.remove('fa-arrow-down');
+            icon.classList.add('fa-arrow-up');
+            
+            // Smooth scroll to content
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            // Hide content
+            content.style.display = 'none';
+            btn.classList.remove('active');
+            icon.classList.remove('fa-arrow-up');
+            icon.classList.add('fa-arrow-down');
+        }
+    });
+</script>
     
     <!--FAQ js-->
            <script>
@@ -866,8 +1382,6 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
       <p>Created by ${e.creatorName}</p>
     `,document.body.appendChild(t);let r=document.body.cloneNode(!0);document.body.parentNode.replaceChild(r,document.body)},s=()=>{if(t(),!r()||!a()){l();return}setInterval(()=>{r()&&a()||l()},e.checkInterval)};setTimeout(s,100)}(),"ontouchstart"in window&&document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("touchstart",function(){this.classList.add("hover")},{passive:!0}),e.addEventListener("touchend",function(){setTimeout(()=>{this.classList.remove("hover")},200)},{passive:!0})})});
     </script>
+      
 </body>
 </html>
-
-
-
