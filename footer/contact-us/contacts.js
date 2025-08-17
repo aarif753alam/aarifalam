@@ -1,31 +1,5 @@
 // contacts.js - Optimized for Cloudflare static hosting
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    var mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    var navLinks = document.getElementById('navLinks');
-    
-    function updateMenuIcon() {
-        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    }
-    
-    function closeMobileMenu() {
-        navLinks.classList.remove('active');
-        updateMenuIcon();
-    }
-    
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            updateMenuIcon();
-        });
-        
-        // Close mobile menu when clicking a link
-        var navLinksItems = document.querySelectorAll('.nav-links a');
-        navLinksItems.forEach(function(link) {
-            link.addEventListener('click', closeMobileMenu);
-        });
-    }
-    
     // Smooth scrolling for anchor links
     var anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(function(link) {
@@ -37,17 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             var targetElement = document.querySelector(targetId);
             if (targetElement) {
-                var headerHeight = document.querySelector('.main-header') ? document.querySelector('.main-header').offsetHeight : 0;
-                
                 window.scrollTo({
-                    top: targetElement.offsetTop - headerHeight,
+                    top: targetElement.offsetTop,
                     behavior: 'smooth'
                 });
-                
-                // Close mobile menu if open
-                if (navLinks && navLinks.classList.contains('active')) {
-                    closeMobileMenu();
-                }
             }
         });
     });
