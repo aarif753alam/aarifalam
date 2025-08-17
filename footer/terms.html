@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Terms and Conditions - AarifAlam.life</title>
-  <meta name="description" content="Read the Terms and Conditions of AarifAlam.life — a privacy-first educational platform offering games, tools, and resources for students, parents, and seniors." />
+  <meta name="description" content="Read the Terms and Conditions of AarifAlam.life — a privacy-first educational platform offering games, arif alam, tools, aand resources for students, parents, and seniors." />
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://aarifalam.life/footer/terms" />
@@ -20,9 +20,25 @@
   <meta name="twitter:title" content="Terms and Conditions - AarifAlam.life" />
   <meta name="twitter:description" content="Read the Terms and Conditions of AarifAlam.life — a privacy-first educational platform offering games, tools, and resources for students, parents, and seniors." />
 
-    <style>
+    <!-- Favicon and Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+  <link rel="manifest" href="../images/logo/site.webmanifest">
+  <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XX2CV48SMH');
+</script>
+  
+ <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
             color: #333;
             max-width: 900px;
@@ -31,28 +47,23 @@
             background-color: #f9f9f9;
         }
         h1 {
-            color: #004aad;
+            color: #2c3e50;
             text-align: center;
-            border-bottom: 2px solid #004aad;
+            border-bottom: 2px solid #3498db;
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
         h2 {
-            color: #004aad;
+            color: #2980b9;
             margin-top: 40px;
-            border-left: 5px solid #004aad;
-            padding-left: 15px;
-        }
-        h3 {
-            color: #0066cc;
-            margin-top: 25px;
+            font-size: 1.4em;
         }
         .notice-box {
             background-color: #e8f4fc;
-            border-left: 5px solid #004aad;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 0 8px 8px 0;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 6px;
         }
         .highlight {
             background-color: #fffde7;
@@ -60,14 +71,15 @@
             border-radius: 3px;
         }
         ul {
-            padding-left: 25px;
+            padding-left: 20px;
         }
         li {
             margin-bottom: 10px;
         }
         a {
-            color: #0066cc;
+            color: #2980b9;
             text-decoration: none;
+            font-weight: 500;
         }
         a:hover {
             text-decoration: underline;
@@ -87,10 +99,31 @@
             margin-bottom: 8px;
         }
         .last-updated {
-            text-align: right;
+            text-align: center;
             font-style: italic;
-            color: #666;
+            color: #7f8c8d;
             margin-bottom: 30px;
+        }
+        #lang-toggle {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
         }
         @media (max-width: 768px) {
             body {
@@ -99,168 +132,256 @@
             .toc-nav ul {
                 columns: 1;
             }
+            h1 {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Terms and Conditions</h1>
-    <p class="last-updated">Last Updated: <span id="current-date"></span></p>
-
-    <div class="notice-box">
-        <p><strong>Important:</strong> By using AarifAlam.life ("the Site"), you agree to these Terms and Conditions. Please read them carefully. If you disagree with any part, you must discontinue use immediately.</p>
+    <div id="lang-toggle">
+        <button onclick="toggleLanguage()">हिंदी में देखें / View in Hindi</button>
     </div>
+    
+    <div id="english">
+        <h1>Terms and Conditions</h1>
+        <p class="last-updated">Last Updated: <span id="current-date"></span></p>
 
-    <div class="toc-nav">
-        <h3>Table of Contents</h3>
+        <div class="notice-box">
+            <p><strong>Important:</strong> By using AarifAlam.life ("the Site"), you agree to these Terms. Please read them carefully. If you disagree, please discontinue use immediately.</p>
+        </div>
+
+        <div class="toc-nav">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#acceptance">1. Acceptance of Terms</a></li>
+                <li><a href="#services">2. Our Services</a></li>
+                <li><a href="#user-responsibilities">3. User Responsibilities</a></li>
+                <li><a href="#content">4. Content Ownership</a></li>
+                <li><a href="#privacy">5. Privacy</a></li>
+                <li><a href="#disclaimers">6. Disclaimers</a></li>
+                <li><a href="#liability">7. Liability</a></li>
+                <li><a href="#changes">8. Changes to Terms</a></li>
+                <li><a href="#contact">9. Contact Us</a></li>
+            </ul>
+        </div>
+
+       <h2 id="acceptance">1. Acceptance of Terms</h2>
+<p>By accessing or using <strong>AarifAlam.life</strong>, operated by Aarif Alam, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use.</p>
+
+<h2 id="services">2. Our Services</h2>
+<p>We provide the following free-to-use services:</p>
+<ul>
+    <li><span class="emoji">🎮</span> <strong>Educational games</strong> (e.g., <a href="/Game/">Game Zone</a>)</li>
+    <li><span class="emoji">🪄</span> <strong>PDF tools</strong> (e.g., <a href="/pdf/">image to pdf and other pdf tools</a>)</li>
+
+    <li><span class="emoji">🛠️</span> <strong>Creative tools</strong> (e.g., <a href="/tools/image-to-url">Image-to-URL Converter</a>)</li>
+    <li><span class="emoji">📚</span> <strong>Learning resources & blogs</strong></li>
+</ul>
+
+<h2 id="user-responsibilities">3. User Responsibilities</h2>
+<div class="notice-box">
+    <p><strong>By using the Site, you agree not to:</strong></p>
+    <ul>
+        <li><span class="emoji">❌</span> Use the Site for unlawful or harmful purposes</li>
+        <li><span class="emoji">❌</span> Attempt to bypass, hack, or access restricted areas</li>
+        <li><span class="emoji">❌</span> Upload, share, or transmit viruses, malware, or harmful content</li>
+    </ul>
+</div>
+
+<h3>Guidelines for Children:</h3>
+<ul>
+    <li><span class="emoji">👶</span> Users under 13 should only use the Site under parental or guardian supervision.</li>
+    <li><span class="emoji">🛡️</span> We do not knowingly collect or store personal data of children under 13.</li>
+</ul>
+
+<h2 id="content">4. Content Ownership</h2>
+<h3>Our Content:</h3>
+<ul>
+    <li><span class="emoji">©️</span> All original content, materials, and features on this Site are the intellectual property of Aarif Alam unless otherwise stated.</li>
+    <li><span class="emoji">🚫</span> You may not copy, republish, or distribute our content without prior written permission.</li>
+</ul>
+
+
+       <h3>Your Content</h3>
+<ul>
+    <li><span class="emoji">💾</span> Any files you upload remain completely yours — we don’t claim ownership.</li>
+    <li><span class="emoji">⏳</span> We only use them temporarily to run the services you request, and nothing more.</li>
+</ul>
+
+<h2 id="privacy">5. Privacy</h2>
+<p>Your privacy is important to us. For details, please see our <a href="/footer/privacy-policy">Privacy Policy</a>. In short:</p>
+<ul>
+    <li><span class="emoji">📊</span> We use Google Analytics, but only for anonymous, general stats.</li>
+    <li><span class="emoji">🖥️</span> Google AdSense may display ads tailored to your interests.</li>
+    <li><span class="emoji">✉️</span> Messages sent through our contact form are deleted once we’ve responded.</li>
+</ul>
+
+<h2 id="disclaimers">6. Disclaimers</h2>
+<div class="notice-box">
+    <p><strong>Please note:</strong> The Site is provided “as is,” with no promises or guarantees. For example, we can’t promise:</p>
+    <ul>
+        <li><span class="emoji">⚠️</span> That the Site will always be available, or completely error‑free</li>
+        <li><span class="emoji">📝</span> That every piece of educational content will always be 100% accurate</li>
+    </ul>
+</div>
+
+<h2 id="liability">7. Limitation of Liability</h2>
+<p>To the maximum extent allowed by law, we’re not responsible for things like:</p>
+<ul>
+    <li><span class="emoji">💸</span> Loss of data, profits, or business opportunities</li>
+    <li><span class="emoji">🔌</span> Temporary service interruptions or technical issues</li>
+</ul>
+
+<h2 id="changes">8. Updates to These Terms</h2>
+<p>We may revise these Terms from time to time. When we do, we’ll let you know by:</p>
+<ul>
+    <li><span class="emoji">📅</span> Updating the “Last Updated” date at the top</li>
+    <li><span class="emoji">🔔</span> Posting a clear notice if it’s a major change</li>
+</ul>
+
+<h2 id="contact">9. Contact Us</h2>
+<p>Have questions or feedback about these Terms? Reach out anytime:</p>
+<ul>
+    <li><span class="emoji">📧</span> Email: <a href="mailto:aarif753alam@gmail.com">aarif753alam@gmail.com</a></li>
+    <li><span class="emoji">📝</span> Or use our <a href="/footer/contact-us/feedback">Feedback Form</a></li>
+</ul>
+</div>
+
+
+    <!-- Hindi Version -->
+    <div id="hindi" style="display:none">
+        <h1>नियम और शर्तें</h1>
+        <p class="last-updated">अंतिम अपडेट: <span id="current-date-hindi"></span></p>
+
+        <div class="notice-box">
+            <p><strong>महत्वपूर्ण:</strong> AarifAlam.life ("साइट") का उपयोग करके, आप इन नियमों से सहमत होते हैं। कृपया ध्यान से पढ़ें। यदि आप असहमत हैं, तो कृपया उपयोग बंद कर दें।</p>
+        </div>
+
+        <div class="toc-nav">
+            <h2>विषय सूची</h2>
+            <ul>
+                <li><a href="#acceptance-hi">1. नियमों की स्वीकृति</a></li>
+                <li><a href="#services-hi">2. हमारी सेवाएं</a></li>
+                <li><a href="#user-responsibilities-hi">3. उपयोगकर्ता जिम्मेदारियां</a></li>
+                <li><a href="#content-hi">4. सामग्री स्वामित्व</a></li>
+                <li><a href="#privacy-hi">5. गोपनीयता</a></li>
+                <li><a href="#disclaimers-hi">6. अस्वीकरण</a></li>
+                <li><a href="#liability-hi">7. दायित्व</a></li>
+                <li><a href="#changes-hi">8. नियमों में परिवर्तन</a></li>
+                <li><a href="#contact-hi">9. हमसे संपर्क करें</a></li>
+            </ul>
+        </div>
+
+        <h2 id="acceptance-hi">1. नियमों की स्वीकृति</h2>
+        <p>ये नियम AarifAlam.life के उपयोग को नियंत्रित करते हैं। साइट का उपयोग करके, आप इन नियमों से सहमत होते हैं।</p>
+
+        <h2 id="services-hi">2. हमारी सेवाएं</h2>
+        <p>हम प्रदान करते हैं:</p>
         <ul>
-            <li><a href="#acceptance">1. Acceptance of Terms</a></li>
-            <li><a href="#services">2. Description of Services</a></li>
-            <li><a href="#user-responsibilities">3. User Responsibilities</a></li>
-            <li><a href="#intellectual-property">4. Intellectual Property</a></li>
-            <li><a href="#privacy">5. Privacy Policy</a></li>
-            <li><a href="#disclaimers">6. Disclaimers</a></li>
-            <li><a href="#limitations">7. Limitations of Liability</a></li>
-            <li><a href="#modifications">8. Modifications</a></li>
-            <li><a href="#termination">9. Termination</a></li>
-            <li><a href="#governing-law">10. Governing Law</a></li>
-            <li><a href="#contact">11. Contact Information</a></li>
+            <li><span class="emoji">🎮</span> शैक्षिक खेल (जैसे <a href="/Game/">Game zone</a>)</li>
+            <li><span class="emoji">🅿️</span> PDF Tools (जैसे <a href="/pdf/">image to pdf and other</a>)</li>
+            <li><span class="emoji">🛠️</span> रचनात्मक उपकरण (जैसे <a href="/tools/image-to-url">छवि-से-URL</a>)</li>
+            <li><span class="emoji">📚</span> सीखने के संसाधन और ब्लॉग</li>
         </ul>
-    </div>
+        <p>सभी सेवाएं <span class="highlight">निःशुल्क</span> हैं।</p>
 
-    <h2 id="acceptance">1. Acceptance of Terms</h2>
-    <p>These Terms and Conditions ("Terms") govern your access to and use of AarifAlam.life ("the Site"), operated by Aarif Alam ("we", "us", or "our"). By accessing or using the Site, you agree to be bound by these Terms.</p>
-    <p>If you are using the Site on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
+        <h2 id="user-responsibilities-hi">3. उपयोगकर्ता जिम्मेदारियां</h2>
+        <div class="notice-box">
+            <p><strong>आप सहमत हैं कि आप नहीं करेंगे:</strong></p>
+            <ul>
+                <li><span class="emoji">❌</span> साइट का अवैध उपयोग</li>
+                <li><span class="emoji">❌</span> प्रतिबंधित क्षेत्रों तक पहुंचने का प्रयास</li>
+                <li><span class="emoji">❌</span> हानिकारक सामग्री या वायरस अपलोड करना</li>
+            </ul>
+        </div>
 
-    <h2 id="services">2. Description of Services</h2>
-    <p>The Site provides:</p>
-    <ul>
-        <li>Browser-based educational games and tools</li>
-        <li>Learning resources and articles</li>
-        <li>Creative utilities (image conversion, drawing tools, etc.)</li>
-        <li>Other features as may be added from time to time</li>
-    </ul>
-    <p>All services are provided <span class="highlight">free of charge</span> unless otherwise specified.</p>
+<h3>बच्चों के लिए दिशा‑निर्देश:</h3>
+<ul>
+    <li><span class="emoji">👶</span> 13 वर्ष से कम उम्र के उपयोगकर्ताओं को साइट केवल माता‑पिता या अभिभावक की निगरानी में ही उपयोग करनी चाहिए।</li>
+    <li><span class="emoji">🛡️</span> हम जानबूझकर 13 वर्ष से कम उम्र के बच्चों का व्यक्तिगत डेटा एकत्र या संग्रहित नहीं करते।</li>
+</ul>
 
-    <h2 id="user-responsibilities">3. User Responsibilities</h2>
-    <h3>3.1 Appropriate Use</h3>
-    <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You agree not to:</p>
-    <ul>
-        <li>Use the Site in any way that violates applicable laws</li>
-        <li>Attempt to gain unauthorized access to any part of the Site</li>
-        <li>Upload or transmit harmful content (viruses, malware, etc.)</li>
-        <li>Use automated systems to access the Site in violation of our robots.txt file</li>
-    </ul>
 
-    <h3>3.2 Age Requirements</h3>
-    <p>The Site is designed to be family-friendly:</p>
-    <ul>
-        <li>Children under 13 may use the Site with parental supervision</li>
-        <li>We do not knowingly collect personal information from children under 13</li>
-        <li>Parents/guardians are responsible for monitoring their children's use</li>
-    </ul>
-
-    <h2 id="intellectual-property">4. Intellectual Property</h2>
-    <h3>4.1 Site Content</h3>
-    <p>All original content on the Site (text, graphics, logos, games, etc.) is owned by us and protected by copyright laws. You may not:</p>
-    <ul>
-        <li>Republish material from the Site without permission</li>
-        <li>Sell, rent, or sub-license material from the Site</li>
-        <li>Reproduce, duplicate, or copy material for commercial purposes</li>
-    </ul>
-
-    <h3>4.2 User-Generated Content</h3>
-    <p>For content you submit through our tools (images, text, etc.):</p>
-    <ul>
-        <li>You retain ownership of your original content</li>
-        <li>You grant us a limited license to process it temporarily to provide our services</li>
-        <li>We do not claim permanent rights to user-submitted content</li>
-    </ul>
-
-    <h2 id="privacy">5. Privacy Policy</h2>
-    <p>Your use of the Site is also governed by our <a href="privacy-policy.html">Privacy Policy</a>, which explains how we handle information. Key points:</p>
-    <ul>
-        <li>We collect minimal data necessary to operate the Site</li>
-        <li>We use third-party services (imgbb for images, EmailJS for forms) with their own privacy policies</li>
-        <li>We implement reasonable security measures</li>
-    </ul>
-
-    <h2 id="disclaimers">6. Disclaimers</h2>
-    <div class="notice-box">
-        <p><strong>The Site is provided "as is" and "as available" without warranties of any kind.</strong> We do not guarantee that:</p>
+        <h2 id="content-hi">4. सामग्री स्वामित्व</h2>
+        <h3>हमारी सामग्री:</h3>
         <ul>
-            <li>The Site will be available uninterrupted or error-free</li>
-            <li>Results from using any tools will be accurate or reliable</li>
-            <li>Defects will be corrected</li>
+            <li><span class="emoji">©️</span> सभी साइट सामग्री हमारी है</li>
+            <li><span class="emoji">🚫</span> अनुमति के बिना पुनः प्रकाशित न करें</li>
         </ul>
-    </div>
 
-    <h3>6.1 Educational Content</h3>
-    <p>While we strive for accuracy:</p>
-    <ul>
-        <li>Educational content is for general information only</li>
-        <li>We recommend verifying important information with primary sources</li>
-        <li>We are not responsible for decisions made based on Site content</li>
-    </ul>
+        <h3>आपकी सामग्री:</h3>
+        <ul>
+            <li><span class="emoji">💾</span> आप अपलोड की गई फाइलों के मालिक बने रहते हैं</li>
+            <li><span class="emoji">⏳</span> हम उन्हें केवल अस्थायी रूप से संसाधित करते हैं</li>
+        </ul>
 
-    <h3>6.2 Third-Party Links</h3>
-    <p>The Site may contain links to third-party websites. We:</p>
-    <ul>
-        <li>Do not control these external sites</li>
-        <li>Are not responsible for their content or practices</li>
-        <li>Provide links for convenience only, without endorsement</li>
-    </ul>
+        <h2 id="privacy-hi">5. गोपनीयता</h2>
+        <p>आपकी गोपनीयता महत्वपूर्ण है। विवरण के लिए हमारी <a href="/footer/privacy-policy">गोपनीयता नीति</a> देखें। मुख्य बिंदु:</p>
+        <ul>
+            <li><span class="emoji">📊</span> हम Google Analytics का उपयोग करते हैं (अनाम डेटा)</li>
+            <li><span class="emoji">🖥️</span> Google AdSense प्रासंगिक विज्ञापन दिखाता है</li>
+            <li><span class="emoji">✉️</span> संपर्क फॉर्म संदेश उत्तर के बाद हटा दिए जाते हैं</li>
+        </ul>
 
-    <h2 id="limitations">7. Limitations of Liability</h2>
-    <p>To the maximum extent permitted by law, we shall not be liable for:</p>
-    <ul>
-        <li>Any indirect, incidental, or consequential damages</li>
-        <li>Loss of data, profits, or business opportunities</li>
-        <li>Service interruptions or downtime</li>
-        <li>Content accuracy or completeness</li>
-    </ul>
+        <h2 id="disclaimers-hi">6. अस्वीकरण</h2>
+        <div class="notice-box">
+            <p><strong>साइट "जैसी है" वैसी प्रदान की जाती है।</strong> हम गारंटी नहीं देते:</p>
+            <ul>
+                <li><span class="emoji">⚠️</span> निर्बाध उपलब्धता या त्रुटि-मुक्त संचालन</li>
+                <li><span class="emoji">📝</span> शैक्षिक सामग्री की पूर्ण सटीकता</li>
+            </ul>
+        </div>
 
-    <h2 id="modifications">8. Modifications</h2>
-    <p>We may revise these Terms at any time. When we do:</p>
-    <ul>
-        <li>We will update the "Last Updated" date</li>
-        <li>Material changes will be announced on the Site</li>
-        <li>Continued use after changes constitutes acceptance</li>
-    </ul>
+        <h2 id="liability-hi">7. दायित्व</h2>
+        <p>कानून द्वारा अनुमत सीमा तक, हम जिम्मेदार नहीं हैं:</p>
+        <ul>
+            <li><span class="emoji">💸</span> खोए हुए लाभ या डेटा के लिए</li>
+            <li><span class="emoji">🔌</span> सेवा व्यवधानों के लिए</li>
+        </ul>
 
-    <h2 id="termination">9. Termination</h2>
-    <p>We may terminate or suspend access to the Site:</p>
-    <ul>
-        <li>Immediately, for violations of these Terms</li>
-        <li>With notice, for any other reason</li>
-    </ul>
-    <p>All provisions of these Terms which should survive termination will do so.</p>
+        <h2 id="changes-hi">8. नियमों में परिवर्तन</h2>
+        <p>हम इन नियमों को अपडेट कर सकते हैं। हम आपको सूचित करेंगे:</p>
+        <ul>
+            <li><span class="emoji">📅</span> "अंतिम अपडेट" तिथि को अपडेट करके</li>
+            <li><span class="emoji">🔔</span> बड़े बदलावों के लिए नोटिस पोस्ट करके</li>
+        </ul>
 
-    <h2 id="governing-law">10. Governing Law</h2>
-    <p>These Terms shall be governed by the laws of [Your Country/State] without regard to conflict of law provisions.</p>
-
-    <h2 id="contact">11. Contact Information</h2>
-    <p>For questions about these Terms, please contact us at:</p>
-    <p>Email: <a href="mailto:contact@aarifalam.life">contact@aarifalam.life</a></p>
-
-    <div class="notice-box">
-        <p><strong>Effective Date:</strong> These Terms are effective as of <span id="effective-date"></span>.</p>
+        <h2 id="contact-hi">9. हमसे संपर्क करें</h2>
+        <p>इन नियमों के बारे में प्रश्नों के लिए:</p>
+        <ul>
+            <li><span class="emoji">📧</span> ईमेल: <a href="mailto:aarif753alam@gmail.com">aarif753alam@gmail.com</a></li>
+            <li><span class="emoji">📝</span> हमारा <a href="/footer/contact-us/feedback">फीडबैक फॉर्म</a> उपयोग करें</li>
+        </ul>
     </div>
 
     <script>
-        // Set current date
-        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        // Auto-update date
+        const updateDates = () => {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
+            document.getElementById('current-date-hindi').textContent = new Date().toLocaleDateString('hi-IN', options);
+        };
         
-        // Set effective date (same as current or your launch date)
-        document.getElementById('effective-date').textContent = new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        // Language Toggle
+        function toggleLanguage() {
+            const en = document.getElementById('english');
+            const hi = document.getElementById('hindi');
+            const btn = document.querySelector('button');
+
+            if (hi.style.display === "none") {
+                en.style.display = "none";
+                hi.style.display = "block";
+                btn.textContent = "English में देखें / View in English";
+            } else {
+                en.style.display = "block";
+                hi.style.display = "none";
+                btn.textContent = "हिंदी में देखें / View in Hindi";
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', updateDates);
     </script>
 </body>
-
 </html>
