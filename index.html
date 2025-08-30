@@ -608,7 +608,42 @@ or
   <a href="#" class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
   </a>
+ <!--My other js-->
+<script src="/main/js/faq.js"></script><script src="main/js/main.js"></script><script src="main/js/header.js"></script>
+  
+    <!-- At the bottom of your HTML -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true });
+</script>
+  
+  <script>
+  // Love Banner JavaScript - works with your existing header
+  const header = document.querySelector('.main-header');
+  const loveBanner = document.querySelector('.love-banner');
+  let lastScroll = 0;
+  const scrollThreshold = 10;
 
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (Math.abs(currentScroll - lastScroll) < scrollThreshold) return;
+    
+    if (currentScroll > lastScroll && currentScroll > header.offsetHeight) {
+      // Scrolling up - hide both
+      header.style.transform = 'translateY(-100%)';
+      loveBanner.style.transform = 'translateY(-100%)';
+    } else
+
+ {
+      // Scrolling down - show both
+      header.style.transform = 'translateY(0)';
+      loveBanner.style.transform = 'translateY(0)';
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>
 <script>
 if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),slideInterval=setInterval(()=>{let e=(currentSlide+1)%testimonials.length;showSlide(e)},5e3)}dots.forEach((t,a)=>{t.addEventListener("click",()=>{clearInterval(slideInterval),showSlide(a),e()})}),showSlide(0),e()}const backToTop=document.getElementById("backToTop");backToTop&&(window.addEventListener("scroll",()=>{backToTop.classList.toggle("visible",window.scrollY>300)}),backToTop.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})})),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){let t=this.getAttribute("href");if("#"===t)return;let a=document.querySelector(t);if(a&&(e.preventDefault(),window.scrollTo({top:a.offsetTop-80,behavior:"smooth"}),function(){let e={creatorName:"@aarifalam0105",checkInterval:5e3,originalUrl:"https://aarifalam.life/"},t=()=>{try{let t=document.getElementById("creator-watermark");return!!t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(a){return!1}},a=()=>{let t=`
       .body-blocked {
@@ -643,42 +678,5 @@ if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),s
       <p>Original version: <a href="${e.originalUrl}" target="_blank">${e.originalUrl}</a></p>
     `,document.body.appendChild(o)};if(!t()){a();return}setInterval(()=>{t()||a()},e.checkInterval)}(),navLinks&&navLinks.classList.contains("show"))){navLinks.classList.remove("show");let o=mobileMenuBtn.querySelector("i");o.classList.remove("fa-times"),o.classList.add("fa-bars")}})});
 </script>
-<script>
-  // Love Banner JavaScript - works with your existing header
-  const header = document.querySelector('.main-header');
-  const loveBanner = document.querySelector('.love-banner');
-  let lastScroll = 0;
-  const scrollThreshold = 10;
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (Math.abs(currentScroll - lastScroll) < scrollThreshold) return;
-    
-    if (currentScroll > lastScroll && currentScroll > header.offsetHeight) {
-      // Scrolling up - hide both
-      header.style.transform = 'translateY(-100%)';
-      loveBanner.style.transform = 'translateY(-100%)';
-    } else
-
- {
-      // Scrolling down - show both
-      header.style.transform = 'translateY(0)';
-      loveBanner.style.transform = 'translateY(0)';
-    }
-    
-    lastScroll = currentScroll;
-  });
-</script>
-  
-  <!-- At the bottom of your HTML -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ once: true });
-</script>
-<script src="main/js/faq.js"></script><script src="main/js/main.js"></script><script src="main/js/header.js"></script>
 </body>
 </html>
-
-
-
