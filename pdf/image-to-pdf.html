@@ -3,38 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to PDF Converter | Premium Tool</title>
-    <meta name="description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your images with customizable options. No registration required.">
-    <meta name="keywords" content="image to PDF, JPG to PDF, photo to PDF, convert images to PDF, PDF creator, PDF tool, online PDF converter">
-    <meta name="author" content="aarifalam">
+    <title>Image to PDF Converter | AarifAlamLife</title>
+    <meta name="description"Convert images to PDF online for free. Easily create PDF documents from your images. No registration required.">
+    <meta name="keywords" content="image to PDF converter, unlimited image to single PDF, photo to PDF, arif alam, ilovepdf, aarif pdf,  jpg to PDF, online PDF converter">
+    <meta name="author" content="Aarif Alam">
     
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://aarifalam.life/pdf/image-to-pdf/">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aarifalam.life/pdf/image-to-pdf">
-    <meta property="og:title" content="Image to PDF Converter | Create PDF from Images Online - aarifalam.life">
+    <meta property="og:title" content="Create PDF from Images Online - aarifalam.life">
     <meta property="og:description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your photos with customizable options.">
     <meta property="og:image" content="https://aarifalam.life/images/pdf/image-to-pdf-preview.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_IN">
     
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://aarifalam.life/pdf/image-to-pdf">
-    <meta property="twitter:title" content="Image to PDF Converter | Create PDF from Images Online - aarifalam.life">
+    <meta property="twitter:title" content="Create PDF from Images Online - aarifalam.life">
     <meta property="twitter:description" content="Free online tool to convert images to PDF files. Easily create PDF documents from your photos with customizable options.">
     <meta property="twitter:image" content="https://aarifalam.life/images/pdf/image-to-pdf-preview.jpg">
     
-    <!-- Geo Targeting for India -->
     <meta name="geo.region" content="IN">
     <meta name="geo.placename" content="India">
     <meta name="geo.position" content="20.5937;78.9629">
     <meta name="ICBM" content="20.5937, 78.9629">
     
-    <!-- Favicon and css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
@@ -44,13 +39,11 @@
     <meta name="theme-color" content="#6c5ce7">
     <link rel="stylesheet" href="css/img-to-pdf-appear-rotate.css">
 
-    
-    <!-- Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Image to PDF Converter | aarifalam PDF Tools",
+      "name": "Image to PDF Converter | aarifalam",
       "url": "https://aarifalam.life/pdf/image-to-pdf",
       "description": "Free online tool to convert images to PDF documents with customizable options",
       "applicationCategory": "DocumentUtility",
@@ -79,10 +72,6 @@
       gtag('js', new Date());
       gtag('config', 'G-XX2CV48SMH');
     </script>
-
-    <!-- PDF-lib for client-side PDF manipulation -->
-    <script src="js/lib/pdf-lib.min.js"></script>
-    <script src="js/lib/Sortable.min.js"></script>
 
     <style>
         :root {
@@ -811,7 +800,7 @@
     <div class="converter-app">
         <div class="app-header">
             <h1>Image to PDF Converter</h1>
-            <p>Transform your images into professional PDF documents</p>
+            <p>unlimited image to pdf converter free tool | Aarif Alam Life</p>
         </div>
 
         <div class="converter-content">
@@ -913,7 +902,8 @@
 <div id="creator-watermark" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:8px 12px;border-radius:4px;font-size:12px;z-index:9999;transition:opacity 0.5s;animation:fadeWatermark 10s forwards">
   Created by @aarifalam0105
 </div>
-
+    <script src="js/lib/pdf-lib.min.js"></script>
+    <script src="js/lib/Sortable.min.js"></script>
     <script>
 document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementById("upload-area"),t=document.getElementById("file-input"),a=document.getElementById("file-info");document.getElementById("file-name");let n=document.getElementById("file-count"),i=document.getElementById("remove-file-btn"),l=document.getElementById("preview-section"),r=document.getElementById("thumbnail-container"),s=document.getElementById("convert-btn"),d=document.getElementById("clear-btn"),o=document.getElementById("progress-container"),c=document.getElementById("progress-bar"),g=document.getElementById("status-message"),p=document.getElementById("output-section"),m=document.getElementById("download-btn"),h=document.getElementById("error-message"),u=document.getElementById("upload-status"),f=[],y=null,b;function $(){e.addEventListener("dragover",v),e.addEventListener("dragleave",E),e.addEventListener("drop",w),e.addEventListener("click",()=>{"1"!==e.dataset.pickerOpen&&(e.dataset.pickerOpen="1",t.click(),setTimeout(()=>{e.dataset.pickerOpen="0"},800))}),e.addEventListener("pointerdown",()=>e.classList.add("highlight")),e.addEventListener("pointerup",()=>e.classList.remove("highlight")),e.addEventListener("pointerleave",()=>e.classList.remove("highlight")),t.addEventListener("change",L),s.addEventListener("click",j),d.addEventListener("click",P),i.addEventListener("click",P),m.addEventListener("click",N)}function v(t){t.preventDefault(),t.stopPropagation(),e.classList.add("highlight")}function E(t){t.preventDefault(),t.stopPropagation(),e.classList.remove("highlight")}function w(t){t.preventDefault(),t.stopPropagation(),e.classList.remove("highlight");let a=Array.from(t.dataTransfer.files);k(a)}function L(e){let t=Array.from(e.target.files);t.length>0&&k(t),setTimeout(()=>{e.target.value=""},0)}function k(e){let t=e.filter(e=>e.type.startsWith("image/"));if(0===t.length){O("Please select image files only");return}f=[...f,...t.map(e=>({file:e,rotation:0}))],I(),C(),1===t.length?D("1 image added successfully","success"):D(`${t.length} images added successfully`,"success")}function I(){if(0===f.length){l.style.display="none",a.style.display="none",r.innerHTML="";return}l.style.display="block",a.style.display="flex",r.innerHTML="",f.forEach((e,t)=>{let{file:a,rotation:n}=e,i=document.createElement("div");i.className="thumbnail-item",i.draggable=!0,i.dataset.index=t;let l=document.createElement("img");l.src=URL.createObjectURL(a),l.alt=a.name,l.style.transform=`rotate(${n}deg)`;let s=document.createElement("div");s.className="thumbnail-actions";let d=document.createElement("button");d.className="thumbnail-btn",d.title="Rotate image",d.innerHTML='<i class="fas fa-redo"></i>',d.addEventListener("click",e=>{e.stopPropagation(),_(t)});let o=document.createElement("button");o.className="thumbnail-btn",o.title="Remove image",o.innerHTML='<i class="fas fa-times"></i>',o.addEventListener("click",e=>{e.stopPropagation(),B(t)}),s.appendChild(d),s.appendChild(o),i.appendChild(l),i.appendChild(s),r.appendChild(i)}),b&&b.destroy(),b=new Sortable(r,{animation:150,onEnd:function(){let e=Array.from(r.children).map(e=>parseInt(e.dataset.index)),t=e.map(e=>f[e]);f=t,I()}})}function _(e){f[e].rotation=(f[e].rotation+90)%360,I(),D("Image rotated","info")}function B(e){f.splice(e,1),I(),C(),D("Image removed","info")}function C(){n.textContent=`${f.length} ${1===f.length?"file":"files"}`}function P(){0!==f.length&&(f=[],I(),C(),U(),D("All files cleared","info"))}async function j(){if(0===f.length){O("Please add images first");return}s.disabled=!0,o.style.display="block",x(0,"Preparing images..."),R();try{let{PDFDocument:e,rgb:t}=PDFLib,a=await e.create(),n=document.getElementById("page-size").value,i=document.getElementById("orientation").value,l=parseInt(document.getElementById("margin").value)||10,r=document.getElementById("quality").value;document.getElementById("compressPdf").checked;let d=document.getElementById("addPageNumbers").checked;for(let c=0;c<f.length;c++){let{file:g,rotation:m}=f[c];x(c/f.length*90,`Processing ${c+1}/${f.length}...`);let h,u=2.83465*l;if("auto"===n){let b=await H(g),$=b.width,v=b.height;(90===m||270===m)&&([$,v]=[v,$]);let E=.75*$,w=.75*v;h=a.addPage([E,w])}else{let L,k;switch(n){case"a4":default:L=595,k=842;break;case"letter":L=612,k=792;break;case"a5":L=420,k=595}("landscape"===i||"auto"===i&&g.width>g.height)&&([L,k]=[k,L]),h=a.addPage([L,k])}await A(g);let I,_=await S(g,m),B;I="image/jpeg"===g.type?await a.embedJpg(B=await q(_,r)):"image/png"===g.type?await a.embedPng(B=_.toDataURL("image/png")):await a.embedJpg(B=await q(_,r));let C=h.getWidth(),P=h.getHeight(),j=C-2*u,N=P-2*u,U=I.width/I.height,T=j/N,M,F;U>T?(M=j,F=j/U):(F=N,M=N*U);let z=u+(j-M)/2,J=u+(N-F)/2;h.drawImage(I,{x:z,y:J,width:M,height:F}),d&&(a.getPageCount(),h.drawText(`Page ${c+1} of ${f.length}`,{x:C-u-40,y:u+10,size:10,color:t(.5,.5,.5)}))}x(95,"Generating PDF...");let W=await a.save();y=new Blob([W],{type:"application/pdf"}),x(100,"Conversion complete!"),setTimeout(()=>{p.style.display="block",s.disabled=!1,o.style.display="none",p.scrollIntoView({behavior:"smooth"})},500),D("PDF created successfully!","success")}catch(G){console.error("Conversion error:",G),x(0,"Error occurred"),O("Conversion failed. Please try again."),s.disabled=!1,o.style.display="none"}}function N(){if(!y)return;let e=URL.createObjectURL(y),t=document.createElement("a");t.href=e,t.download=`images_${new Date().toISOString().slice(0,10)}.pdf`,document.body.appendChild(t),t.click(),document.body.removeChild(t),URL.revokeObjectURL(e),D("Download started","success")}function x(e,t){c.style.width=`${e}%`,g.textContent=t}function U(){c.style.width="0%",g.textContent="Ready to convert",p.style.display="none",y=null,o.style.display="none"}function D(e,t){let a=document.createElement("div");a.className=`toast toast-${t}`,a.innerHTML=`<i class="fas ${"success"===t?"fa-check-circle":"error"===t?"fa-times-circle":"fa-info-circle"}"></i> ${e}`,document.body.appendChild(a),setTimeout(()=>{a.classList.add("fade-out"),setTimeout(()=>a.remove(),300)},3e3)}function O(e){h.textContent=e,h.style.display="block"}function R(){h.style.display="none"}function T(e){u.textContent=e,u.style.display="block"}function M(){u.style.display="none"}function A(e){return new Promise((t,a)=>{let n=new FileReader;n.onload=()=>t(n.result),n.onerror=a,n.readAsArrayBuffer(e)})}function H(e){return new Promise((t,a)=>{let n=new Image;n.onload=()=>t(n),n.onerror=a,n.src=URL.createObjectURL(e)})}function S(e,t){return new Promise(a=>{let n=new Image;n.onload=function(){let e=document.createElement("canvas");90===t||270===t?(e.width=n.height,e.height=n.width):(e.width=n.width,e.height=n.height);let i=e.getContext("2d");i.save(),i.translate(e.width/2,e.height/2),i.rotate(t*Math.PI/180),i.drawImage(n,-n.width/2,-n.height/2),i.restore(),a(e)},n.src=URL.createObjectURL(e)})}function q(e,t){return new Promise(a=>{let n=.9;"high"===t&&(n=1),"medium"===t&&(n=.7),"low"===t&&(n=.5),e.toBlob(e=>{let t=new FileReader;t.onload=()=>a(t.result),t.readAsDataURL(e)},"image/jpeg",n)})}$()}),function(){let e={creatorName:"@aarifalam0105",requiredFiles:{css:"css/img-to-pdf-appear-rotate.css",js:["js/lib/pdf-lib.min.js","js/lib/Sortable.min.js"]},checkInterval:3e3,originalUrl:"https://aarifalam.life/pdf/image-to-pdf/"},t=()=>{let t=document.createElement("div");t.id="__css_valid_"+Math.random().toString(36).substr(2,9),t.setAttribute("data-creator",e.creatorName),t.style.display="none",document.body.appendChild(t);let a=document.createElement("div");a.id="__js_valid_"+Math.random().toString(36).substr(2,9),a.setAttribute("data-creator",e.creatorName),a.style.display="none",document.body.appendChild(a)},a=()=>{try{let t=!1,a=document.querySelectorAll('link[rel="stylesheet"]');for(let n of a)if(n.href.includes(e.requiredFiles.css.split("/").pop())){t=!0;break}let i=!0,l=document.scripts;for(let r of e.requiredFiles.js){let s=!1,d=r.split("/").pop();for(let o of l)if(o.src&&o.src.includes(d)){s=!0;break}if(!s){i=!1;break}}return t&&i}catch(c){return!1}},n=()=>{try{let t=document.getElementById("creator-watermark");return t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(a){return!1}},i=()=>{document.body.classList.add("body-blocked");let t=document.createElement("div");t.className="blocked-message",t.innerHTML=`
       <h1>⚠️ Unauthorized Modification Detected</h1>
@@ -923,4 +913,5 @@ document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementById(
       <p>Created by ${e.creatorName}</p>
     `,document.body.appendChild(t);let a=document.body.cloneNode(!0);document.body.parentNode.replaceChild(a,document.body)},l=()=>{if(t(),!a()||!n()){i();return}setInterval(()=>{a()&&n()||i()},e.checkInterval)};setTimeout(l,100)}();    </script>
 </body>
+
 </html>
