@@ -1,0 +1,83 @@
+.thumbnail-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  padding: 0 15px; /* keeps spacing on very small screens */
+}
+
+.thumbnail-link {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease;
+  max-width: 100%;  /* ensures no overflow */
+}
+
+.blog-thumbnail {
+  width: 100%;
+  max-width: 90vw;   /* scales to screen width */
+  height: auto;
+  border-radius: 22px;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+
+/* Glow animation */
+.thumbnail-link::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    #00f5ff,
+    #0099ff,
+    #6a5af9,
+    #ff007f,
+    #ffae00,
+    #00f5ff
+  );
+  animation: rotateGlow 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.thumbnail-link:hover::after {
+  opacity: 0.7;
+}
+
+.thumbnail-link:hover .blog-thumbnail {
+  transform: scale(1.05);
+}
+
+.thumbnail-link:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Animation */
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (min-width: 480px) {
+  .blog-thumbnail { max-width: 400px; }
+}
+
+@media (min-width: 768px) {
+  .blog-thumbnail { max-width: 550px; }
+}
+
+@media (min-width: 1200px) {
+  .blog-thumbnail { max-width: 700px; }
+}
+
+@media (min-width: 1600px) {
+  .blog-thumbnail { max-width: 900px; }
+}
