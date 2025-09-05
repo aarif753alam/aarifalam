@@ -1,0 +1,37 @@
+.site-footer {
+  background: #f9f9f9;
+  color: #444;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.site-footer a {
+  color: #444;
+  margin: 0 8px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.site-footer a:hover {
+  color: #0077cc;
+}
+
+.site-footer p {
+  margin: 5px 0;
+}
+
+.site-footer p:last-child {
+  font-size: 12px;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    font-size: 13px;
+  }
+  .site-footer p:last-child {
+    font-size: 11px;
+  }
+}
