@@ -148,6 +148,7 @@ body {
     font-weight: 600;
 }
 
+/* When video is playing */
 .video-playing .video-thumbnail,
 .video-playing .play-button {
     opacity: 0;
