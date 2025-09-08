@@ -65,12 +65,12 @@
       ]
     }
   </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/main/css/translate-botton.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="game-css/header.css">
-
     <style>
    :root {
   --primary: #c300ff;
@@ -862,7 +862,7 @@ img {
   <header class="main-header">
     <div class="container">
       <div class="header-container">
-        <a href="../index.html" class="logo">
+        <a href="/index.html" class="logo">
           <div class="logo-icon">
             <i class="fas fa-bolt"></i>
           </div>
@@ -886,10 +886,10 @@ img {
         <nav class="main-nav">
           <ul class="nav-links" id="navLinks">
           <li><a href="/index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-           <li><a href="/blog/index.html"><i class="fas fa-brain"></i> MY BLOG </a></li>
-           <li><a href="index.html"><i class="fas fa-gamepad"></i> GAME ZOON </a></li>
-           <li><a href="/tools/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
-          <li><a href="/footer/contact-us/contact.html"><i class="fas fa-handshake"></i> contact-us</a></li>
+           <li><a href="/blog/index.html"><i class="fas fa-brain"></i>MY BLOG</a></li>
+           <li><a href="index.html"><i class="fas fa-gamepad"></i>GAME ZOON</a></li>
+           <li><a href="/pdf/index.html"><i class="fas fa-gift"></i>Aarif PDF</a></li>
+          <li><a href="/footer/contact-us/contact.html"><i class="fas fa-handshake"></i>contact-us</a></li>
         </ul>
       </nav>
     </div>
@@ -914,13 +914,15 @@ img {
   
 <div class="blog-lang-switcher-bar">
   <div class="blog-lang-dropdown">
-    <button class="blog-lang-btn">🌐 Translate-Hindi ▼</button>
+    <button class="blog-lang-btn">
+      🌐select Language <span class="arrow">▼</span>
+    </button>
     <div class="blog-lang-dropdown-content">
-      <a href="index.html">English</a>
-      <a href="hi/index.html">हिन्दी</a>
+      <a href="/Game/hi/index.html">🇮🇳 हिन्दी</a>
+      <a href="/Game/index.html">English</a>
     </div>
   </div>
-</div>
+</div> 
 
   <section class="games-section" id="games">
     <div class="container">
@@ -953,18 +955,47 @@ img {
           <span>4.8</span>
         </div>
         <div class="play-indicator">
-          Play Now <i class="fas fa-arrow-right"></i>
+        Published – May 2025 <i class="fas fa-arrow-right"></i>
         </div>
       </div>
     </div>
   </a>
 
-<!-- Game Card 2 -->
+   <!-- Game Card 2 -->
+<a href="abcd-brain-game.html" class="game-card" aria-label="Play ABCD Brain Game">
+  <div class="game-thumbnail-container">
+    <img src="https://res.cloudinary.com/dooyfg1pa/image/upload/v1757352826/Game_Zone_4_rvudfg.jpg" 
+         alt="ABCD Brain Game" class="game-thumbnail">
+    <span class="game-badge">Educational</span>
+    <div class="game-logo-overlay">
+      <img src="https://res.cloudinary.com/dooyfg1pa/image/upload/v1757352938/brain-game-abcd_idweml.png" alt="Game logo">
+    </div>
+  </div>
+  <div class="game-info">
+    <h3 class="game-title">
+      <i class="fas fa-brain"></i> ABCD Brain Game
+    </h3>
+    <p class="game-description">
+      Solve fun ABCD puzzles and give your brain a little workout. last level-15<br>
+    </p>
+    <div class="game-meta">
+      <div class="game-rating">
+        <i class="fas fa-star"></i>
+        <span>4.5</span>
+      </div>
+      <div class="play-indicator">
+        Published – September 2025 <i class="fas fa-arrow-right"></i>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- Game Card 3 -->
 <a href="Heart-Touch-game.html" class="game-card" aria-label="Play Heart-touching Game">
   <div class="game-thumbnail-container">
     <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1747539320/heart-touch_s9vg6y.png" 
          alt="Heart-touching Game" class="game-thumbnail">
-    <span class="game-badge">Popular</span>
+    <span class="game-badge">fun</span>
     <div class="game-logo-overlay">
       <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1747267688/HEART-TOUCH_c9vpnx.jpg" alt="Game logo">
     </div>
@@ -982,13 +1013,13 @@ img {
         <span>3.9</span>
       </div>
       <div class="play-indicator">
-        Play Now <i class="fas fa-arrow-right"></i>
+        Published – june 2025 <i class="fas fa-arrow-right"></i>
       </div>
     </div>
   </div>
 </a>
 
-<!-- Game Card 3 -->
+<!-- Game Card 4 -->
 <a href="numbergame.html" class="game-card" aria-label="Play Space Shooter">
   <div class="game-thumbnail-container">
     <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1747539780/numbergame_k9cwo6.png" 
@@ -1008,24 +1039,24 @@ img {
     <div class="game-meta">
       <div class="game-rating">
         <i class="fas fa-star"></i>
-        <span>4.2</span>
+        <span>4.1</span>
       </div>
       <div class="play-indicator">
-        Play Now <i class="fas fa-arrow-right"></i>
-      </div>
-    </div>
-  </div>
-</a>
-  </div>
-    </div>
-  </section>
+       Published – june 2025 <i class="fas fa-arrow-right"></i>
+           </div>
+         </div>
+       </div>
+     </a>
+   </div>
+ </div>
+</section>
   
  <!-- Rewards Section -->
 <section class="rewards-section" id="rewards">
   <div class="container">
     <div class="section-header">
       <h3>Earn While You Play</h3>
-      <h2 class="section-title">new Updates & info </h2>
+      <h2 class="section-title">new Updates & info</h2>
     </div>
     
   <div class="rewards-container">
@@ -1038,7 +1069,7 @@ img {
     <p class="reward-description">
       You can create your own game! <br>
       Just contact me. <br>
-      <strong>No coding required</strong> — your game can be created using AI.
+      <strong>No coding required</strong> — your game can be created using AI. you need to know only basic coding.
     </p>
   </div>
 
@@ -1098,7 +1129,6 @@ img {
       <h4>Why Choose Us</h4>
       <h2 class="section-title">Important for You</h2>
     </div>
-    
     <div class="features-container">
       <div class="feature-card">
         <div class="feature-icon">
@@ -1111,7 +1141,6 @@ img {
           Parents can play word-meaning games with their children, and adults can enjoy playing these games with their peers.
         </p>
       </div>
-      
 <div class="feature-card">
   <div class="feature-icon">
     <i class="fas fa-clock"></i>
@@ -1123,7 +1152,6 @@ img {
     Instead, try reading books or creating your own games to learn new skills.
   </p>
 </div>
-
       <div class="feature-card">
         <div class="feature-icon">
           <i class="fas fa-headset"></i>
@@ -1137,7 +1165,6 @@ img {
     </div>
   </div>
 </section>
-
   
 <section class="cta-section">
   <div class="cta-bg-pattern"></div>
@@ -1149,7 +1176,9 @@ img {
     </a>
   </div>
 </section>
-
+  
+  <script src="/main/js/translate-botton.js"></script>
+  
 <footer class="main-footer" id="contact">
   <div class="container">
     <div class="footer-container">
@@ -1170,10 +1199,10 @@ img {
   <h3 class="footer-links-title">Quick Links</h3>
   <ul class="footer-links-list">
     <li><a href="/index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-    <li><a href="/blog/index.html"><i class="fas fa-brain"></i> BRAIN POWER </a></li>
+    <li><a href="/blog/index.html"><i class="fas fa-brain"></i>My Blog</a></li>
     <li><a href="index.html"><i class="fas fa-gamepad"></i> GAME ZOON </a></li>
     <li><a href="/tools/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
-    <li><a href="/tools/image-to-url.html"><i class="fas fa-palette"></i> image to url</a></li>
+    <li><a href="/tools/image-to-url.html"><i class="fas fa-link"></i> image to url</a></li>
   </ul>
 </div>
 
@@ -1218,9 +1247,8 @@ img {
 
 </div> 
 </footer>
-
  <script src="game-js/header.js"></script>
-  
 </body>
 </html>
+
 
