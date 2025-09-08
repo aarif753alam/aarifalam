@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Fill Challenge - Brain Game | Aarif</title>
+    <meta name="description" content="Test your alphabet skills with this fun educational brain game. Fill missing letters, arrange alphabet sequences, and challenge your mind!">
+    <meta name="keywords" content="alphabet game, brain game, educational game, abcd letter challenge, word game, abcd learning game, cognitive skills">
+  
+    <meta name="author" content="Aarif Alam">
+    <link rel="canonical" href="https://aarifalam.life/Game/abcd-brain-game.html">
+  
+    <meta property="og:title" content="Alphabet Fill Challenge - Brain Game | Aarif">
+    <meta property="og:description" content="Test your alphabet skills with this fun educational brain game. Fill missing letters and arrange alphabet sequences.">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://aarifalam.life/Game/abcd-brain-game.html">
+    <meta property="og:image" content="https://aarifalam.life/images/alphabet-game.jpg">
+    <meta property="og:image:alt" content="Alphabet Fill Challenge Game">
+    <meta property="og:site_name" content="AarifAlam Games">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alphabet Fill Challenge - Brain Game">
+    <meta name="twitter:description" content="Test your alphabet skills with this fun educational brain game. Fill missing letters and challenge your mind!">
+    <meta name="twitter:image" content="https://aarifalam.life/images/alphabet-game.jpg">
+    <meta name="twitter:site" content="@AarifAlam0105">
+    <meta name="twitter:creator" content="@AarifAlam0105">
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Game",
+  "name": "Alphabet Fill Challenge - ABCD Brain Game",
+  "description": "A fun and educational brain game where players test their skills by filling in missing letters and arranging alphabet sequences across 15 challenging levels.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web Browser",
+  "url": "https://aarifalam.life/Game/abcd-brain-game.html",
+  "gameLocation": "https://aarifalam.life/Game/abcd-brain-game.html",
+  "image": "https://aarifalam.life/images/alphabet-game.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Aarif Alam",
+    "url": "https://aarifalam.life"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AarifAlam Games",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aarifalam.life/images/logo/favicon-32x32.png"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://aarifalam.life/Game/abcd-brain-game.html"
+  }
+}
+</script>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XX2CV48SMH');
+    </script>
+    <script src="game-js/abcd-brain-game.js"></script>
+    <link rel="preload" href="game-js/abcd-brain-game.js" as="script">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+    <link rel="manifest" href="../images/logo/site.webmanifest">
+    <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Marker Felt', 'Arial Rounded MT Bold', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #FFD700;
+        }
+
+        .level-info {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .letter-card {
+            background: linear-gradient(135deg, #ff9a8b 0%, #ff6b88 100%);
+            height: 70px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .letter-card.empty {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .alphabet-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .alphabet-key {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+            color: #2c3e50;
+        }
+
+        .alphabet-key:hover {
+            transform: scale(1.1);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2c3e50;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        .success {
+            background: rgba(46, 213, 115, 0.3);
+            display: block;
+        }
+
+        .error {
+            background: rgba(255, 71, 87, 0.3);
+            display: block;
+        }
+
+        .analysis {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: left;
+            display: none;
+        }
+
+        .level-rules {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #FFD700;
+        }
+
+        /* Animation for correct answer */
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .celebrate {
+            animation: celebrate 0.5s ease;
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            opacity: 0;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .letter-card {
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .alphabet-key {
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Mode indicator */
+        .mode-indicator {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .arrange-mode {
+            background: linear-gradient(135deg, #ff9a8b 0%, #ff6b88 100%);
+            color: white;
+        }
+
+        .fill-mode {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #2c3e50;
+        }
+
+        /* Arrange button */
+        #arrange-btn {
+            display: none;
+            background: linear-gradient(135deg, #ff9a8b 0%, #ff6b88 100%);
+        }
+
+        /* Drag and drop styles */
+        .letter-card[draggable="true"] {
+            cursor: grab;
+        }
+
+        .letter-card[draggable="true"]:active {
+            cursor: grabbing;
+        }
+
+        /* Shuffle button */
+        #shuffle-btn {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Alphabet Fill Challenge</h1>
+            <div class="level-info">Level: <span id="level">1</span></div>
+            <div class="timer">Time: <span id="time">No Limit</span></div>
+            <div class="mode-indicator" id="mode-indicator"></div>
+        </div>
+        
+        <div class="game-board" id="game-board">
+            <!-- My Alphabet cards look here -->
+        </div>
+        
+        <div class="alphabet-selector" id="alphabet-selector">
+            <!-- THIS SPACE For, Alphabet keys  generated here -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-primary" id="shuffle-btn">Shuffle</button>
+            <button class="btn btn-secondary" id="check-btn">Check Answer</button>
+            <button class="btn btn-secondary" id="hint-btn">Hint</button>
+            <button class="btn btn-secondary" id="arrange-btn">Check Arrangement</button>
+        </div>
+        
+        <div class="message success" id="success-message">
+            Correct! Well done!
+        </div>
+        
+        <div class="message error" id="error-message">
+            Not quite right. Try again!
+        </div>
+        
+        <div class="analysis" id="analysis">
+            <h3>Analysis:</h3>
+            <p id="analysis-text"></p>
+        </div>
+        
+        <div class="level-rules" id="level-rules">
+            Level 1: No time limit, 5 empty cards to fill
+        </div>
+    </div>
+
+<script>    
+    // Game state
+    let gameState = {
+        currentLevel: 1,
+        alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        emptyIndices: [],
+        selectedLetter: null,
+        timer: null,
+        timeRemaining: 0,
+        isGameOver: false,
+        filledCount: 0,
+        arranged: false,
+        dragSource: null,
+        touchStartX: 0,
+        touchStartY: 0,
+        isDragging: false,
+        activeCard: null,
+        isMobile: 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    };
+    
+    // DOM elements
+    const elements = {
+        gameBoard: document.getElementById('game-board'),
+        alphabetSelector: document.getElementById('alphabet-selector'),
+        levelDisplay: document.getElementById('level'),
+        timeDisplay: document.getElementById('time'),
+        shuffleBtn: document.getElementById('shuffle-btn'),
+        checkBtn: document.getElementById('check-btn'),
+        hintBtn: document.getElementById('hint-btn'),
+        arrangeBtn: document.getElementById('arrange-btn'),
+        successMessage: document.getElementById('success-message'),
+        errorMessage: document.getElementById('error-message'),
+        analysis: document.getElementById('analysis'),
+        analysisText: document.getElementById('analysis-text'),
+        levelRules: document.getElementById('level-rules'),
+        modeIndicator: document.getElementById('mode-indicator')
+    };
+    
+    // Initialize game
+    function initGame() {
+        // Load saved game if available
+        loadGameProgress();
+        
+        // Reset game state if needed
+        gameState.emptyIndices = [];
+        gameState.selectedLetter = null;
+        gameState.isGameOver = false;
+        gameState.filledCount = 0;
+        gameState.arranged = false;
+        gameState.dragSource = null;
+        gameState.isDragging = false;
+        gameState.activeCard = null;
+        
+        // Clear any existing timer
+        if (gameState.timer) {
+            clearInterval(gameState.timer);
+        }
+        
+        // Generate game board and alphabet selector
+        generateGameBoard();
+        generateAlphabetSelector();
+        
+        // Update UI
+        updateLevelDisplay();
+        updateTimerDisplay();
+        updateModeIndicator();
+        
+        // Hide messages
+        elements.successMessage.style.display = 'none';
+        elements.errorMessage.style.display = 'none';
+        elements.analysis.style.display = 'none';
+        
+        // Show/hide arrange button based on level
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        if (levelRule.mode === 'arrange') {
+            elements.arrangeBtn.style.display = 'block';
+        } else {
+            elements.arrangeBtn.style.display = 'none';
+        }
+    }
+    
+    // Generate game board
+    function generateGameBoard() {
+        elements.gameBoard.innerHTML = '';
+        
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        const isOrdered = levelRule.isOrdered;
+        const emptyCards = levelRule.emptyCards;
+        const mode = levelRule.mode;
+        
+        // Create ordered or shuffled alphabet
+        let displayAlphabet = [...gameState.alphabet];
+        if (!isOrdered || mode === 'arrange') {
+            displayAlphabet = [...gameState.alphabet].sort(() => Math.random() - 0.5);
+        }
+        
+        // Select random indices to make empty
+        gameState.emptyIndices = [];
+        if (mode === 'fill') {
+            while (gameState.emptyIndices.length < emptyCards) {
+                const randomIndex = Math.floor(Math.random() * displayAlphabet.length);
+                if (!gameState.emptyIndices.includes(randomIndex)) {
+                    gameState.emptyIndices.push(randomIndex);
+                }
+            }
+        }
+        
+        // Create letter cards
+        displayAlphabet.forEach((letter, index) => {
+            const card = document.createElement('div');
+            card.className = 'letter-card';
+            card.dataset.index = index;
+            card.dataset.original = letter;
+            
+            if (mode === 'fill' && gameState.emptyIndices.includes(index)) {
+                card.classList.add('empty');
+                card.textContent = '?';
+            } else {
+                card.textContent = letter;
+                
+                // Make cards draggable for arrange mode
+                if (mode === 'arrange') {
+                    card.setAttribute('draggable', 'true');
+                    
+                    // Desktop drag events
+                    card.addEventListener('dragstart', handleDragStart);
+                    card.addEventListener('dragover', handleDragOver);
+                    card.addEventListener('drop', handleDrop);
+                    card.addEventListener('dragend', handleDragEnd);
+                    
+                    // Mobile touch events
+                    card.addEventListener('touchstart', handleTouchStart, { passive: false });
+                    card.addEventListener('touchmove', handleTouchMove, { passive: false });
+                    card.addEventListener('touchend', handleTouchEnd);
+                    card.addEventListener('touchcancel', handleTouchEnd);
+                }
+            }
+            
+            // Click event for filling empty cards
+            card.addEventListener('click', function(e) {
+                // Prevent click event during drag operations
+                if (gameState.isDragging) {
+                    gameState.isDragging = false;
+                    return;
+                }
+                
+                const levelRule = config.levelRules[gameState.currentLevel - 1];
+                
+                if ((levelRule.mode === 'fill' || gameState.arranged) && 
+                    this.classList.contains('empty') && gameState.selectedLetter) {
+                    fillEmptyCard(this);
+                }
+            });
+            
+            // Add touch event for mobile filling
+            if (gameState.isMobile) {
+                card.addEventListener('touchend', function(e) {
+                    if (gameState.isDragging) return;
+                    
+                    const levelRule = config.levelRules[gameState.currentLevel - 1];
+                    
+                    if ((levelRule.mode === 'fill' || gameState.arranged) && 
+                        this.classList.contains('empty') && gameState.selectedLetter) {
+                        fillEmptyCard(this);
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+            
+            elements.gameBoard.appendChild(card);
+        });
+        
+        // Reset filled count
+        gameState.filledCount = 0;
+        gameState.arranged = false;
+        
+        // Start timer if needed
+        if (levelRule.timeLimit > 0) {
+            gameState.timeRemaining = levelRule.timeLimit;
+            startTimer();
+        }
+    }
+    
+    // Fill an empty card with the selected letter
+    function fillEmptyCard(card) {
+        card.textContent = gameState.selectedLetter;
+        card.classList.remove('empty');
+        card.dataset.filled = gameState.selectedLetter;
+        
+        // Remove the selected letter from alphabet selector
+        const keys = document.querySelectorAll('.alphabet-key');
+        keys.forEach(key => {
+            if (key.textContent === gameState.selectedLetter && key.style.visibility !== 'hidden') {
+                key.style.visibility = 'hidden';
+                key.dataset.used = 'true';
+            }
+        });
+        
+        gameState.selectedLetter = null;
+        gameState.filledCount++;
+        
+        // Reset key backgrounds
+        resetKeyBackgrounds();
+        
+        // Check if all empty cards are filled
+        checkCompletion();
+    }
+    
+    // Generate alphabet selector
+    function generateAlphabetSelector() {
+        elements.alphabetSelector.innerHTML = '';
+        
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        let selectorAlphabet = [...gameState.alphabet];
+        
+        // Shuffle selector if needed
+        if (levelRule.shuffleSelector) {
+            selectorAlphabet = [...gameState.alphabet].sort(() => Math.random() - 0.5);
+        }
+        
+        selectorAlphabet.forEach(letter => {
+            const key = document.createElement('div');
+            key.className = 'alphabet-key';
+            key.textContent = letter;
+            key.dataset.letter = letter;
+            key.dataset.used = 'false';
+            
+            // Click event for desktop
+            key.addEventListener('click', function() {
+                handleKeySelection(this);
+            });
+            
+            // Touch event for mobile
+            key.addEventListener('touchstart', function(e) {
+                if (gameState.isMobile) {
+                    handleKeySelection(this);
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            elements.alphabetSelector.appendChild(key);
+        });
+    }
+    
+    // Handle alphabet key selection
+    function handleKeySelection(key) {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        // Allow selection in fill mode OR in arrange mode after arrangement is done
+        if ((levelRule.mode === 'fill' || gameState.arranged) && key.dataset.used === 'false') {
+            gameState.selectedLetter = key.textContent;
+            
+            // Highlight selected letter
+            highlightSelectedKey(key);
+        }
+    }
+    
+    // Highlight the selected key
+    function highlightSelectedKey(selectedKey) {
+        const keys = document.querySelectorAll('.alphabet-key');
+        keys.forEach(key => {
+            if (key.dataset.used === 'false') {
+                key.style.background = 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)';
+                key.style.transform = 'scale(1)';
+            }
+        });
+        selectedKey.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)';
+        selectedKey.style.transform = 'scale(1.1)';
+    }
+    
+    // Reset all key backgrounds
+    function resetKeyBackgrounds() {
+        const keys = document.querySelectorAll('.alphabet-key');
+        keys.forEach(key => {
+            if (key.dataset.used === 'false') {
+                key.style.background = 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)';
+                key.style.transform = 'scale(1)';
+            }
+        });
+    }
+    
+    // Update level display
+    function updateLevelDisplay() {
+        elements.levelDisplay.textContent = gameState.currentLevel;
+        
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        let rulesText = `Level ${gameState.currentLevel}: `;
+        
+        if (levelRule.timeLimit > 0) {
+            rulesText += `${levelRule.timeLimit} second time limit, `;
+        } else {
+            rulesText += "No time limit, ";
+        }
+        
+        rulesText += `${levelRule.emptyCards} empty cards to fill`;
+        
+        if (levelRule.mode === 'arrange') {
+            rulesText += ", arrange letters first";
+        }
+        
+        elements.levelRules.textContent = rulesText;
+    }
+    
+    // Update mode indicator
+    function updateModeIndicator() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.mode === 'arrange') {
+            if (gameState.arranged) {
+                elements.modeIndicator.textContent = "Mode: Fill missing letters";
+                elements.modeIndicator.className = "mode-indicator fill-mode";
+            } else {
+                elements.modeIndicator.textContent = "Mode: Arrange letters correctly";
+                elements.modeIndicator.className = "mode-indicator arrange-mode";
+            }
+            elements.modeIndicator.style.display = "block";
+        } else {
+            elements.modeIndicator.style.display = "none";
+        }
+    }
+    
+    // Update timer display
+    function updateTimerDisplay() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.timeLimit > 0) {
+            const minutes = Math.floor(gameState.timeRemaining / 60);
+            const seconds = gameState.timeRemaining % 60;
+            elements.timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            // Change color when time is running out
+            if (gameState.timeRemaining <= 10) {
+                elements.timeDisplay.style.color = '#ff4757';
+            } else {
+                elements.timeDisplay.style.color = '#FFD700';
+            }
+        } else {
+            elements.timeDisplay.textContent = "No Limit";
+            elements.timeDisplay.style.color = '#FFD700';
+        }
+    }
+    
+    // Start timer
+    function startTimer() {
+        if (gameState.timer) {
+            clearInterval(gameState.timer);
+        }
+        
+        gameState.timer = setInterval(function() {
+            gameState.timeRemaining--;
+            
+            updateTimerDisplay();
+            
+            if (gameState.timeRemaining <= 0) {
+                clearInterval(gameState.timer);
+                endGame(false, "Time's up!");
+            }
+        }, 1000);
+    }
+    
+    // Check if all empty cards are filled
+    function checkCompletion() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.mode === 'arrange' && !gameState.arranged) {
+            // In arrange mode, first check if arrangement is correct
+            checkArrangement();
+            return;
+        }
+        
+        const emptyCards = document.querySelectorAll('.letter-card.empty');
+        
+        if (emptyCards.length === 0) {
+            // All cards are filled, check if correct
+            checkAnswer();
+        }
+    }
+    
+    // Check if the arrangement is correct (for arrange mode)
+    function checkArrangement() {
+        const cards = document.querySelectorAll('.letter-card');
+        let isCorrect = true;
+        
+        for (let i = 0; i < cards.length - 1; i++) {
+            const currentCharCode = cards[i].textContent.charCodeAt(0);
+            const nextCharCode = cards[i + 1].textContent.charCodeAt(0);
+            
+            if (nextCharCode - currentCharCode !== 1) {
+                isCorrect = false;
+                break;
+            }
+        }
+        
+        if (isCorrect) {
+            // Correct arrangement
+            gameState.arranged = true;
+            updateModeIndicator();
+            
+            // Create empty spots for filling
+            const levelRule = config.levelRules[gameState.currentLevel - 1];
+            const emptyIndices = [];
+            
+            while (emptyIndices.length < levelRule.emptyCards) {
+                const randomIndex = Math.floor(Math.random() * cards.length);
+                if (!emptyIndices.includes(randomIndex)) {
+                    emptyIndices.push(randomIndex);
+                }
+            }
+            
+            // Hide the letters that need to be filled
+            emptyIndices.forEach(index => {
+                cards[index].classList.add('empty');
+                cards[index].dataset.original = cards[index].textContent;
+                cards[index].textContent = '?';
+            });
+            
+            gameState.emptyIndices = emptyIndices;
+            
+            // Show success message
+            elements.successMessage.textContent = "Great! Letters arranged correctly. Now fill the missing ones!";
+            elements.successMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                elements.successMessage.style.display = 'none';
+            }, 3000);
+            
+            // Save game progress
+            saveGameProgress();
+        } else {
+            // Incorrect arrangement
+            endGame(false, "Letters are not in correct order. Keep trying!");
+        }
+    }
+    
+// Check if the answer is correct
+function checkAnswer() {
+    const levelRule = config.levelRules[gameState.currentLevel - 1];
+    const cards = document.querySelectorAll('.letter-card');
+    let isCorrect = true;
+    let incorrectPositions = [];
+
+    // Check if player has filled all empty cards
+    if (gameState.filledCount < gameState.emptyIndices.length) {
+        endGame(false, "Please fill all empty cards before checking!");
+        return;
+    }
+
+    if ([12, 13, 14, 15].includes(gameState.currentLevel)) {
+        // Position-independent check - ensure all letters are correct without duplicates
+        let originalLetters = Array.from(cards).map(c => c.dataset.original);
+        let filledLetters = Array.from(cards).map(c => c.dataset.filled || c.textContent);
+        
+        // Create copies for comparison
+        let originalLettersCopy = [...originalLetters];
+        let filledLettersCopy = [...filledLetters];
+        
+        // Check for duplicates in filled letters
+        const filledSet = new Set();
+        const duplicates = new Set();
+        
+        filledLettersCopy.forEach(letter => {
+            if (filledSet.has(letter)) {
+                duplicates.add(letter);
+            }
+            filledSet.add(letter);
+        });
+        
+        // If there are duplicates, it's incorrect
+        if (duplicates.size > 0) {
+            isCorrect = false;
+            duplicates.forEach(duplicate => {
+                incorrectPositions.push({
+                    position: 0, // No specific position for duplicates
+                    original: "No duplicate letters allowed",
+                    filled: `Duplicate: ${duplicate}`
+                });
+            });
+        }
+        
+        // Check if all original letters are present in filled letters (order doesn't matter)
+        if (isCorrect) {
+            originalLettersCopy.forEach(originalLetter => {
+                const index = filledLettersCopy.indexOf(originalLetter);
+                if (index === -1) {
+                    isCorrect = false;
+                    incorrectPositions.push({
+                        position: 0,
+                        original: originalLetter,
+                        filled: "Missing"
+                    });
+                } else {
+                    // Remove the matched letter to handle duplicates correctly
+                    filledLettersCopy.splice(index, 1);
+                }
+            });
+            
+            // Check if there are any extra letters that shouldn't be there
+            if (filledLettersCopy.length > 0) {
+                isCorrect = false;
+                filledLettersCopy.forEach(extraLetter => {
+                    incorrectPositions.push({
+                        position: 0,
+                        original: "Extra letter",
+                        filled: extraLetter
+                    });
+                });
+            }
+        }
+    } else {
+        // Position-dependent check (your original logic)
+        cards.forEach((card, index) => {
+            const originalLetter = card.dataset.original;
+            const filledLetter = card.dataset.filled;
+
+            if (filledLetter && originalLetter !== filledLetter) {
+                isCorrect = false;
+                incorrectPositions.push({
+                    position: index + 1,
+                    original: originalLetter,
+                    filled: filledLetter
+                });
+            }
+        });
+    }
+
+    if (isCorrect) {
+        // Correct answer
+        elements.successMessage.style.display = 'block';
+        elements.errorMessage.style.display = 'none';
+        elements.analysis.style.display = 'none';
+
+        // Celebrate with animation
+        cards.forEach(card => card.classList.add('celebrate'));
+
+        // Create confetti effect
+        createConfetti();
+
+        // Save game progress before moving to next level
+        saveGameProgress();
+
+        // Move to next level after a delay
+        setTimeout(function() {
+            if (gameState.currentLevel < config.totalLevels) {
+                gameState.currentLevel++;
+                generateGameBoard();
+                generateAlphabetSelector();
+                updateLevelDisplay();
+                updateModeIndicator();
+
+                const newLevelRule = config.levelRules[gameState.currentLevel - 1];
+                elements.arrangeBtn.style.display = newLevelRule.mode === 'arrange' ? 'block' : 'none';
+
+                saveGameProgress();
+            } else {
+                endGame(true, "Congratulations! You completed all levels!");
+                localStorage.removeItem('alphabetGameProgress');
+            }
+        }, 2000);
+    } else {
+        // Incorrect answer with hints
+        const hintText = incorrectPositions.map(pos => {
+            if (pos.position === 0) {
+                return pos.filled.includes("Duplicate") ? 
+                    `Duplicate letter "${pos.filled.split(': ')[1]}" found` :
+                    `Missing letter "${pos.original}"`;
+            } else {
+                return `Position ${pos.position} should be "${pos.original}" not "${pos.filled}"`;
+            }
+        }).join("\n");
+        
+        endGame(false, "Some answers are incorrect!\n" + hintText, incorrectPositions);
+    }
+}
+
+    // Show analysis of incorrect answers
+    function showAnalysis(incorrectPositions) {
+        elements.analysis.style.display = 'block';
+        let analysisHTML = "You made some mistakes:<br><br>";
+        
+        incorrectPositions.forEach(item => {
+            analysisHTML += `Position ${item.position} should be <strong>"${item.original}"</strong> not <strong>"${item.filled}"</strong><br>`;
+        });
+        
+        analysisHTML += "<br>Try again!";
+        elements.analysisText.innerHTML = analysisHTML;
+    }
+    
+    // End game
+    function endGame(isWin, message, incorrectPositions = []) {
+        gameState.isGameOver = true;
+        
+        if (gameState.timer) {
+            clearInterval(gameState.timer);
+        }
+        
+        if (isWin) {
+            elements.successMessage.textContent = message;
+            elements.successMessage.style.display = 'block';
+            elements.errorMessage.style.display = 'none';
+            elements.analysis.style.display = 'none';
+            
+            // Create confetti effect
+            createConfetti();
+        } else {
+            elements.successMessage.style.display = 'none';
+            elements.errorMessage.textContent = message;
+            elements.errorMessage.style.display = 'block';
+            
+            if (incorrectPositions.length > 0) {
+                showAnalysis(incorrectPositions);
+            }
+            
+            // Add try again button
+            if (!document.getElementById('try-again-btn')) {
+                const tryAgainBtn = document.createElement('button');
+                tryAgainBtn.id = 'try-again-btn';
+                tryAgainBtn.className = 'btn btn-primary';
+                tryAgainBtn.textContent = 'Try Again';
+                tryAgainBtn.style.marginTop = '10px';
+                
+                tryAgainBtn.addEventListener('click', function() {
+                    generateGameBoard();
+                    generateAlphabetSelector();
+                    elements.errorMessage.style.display = 'none';
+                    elements.analysis.style.display = 'none';
+                    this.remove();
+                    
+                    // Restart timer if needed
+                    const levelRule = config.levelRules[gameState.currentLevel - 1];
+                    if (levelRule.timeLimit > 0) {
+                        gameState.timeRemaining = levelRule.timeLimit;
+                        startTimer();
+                    }
+                    
+                    // Update mode indicator
+                    updateModeIndicator();
+                });
+                
+                elements.errorMessage.appendChild(tryAgainBtn);
+            }
+        }
+    }
+    
+    // Create confetti effect
+    function createConfetti() {
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+            confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(function() {
+                confetti.remove();
+            }, 3000);
+        }
+    }
+    
+    // Drag and drop functions for arrange mode (Desktop)
+    function handleDragStart(e) {
+        this.style.opacity = '0.4';
+        gameState.dragSource = this;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', this.dataset.index);
+    }
+    
+    function handleDragOver(e) {
+        e.preventDefault();
+        return false;
+    }
+    
+    function handleDrop(e) {
+        e.preventDefault();
+        
+        if (gameState.dragSource !== this) {
+            // Swap letters
+            const sourceIndex = gameState.dragSource.dataset.index;
+            const sourceLetter = gameState.dragSource.textContent;
+            const targetLetter = this.textContent;
+            
+            gameState.dragSource.textContent = targetLetter;
+            this.textContent = sourceLetter;
+        }
+        
+        return false;
+    }
+    
+    function handleDragEnd() {
+        this.style.opacity = '1';
+    }
+    
+    // Touch functions for arrange mode (Mobile)
+    function handleTouchStart(e) {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        if (levelRule.mode !== 'arrange' || gameState.arranged) return;
+        
+        gameState.touchStartX = e.touches[0].clientX;
+        gameState.touchStartY = e.touches[0].clientY;
+        gameState.activeCard = this;
+        this.style.opacity = '0.7';
+        e.preventDefault();
+    }
+    
+    function handleTouchMove(e) {
+        if (!gameState.activeCard) return;
+        
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        
+        // Calculate distance from start point
+        const deltaX = Math.abs(touchX - gameState.touchStartX);
+        const deltaY = Math.abs(touchY - gameState.touchStartY);
+        
+        // If movement is significant, mark as dragging
+        if (deltaX > 10 || deltaY > 10) {
+            gameState.isDragging = true;
+        }
+        
+        e.preventDefault();
+    }
+    
+    function handleTouchEnd(e) {
+        if (!gameState.activeCard) return;
+        
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        if (levelRule.mode !== 'arrange' || gameState.arranged) return;
+        
+        if (!gameState.isDragging) {
+            // It's a tap, not a drag - reset and return
+            gameState.activeCard.style.opacity = '1';
+            gameState.activeCard = null;
+            gameState.isDragging = false;
+            return;
+        }
+        
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        
+        // Find the element at the drop position
+        const dropElement = document.elementFromPoint(touchEndX, touchEndY);
+        
+        if (dropElement && dropElement.classList.contains('letter-card') && 
+            dropElement !== gameState.activeCard) {
+            // Swap letters
+            const sourceLetter = gameState.activeCard.textContent;
+            const targetLetter = dropElement.textContent;
+            
+            gameState.activeCard.textContent = targetLetter;
+            dropElement.textContent = sourceLetter;
+        }
+        
+        // Reset state
+        gameState.activeCard.style.opacity = '1';
+        gameState.activeCard = null;
+        gameState.isDragging = false;
+    }
+    
+    // Save game progress to localStorage
+    function saveGameProgress() {
+        const progress = {
+            currentLevel: gameState.currentLevel,
+            arranged: gameState.arranged
+        };
+        localStorage.setItem('alphabetGameProgress', JSON.stringify(progress));
+    }
+    
+    // Load game progress from localStorage
+    function loadGameProgress() {
+        const savedProgress = localStorage.getItem('alphabetGameProgress');
+        if (savedProgress) {
+            const progress = JSON.parse(savedProgress);
+            gameState.currentLevel = progress.currentLevel;
+            gameState.arranged = progress.arranged || false;
+        }
+    }
+    
+    // Reset game completely
+    function resetGame() {
+        if (confirm("Are you sure you want to reset the game? All progress will be lost.")) {
+            gameState.currentLevel = 1;
+            gameState.arranged = false;
+            localStorage.removeItem('alphabetGameProgress');
+            initGame();
+        }
+    }
+    
+    // Add reset button to the game
+    function addResetButton() {
+        // Check if reset button already exists
+        if (document.getElementById('reset-btn')) {
+            return;
+        }
+        
+        const resetBtn = document.createElement('button');
+        resetBtn.id = 'reset-btn';
+        resetBtn.className = 'btn btn-secondary';
+        resetBtn.textContent = 'Reset Game';
+        resetBtn.style.marginTop = '10px';
+        
+        resetBtn.addEventListener('click', resetGame);
+        
+        // Add to controls container
+        elements.controls.appendChild(resetBtn);
+    }
+    
+    // Check arrangement button handler
+    elements.arrangeBtn.addEventListener('click', checkArrangement);
+    
+    // Shuffle the game board (for arrange mode)
+    elements.shuffleBtn.addEventListener('click', function() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.mode !== 'arrange') {
+            alert("Shuffle is only available in arrange mode!");
+            return;
+        }
+        
+        // Get current letters
+        const cards = document.querySelectorAll('.letter-card');
+        const letters = Array.from(cards).map(card => card.textContent);
+        
+        // Shuffle the letters
+        for (let i = letters.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [letters[i], letters[j]] = [letters[j], letters[i]];
+        }
+        
+        // Update the cards with shuffled letters
+        cards.forEach((card, index) => {
+            card.textContent = letters[index];
+        });
+    });
+    
+    // Provide a hint to the player
+    elements.hintBtn.addEventListener('click', function() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.mode === 'arrange' && !gameState.arranged) {
+            // Hint for arrange mode
+            const cards = document.querySelectorAll('.letter-card');
+            const correctOrder = [...gameState.alphabet];
+            
+            // Find the first incorrect position
+            for (let i = 0; i < cards.length; i++) {
+                if (cards[i].textContent !== correctOrder[i]) {
+                    alert(`Hint: Position ${i + 1} should be "${correctOrder[i]}"`);
+                    return;
+                }
+            }
+            
+            alert("All letters are already in correct order!");
+            return;
+        }
+        
+        const emptyCards = document.querySelectorAll('.letter-card.empty');
+        
+        if (emptyCards.length === 0) {
+            alert("There are no empty cards to fill!");
+            return;
+        }
+        
+        // Find first empty card
+        const firstEmpty = emptyCards[0];
+        const correctLetter = firstEmpty.dataset.original;
+        
+        // Highlight the correct letter in the selector
+        const keys = document.querySelectorAll('.alphabet-key');
+        keys.forEach(key => {
+            if (key.textContent === correctLetter && key.dataset.used === 'false') {
+                key.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)';
+                key.style.color = 'white';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    if (key.dataset.used === 'false') {
+                        key.style.background = 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)';
+                        key.style.color = '#2c3e50';
+                    }
+                }, 2000);
+            }
+        });
+        
+        alert(`Hint: The missing letter at position ${parseInt(firstEmpty.dataset.index) + 1} is "${correctLetter}"`);
+    });
+    
+    // Check answer button handler
+    elements.checkBtn.addEventListener('click', function() {
+        const levelRule = config.levelRules[gameState.currentLevel - 1];
+        
+        if (levelRule.mode === 'arrange' && !gameState.arranged) {
+            checkArrangement();
+        } else {
+            checkAnswer();
+        }
+    });
+    
+    // Initialize the game
+    initGame();
+    
+    // Add reset button
+    addResetButton();
+});
+</script>
+
+</body>
+</html>
