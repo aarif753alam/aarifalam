@@ -53,28 +53,28 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sample search data - replace with your actual content
   var searchData = [
     { 
-      title: "The Power of True Speech", 
-      url: "blogs.html", 
+      title: "blog", 
+      url: "/blog/index.html", 
       description: "Discover the transformative power of true speech and authentic communication",
       keywords: "honesty, integrity, communication, truth" 
     },
     { 
       title: "Contact Us", 
-      url: "../footer/contact-us/contact.html", 
+      url: "/footer/contact-us/contact.html", 
       description: "Get in touch with Aarif Alam",
       keywords: "contact, email, message, reach out" 
     },
     { 
       title: "Game Zone", 
-      url: "../Game/game-page.html", 
+      url: "/Game/index.html", 
       description: "Fun games and interactive experiences",
       keywords: "games, play, fun, entertainment" 
     },
     { 
-      title: "Greeting Cards", 
-      url: "../GreetingCard/greeting-card.html", 
-      description: "Create beautiful digital greeting cards",
-      keywords: "cards, greetings, messages, digital" 
+      title: "pdf", 
+      url: "/pdf/index.html", 
+      description: "100% Free pdf tools",
+      keywords: "jpg to pdf, pdf convert, image to url" 
     }
   ];
   
@@ -194,4 +194,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+
 });
