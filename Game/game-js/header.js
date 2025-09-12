@@ -50,35 +50,133 @@ document.addEventListener('DOMContentLoaded', function() {
   var mobileSearchBtn = document.getElementById('mobileSearchBtn');
   var headerSearch = document.querySelector('.header-search');
   
-  // Sample search data - replace with your actual content
-  var searchData = [
-    { 
-      title: "word meaning game", 
-      url: "word-meaning-game.html", 
-      description: " this game motivate you to learn more english ( specially for children's )",
-      keywords: "word meaning game, english improve, english learn motivation , play english word game" 
-    },
-    { 
-      title: "heart eat game", 
-      url: "../Game/Heart-Touch-game.html", 
-      description: "heart eat game and  win reward",
-      keywords: "heart eat, heart touch and win, heart game, ball touch heart" 
-    },
-    { 
-      title: "Contact Us", 
-      url: "../footer/contact-us/contact.html", 
-      description: "Get in touch with Aarif Alam",
-      keywords: "contact, email, message, reach out" 
-    },
+// Updated search data including all PDF tools, games, blog, and contact
+var searchData = [
+  // Blog & Contact
+  { 
+    title: "Blog", 
+    url: "/blog/index.html", 
+    description: "Discover the latest blogs and articles on Aarif Alam's platform",
+    keywords: "blog, articles, writing, insights" 
+  },
+  { 
+    title: "Contact Us", 
+    url: "/footer/contact-us/contact.html", 
+    description: "Get in touch with Aarif Alam",
+    keywords: "contact, email, message, reach out" 
+  },
+  { 
+    title: "Feedback", 
+    url: "/footer/contact-us/feedback.html", 
+    description: "Share your feedback with Aarif Alam",
+    keywords: "feedback, comment, suggestions" 
+  },
 
-    { 
-      title: "Greeting Cards", 
-      url: "../GreetingCard/greeting-card.html", 
-      description: "Create beautiful digital greeting cards",
-      keywords: "cards, greetings, messages, digital" 
-    }
-  ];
-  
+  // Game Tools
+  { 
+    title: "Game Zone", 
+    url: "/Game/index.html", 
+    description: "Fun games and interactive experiences",
+    keywords: "games, play, fun, entertainment" 
+  },
+  { 
+    title: "Word Meaning Game", 
+    url: "/Game/word-meaning-page.html", 
+    description: "Enhance your vocabulary with interactive word games",
+    keywords: "vocabulary, words, game, learning" 
+  },
+  { 
+    title: "ABCD Brain Game", 
+    url: "/Game/abcd-brain-game.html", 
+    description: "Solve fun ABCD puzzles and give your brain a little workout",
+    keywords: "abcd, brain, puzzle, educational" 
+  },
+  { 
+    title: "Heart-touching Game", 
+    url: "/Game/Heart-Touch-game.html", 
+    description: "Move the ball to touch all hearts without touching enemies",
+    keywords: "heart, touching, fun, game" 
+  },
+  { 
+    title: "1–25 Numbers Game", 
+    url: "/Game/numbergame.html", 
+    description: "Play with two players to complete numbers from 1 to 25",
+    keywords: "numbers, game, math, multiplayer" 
+  },
+
+  // Image & Greeting Tools
+  { 
+    title: "Image to URL", 
+    url: "/tools/image-to-url.html", 
+    description: "Convert your images into shareable URLs",
+    keywords: "image, url, convert, share" 
+  },
+  { 
+    title: "Greeting Card", 
+    url: "/tools/greeting-card.html", 
+    description: "Create beautiful digital greeting cards",
+    keywords: "cards, greetings, messages, digital" 
+  },
+
+  // PDF Tools - High Priority
+  { 
+    title: "Image to PDF", 
+    url: "/pdf/image-to-pdf", 
+    description: "Convert JPG/PNG images into PDF",
+    keywords: "image, pdf, convert, jpg, png" 
+  },
+  { 
+    title: "PDF to PNG/JPG", 
+    url: "/pdf/pdf-to-image", 
+    description: "Convert PDF to high-quality PNG or JPG",
+    keywords: "pdf, png, jpg, convert" 
+  },
+  { 
+    title: "Merge PDF", 
+    url: "/pdf/merge-pdf", 
+    description: "Combine multiple PDFs into one document",
+    keywords: "pdf, merge, combine, document" 
+  },
+  { 
+    title: "Split PDF", 
+    url: "/pdf/split-pdf", 
+    description: "Divide PDF into multiple files",
+    keywords: "pdf, split, divide, pages" 
+  },
+  { 
+    title: "Remove PDF Pages", 
+    url: "/pdf/remove-pdf-page", 
+    description: "Delete unwanted pages from PDF",
+    keywords: "pdf, remove, delete, pages" 
+  },
+
+  // PDF Tools - Medium Priority
+  { 
+    title: "PDF Reorder Pages", 
+    url: "/pdf/pdf-reorder", 
+    description: "Rearrange PDF pages",
+    keywords: "pdf, reorder, pages, arrange" 
+  },
+  { 
+    title: "Text to PDF", 
+    url: "/pdf/text-to-pdf", 
+    description: "Transform text files into PDF documents",
+    keywords: "text, pdf, convert, document" 
+  },
+  { 
+    title: "PDF Image Watermark", 
+    url: "/pdf/pdf-image-watermark", 
+    description: "Add image watermarks to PDF",
+    keywords: "pdf, watermark, image, protection" 
+  },
+  { 
+    title: "PDF Text Watermark", 
+    url: "/pdf/pdf-text-watermark", 
+    description: "Add text watermarks to PDF",
+    keywords: "pdf, watermark, text, protection" 
+  }
+];
+
   // Mobile search toggle
   mobileSearchBtn.addEventListener('click', function() {
     headerSearch.classList.toggle('active');
@@ -195,4 +293,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+
 });
