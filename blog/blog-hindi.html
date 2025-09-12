@@ -104,6 +104,7 @@
   
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/main/css/translate-button.css">
 <link rel="stylesheet" href="css/blogheader.css">
 <link rel="stylesheet" href="css/blogfooter.css">
 
@@ -670,7 +671,7 @@ main {
           <div class="logo-icon">
             <i class="fas fa-bolt"></i>
           </div>
-          <span class="logo-text">AarifAlam</span>
+          <span class="logo-text">AarifAlam.Life</span>
         </a>
                 <div class="header-search">
           <input type="text" id="searchInput" placeholder="Search knowledge..." aria-label="Search">
@@ -687,13 +688,13 @@ main {
           <i class="fas fa-bars"></i>
         </button>
         
-        <nav class="main-nav">
+         <nav class="main-nav">
           <ul class="nav-links" id="navLinks">
-            <li><a href="../index.html"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="index.html"><i class="fas fa-brain"></i>My Blog</a></li>
-            <li><a href="../Game/index.html"><i class="fas fa-gamepad"></i>GAME ZOON</a></li>
-            <li><a href="../pdf/index.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
-            <li><a href="../footer/contact-us/contact.html"><i class="fas fa-handshake"></i>Contact Us</a></li>
+            <li><a href="/index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/blog/index.html"><i class="fas fa-brain"></i>blog</a></li>
+            <li><a href="/Game/index.html.html"><i class="fas fa-gamepad"></i>GAME ZOON</a></li>
+            <li><a href="/tools/greeting-card.html"><i class="fas fa-gift"></i>Greeting Card</a></li>
+            <li><a href="/footer/contact-us/contact.html"><i class="fas fa-handshake"></i>Contact Us</a></li>
           </ul>
         </nav>
       </div>
@@ -714,10 +715,12 @@ main {
 
 <div class="blog-lang-switcher-bar">
   <div class="blog-lang-dropdown">
-    <button class="blog-lang-btn">🌐 Translate-english ▼</button>
+    <button class="blog-lang-btn">
+      🌐select Language <span class="arrow">▼</span>
+    </button>
     <div class="blog-lang-dropdown-content">
-      <a href="index.html">English</a>
-      <a href="blog-hindi.html">हिन्दी</a>
+      <a href="/blog/index.html">English</a>
+      <a href="/blog/blog-hindi.html">🇮🇳 हिन्दी</a>
     </div>
   </div>
 </div>
@@ -805,35 +808,35 @@ main {
           </div>
         </div>
         
-        <div class="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="value-of-time.html"><i class="fas fa-brain"></i> BRAIN POWER</a></li>
-            <li><a href="../Game/index.html"><i class="fas fa-gamepad"></i> GAME ZOON</a></li>
-            <li><a href="../pdf/index.html"><i class="fas pdf"></i> PDF Tools</a></li>
-            <li><a href="../tools/drawing.html"><i class="fas fa-palette"></i> Digital-board</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="../footer/privacy-policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-            <li><a href="../footer/terms.html"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
-            <li><a href="../footer/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-            <li><a href="../footer/contact-us/contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-            <li><a href="../footer/contact-us/feedback.html"><i class="fas fa-chevron-right"></i> Send Feedback</a></li>
-          </ul>
-        </div>
+         <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="/blog/index.html"><i class="fas fa-brain"></i> aarif blog</a></li>
+          <li><a href="/Game/index.html"><i class="fas fa-gamepad"></i> GAME ZOON</a></li>
+          <li><a href="/tools/greeting-card.html"><i class="fas fa-gift"></i> Greeting Card</a></li>
+          <li><a href="/tools/drawing.html"><i class="fas fa-palette"></i> Digital-board</a></li>
+        </ul>
       </div>
+      
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="/footer/privacy-policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          <li><a href="/footer/terms.html"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+          <li><a href="/footer/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="/footer/contact-us/contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          <li><a href="/footer/contact-us/feedback.html"><i class="fas fa-chevron-right"></i> Send Feedback</a></li>
+        </ul>
+      </div>
+    </div>
       
       <div class="footer-bottom">
         <p>&copy; <span id="year"></span> AarifAlam.life. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
-
+<script src="/main/js/translate-button.js"></script>
   <script>
     window.addEventListener('scroll', function() {
       var scrollProgress = document.getElementById('scrollProgress');
@@ -903,9 +906,9 @@ document.querySelectorAll('.project-card').forEach(card => {
   <script src="js/blogheader.js"></script>
   <script src="js/blogfooter.js"></script>
 
-
 </body>
 </html>
+
 
 
 
