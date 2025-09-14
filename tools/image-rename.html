@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Rename Tool - Organize & Download | AarifAlam.Life</title>
+    <meta name="description" content="Free online tool to rename multiple images in bulk. Upload, organize, rename, and download images with custom naming patterns. No registration required.">
+<meta name="keywords" content="batch image rename, bulk image renaming, image organizer, rename multiple images, image management tool, free image utility, aarifalam">
+  
+<link rel="canonical" href="https://aarifalam.life/tools/image-rename">
+<meta name="robots" content="index, follow">
+
+ <meta property="og:type" content="website">
+<meta property="og:url" content="https://aarifalam.life/tools/image-rename">
+<meta property="og:title" content="Batch Image Rename Tool - Free Online Utility | AarifAlam.Life">
+<meta property="og:description" content="Organize and rename multiple images quickly with our free online tool. Drag & drop interface with batch processing capabilities.">
+<meta property="og:image" content="https://res.cloudinary.com/dooyfg1pa/image/upload/v1757877390/rename-image_t6oxw9.jpg">
+<meta property="og:site_name" content="AarifAlam.Life">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://aarifalam.life/tools/image-rename">
+<meta property="twitter:title" content="Batch Image Rename Tool - Free Online Utility | AarifAlam.Life">
+<meta property="twitter:description" content="Organize and rename multiple images quickly with our free online tool.">
+<meta property="twitter:image" content="https://res.cloudinary.com/dooyfg1pa/image/upload/v1757877390/rename-image_t6oxw9.jpg">
+<meta property="twitter:creator" content="@aarifalam0105">
+<meta property="twitter:site" content="@aarifalam0105">
+
+<link rel="me" href="https://twitter.com/aarifalam0105">
+<link rel="me" href="https://github.com/aarifalam0105">
+<link rel="me" href="https://instagram.com/aarifalam0105">
+<link rel="me" href="https://facebook.com/aarifalam0105">
+<link rel="me" href="https://linkedin.com/in/aarifalam0105">
+<link rel="me" href="https://youtube.com/@aarifalam0105">
+<link rel="me" href="https://pinterest.com/aarifalam0105">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Batch Image Rename Tool",
+  "url": "https://aarifalam.life/tools/image-rename",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free online tool for renaming multiple images with batch processing capabilities",
+  "featureList": ["Drag & Drop Interface", "Batch Renaming", "Image Preview", "ZIP Download"],
+  "author": {
+    "@type": "Person",
+    "name": "Aarif Alam",
+    "url": "https://aarifalam.life",
+    "sameAs": [
+      "https://twitter.com/aarifalam0105",
+      "https://github.com/aarifalam0105",
+      "https://instagram.com/aarifalam0105",
+      "https://facebook.com/aarifalam0105",
+      "https://linkedin.com/in/aarifalam0105",
+      "https://youtube.com/@aarifalam0105",
+      "https://pinterest.com/aarifalam0105"
+    ]
+  }
+}
+</script>
+  
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="css/image-rename.css">
+     <link rel="stylesheet" href="../main/css/main-header.css">
+     <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+     <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+     <link rel="manifest" href="../images/logo/site.webmanifest">
+     <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XX2CV48SMH');
+</script>
+
+</head>
+<body>
+ <div class="header-0105-scroll-progress" id="header0105ScrollProgress" aria-hidden="true"></div>
+
+    <header class="header-0105" role="banner">
+        <div class="header-0105-container">
+            <div class="header-0105-inner">
+                <a href="/index.html" class="header-0105-logo" aria-label="Go to homepage">
+                    <div class="header-0105-logo-icon" aria-hidden="true">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="header-0105-logo-text">AarifAlam.Life</span>
+                </a>
+
+                <nav class="header-0105-nav" aria-label="Primary navigation">
+                    <ul class="header-0105-nav-links" id="header0105NavLinks">
+                        <li><a href="/index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+                        
+                        <li class="header-0105-dropdown">
+                            <a href="/blog/index.html"><i class="fas fa-brain" aria-hidden="true"></i>My Blog<i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 0.5rem;"></i></a>
+                            <div class="header-0105-dropdown-menu">
+                                <a href="/blog/Value-of-time.html"><i class="fas fa-clock"></i>Value of time</a>
+                                <a href="/blog/islamic/5-powerful-quran-words.html"><i class="fas fa-quran"></i>5 powerful quran words</a>
+                            </div>
+                        </li>
+                        <li><a href="/Game/index.html"><i class="fas fa-gamepad"></i>Aarif GAME</a></li>
+
+                        <li><a href="/pdf/index.html"><i class="fas fa-file-pdf" aria-hidden="true"></i> Aarif PDF</a></li>
+                        <li><a href="/footer/contact-us/contact.html"><i class="fas fa-handshake"></i>Contact us</a></li>
+                      </ul>
+                   </nav>
+
+<div class="header-0105-tools-dropdown">
+    <button class="header-0105-tools-btn">
+        <i class="fas fa-th-large"></i> More Tools
+    </button>
+    <div class="header-0105-tools-menu">
+   <a href="/blog/index.html" class="header-0105-mobile-tool-item">
+    <div class="header-0105-tool-icon">
+        <i class="fas fa-blog"></i>
+    </div>
+    <span class="header-0105-tool-name">Blog</span>
+   </a>
+
+        <a href="/GreetingCard/img-to-url.html" class="header-0105-tool-item">
+            <div class="header-0105-tool-icon">
+                <i class="fas fa-image"></i>
+            </div>
+            <span class="header-0105-tool-name">Image to URL</span>
+        </a>
+        <a href="/Game/word-meaning-game.html" class="header-0105-tool-item">
+            <div class="header-0105-tool-icon">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <span class="header-0105-tool-name">Word Meaning Game</span>
+        </a>
+        <a href="/pdf/image-to-pdf.html" class="header-0105-tool-item">
+            <div class="header-0105-tool-icon">
+                <i class="fas fa-file-image"></i>
+            </div>
+            <span class="header-0105-tool-name">Image to PDF</span>
+        </a>
+        <a href="/pdf/text-to-pdf" class="header-0105-tool-item">
+            <div class="header-0105-tool-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <span class="header-0105-tool-name">Text to PDF</span>
+        </a>
+        <a href="/footer/contact-us/feedback" class="header-0105-tool-item">
+            <div class="header-0105-tool-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <span class="header-0105-tool-name">Feedback</span>
+        </a>
+    </div>
+</div>
+
+                <button
+                    class="header-0105-mobile-tools-btn"
+                    id="header0105MobileToolsBtn"
+                    type="button"
+                    aria-label="Toggle tools menu"
+                    aria-expanded="false"
+                >
+                    <i class="fas fa-th-large" aria-hidden="true"></i>
+                </button>
+                <button
+                    class="header-0105-mobile-menu-btn"
+                    id="header0105MobileMenuBtn"
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="header0105NavLinks"
+                >
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+<div class="header-0105-mobile-tools-menu" id="header0105MobileToolsMenu">
+    <a href="https://aarifalam.life/" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-home"></i>
+        </div>
+        <span class="header-0105-tool-name">Home</span>
+    </a>
+
+   <a href="/blog/index.html" class="header-0105-mobile-tool-item">
+    <div class="header-0105-tool-icon">
+        <i class="fas fa-blog"></i>
+    </div>
+    <span class="header-0105-tool-name">Blog</span>
+   </a>
+
+    <a href="/Game/index.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-gamepad"></i>
+        </div>
+        <span class="header-0105-tool-name">Game Zone</span>
+   </a>
+    <a href="/Game/word-meaning-page.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-language"></i>
+        </div>
+        <span class="header-0105-tool-name">Word Meaning Game</span>
+    </a>
+
+    <a href="/tools/image-to-url.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-link"></i>
+        </div>
+        <span class="header-0105-tool-name">Image to URL</span>
+    </a>
+
+    <a href="/pdf/merge-pdf.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-object-group"></i>
+        </div>
+        <span class="header-0105-tool-name">Merge PDF</span>
+    </a>
+    <a href="/pdf/split-pdf.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-columns"></i>
+        </div>
+        <span class="header-0105-tool-name">Split PDF</span>
+    </a>
+    <a href="/pdf/image-to-pdf.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-file-pdf"></i>
+        </div>
+        <span class="header-0105-tool-name">Image to PDF</span>
+    </a>
+
+    <a href="/tools/greeting-card.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-gift"></i>
+        </div>
+        <span class="header-0105-tool-name">Greeting Card</span>
+    </a>
+
+       <a href="/footer/contact-us/contact.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-envelope"></i>
+        </div>
+        <span class="header-0105-tool-name">Contact Us</span>
+    </a>
+    <a href="/footer/contact-us/feedback.html" class="header-0105-mobile-tool-item">
+        <div class="header-0105-tool-icon">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <span class="header-0105-tool-name">Feedback</span>
+    </a>
+</div>
+
+    <div class="container">
+        <header>
+            <h1>Advanced Image Rename Tool</h1>
+            <p class="subtitle">Select, arrange, rename and download your images</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="upload-section" id="dropZone">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Drag & drop images here or click to browse</p>
+                    <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                    <button class="btn" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i> Select Images
+                    </button>
+                </div>
+                
+                <div class="rename-section">
+                    <input type="text" class="rename-input" id="renameInput" placeholder="Enter base name (e.g. q)">
+                    <button class="btn" id="renameBtn" onclick="renameImages()">
+                        <i class="fas fa-tag"></i> Rename All
+                    </button>
+                </div>
+                
+                <div class="sort-options">
+                    <button class="btn sort-btn" onclick="sortByDate()">
+                        <i class="fas fa-calendar"></i> Sort by Date
+                    </button>
+                    <button class="btn sort-btn" onclick="sortByName()">
+                        <i class="fas fa-font"></i> Sort by Name
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn" onclick="addMoreImages()">
+                        <i class="fas fa-plus"></i> Add More
+                    </button>
+                    <button class="btn" id="downloadBtn" onclick="processDownload()" disabled>
+                        <i class="fas fa-download"></i> Download All
+                    </button>
+                    <button class="btn" onclick="clearAll()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+                
+                <div class="instructions">
+                    <h3>How to use:</h3>
+                    <ol>
+                        <li>Select images using the button or drag & drop</li>
+                        <li>Arrange images by dragging them to your desired order</li>
+                        <li>Remove any image by clicking the × button</li>
+                        <li>Enter a base name and click "Rename All"</li>
+                        <li>Click "Download All" to get your renamed images as ZIP</li>
+                        <li>Use sort options to rearrange images by date or name</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <h2>Your Images <span id="imageCount">(0)</span></h2>
+                <p>Drag to rearrange the order of images</p>
+                
+                <div class="image-list" id="imageList">
+                    <!-- Images will be added here dynamically -->
+                    <div class="placeholder" style="text-align: center; padding: 30px; color: #777;">
+                        <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <p>No images selected yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="preview-modal" id="previewModal">
+        <span class="close-modal" onclick="closePreview()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Preview">
+        </div>
+    </div>
+    
+    <div class="download-modal" id="downloadModal">
+        <div class="download-content">
+            <div class="download-icon">
+                <i class="fas fa-file-archive"></i>
+            </div>
+            <h2>Your Images Are Ready!</h2>
+            <p>All images have been renamed and packaged into a ZIP file</p>
+            
+            <div class="progress-bar">
+                <div class="progress" id="downloadProgress"></div>
+            </div>
+            
+            <p id="statusText">Preparing download...</p>
+            
+            <div class="action-buttons">
+                <button class="btn" onclick="downloadZip()">
+                    <i class="fas fa-download"></i> Download ZIP
+                </button>
+                <button class="btn" onclick="closeDownloadModal()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+
+  <script src="js/image-rename.js"></script>
+  <script src="../main/js/main-header.js"></script>
+
+</body>
+</html>
