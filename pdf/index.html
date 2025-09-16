@@ -1242,32 +1242,6 @@
 </script>
 <script src="js/pdf-header.js"></script>
 <script src="js/responsive.js"></script>
-
-      <!-- pdf blog js-->
-      <script>
-    document.getElementById('togglePdfTools').addEventListener('click', function() {
-        const content = document.getElementById('pdfToolsContent');
-        const btn = this;
-        const icon = btn.querySelector('.icon');
-        
-        if (content.style.display === 'none') {
-            // Show content
-            content.style.display = 'block';
-            btn.classList.add('active');
-            icon.classList.remove('fa-arrow-down');
-            icon.classList.add('fa-arrow-up');
-            
-            // Smooth scroll to content
-            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            // Hide content
-            content.style.display = 'none';
-            btn.classList.remove('active');
-            icon.classList.remove('fa-arrow-up');
-            icon.classList.add('fa-arrow-down');
-        }
-    });
-</script>
     
     <!--FAQ js-->
            <script>
@@ -1311,5 +1285,6 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
       
 </body>
 </html>
+
 
 
