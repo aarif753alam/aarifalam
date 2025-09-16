@@ -1306,7 +1306,10 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
       <p>Created by ${e.creatorName}</p>
     `,document.body.appendChild(t);let r=document.body.cloneNode(!0);document.body.parentNode.replaceChild(r,document.body)},s=()=>{if(t(),!r()||!a()){l();return}setInterval(()=>{r()&&a()||l()},e.checkInterval)};setTimeout(s,100)}(),"ontouchstart"in window&&document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("touchstart",function(){this.classList.add("hover")},{passive:!0}),e.addEventListener("touchend",function(){setTimeout(()=>{this.classList.remove("hover")},200)},{passive:!0})})});
     </script>
+
+    <script src="js/pdf-blog.js"></script>
       
 </body>
 </html>
+
 
