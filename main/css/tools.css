@@ -147,11 +147,11 @@
         .tool-blog { background: linear-gradient(135deg, #4cc9f0, #4361ee); }
         .tool-game { background: linear-gradient(135deg, #ff6584, #e64c66); }
         .tool-pdf  { background: linear-gradient(135deg, #ff9a44, #ff7e33); }
-        .tool-contact { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+        .tools-image-rename { background: linear-gradient(135deg, #6a11cb, #2575fc); }
         .tool-image { background: linear-gradient(135deg, #2667ff, #6ff317); }
         .tool-drawing { background: linear-gradient(135deg, #1e5bff, #0d47a1); }
         .tool-greeting { background: linear-gradient(135deg, #2b8993, #0dba55a1); }
-        .tool-word-count { background: linear-gradient(135deg, #8fb73d, #6b8f08a3); }
+        .tool-image-converter { background: linear-gradient(135deg, #8fb73d, #6b8f08a3); }
         .tool-compress { background: linear-gradient(135deg, #211d9e, #1e09dc91); }
         .tool-image-pdf { background: linear-gradient(135deg, #d609ff, #d40ddba4); }
 
@@ -216,3 +216,4 @@
             }
 
         }
+
