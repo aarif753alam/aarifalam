@@ -384,7 +384,7 @@ function copyToClipboard(text) {
 
 // Schedule image deletion from Cloudinary
 function scheduleDeletion(publicId, url) {
-    if (confirm("This image will be deleted from our servers in 1 hour. The URL will stop working after deletion. Do you want to proceed?")) {
+    if (confirm("This image will be deleted from your local storage in 1 hour. The URL will working after deletion. Do you want to proceed?")) {
         // Calculate deletion time (1 hour from now)
         const deletionTime = new Date();
         deletionTime.setHours(deletionTime.getHours() + 1);
@@ -659,4 +659,5 @@ function showToast(message, type = 'success') {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
+
 }
