@@ -104,16 +104,16 @@ if (form) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
 
-    // 1️⃣ Send subscriber info to YOUR Gmail
+    // 1️⃣ Notify your Gmail
     emailjs.send('service_ro4kggr', 'template_xw7g5ib', {
-      user_email: email,
-      to_email: "aarifalam0105@gmail.com",
+      user_email: email,                       // Subscriber’s email
+      to_email: "aarifalam0105@gmail.com",     // Your Gmail
       from_name: "Subscribe Me",
       from_email: "aarifalam0105@gmail.com",
       date: new Date().toLocaleString()
     })
     .then(function(response) {
-      // 2️⃣ Auto-reply to the subscriber
+      // 2️⃣ Auto-reply to subscriber
       emailjs.send('service_ro4kggr', 'template_1ivgleo', {
         user_email: email,
         from_name: "Subscribe Me",
@@ -130,7 +130,7 @@ You need anything, don’t hesitate to reach out.`
       messageContainer.className = 'subscription-message success';
       messageContainer.innerHTML = `
         <div class="success-animation">
-          <svg class="checkmark" viewBox="0 0 52 52">
+          <svg class="checkmark" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
           </svg>
@@ -173,5 +173,6 @@ You need anything, don’t hesitate to reach out.`
     });
   });
 }
+
 
 
