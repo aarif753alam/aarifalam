@@ -79,14 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 // ======================
-// EmailJS Form Submission + Auto-Reply
+// EmailJS Form Submission - Single Template
 // ======================
-(function() {
-  emailjs.init('24sxryXs3Nz3gt--f'); // Your EmailJS Public Key
-})();
+document.addEventListener('DOMContentLoaded', function() {
 
-var form = document.getElementById('emailSignupForm');
-if (form) {
+  emailjs.init('24sxryXs3Nz3gt--f'); // Your EmailJS Public Key
+
+  var form = document.getElementById('emailSignupForm');
+  if (!form) return;
+
   var submitBtn = form.querySelector('.btn-primary');
   var messageContainer = document.createElement('div');
   messageContainer.className = 'subscription-message';
@@ -95,38 +96,29 @@ if (form) {
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+
     var emailInput = form.querySelector('input[type="email"]');
     var email = emailInput.value.trim();
-
     if (!email) return;
 
     submitBtn.classList.add('loading');
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
 
-    // 1️⃣ Notify your Gmail
-    emailjs.send('service_ro4kggr', 'template_xw7g5ib', {
-      user_email: email,                       // Subscriber’s email
-      to_email: "aarifalam0105@gmail.com",     // Your Gmail
-      from_name: "Subscribe Me",
+    // Send using single template (template_1ivgleo)
+    emailjs.send('service_ro4kggr', 'template_1ivgleo', {
+      user_email: email,                   // Subscriber email
+      from_name: "Subscribe Me",           // Sender name visible
       from_email: "aarifalam0105@gmail.com",
-      date: new Date().toLocaleString()
+      subject: "Welcome to Aarif Alam Life!",
+      message: `Hello!
+
+Thank you for subscribing to Aarif Alam Life! 🎉
+Welcome to our website – https://aarifalam.life
+You need anything, don’t hesitate to reach out.`
     })
     .then(function(response) {
-      // 2️⃣ Auto-reply to subscriber
-      emailjs.send('service_ro4kggr', 'template_1ivgleo', {
-        user_email: email,
-        from_name: "Subscribe Me",
-        from_email: "aarifalam0105@gmail.com",
-        subject: "Welcome to Aarif Alam Life!",
-        message: `Thank you so much for subscribing! 🎉
-Welcome to our powerful website – aarifalam.life.
-You need anything, don’t hesitate to reach out.`
-      }).catch(function(err){
-        console.error("Auto-reply failed:", err);
-      });
-
-      // Success message
+      // Show success message
       messageContainer.className = 'subscription-message success';
       messageContainer.innerHTML = `
         <div class="success-animation">
@@ -143,7 +135,7 @@ You need anything, don’t hesitate to reach out.`
       messageContainer.style.display = 'block';
       form.reset();
     }, function(error) {
-      // Error message
+      // Show error message
       messageContainer.className = 'subscription-message error';
       messageContainer.innerHTML = `
         <div class="error-animation">
@@ -155,6 +147,7 @@ You need anything, don’t hesitate to reach out.`
         </div>
       `;
       messageContainer.style.display = 'block';
+      console.error("EmailJS Error:", error);
     })
     .finally(function() {
       // Restore button
@@ -172,7 +165,5 @@ You need anything, don’t hesitate to reach out.`
       }, 5000);
     });
   });
-}
 
-
-
+});
