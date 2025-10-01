@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Send using single template (template_1ivgleo)
     emailjs.send('service_ro4kggr', 'template_1ivgleo', {
       user_email: email,                   // Subscriber email
-      from_name: "Subscribe Me",           // Sender name visible
+      from_name: "Aarif Alam Life",        // Sender name visible
       from_email: "aarifalam0105@gmail.com",
       subject: "Welcome to Aarif Alam Life!",
       message: `Hello!
@@ -164,6 +164,8 @@ You need anything, don’t hesitate to reach out.`
         }, 500);
       }, 5000);
     });
+
   });
 
 });
+
