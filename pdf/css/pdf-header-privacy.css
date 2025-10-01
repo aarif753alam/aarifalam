@@ -1,0 +1,14 @@
+.header-0105-mobile-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.header-0105-mobile-dropdown-menu.active {
+  display: flex;
+}
+
+.header-0105-mobile-dropdown button .fa-chevron-down.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
