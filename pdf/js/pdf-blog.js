@@ -1,19 +1,22 @@
-document.getElementById('togglePdfTools').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById('pdfToolsContent');
-    const btn = this;
-    const icon = btn.querySelector('.icon');
-    
-    if (content.style.display === 'none' || content.style.display === '') {
-        content.style.display = 'block';
-        btn.classList.add('active');
+    const btn = document.getElementById('togglePdfTools');
+    const icon = btn ? btn.querySelector('.icon') : null;
+
+    // Always show blog content and make toggle button look active
+    if (content) content.style.display = 'block';
+    if (btn) btn.classList.add('active');
+    if (icon) {
         icon.classList.remove('fa-arrow-down');
         icon.classList.add('fa-arrow-up');
-        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-        content.style.display = 'none';
-        btn.classList.remove('active');
-        icon.classList.remove('fa-arrow-up');
-        icon.classList.add('fa-arrow-down');
+    }
+
+    // Disable toggle behavior (no hiding allowed)
+    if (btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent collapsing
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     }
 });
 
@@ -34,7 +37,6 @@ document.querySelectorAll('.share-prompt').forEach(shareBtn => {
                 console.log("Share canceled:", err);
             }
         } else {
-            // fallback for unsupported browsers
             prompt("Copy this link to share:", window.location.href);
         }
     });
