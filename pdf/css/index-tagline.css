@@ -1,28 +1,11 @@
-      /* Tool-specific colors */
-        .tool-merge { background: linear-gradient(135deg, #6c63ff, #4d44db); }
-        .tool-split { background: linear-gradient(135deg, #ff6584, #e64c66); }
-        .tool-convert { background: linear-gradient(135deg, #ff9a44, #ff7e33); }
-        .tool-jpg-pdf { background: linear-gradient(135deg, #ed01f5, #90099a); }
-        .tool-pdf-jpg { background: linear-gradient(135deg, #7209b7, #560bad); }
-        .tool-remove { background: linear-gradient(135deg, #ff4d4d, #cc0000); }
-        .tool-watermark { background: linear-gradient(135deg, #4cc9f0, #4361ee); }
-        .tool-reorder { background: linear-gradient(135deg, #f8961e, #f3722c); }
-        .tool-text { background: linear-gradient(135deg, #90be6d, #43aa8b); }
-        .tool-image-url { background: linear-gradient(135deg, #2667ff, #6ff317); }
-
-        
-        /* Tagline */
-        .tagline {
-            text-align: center;
-            margin: 30px auto;
-            max-width: 800px;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(57, 225, 227, 0.1));
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            font-weight: 500;
-            color: var(--primary-dark);
-            border-left: 4px solid var(--primary);
-            border-right: 4px solid var(--accent);
-            box-shadow: var(--shadow);
-        }
+/* Tool-specific colors */
+.tool-merge { background: linear-gradient(135deg, #6c63ff, #4d44db); }
+.tool-split { background: linear-gradient(135deg, #ff6584, #e64c66); }
+.tool-convert { background: linear-gradient(135deg, #ff9a44, #ff7e33); }
+.tool-jpg-pdf { background: linear-gradient(135deg, #ed01f5, #90099a); }
+.tool-pdf-jpg { background: linear-gradient(135deg, #7209b7, #560bad); }
+.tool-remove { background: linear-gradient(135deg, #ff4d4d, #cc0000); }
+.tool-watermark { background: linear-gradient(135deg, #4cc9f0, #4361ee); }
+.tool-reorder { background: linear-gradient(135deg, #f8961e, #f3722c); }
+.tool-text { background: linear-gradient(135deg, #90be6d, #43aa8b); }
+.tool-image-url { background: linear-gradient(135deg, #2667ff, #6ff317); }
