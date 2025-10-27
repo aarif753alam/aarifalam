@@ -1,91 +1,121 @@
-/* Responsive Styles for PDF Nexus Pro */
-/* Mobile First Approach */
+/* Mobile First - Default (3 cards) */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
 
-/* Base Mobile Styles */
-@media (max-width: 479px) {
-    :root {
-        --card-size: 100px;
-        --border-radius: 12px;
-    }
-    
-    .container {
-        width: 100%;
-        padding: 0 10px;
-    }
-    
-    .header h1 {
-        font-size: 1.8rem;
-        line-height: 1.2;
-    }
-    
-    .header p {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
-    
+.tool-card {
+    padding: 8px 2px;
+    border-radius: 12px;
+}
+
+.tool-icon {
+    width: 35px;
+    height: 35px;
+    margin: 0 auto 6px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.tool-card h3 {
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+    line-height: 1.2;
+}
+
+.tool-card p {
+    font-size: 0.65rem;
+    line-height: 1.2;
+}
+
+/* Very Small Phones (280px-359px) */
+@media (min-width: 280px) and (max-width: 359px) {
     .tools-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-    }
-    
-    .tool-card {
-        padding: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
     }
     
     .tool-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
     }
     
     .tool-card h3 {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
     
     .tool-card p {
         font-size: 0.6rem;
     }
-    
-    .tagline {
-        margin: 20px auto;
-        padding: 12px;
-        font-size: 0.9rem;
+}
+
+/* Small Phones (360px-399px) */
+@media (min-width: 360px) and (max-width: 399px) {
+    .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
     }
 }
 
-/* Small Devices (480px - 767px) */
-@media (min-width: 480px) and (max-width: 767px) {
-    :root {
-        --card-size: 110px;
-    }
-    
+/* Medium Phones (400px-479px) */
+@media (min-width: 400px) and (max-width: 479px) {
     .tools-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
     }
     
+    .tool-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+    
     .tool-card h3 {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
     }
     
     .tool-card p {
-        font-size: 0.65rem;
+        font-size: 0.68rem;
     }
 }
 
-/* Tablets (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-    :root {
-        --card-size: 130px;
+/* Large Phones (480px-575px) */
+@media (min-width: 480px) and (max-width: 575px) {
+    .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
     }
     
+    .tool-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.82rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.72rem;
+    }
+}
+
+/* Small Tablets (576px-667px) */
+@media (min-width: 576px) and (max-width: 667px) {
     .tools-grid {
         grid-template-columns: repeat(5, 1fr);
         gap: 12px;
     }
     
-    .header h1 {
-        font-size: 2.4rem;
+    .tool-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
     }
     
     .tool-card h3 {
@@ -93,107 +123,263 @@
     }
     
     .tool-card p {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
 }
 
-/* Small Laptops (1024px - 1279px) */
-@media (min-width: 1024px) and (max-width: 1279px) {
-    :root {
-        --card-size: 140px;
-    }
-    
+/* Medium Tablets (668px-767px) */
+@media (min-width: 668px) and (max-width: 767px) {
     .tools-grid {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 14px;
     }
-}
-
-/* Large Laptops and Desktops (1280px - 1439px) */
-@media (min-width: 1280px) and (max-width: 1439px) {
-    :root {
-        --card-size: 150px;
+    
+    .tool-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
     }
     
+    .tool-card h3 {
+        font-size: 0.88rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.78rem;
+    }
+}
+
+/* Large Tablets (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .tools-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 15px;
+    }
+    
+    .tool-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.35rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.9rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Small Desktops (992px-1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
     .tools-grid {
         grid-template-columns: repeat(6, 1fr);
         gap: 16px;
     }
-}
-
-/* Extra Large Screens (1440px and up) */
-@media (min-width: 1440px) {
-    :root {
-        --card-size: 160px;
+    
+    .tool-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
     }
     
+    .tool-card h3 {
+        font-size: 0.92rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.82rem;
+    }
+}
+
+/* Medium Desktops (1200px-1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
     .tools-grid {
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 18px;
     }
-}
-
-/* Mac-specific adjustments for better rendering */
-@supports (-webkit-font-smoothing: antialiased) {
-    body {
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-    }
     
-    .tool-card {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-}
-
-/* High DPI/Retina Displays */
-@media 
-(-webkit-min-device-pixel-ratio: 2), 
-(min-resolution: 192dpi) { 
     .tool-icon {
-        background-position: center;
-        background-size: cover;
+        width: 55px;
+        height: 55px;
+        font-size: 1.45rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.94rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.84rem;
     }
 }
 
-/* Landscape Mobile Devices */
-@media (max-width: 767px) and (orientation: landscape) {
+/* Large Desktops (1440px-1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
     .tools-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
     }
     
-    .tool-card {
-        padding: 8px;
+    .tool-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 1.5rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.96rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.86rem;
+    }
+}
+
+/* Extra Large Desktops (1920px+) */
+@media (min-width: 1920px) {
+    .tools-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 22px;
+    }
+    
+    .tool-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 1rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+    .tools-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+    }
+    
+    .tool-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.7rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.6rem;
     }
 }
 
 /* Foldable Devices */
-@media (min-width: 600px) and (max-width: 899px) {
+@media (max-width: 279px) {
     .tools-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Very Small Height Devices */
-@media (max-height: 500px) {
-    .header {
-        margin-bottom: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
     }
     
-    .tagline {
-        margin: 15px auto;
+    .tool-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 0.65rem;
+    }
+    
+    .tool-card p {
+        font-size: 0.55rem;
     }
 }
 
-/* Print Styles */
-@media print {
+/* Ultra-wide Screens (2560px+) */
+@media (min-width: 2560px) {
+    .tools-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 25px;
+    }
+    
+    .tool-icon {
+        width: 65px;
+        height: 65px;
+        font-size: 1.8rem;
+    }
+    
+    .tool-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .tool-card p {
+        font-size: 1rem;
+    }
+}
+
+/* Container Responsive */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 15px 8px;
+    }
+}
+
+@media (max-width: 479px) {
+    .container {
+        padding: 10px 5px;
+    }
+}
+
+/* Header Text Responsive */
+.header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+}
+
+.header p {
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+}
+
+.category-header h2 {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+}
+
+.tagline {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .tool-card:hover {
+        transform: none;
+    }
+    
+    .tool-card:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
     .tool-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
+        transition: none;
     }
     
-    .tools-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+    .tool-card:hover {
+        transform: none;
     }
 }
