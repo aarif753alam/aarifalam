@@ -120,218 +120,317 @@
      crossorigin="anonymous"></script>
     
     <style>
-        :root {
-            --primary: #6c63ff;
-            --primary-dark: #4d44db;
-            --secondary: #ff6584;
-            --accent: #39e1e3;
-            --dark: #2a2a72;
-            --light: #f8f9fa;
-            --text: #333;
-            --text-light: #777;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --border-radius: 16px;
-            --card-size: 120px;
-        }
+:root {
+    /* Light Theme Colors */
+    --primary: #6c63ff;
+    --primary-dark: #4d44db;
+    --secondary: #ff6584;
+    --accent: #39e1e3;
+    --dark: #2a2a72;
+    --light: #f8f9fa;
+    --text: #333;
+    --text-light: #777;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --border-radius: 16px;
+    --card-size: 120px;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --border-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Colors */
+    --primary: #8b85ff;
+    --primary-dark: #6c63ff;
+    --secondary: #ff7b9c;
+    --accent: #4fe9eb;
+    --dark: #1a1a4a;
+    --light: #1e1e2e;
+    --text: #e4e4e7;
+    --text-light: #a1a1aa;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --bg-primary: #0f0f23;
+    --bg-secondary: #1a1a2e;
+    --border-color: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    padding: 20px 0;
+    min-height: 100vh;
+    transition: var(--transition);
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 10px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 70px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.toggle-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.toggle-btn:hover::before {
+    left: 100%;
+}
+
+.toggle-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-size), 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.tool-card {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius);
+    padding: 2px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: inherit;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.tool-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.tool-card:active {
+    transform: translateY(-2px) scale(1.01);
+}
+
+.tool-icon {
+    width: clamp(40px, 10vw, 50px);
+    height: clamp(40px, 10vw, 50px);
+    margin: 0 auto 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    transition: var(--transition);
+}
+
+.tool-card:hover .tool-icon {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.tool-card h3 {
+    font-size: clamp(0.8rem, 3vw, 0.95rem);
+    margin-bottom: 4px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.tool-card p {
+    color: var(--text-light);
+    font-size: clamp(0.65rem, 2.5vw, 0.75rem);
+    line-height: 1.3;
+}
+
+/* Category Headers */
+.category-header {
+    text-align: center;
+    margin: 40px 0 20px;
+    position: relative;
+}
+
+.category-header h2 {
+    display: inline-block;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 20px;
+    position: relative;
+}
+
+.category-header h2::before,
+.category-header h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.category-header h2::before {
+    left: -60px;
+}
+
+.category-header h2::after {
+    right: -60px;
+    background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+/* Tagline */
+.tagline {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 800px;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(57, 225, 227, 0.1));
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 500;
+    color: var(--primary-dark);
+    border-left: 4px solid var(--primary);
+    border-right: 4px solid var(--accent);
+    box-shadow: var(--shadow);
+}
+/* Star Field Animation for Dark Mode */
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+[data-theme="dark"] .star-field {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration, 3s) infinite var(--delay, 0s);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    animation: fadeInUp 0.8s ease;
+}
+
+.tools-grid {
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.tagline {
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: #f5f7fa;
-            padding: 20px 0;
-            min-height: 100vh;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 10px;
-        }
-        
-        /* Header Section */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .header h1 {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .header p {
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Tools Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(var(--card-size), 1fr));
-            gap: 10px;
-            margin-bottom: 10px;
-            justify-content: center;
-        }
-        
-        .tool-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            aspect-ratio: 1/1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .tool-card:active {
-            transform: translateY(-2px) scale(1.01);
-        }
-        
-        .tool-icon {
-            width: clamp(40px, 10vw, 50px);
-            height: clamp(40px, 10vw, 50px);
-            margin: 0 auto 8px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            transition: var(--transition);
-        }
-        
-        .tool-card:hover .tool-icon {
-            transform: rotate(10deg) scale(1.1);
-        }
-        
-        .tool-card h3 {
-            font-size: clamp(0.8rem, 3vw, 0.95rem);
-            margin-bottom: 4px;
-            color: var(--dark);
-            font-weight: 600;
-        }
-        
-        .tool-card p {
-            color: var(--text-light);
-            font-size: clamp(0.65rem, 2.5vw, 0.75rem);
-            line-height: 1.3;
-        }
-        
-        
-        /* Category Headers */
-        .category-header {
-            text-align: center;
-            margin: 40px 0 20px;
-            position: relative;
-        }
-        
-        .category-header h2 {
-            display: inline-block;
-            font-size: 1.4rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding: 0 20px;
-            position: relative;
-        }
-        
-        .category-header h2::before,
-        .category-header h2::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-        }
-        
-        .category-header h2::before {
-            left: -60px;
-        }
-        
-        .category-header h2::after {
-            right: -60px;
-            background: linear-gradient(90deg, transparent, var(--accent));
-        }
-        
-        /* Responsive Adjustments */
-        @media (min-width: 768px) {
-            :root {
-                --card-size: 140px;
-            }
-            
-            .tools-grid {
-                gap: 15px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            :root {
-                --card-size: 150px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-            
-            .category-header h2::before,
-            .category-header h2::after {
-                width: 20px;
-            }
-            
-            .category-header h2::before {
-                left: -30px;
-            }
-            
-            .category-header h2::after {
-                right: -30px;
-            }
-        }
-        /* Watermark animation */
+ /* Watermark animation */
 @keyframes fadeWatermark {
   0% { opacity: 1; }
   90% { opacity: 1; }
@@ -369,269 +468,461 @@
 
   </style>
 
-    <!-- pdf tools blog css-->
-    <style>
-    /* Premium Toggle Button Styles */
-    .pdf-toggle-container {
-        position: relative;
-        display: inline-block;
-        margin: 30px 0;
-        perspective: 1000px;
-        width: 100%;
-        text-align: center;
-    }
 
-    .pdf-toggle-wrapper {
-        position: relative;
-        display: inline-block;
-        transform-style: preserve-3d;
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
+<!-- PDF Tools Blog Unified CSS -->
+<style>
+/* 🌙 PDF Toggle Button (Premium Style) */
+.pdf-toggle-container {
+    position: relative;
+    display: inline-block;
+    margin: 30px 0;
+    perspective: 1000px;
+    width: 100%;
+    text-align: center;
+}
 
-    .pdf-toggle-backdrop {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        border-radius: 50px;
-        filter: blur(8px);
-        opacity: 0.6;
-        transition: all 0.4s ease;
-        z-index: 0;
-    }
+.pdf-toggle-wrapper {
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-    .pdf-toggle-btn {
-        position: relative;
-        padding: 16px 32px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        border: none;
-        border-radius: 50px;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        overflow: hidden;
-        z-index: 1;
-        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 220px;
-        justify-content: center;
-    }
+.pdf-toggle-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50px;
+    filter: blur(8px);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+    z-index: 0;
+}
 
-    .pdf-toggle-btn .text {
-        position: relative;
-        z-index: 2;
-        transition: all 0.3s ease;
-    }
+.pdf-toggle-btn {
+    position: relative;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+    justify-content: center;
+}
 
-    .pdf-toggle-btn .icon {
-        position: relative;
-        z-index: 2;
-        transition: all 0.3s ease;
-    }
+.pdf-toggle-btn .text,
+.pdf-toggle-btn .icon {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
 
-    .pdf-toggle-btn .hover-effect {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
+.pdf-toggle-btn .hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
 
-    /* Content Animation */
-    .pdf-content {
-        animation: fadeIn 0.6s ease-out forwards;
-        margin-top: 20px;
-    }
+.pdf-toggle-container:hover .pdf-toggle-wrapper {
+    transform: translateY(-3px);
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.pdf-toggle-container:hover .pdf-toggle-backdrop {
+    transform: translateY(6px) scale(0.95);
+    opacity: 0.4;
+}
 
-    /* Hover Animations */
-    .pdf-toggle-container:hover .pdf-toggle-wrapper {
-        transform: translateY(-3px);
-    }
+.pdf-toggle-btn:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px);
+}
 
-    .pdf-toggle-container:hover .pdf-toggle-backdrop {
-        transform: translateY(6px) scale(0.95);
-        opacity: 0.4;
-    }
+.pdf-toggle-btn:hover .hover-effect {
+    opacity: 1;
+}
 
-    .pdf-toggle-btn:hover {
-        box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
-        transform: translateY(-2px);
-    }
+.pdf-toggle-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+}
 
-    .pdf-toggle-btn:hover .hover-effect {
-        opacity: 1;
-    }
+.pdf-toggle-btn.active .icon {
+    transform: rotate(180deg);
+}
 
-    /* Active State (when content is visible) */
-    .pdf-toggle-btn.active {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
+.pdf-toggle-btn.active + .pdf-toggle-backdrop {
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+}
 
-    .pdf-toggle-btn.active .icon {
-        transform: rotate(180deg);
-    }
+/* 🌙 PDF Tools Article (Now Theme Adaptive) */
+.pdf-tools-article {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.8;
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: var(--bg-primary);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
 
-    .pdf-toggle-btn.active + .pdf-toggle-backdrop {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-</style>
-    <!-- pdf tools blog-->
-    <style>
+.pdf-tools-article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.tool-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    border-left: 4px solid transparent;
+    background: var(--bg-secondary);
+}
+
+.tool-section:hover {
+    background: rgba(67, 97, 238, 0.1);
+    border-left-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.cta-button:hover::after {
+    opacity: 1;
+}
+
+.cta-button span {
+    position: relative;
+    z-index: 1;
+}
+
+.share-prompt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    background: rgba(67, 97, 238, 0.1);
+    transition: var(--transition);
+}
+
+.share-prompt:hover {
+    background: rgba(67, 97, 238, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tool-section {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.tool-section:nth-child(1) { animation-delay: 0.1s; }
+.tool-section:nth-child(2) { animation-delay: 0.2s; }
+.tool-section:nth-child(3) { animation-delay: 0.3s; }
+
+/* Responsive */
+@media (max-width: 768px) {
     .pdf-tools-article {
-        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        line-height: 1.8;
-        max-width: 850px;
-        margin: 2rem auto;
-        padding: 2.5rem;
-        background: white;
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        color: var(--text);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .pdf-tools-article::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 8px;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
-    }
-
-    .tool-section {
-        margin-bottom: 3rem;
         padding: 1.5rem;
         border-radius: 12px;
-        transition: var(--transition);
-        border-left: 4px solid transparent;
     }
-
-    .tool-section:hover {
-        background: rgba(67, 97, 238, 0.05);
-        border-left-color: var(--accent);
-        transform: translateY(-2px);
-    }
-
-    .cta-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.8rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 0.8rem 1.8rem;
-        border-radius: 50px;
-        font-weight: 600;
-        margin-top: 1rem;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cta-button::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--secondary), var(--primary));
-        opacity: 0;
-        transition: var(--transition);
-    }
-
-    .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
-    }
-
-    .cta-button:hover::after {
-        opacity: 1;
-    }
-
-    .cta-button span {
-        position: relative;
-        z-index: 1;
-    }
-
-    .share-prompt {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 600;
-        margin: 2rem 0;
-        color: var(--primary);
-        cursor: pointer;
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        background: rgba(67, 97, 238, 0.1);
-        transition: var(--transition);
-    }
-
-    .share-prompt:hover {
-        background: rgba(67, 97, 238, 0.2);
-        transform: translateY(-2px);
-    }
-
-    /* Animation for tool sections */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .tool-section {
-        animation: fadeInUp 0.6s ease-out forwards;
-        opacity: 0;
-    }
-
-    /* Delay animations for each section */
-    .tool-section:nth-child(1) { animation-delay: 0.1s; }
-    .tool-section:nth-child(2) { animation-delay: 0.2s; }
-    .tool-section:nth-child(3) { animation-delay: 0.3s; }
-    /* Continue for all 9 sections... */
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .pdf-tools-article {
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-        
-        h1 {
-            font-size: 2rem;
-        }
-        
-        h2 {
-            font-size: 1.4rem;
-        }
-    }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.4rem; }
+}
 </style>
 
+
+/* extra css */
+<style>
+/* === ENHANCED CARD FEEL & INTERACTION === */
+/* Add these styles to your existing CSS */
+
+/* Enhanced Card Container */
+.tool-card {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    /* Keep your existing properties */
+}
+
+/* Enhanced Top Border with Animation */
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    background-size: 200% 100%;
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+/* Hover Glow Effect */
+.tool-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(108, 99, 255, 0.1), 
+        rgba(57, 225, 227, 0.1), 
+        transparent
+    );
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+/* Enhanced Hover States */
+.tool-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 5px 15px rgba(108, 99, 255, 0.3);
+    border-color: var(--primary);
+}
+
+.tool-card:hover::before {
+    background-position: 100% 0;
+    height: 5px;
+}
+
+.tool-card:hover::after {
+    left: 100%;
+}
+
+/* Active/Pressed State */
+.tool-card:active {
+    transform: translateY(-2px) scale(1.02);
+    transition: all 0.1s ease;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.15),
+        0 2px 5px rgba(108, 99, 255, 0.4);
+}
+
+/* Focus State for Accessibility */
+.tool-card:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Enhanced Icon Container */
+.tool-icon {
+    position: relative;
+    z-index: 3;
+    /* New properties */
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Keep your existing properties */
+}
+
+/* Enhanced Icon Hover */
+.tool-card:hover .tool-icon {
+    transform: rotate(15deg) scale(1.15);
+    box-shadow: 
+        inset 0 2px 8px rgba(255, 255, 255, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Card Content Enhancement */
+.tool-card h3 {
+    position: relative;
+    z-index: 3;
+    transition: all 0.3s ease;
+    /* Keep your existing properties */
+}
+
+.tool-card p {
+    position: relative;
+    z-index: 3;
+    transition: all 0.3s ease;
+    /* Keep your existing properties */
+}
+
+.tool-card:hover h3 {
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.tool-card:hover p {
+    color: var(--text);
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Touch Device Specific Enhancements */
+@media (hover: none) and (pointer: coarse) {
+    .tool-card:active {
+        transform: scale(0.95);
+        background: rgba(108, 99, 255, 0.05);
+    }
+    
+    .tool-card:active .tool-icon {
+        transform: scale(1.1);
+    }
+}
+
+/* Dark Mode Specific Enhancements */
+[data-theme="dark"] .tool-card:hover {
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        0 5px 15px rgba(108, 99, 255, 0.2);
+}
+
+[data-theme="dark"] .tool-icon {
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced Tool-specific Colors with Better Gradients */
+.tool-merge { 
+    background: linear-gradient(135deg, #6c63ff 0%, #4d44db 50%, #3a32c7 100%); 
+}
+.tool-split { 
+    background: linear-gradient(135deg, #ff6584 0%, #e64c66 50%, #d63352 100%); 
+}
+.tool-convert { 
+    background: linear-gradient(135deg, #ff9a44 0%, #ff7e33 50%, #ff6a1a 100%); 
+}
+.tool-jpg-pdf { 
+    background: linear-gradient(135deg, #ed01f5 0%, #90099a 50%, #7a0783 100%); 
+}
+.tool-pdf-jpg { 
+    background: linear-gradient(135deg, #7209b7 0%, #560bad 50%, #480a8c 100%); 
+}
+.tool-remove { 
+    background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 50%, #b30000 100%); 
+}
+.tool-watermark { 
+    background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 50%, #3a56d4 100%); 
+}
+.tool-reorder { 
+    background: linear-gradient(135deg, #f8961e 0%, #f3722c 50%, #e55c1a 100%); 
+}
+.tool-text { 
+    background: linear-gradient(135deg, #90be6d 0%, #43aa8b 50%, #38a17a 100%); 
+}
+.tool-image-url { 
+    background: linear-gradient(135deg, #2667ff 0%, #6ff317 50%, #5cd60c 100%); 
+}
+
+/* Pulse Animation for Attention */
+@keyframes subtle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.tool-card:focus {
+    animation: subtle-pulse 2s infinite;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .tool-card,
+    .tool-icon {
+        transition: none;
+    }
+    
+    .tool-card:hover {
+        transform: none;
+    }
+    
+    .ripple {
+        display: none;
+    }
+}
+</style>
 </head>
 <body>
 <!-- Scroll Progress Indicator -->
@@ -1206,6 +1497,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Theme Toggle Button -->
+<div class="theme-toggle">
+  <button id="themeToggle" class="toggle-btn" title="Toggle Theme">
+    🌙
+  </button>
+</div>
     
 <footer style="text-align: center; padding: 20px 0; margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1);">
     <div style="font-size: 14px; color: #777;">
@@ -1260,6 +1558,186 @@
         }
     };
     </script>
+    
+    <script>
+  const toggleBtn = document.getElementById('themeToggle');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+
+  // Apply saved theme
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  toggleBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+  // Toggle logic
+  toggleBtn.addEventListener('click', () => {
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  });
+</script>
+
+<script>
+// Enhanced Card Interactions with Ripple Effect
+document.addEventListener('DOMContentLoaded', function() {
+    const toolCards = document.querySelectorAll('.tool-card');
+    
+    toolCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Ripple effect
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+            `;
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Enhanced hover sound simulation (optional)
+        card.addEventListener('mouseenter', function() {
+            this.style.cursor = 'pointer';
+        });
+    });
+});
+</script>
+    
+<script>
+// ✅ List of domains you personally trust
+// Add new ones here when you want to allow iframes from them
+const allowedDomains = [
+  "aarifalam.life",          // main domain
+  "aarifalam.pages.dev"      // your Cloudflare/GitHub deploy
+  // Example: "trustedpartner.com"
+];
+
+(function() {
+  try {
+    if (window.top !== window.self) {
+      const referrer = document.referrer || "";
+      
+      // ✅ Check if the iframe source matches your allowed domains
+      const allowed = allowedDomains.some(domain =>
+        referrer.includes(domain)
+      );
+
+      // ✅ Also auto-allow all subdomains of aarifalam.life
+      const subdomainAllowed = referrer.match(/:\/\/([a-z0-9.-]*\.)?aarifalam\.life/i);
+
+      if (!allowed && !subdomainAllowed) {
+        document.head.innerHTML = `
+        <style>
+          body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #001a00, #000);
+            color: #00ff55;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+          }
+
+          .security-box {
+            border: 3px dashed rgba(0,255,100,0.7);
+            padding: 40px 60px;
+            border-radius: 20px;
+            background: rgba(0,255,50,0.05);
+            box-shadow: 0 0 25px rgba(0,255,80,0.4);
+            text-align: center;
+            position: relative;
+            animation: glowFade 2s infinite alternate;
+          }
+
+          @keyframes glowFade {
+            from { box-shadow: 0 0 10px rgba(0,255,100,0.4); }
+            to { box-shadow: 0 0 25px rgba(0,255,100,0.8); }
+          }
+
+          .security-box::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 2px dashed rgba(0,255,80,0.3);
+            border-radius: 20px;
+            opacity: 0.5;
+            animation: fadeEdges 3s infinite alternate;
+          }
+
+          @keyframes fadeEdges {
+            from { opacity: 0.2; }
+            to { opacity: 0.6; }
+          }
+
+          h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #00ff77;
+          }
+
+          p {
+            font-size: 1rem;
+            color: #aaffcc;
+            margin-bottom: 25px;
+          }
+
+          .contact-btn {
+            background: linear-gradient(135deg, #00ff77, #007a3d);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0,255,100,0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+          }
+
+          .contact-btn:hover {
+            background: linear-gradient(135deg, #00cc66, #006633);
+            box-shadow: 0 0 25px rgba(0,255,100,0.8);
+            transform: scale(1.1);
+          }
+
+          @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+          }
+        </style>`;
+
+        document.body.innerHTML = `
+          <div class="security-box">
+            <h2>⚠️ Security Restriction</h2>
+            <p>
+              This website cannot be embedded in an iframe for security reasons.<br>
+              Only authorized domains approved by Aarif Alam are allowed.
+            </p>
+            <button class="contact-btn" onclick="window.top.location='https://aarifalam.life'">
+              Visit Official Site
+            </button>
+          </div>`;
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Iframe embedding blocked for security reasons.');
+  }
+})();
+</script>
     <script>
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("click",function(e){let t=this.dataset.tool;console.log(`Tool clicked: ${t}`)})}),function(){let e={creatorName:"@aarifalam0105",requiredFiles:{css:"css/index-tagline.css",js:"js/pdf-header.js"},checkInterval:3e3,originalUrl:"https://aarifalam.life/"},t=()=>{let t=document.createElement("div");t.id="__css_valid_"+Math.random().toString(36).substr(2,9),t.setAttribute("data-creator",e.creatorName),t.style.display="none",document.body.appendChild(t);let r=document.createElement("div");r.id="__js_valid_"+Math.random().toString(36).substr(2,9),r.setAttribute("data-creator",e.creatorName),r.style.display="none",document.body.appendChild(r)},r=()=>{try{let t=!1;document.querySelectorAll('link[rel="stylesheet"]').forEach(r=>{r.href.includes(e.requiredFiles.css.split("/").pop())&&(t=!0)});let r=!1;return Array.from(document.scripts).forEach(t=>{t.src&&t.src.includes(e.requiredFiles.js.split("/").pop())&&(r=!0)}),t&&r}catch(a){return!1}},a=()=>{try{let t=document.getElementById("creator-watermark");return t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(r){return!1}},l=()=>{document.body.classList.add("body-blocked");let t=document.createElement("div");t.className="blocked-message",t.innerHTML=`
       <h1>⚠️ Unauthorized Modification Detected</h1>
@@ -1269,11 +1747,10 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
       <p>Created by ${e.creatorName}</p>
     `,document.body.appendChild(t);let r=document.body.cloneNode(!0);document.body.parentNode.replaceChild(r,document.body)},s=()=>{if(t(),!r()||!a()){l();return}setInterval(()=>{r()&&a()||l()},e.checkInterval)};setTimeout(s,100)}(),"ontouchstart"in window&&document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("touchstart",function(){this.classList.add("hover")},{passive:!0}),e.addEventListener("touchend",function(){setTimeout(()=>{this.classList.remove("hover")},200)},{passive:!0})})});
     </script>
-
     <script src="js/pdf-blog.js"></script>
-      
 </body>
 </html>
+
 
 
 
