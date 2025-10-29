@@ -923,6 +923,442 @@ body {
     }
 }
 </style>
+    <style>
+/* PDF Showcase Styles - Theme Compatible */
+.pdf-showcase {
+  padding: 80px 20px;
+  background: var(--bg-secondary);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.pdf-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 101, 132, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(57, 225, 227, 0.08) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+.showcase-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.showcase-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(108, 99, 255, 0.1),
+    rgba(57, 225, 227, 0.1),
+    transparent 30%
+  );
+  animation: rotate 15s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Image Side */
+.showcase-image {
+  position: relative;
+  z-index: 2;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--border-color);
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: var(--transition);
+  background: var(--bg-primary);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+}
+
+.showcase-image:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px var(--primary);
+}
+
+.showcase-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition);
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* Text Side */
+.showcase-text {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.showcase-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  transform: translateX(-20px);
+  animation: slideInRight 0.8s ease forwards;
+  opacity: 0;
+}
+
+.showcase-description {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 30px;
+  transform: translateX(-20px);
+  animation: slideInRight 0.8s ease 0.2s forwards;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+/* Button */
+.showcase-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  box-shadow: 
+    0 8px 25px rgba(108, 99, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateX(-20px);
+  animation: slideInRight 0.8s ease 0.4s forwards;
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.showcase-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition);
+}
+
+.showcase-btn:hover::before {
+  left: 100%;
+}
+
+.showcase-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  box-shadow: 
+    0 12px 30px rgba(108, 99, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.showcase-btn:active {
+  transform: translateY(0) scale(1);
+}
+
+.showcase-btn i {
+  transition: var(--transition);
+}
+
+.showcase-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* Indicators */
+.showcase-indicators {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.showcase-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--border-color);
+}
+
+.showcase-indicator::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: transparent;
+  transition: var(--transition);
+}
+
+.showcase-indicator:hover::before {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.showcase-indicator.active {
+  background: var(--primary);
+  transform: scale(1.2);
+  box-shadow: 
+    0 0 0 2px rgba(108, 99, 255, 0.3),
+    0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+/* Animation Classes */
+.fade-out {
+  animation: fadeOut 0.6s ease forwards !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards !important;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .showcase-container {
+    gap: 40px;
+    padding: 30px;
+  }
+  
+  .showcase-title {
+    font-size: 2.2rem;
+  }
+  
+  .showcase-image img {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pdf-showcase {
+    padding: 60px 15px;
+  }
+  
+  .showcase-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 25px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+  }
+  
+  .showcase-image {
+    transform: none;
+    order: 2;
+  }
+  
+  .showcase-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .showcase-image img {
+    height: 300px;
+  }
+  
+  .showcase-text {
+    order: 1;
+    padding: 0;
+  }
+  
+  .showcase-title,
+  .showcase-description,
+  .showcase-btn {
+    transform: translateY(20px);
+    animation: slideInUp 0.8s ease forwards;
+  }
+  
+  .showcase-title {
+    animation-delay: 0s;
+  }
+  
+  .showcase-description {
+    animation-delay: 0.2s;
+  }
+  
+  .showcase-btn {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes slideInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-showcase {
+    padding: 40px 10px;
+  }
+  
+  .showcase-container {
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .showcase-title {
+    font-size: 1.8rem;
+  }
+  
+  .showcase-description {
+    font-size: 1.1rem;
+  }
+  
+  .showcase-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+  
+  .showcase-image img {
+    height: 250px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .showcase-container::before,
+  .pdf-showcase::before {
+    animation: none;
+  }
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .showcase-container {
+  background: rgba(15, 15, 35, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .showcase-image {
+  background: rgba(30, 30, 46, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .showcase-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+[data-theme="dark"] .showcase-indicator {
+  background: var(--text-light);
+}
+
+[data-theme="dark"] .showcase-indicator.active {
+  background: var(--primary);
+}
+
+/* Light mode specific adjustments */
+[data-theme="light"] .showcase-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .showcase-image {
+  background: rgba(255, 255, 255, 0.8);
+}
+</style>    
 </head>
 <body>
 <!-- Scroll Progress Indicator -->
@@ -1124,7 +1560,27 @@ body {
             <strong>Why choose our PDF tools?</strong> 100% free • No watermarks • No registration • Unlimited use • Works on all devices • Secure processing ( No your pdf file store )
         </div>
     </div>
-    
+
+    <section class="pdf-showcase">
+  <div class="showcase-container">
+    <!-- Image side -->
+    <div class="showcase-image">
+      <img src="https://res.cloudinary.com/dcwnn9c0u/image/upload/v1761769560/uppvjzrtadkycn5aysah.png" alt="PDF Tool Image">
+    </div>
+
+    <!-- Text side -->
+    <div class="showcase-text">
+      <h2 class="showcase-title">Image to PDF</h2>
+      <p class="showcase-description">Convert JPG, PNG, and other images into a single PDF file instantly.</p>
+      <a href="/pdf/image-to-pdf" class="showcase-btn">
+        <span>Open Tool</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+      <!-- Indicators will be added here by JavaScript -->
+    </div>
+  </div>
+</section>
+
 <!--  pdf blog  -->
 <!-- Toggle Button of pdf blog -->
 <div class="pdf-toggle-container">
@@ -1523,6 +1979,216 @@ body {
   Created by @aarifalam0105
 </div>
 
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const showcaseItems = [
+    {
+      img: "https://res.cloudinary.com/dcwnn9c0u/image/upload/v1761769560/uppvjzrtadkycn5aysah.png",
+      title: "Image to PDF",
+      desc: "Convert JPG, PNG, and other images into a single PDF file instantly.",
+      link: "/pdf/image-to-pdf"
+    },
+    {
+      img: "https://res.cloudinary.com/dcwnn9c0u/image/upload/v1761769561/ggnapuhbkvsdwppo5m5s.png",
+      title: "Merge PDF",
+      desc: "Combine multiple PDF files into one organized document easily.",
+      link: "/pdf/merge-pdf"
+    },
+    {
+      img: "https://res.cloudinary.com/dcwnn9c0u/image/upload/v1761769562/gphnghivzhi2byqge8jp.png",
+      title: "Split PDF",
+      desc: "Divide large PDF files into smaller, manageable documents with precision.",
+      link: "/pdf/split-pdf"
+    },
+    {
+      img: "https://res.cloudinary.com/dcwnn9c0u/image/upload/v1761769563/turehl9l1agcmdgdyfcw.png",
+      title: "PDF to Image",
+      desc: "Convert PDF pages to high-quality JPG or PNG images instantly.",
+      link: "/pdf/pdf-to-image"
+    }
+  ];
+
+  let current = 0;
+  let animationInterval;
+  const img = document.querySelector(".showcase-image img");
+  const title = document.querySelector(".showcase-title");
+  const desc = document.querySelector(".showcase-description");
+  const btn = document.querySelector(".showcase-btn");
+  const showcase = document.querySelector('.pdf-showcase');
+
+  // Create navigation indicators
+  const indicatorContainer = document.createElement('div');
+  indicatorContainer.className = 'showcase-indicators';
+  
+  showcaseItems.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = `showcase-indicator ${index === 0 ? 'active' : ''}`;
+    dot.setAttribute('aria-label', `Show tool ${index + 1}`);
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      clearInterval(animationInterval);
+      current = index;
+      switchContent();
+      updateIndicators();
+      animationInterval = setInterval(switchContent, 4000);
+    });
+    indicatorContainer.appendChild(dot);
+  });
+  
+  document.querySelector('.showcase-text').appendChild(indicatorContainer);
+
+  // Function to update active indicator
+  function updateIndicators() {
+    const indicators = document.querySelectorAll('.showcase-indicator');
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === current);
+    });
+  }
+
+  // Function to switch content with smooth animation
+  function switchContent() {
+    current = (current + 1) % showcaseItems.length;
+    const item = showcaseItems[current];
+
+    // Add fade-out animation
+    img.classList.add('fade-out');
+    title.classList.add('fade-out');
+    desc.classList.add('fade-out');
+    btn.classList.add('fade-out');
+
+    setTimeout(() => {
+      // Change content
+      img.src = item.img;
+      img.alt = `${item.title} Tool Preview`;
+      title.textContent = item.title;
+      desc.textContent = item.desc;
+      btn.href = item.link;
+
+      // Add fade-in animation
+      img.classList.remove('fade-out');
+      title.classList.remove('fade-out');
+      desc.classList.remove('fade-out');
+      btn.classList.remove('fade-out');
+      img.classList.add('fade-in');
+      title.classList.add('fade-in');
+      desc.classList.add('fade-in');
+      btn.classList.add('fade-in');
+
+      // Update indicators
+      updateIndicators();
+
+      // Remove fade-in class after animation completes
+      setTimeout(() => {
+        img.classList.remove('fade-in');
+        title.classList.remove('fade-in');
+        desc.classList.remove('fade-in');
+        btn.classList.remove('fade-in');
+      }, 600);
+    }, 300);
+  }
+
+  // Initialize auto-switch
+  function startAutoSwitch() {
+    animationInterval = setInterval(switchContent, 4000);
+  }
+
+  // Start the animation
+  startAutoSwitch();
+
+  // Pause animation on hover
+  showcase.addEventListener('mouseenter', () => {
+    clearInterval(animationInterval);
+  });
+
+  showcase.addEventListener('mouseleave', () => {
+    startAutoSwitch();
+  });
+
+  // Click to manually advance (excluding buttons and indicators)
+  showcase.addEventListener('click', (e) => {
+    if (!e.target.closest('.showcase-btn') && !e.target.closest('.showcase-indicator')) {
+      clearInterval(animationInterval);
+      switchContent();
+      startAutoSwitch();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      clearInterval(animationInterval);
+      if (e.key === 'ArrowRight') {
+        current = (current + 1) % showcaseItems.length;
+      } else {
+        current = (current - 1 + showcaseItems.length) % showcaseItems.length;
+      }
+      switchContent();
+      startAutoSwitch();
+    }
+  });
+
+  // Handle theme changes (if your theme toggle triggers events)
+  document.addEventListener('themeChanged', () => {
+    // Force a re-render to ensure theme colors are applied
+    const temp = current;
+    current = -1;
+    switchContent();
+    current = temp;
+  });
+
+  // Touch swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  showcase.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  showcase.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      clearInterval(animationInterval);
+      if (diff > 0) {
+        // Swipe left - next
+        current = (current + 1) % showcaseItems.length;
+      } else {
+        // Swipe right - previous
+        current = (current - 1 + showcaseItems.length) % showcaseItems.length;
+      }
+      switchContent();
+      startAutoSwitch();
+    }
+  }
+
+  // Reduced motion support
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches) {
+    clearInterval(animationInterval);
+    // Add a class to indicate reduced motion
+    showcase.classList.add('reduced-motion');
+  }
+
+  // Listen for reduced motion preferences changes
+  reducedMotion.addEventListener('change', (e) => {
+    if (e.matches) {
+      clearInterval(animationInterval);
+      showcase.classList.add('reduced-motion');
+    } else {
+      showcase.classList.remove('reduced-motion');
+      startAutoSwitch();
+    }
+  });
+});
+</script>
+    
+
 <script>
     // Auto-update year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1750,9 +2416,3 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
     <script src="js/pdf-blog.js"></script>
 </body>
 </html>
-
-
-
-
-
-
