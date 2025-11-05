@@ -116,9 +116,12 @@
     transform: translateX(5px);
 }
 
-/* Visual Area - Right Side */
+/* Visual Area - Right Side - IMPROVED */
 .word-meaning-game-visual-wrapper {
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .word-meaning-game-image-container {
@@ -129,6 +132,9 @@
     transition: all 0.5s ease;
     animation: word-meaning-game-fadeInRight 0.8s ease-out 0.3s backwards, 
                word-meaning-game-float 3s ease-in-out infinite 1s;
+    width: 100%;
+    max-width: 500px; /* Added max-width constraint */
+    margin: 0 auto;
 }
 
 .word-meaning-game-image-container::before {
@@ -156,7 +162,8 @@
 
 .word-meaning-game-featured-image {
     width: 100%;
-    height: 400px;
+    height: auto; /* Changed from fixed height to auto */
+    aspect-ratio: 4/3; /* Added aspect ratio for consistent proportions */
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
@@ -207,7 +214,7 @@
     }
 }
 
-/* Tablet Responsive */
+/* Tablet Responsive - IMPROVED */
 @media (max-width: 1024px) {
     .word-meaning-game-flex-container {
         gap: 40px;
@@ -222,12 +229,16 @@
         font-size: 1.05em;
     }
 
+    .word-meaning-game-image-container {
+        max-width: 400px; /* Adjusted for tablet */
+    }
+
     .word-meaning-game-featured-image {
-        height: 350px;
+        aspect-ratio: 1/1; /* Square aspect ratio for tablets */
     }
 }
 
-/* Mobile Responsive - Better Layout */
+/* Mobile Responsive - Better Layout - IMPROVED */
 @media (max-width: 768px) {
     .word-meaning-game-hero-section {
         margin: 30px auto;
@@ -239,10 +250,10 @@
         gap: 30px;
         padding: 30px 25px;
         border-radius: 20px;
+        text-align: center;
     }
     
     .word-meaning-game-content-wrapper {
-        text-align: center;
         order: 2;
     }
 
@@ -260,8 +271,14 @@
         margin-bottom: 25px;
     }
     
+    .word-meaning-game-image-container {
+        max-width: 100%; /* Full width on mobile */
+        margin: 0 auto;
+    }
+
     .word-meaning-game-featured-image {
-        height: 280px;
+        aspect-ratio: 16/9; /* Wider aspect ratio for mobile */
+        max-height: 300px; /* Added max-height constraint */
     }
 
     .word-meaning-game-cta-button {
@@ -275,7 +292,7 @@
     }
 }
 
-/* Small Mobile - Optimized */
+/* Small Mobile - Optimized - IMPROVED */
 @media (max-width: 480px) {
     .word-meaning-game-hero-section {
         margin: 20px auto;
@@ -305,12 +322,14 @@
         gap: 10px;
     }
     
-    .word-meaning-game-featured-image {
-        height: 220px;
+    .word-meaning-game-image-container {
         border-radius: 16px;
+        max-width: 100%;
     }
 
-    .word-meaning-game-image-container {
+    .word-meaning-game-featured-image {
+        aspect-ratio: 16/9;
+        max-height: 250px; /* Reduced max-height for small mobile */
         border-radius: 16px;
     }
 
@@ -319,7 +338,7 @@
     }
 }
 
-/* Extra Small Mobile */
+/* Extra Small Mobile - IMPROVED */
 @media (max-width: 360px) {
     .word-meaning-game-flex-container {
         padding: 20px 15px;
@@ -334,11 +353,23 @@
     }
 
     .word-meaning-game-featured-image {
-        height: 200px;
+        max-height: 200px; /* Further reduced for very small screens */
+        aspect-ratio: 16/9;
     }
 
     .word-meaning-game-cta-button {
         padding: 12px 24px;
         font-size: 0.95em;
+    }
+}
+
+/* Large Desktop - Added for better scaling on big screens */
+@media (min-width: 1400px) {
+    .word-meaning-game-hero-section {
+        max-width: 1300px;
+    }
+    
+    .word-meaning-game-image-container {
+        max-width: 550px; /* Constrain image size on large screens */
     }
 }
