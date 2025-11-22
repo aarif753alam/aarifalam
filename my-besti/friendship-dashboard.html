@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Dashboard - View All Submissions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --success: rgb(34, 64, 3);
+            --warning: #ffcc00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subheading {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            max-width: 400px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-danger {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .submissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+        }
+        
+        .submission-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+        
+        .submission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-details p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .timestamp {
+            text-align: right;
+        }
+        
+        .date {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .time {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .detail-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .detail-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            min-width: 150px;
+            color: #555555f8;
+        }
+        
+        .detail-value {
+            flex-grow: 1;
+        }
+        
+        .friendship-type {
+            display: inline-block;
+            background: rgba(117, 54, 219, 0.514);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .gender-badge {
+            display: inline-block;
+            background: rgba(60, 38, 255, 0.475);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .qualities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .quality-tag {
+            background: rgba(69, 187, 34, 0.567);
+            color: var(--success);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .message-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border-left: 4px solid var(--accent);
+            font-style: italic;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        
+        .no-data i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .no-data h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 107, 107, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .submission-card:hover .delete-btn {
+            opacity: 1;
+        }
+        
+        .delete-btn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        /* Confirmation Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            animation: modalPop 0.3s ease;
+        }
+        
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .submissions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .timestamp {
+                text-align: left;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .detail-label {
+                min-width: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .dashboard-container {
+                padding: 20px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 10px;">Delete Submission</h3>
+            <p>Are you sure you want to delete this friendship submission? This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="modalCancel">Cancel</button>
+                <button class="btn btn-danger" id="modalConfirm">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Friendship Dashboard</h1>
+            <p class="subheading">View all friendship submissions with complete details</p>
+        </header>
+        
+        <div class="dashboard-container">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSubmissions">0</div>
+                    <div class="stat-label">Total Submissions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="maleCount">0</div>
+                    <div class="stat-label">Male Friends</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="femaleCount">0</div>
+                    <div class="stat-label">Female Friends</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bestFriends">0</div>
+                    <div class="stat-label">Best Friends</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name, contact, or message...">
+                </div>
+                
+                <div class="filter-options">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="male">Male</button>
+                    <button class="filter-btn" data-filter="female">Female</button>
+                    <button class="filter-btn" data-filter="best friend">Best Friends</button>
+                    <button class="filter-btn" data-filter="brother">Brother</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+            
+            <div class="submissions-grid" id="submissionsGrid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading friendship submissions...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+// Worker URL and secret key
+const WORKER_URL = "https://friendship-worker.kumar8948rahul.workers.dev/";
+const DASHBOARD_SECRET = "c2c78d8857b773833ca8408713f54d96";
+
+// DOM elements
+const submissionsGrid = document.getElementById('submissionsGrid');
+const refreshBtn = document.getElementById('refreshBtn');
+const exportBtn = document.getElementById('exportBtn');
+const searchInput = document.getElementById('searchInput');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const deleteModal = document.getElementById('deleteModal');
+const modalCancel = document.getElementById('modalCancel');
+const modalConfirm = document.getElementById('modalConfirm');
+
+const totalSubmissionsEl = document.getElementById('totalSubmissions');
+const maleCountEl = document.getElementById('maleCount');
+const femaleCountEl = document.getElementById('femaleCount');
+const bestFriendsEl = document.getElementById('bestFriends');
+
+let allSubmissions = [];
+let filteredSubmissions = [];
+let submissionToDelete = null;
+
+// Load submissions from Worker with DEBUG
+async function loadSubmissions() {
+    submissionsGrid.innerHTML = `
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading friendship submissions...</p>
+        </div>
+    `;
+    
+    try {
+        console.log('🔍 Sending request to Worker:', WORKER_URL + 'get-submissions');
+        
+        const response = await fetch(WORKER_URL + 'get-submissions', {
+            method: 'GET',
+            headers: {
+                'X-Auth-Token': DASHBOARD_SECRET
+            }
+        });
+
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response ok:', response.ok);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Server error:', errorText);
+            
+            if (response.status === 401) {
+                throw new Error('Authentication failed - check secret key');
+            } else if (response.status === 404) {
+                throw new Error('Worker endpoint not found');
+            } else {
+                throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
+            }
+        }
+
+        const submissions = await response.json();
+        console.log('✅ Data received from Worker:', submissions);
+        
+        // Convert Firebase object to array
+        allSubmissions = submissions ? Object.entries(submissions).map(([key, value]) => ({ 
+            id: key, 
+            ...value 
+        })) : [];
+        
+        console.log('📊 Processed submissions:', allSubmissions);
+        
+        // Sort by timestamp (newest first) - Most recent at top
+        allSubmissions.sort((a, b) => {
+            const dateA = new Date(a.timestamp);
+            const dateB = new Date(b.timestamp);
+            return dateB - dateA; // Newest first
+        });
+        
+        displaySubmissions(allSubmissions);
+        updateStats(allSubmissions);
+        
+    } catch (error) {
+        console.error('💥 Error loading data:', error);
+        submissionsGrid.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Error Loading Data</h3>
+                <p>${error.message}</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #999;">
+                    Check browser console for detailed error information
+                </p>
+            </div>
+        `;
+    }
+}
+
+// Get time period label
+function getTimePeriod(date) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    
+    if (hours < 6) return { period: "Late Night", icon: "fa-moon", color: "#6a11cb" };
+    if (hours < 12) return { period: "Morning", icon: "fa-sun", color: "#ffcc00" };
+    if (hours < 15) return { period: "Afternoon", icon: "fa-cloud-sun", color: "#2575fc" };
+    if (hours < 18) return { period: "Evening", icon: "fa-sun", color: "#ff6b6b" };
+    return { period: "Night", icon: "fa-moon", color: "#6a11cb" };
+}
+
+// Get relative time label
+function getRelativeTime(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    
+    if (diffMins < 1) return { label: "Just Now", color: "#4cd964", icon: "fa-bolt" };
+    if (diffMins < 60) return { label: `${diffMins}m ago`, color: "#4cd964", icon: "fa-clock" };
+    if (diffHours < 24) return { label: `${diffHours}h ago`, color: "#2575fc", icon: "fa-clock" };
+    if (diffDays === 1) return { label: "Yesterday", color: "#ff6b6b", icon: "fa-calendar-day" };
+    if (diffDays < 7) return { label: `${diffDays}d ago`, color: "#ff6b6b", icon: "fa-calendar" };
+    return { label: `${diffDays}d ago`, color: "#999", icon: "fa-calendar" };
+}
+
+// Display submissions in the dashboard with enhanced time indicators
+function displaySubmissions(submissions) {
+    if (submissions.length === 0) {
+        submissionsGrid.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-users"></i>
+                <h3>No Friendship Submissions Yet</h3>
+                <p>When people submit your friendship form, their submissions will appear here.</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const thisWeek = new Date(today);
+    thisWeek.setDate(thisWeek.getDate() - 7);
+    
+    submissions.forEach((submission, index) => {
+        const date = new Date(submission.timestamp);
+        const formattedDate = date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        const formattedTime = date.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        
+        // Determine submission recency
+        const submissionDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const isToday = submissionDate.getTime() === today.getTime();
+        const isYesterday = submissionDate.getTime() === yesterday.getTime();
+        const isThisWeek = date > thisWeek && !isToday && !isYesterday;
+        
+        // Get time period and relative time
+        const timePeriod = getTimePeriod(date);
+        const relativeTime = getRelativeTime(date);
+        
+        // Get first letter for avatar
+        const firstLetter = submission.name ? submission.name.charAt(0).toUpperCase() : '?';
+        
+        // Handle array data from new form structure
+        const q1Values = Array.isArray(submission.q1) ? submission.q1 : [submission.q1];
+        const q2Values = Array.isArray(submission.q2) ? submission.q2 : [submission.q2];
+        const q3Values = Array.isArray(submission.q3) ? submission.q3 : [submission.q3];
+        const q4Values = Array.isArray(submission.q4) ? submission.q4 : [submission.q4];
+        const q5Values = Array.isArray(submission.q5) ? submission.q5 : [submission.q5];
+        
+        // Create qualities list from q5
+        const qualitiesHtml = q5Values.length > 0 
+            ? q5Values.map(quality => 
+                `<span class="quality-tag">${quality}</span>`
+            ).join('')
+            : '<span>No qualities selected</span>';
+        
+        // Create message box if message exists
+        const messageHtml = submission.message && submission.message !== 'No message' 
+            ? `<div class="message-box">"${submission.message}"</div>` 
+            : '';
+        
+        // Add visual indicators based on time
+        const timeBadge = `
+            <div class="time-badge" style="background: ${relativeTime.color}">
+                <i class="fas ${relativeTime.icon}"></i>
+                ${relativeTime.label}
+            </div>
+        `;
+        
+        const recentClass = isToday ? 'today-submission' : (isYesterday ? 'yesterday-submission' : (isThisWeek ? 'week-submission' : ''));
+        
+        html += `
+            <div class="submission-card ${recentClass}" data-id="${submission.id}" data-timestamp="${submission.timestamp}">
+                ${timeBadge}
+                <button class="delete-btn" onclick="showDeleteModal('${submission.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+                
+                <div class="card-header">
+                    <div class="user-info">
+                        <div class="user-avatar">${firstLetter}</div>
+                        <div class="user-details">
+                            <h3>${submission.name}</h3>
+                            <p>${submission.contact || 'No contact provided'}</p>
+                        </div>
+                    </div>
+                    <div class="timestamp">
+                        <div class="date">${formattedDate}</div>
+                        <div class="time">${formattedTime}</div>
+                        <div class="time-period" style="color: ${timePeriod.color}">
+                            <i class="fas ${timePeriod.icon}"></i>
+                            ${timePeriod.period}
+                        </div>
+                        ${isToday ? '<div class="day-indicator today">📅 Today</div>' : ''}
+                        ${isYesterday ? '<div class="day-indicator yesterday">📅 Yesterday</div>' : ''}
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Personal Information -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Gender:</div>
+                            <div class="detail-value">
+                                <span class="gender-badge">${submission.gender || 'Not specified'}</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Contact:</div>
+                            <div class="detail-value">${submission.contact || 'Not provided'}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Why Friendship -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-question-circle"></i>
+                            Why Friendship?
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Reasons:</div>
+                            <div class="detail-value">
+                                <div class="qualities-list">
+                                    ${q1Values.map(val => `<span class="quality-tag">${val}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Friendship Boundaries -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Friendship Boundaries
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Important:</div>
+                            <div class="detail-value">
+                                <div class="qualities-list">
+                                    ${q2Values.map(val => `<span class="quality-tag">${val}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Friendship Type -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-heart"></i>
+                            Friendship Type
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Selected:</div>
+                            <div class="detail-value">
+                                <div class="qualities-list">
+                                    ${q3Values.map(val => `<span class="friendship-type">${val}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Communication Preference -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-comments"></i>
+                            Communication
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Preferences:</div>
+                            <div class="detail-value">
+                                <div class="qualities-list">
+                                    ${q4Values.map(val => `<span class="quality-tag">${val}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Qualities -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i>
+                            Personal Qualities
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Selected:</div>
+                            <div class="detail-value">
+                                <div class="qualities-list">
+                                    ${qualitiesHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Message -->
+                    ${messageHtml ? `
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-comment"></i>
+                            Personal Message
+                        </div>
+                        ${messageHtml}
+                    </div>
+                    ` : ''}
+                    
+                    <!-- Technical Details -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Submission Details
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">User ID:</div>
+                            <div class="detail-value" style="font-family: monospace; font-size: 0.8rem;">
+                                ${submission.userId || 'N/A'}
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Submitted:</div>
+                            <div class="detail-value">${formattedDate} at ${formattedTime}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    submissionsGrid.innerHTML = html;
+    filteredSubmissions = submissions;
+}
+
+// Update statistics
+function updateStats(submissions) {
+    const total = submissions.length;
+    const maleCount = submissions.filter(s => s.gender === 'Male').length;
+    const femaleCount = submissions.filter(s => s.gender === 'Female').length;
+    
+    // Count best friends - check if any q3 value contains "Best friend"
+    const bestFriends = submissions.filter(s => {
+        const q3Values = Array.isArray(s.q3) ? s.q3 : [s.q3];
+        return q3Values.some(val => val && val.toLowerCase().includes('best friend'));
+    }).length;
+
+    // Count today's submissions
+    const today = new Date();
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const todayCount = submissions.filter(s => new Date(s.timestamp) >= todayStart).length;
+
+    totalSubmissionsEl.textContent = total;
+    maleCountEl.textContent = maleCount;
+    femaleCountEl.textContent = femaleCount;
+    bestFriendsEl.textContent = bestFriends;
+}
+
+// Filter submissions with enhanced date filters
+function filterSubmissions(filter) {
+    let filtered = [...allSubmissions];
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const thisWeek = new Date(today);
+    thisWeek.setDate(thisWeek.getDate() - 7);
+    const thisMonth = new Date(today);
+    thisMonth.setDate(1); // First day of current month
+    
+    if (filter === 'male') {
+        filtered = filtered.filter(s => s.gender === 'Male');
+    } else if (filter === 'female') {
+        filtered = filtered.filter(s => s.gender === 'Female');
+    } else if (filter === 'best friend') {
+        filtered = filtered.filter(s => {
+            const q3Values = Array.isArray(s.q3) ? s.q3 : [s.q3];
+            return q3Values.some(val => val && val.toLowerCase().includes('best friend'));
+        });
+    } else if (filter === 'brother') {
+        filtered = filtered.filter(s => {
+            const q3Values = Array.isArray(s.q3) ? s.q3 : [s.q3];
+            return q3Values.some(val => val && val.toLowerCase().includes('brother'));
+        });
+    } else if (filter === 'today') {
+        filtered = filtered.filter(s => {
+            const submissionDate = new Date(s.timestamp);
+            return submissionDate >= today;
+        });
+    } else if (filter === 'yesterday') {
+        filtered = filtered.filter(s => {
+            const submissionDate = new Date(s.timestamp);
+            const submissionDay = new Date(submissionDate.getFullYear(), submissionDate.getMonth(), submissionDate.getDate());
+            return submissionDay.getTime() === yesterday.getTime();
+        });
+    } else if (filter === 'this-week') {
+        filtered = filtered.filter(s => new Date(s.timestamp) >= thisWeek);
+    } else if (filter === 'this-month') {
+        filtered = filtered.filter(s => new Date(s.timestamp) >= thisMonth);
+    } else if (filter === 'last-hour') {
+        const oneHourAgo = new Date(now.getTime() - (60 * 60 * 1000));
+        filtered = filtered.filter(s => new Date(s.timestamp) >= oneHourAgo);
+    } else if (filter === 'last-6-hours') {
+        const sixHoursAgo = new Date(now.getTime() - (6 * 60 * 60 * 1000));
+        filtered = filtered.filter(s => new Date(s.timestamp) >= sixHoursAgo);
+    }
+    
+    displaySubmissions(filtered);
+}
+
+// Search submissions
+function searchSubmissions(query) {
+    if (!query) {
+        displaySubmissions(filteredSubmissions);
+        return;
+    }
+    
+    const lowerQuery = query.toLowerCase();
+    const searched = filteredSubmissions.filter(s => 
+        (s.name && s.name.toLowerCase().includes(lowerQuery)) ||
+        (s.contact && s.contact.toLowerCase().includes(lowerQuery)) ||
+        (s.message && s.message.toLowerCase().includes(lowerQuery)) ||
+        (s.userId && s.userId.toLowerCase().includes(lowerQuery)) ||
+        // Search in all question arrays
+        (s.q1 && (Array.isArray(s.q1) ? s.q1.some(q => q.toLowerCase().includes(lowerQuery)) : s.q1.toLowerCase().includes(lowerQuery))) ||
+        (s.q2 && (Array.isArray(s.q2) ? s.q2.some(q => q.toLowerCase().includes(lowerQuery)) : s.q2.toLowerCase().includes(lowerQuery))) ||
+        (s.q3 && (Array.isArray(s.q3) ? s.q3.some(q => q.toLowerCase().includes(lowerQuery)) : s.q3.toLowerCase().includes(lowerQuery))) ||
+        (s.q4 && (Array.isArray(s.q4) ? s.q4.some(q => q.toLowerCase().includes(lowerQuery)) : s.q4.toLowerCase().includes(lowerQuery))) ||
+        (s.q5 && (Array.isArray(s.q5) ? s.q5.some(q => q.toLowerCase().includes(lowerQuery)) : s.q5.toLowerCase().includes(lowerQuery)))
+    );
+    
+    displaySubmissions(searched);
+}
+
+// Export data to CSV
+function exportToCSV() {
+    if (allSubmissions.length === 0) {
+        alert('No data to export!');
+        return;
+    }
+
+    // Create CSV header
+    let csv = 'Name,Gender,Contact,User ID,Why Friendship,Boundaries,Friendship Type,Communication,Qualities,Message,Date,Time\n';
+    
+    // Add data rows
+    allSubmissions.forEach(submission => {
+        const date = new Date(submission.timestamp);
+        const formattedDate = date.toLocaleDateString();
+        const formattedTime = date.toLocaleTimeString();
+        
+        const q1Text = Array.isArray(submission.q1) ? submission.q1.join('; ') : (submission.q1 || '');
+        const q2Text = Array.isArray(submission.q2) ? submission.q2.join('; ') : (submission.q2 || '');
+        const q3Text = Array.isArray(submission.q3) ? submission.q3.join('; ') : (submission.q3 || '');
+        const q4Text = Array.isArray(submission.q4) ? submission.q4.join('; ') : (submission.q4 || '');
+        const q5Text = Array.isArray(submission.q5) ? submission.q5.join('; ') : (submission.q5 || '');
+        const message = submission.message ? `"${submission.message.replace(/"/g, '""')}"` : '';
+        
+        csv += `"${submission.name}","${submission.gender || ''}","${submission.contact || ''}","${submission.userId || ''}","${q1Text}","${q2Text}","${q3Text}","${q4Text}","${q5Text}",${message},"${formattedDate}","${formattedTime}"\n`;
+    });
+    
+    // Create download link
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `friendship_submissions_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Show delete confirmation modal
+async function showDeleteModal(submissionId) {
+    submissionToDelete = submissionId;
+    deleteModal.style.display = 'flex';
+}
+
+// Delete submission through Worker
+async function deleteSubmission() {
+    if (!submissionToDelete) return;
+    
+    try {
+        console.log('🗑️ Deleting submission:', submissionToDelete);
+        
+        const response = await fetch(WORKER_URL + 'delete-submission', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': DASHBOARD_SECRET
+            },
+            body: JSON.stringify({ submissionId: submissionToDelete })
+        });
+
+        console.log('📡 Delete response status:', response.status);
+
+        if (!response.ok) {
+            throw new Error('Delete failed');
+        }
+
+        const result = await response.json();
+        console.log('✅ Delete result:', result);
+        
+        if (result.success) {
+            // Remove from local arrays
+            allSubmissions = allSubmissions.filter(s => s.id !== submissionToDelete);
+            filteredSubmissions = filteredSubmissions.filter(s => s.id !== submissionToDelete);
+            
+            // Update display
+            displaySubmissions(filteredSubmissions);
+            updateStats(allSubmissions);
+            
+            // Close modal
+            deleteModal.style.display = 'none';
+            submissionToDelete = null;
+            
+            // Show success message
+            alert('Submission deleted successfully!');
+        } else {
+            throw new Error(result.error);
+        }
+    } catch (error) {
+        console.error('💥 Error deleting submission:', error);
+        alert('Error deleting submission. Please try again.');
+    }
+}
+
+// Add CSS for enhanced time indicators
+function addTimeBasedStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .today-submission {
+            border: 2px solid #4cd964;
+            box-shadow: 0 4px 12px rgba(76, 217, 100, 0.3);
+            background: linear-gradient(to right, rgba(76, 217, 100, 0.05), transparent);
+        }
+        
+        .yesterday-submission {
+            border-left: 4px solid #2575fc;
+            background: linear-gradient(to right, rgba(37, 117, 252, 0.03), transparent);
+        }
+        
+        .week-submission {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .time-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .time-period {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+        
+        .day-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .day-indicator.today {
+            background: rgba(76, 217, 100, 0.2);
+            color: #4cd964;
+        }
+        
+        .day-indicator.yesterday {
+            background: rgba(37, 117, 252, 0.2);
+            color: #2575fc;
+        }
+        
+        .submission-card {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        /* Update filter buttons to include time filters */
+        .filter-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+        
+        .filter-btn {
+            white-space: nowrap;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Add time-based filter buttons to the HTML
+function addTimeFilterButtons() {
+    const filterOptions = document.querySelector('.filter-options');
+    if (filterOptions) {
+        const timeFilters = `
+            <button class="filter-btn" data-filter="last-hour">Last Hour</button>
+            <button class="filter-btn" data-filter="last-6-hours">Last 6 Hours</button>
+            <button class="filter-btn" data-filter="today">Today</button>
+            <button class="filter-btn" data-filter="yesterday">Yesterday</button>
+            <button class="filter-btn" data-filter="this-week">This Week</button>
+            <button class="filter-btn" data-filter="this-month">This Month</button>
+        `;
+        filterOptions.innerHTML += timeFilters;
+        
+        // Reattach event listeners to all filter buttons
+        const allFilterBtns = document.querySelectorAll('.filter-btn');
+        allFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                allFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterSubmissions(btn.dataset.filter);
+            });
+        });
+    }
+}
+
+// Event listeners
+refreshBtn.addEventListener('click', loadSubmissions);
+exportBtn.addEventListener('click', exportToCSV);
+
+searchInput.addEventListener('input', (e) => {
+    searchSubmissions(e.target.value);
+});
+
+// Modal event listeners
+modalCancel.addEventListener('click', () => {
+    deleteModal.style.display = 'none';
+    submissionToDelete = null;
+});
+
+modalConfirm.addEventListener('click', deleteSubmission);
+
+// Close modal when clicking outside
+deleteModal.addEventListener('click', (e) => {
+    if (e.target === deleteModal) {
+        deleteModal.style.display = 'none';
+        submissionToDelete = null;
+    }
+});
+
+// Load submissions when page loads
+window.addEventListener('load', () => {
+    addTimeBasedStyles();
+    addTimeFilterButtons();
+    loadSubmissions();
+});
+
+// Make functions globally available for onclick events
+window.showDeleteModal = showDeleteModal;
+</script>
+</body>
+</html>

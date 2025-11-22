@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Title -->
+    <title>Friendship Invitation Form | Become My Friend | aarif</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="Fill out this Friendship Invitation Form to start a pure, honest and meaningful friendship. Answer questions about boundaries, habits, communication style and values. A warm, respectful way to connect.">
+
+    <!-- Keywords -->
+    <meta name="keywords" content="friendship form, friendship invitation, become my friend form, best friend form online, friendship questions, friendship bond, friendship values, trust and respect friendship, online friend form">
+
+    <meta name="author" content="Aarif Alam">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://aarifalam.life/my-besti/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Friendship Invitation | A Pure & Meaningful Bond ❤️">
+    <meta property="og:description" content="Start a meaningful friendship based on trust, respect, and positive values. Fill out the Friendship Invitation Form and share your thoughts.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aarifalam.life/my-besti/">
+    <meta property="og:image" content="https://aarifalam.life/images/friendship-og-banner.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friendship Invitation Form | Start a Beautiful Bond">
+    <meta name="twitter:description" content="A respectful, kind and value-based friendship form. Share your preferences, thoughts and boundaries.">
+    <meta name="twitter:image" content="https://aarifalam.life/images/friendship-og-banner.jpg">
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Friendship Invitation Form",
+      "url": "https://aarifalam.life/my-besti/",
+      "description": "A pure, honest and meaningful friendship invitation form that includes questions about values, habits, communication preferences, and personal message.",
+      "creator": {
+        "@type": "Person",
+        "name": "Aarif Alam",
+        "url": "https://aarifalam.life"
+      },
+      "mainEntity": {
+        "@type": "Questionnaire",
+        "name": "Friendship Invitation Form"
+      }
+    }
+    </script>
+
+    <!-- Favicon From Your File (same paths preserved) -->
+    <link rel="icon" href="../images/logo/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../images/logo/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="shortcut icon" href="../images/logo/favicon.ico" type="image/x-icon">
+
+    <!-- Your Existing CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="besti.css">
+
+    <!-- Your Analytics (kept exactly as your original file) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XX2CV48SMH');
+    </script>
+</head>
+<body>
+    <!-- Custom Alert -->
+    <div class="custom-alert" id="customAlert">
+        <div class="alert-content">
+            <i class="fas fa-question-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 10px;">Confirm Submission</h3>
+            <p>Are you sure you want to submit your friendship form?</p>
+            <div class="alert-buttons">
+                <button class="alert-btn alert-cancel" id="alertCancel">Cancel</button>
+                <button class="alert-btn alert-confirm" id="alertConfirm">Yes, Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Friendship Invitation</h1>
+            <p class="subheading">Let's create a beautiful bond based on trust, respect, and shared values. Fill out this form to become my friend!</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="friendshipForm">
+                <!-- Personal Information Section -->
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i> About You</h2>
+                    
+                    <div class="form-group">
+                        <label for="name">Your Beautiful Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Select Your Gender</label>
+                        <div class="gender-selection">
+                            <div class="gender-option">
+                                <button type="button" class="gender-btn" data-gender="Male">Male</button>
+                            </div>
+                            <div class="gender-option">
+                                <button type="button" class="gender-btn" data-gender="Female">Female</button>
+                            </div>
+                            <div class="gender-option">
+                                <button type="button" class="gender-btn" data-gender="Other">Other</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="gender" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact">How Can I Reach You? (Optional)</label>
+                        <input type="text" id="contact" placeholder="Email, phone, Instagram, etc.">
+                    </div>
+                </div>
+                
+                <!-- Friendship Questions Section -->
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-heart"></i> Friendship Questions</h2>
+                    
+                    <!-- Question 1 -->
+                    <div class="question-container">
+                        <div class="question-title">Q1. Why do you want to be my friend? (Select any)</div>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="q1" value="To share positivity">
+                                <span>To share positivity</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q1" value="To learn from each other">
+                                <span>To learn from each other</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q1" value="To support each other's dreams">
+                                <span>To support each other's dreams</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q1" value="Just to talk normally">
+                                <span>Just to talk normally</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q1" value="Other">
+                                <span>✍️ Write your own option</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-input" id="customQ1">
+                            <input type="text" id="customQ1Input" placeholder="Write your own reason...">
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="question-container">
+                        <div class="question-title">Q2. Which type of friendship boundary is important to you? (Select any)</div>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="q2" value="Love infinite">
+                                <span>Love infinite</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q2" value="Forgive often">
+                                <span>Forgive often</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q2" value="No disrespect">
+                                <span>No disrespect</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q2" value="No cheating">
+                                <span>No cheating</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q2" value="Other">
+                                <span>✍️ Write your own option</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-input" id="customQ2">
+                            <input type="text" id="customQ2Input" placeholder="Write your own boundary...">
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="question-container">
+                        <div class="question-title">Q3. How would you like to be my friend? (Select any)</div>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="q3" value="Best friend for life long ❤️">
+                                <span>Best friend for life long ❤️</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q3" value="Brother + Friend👨">
+                                <span>Brother + Friend👨</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q3" value="Good friend 😊">
+                                <span>Good friend 😊</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q3" value="Only normal friend 💫">
+                                <span>Only normal friend 💫</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q3" value="Other">
+                                <span>✍️ Write your own option</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-input" id="customQ3">
+                            <input type="text" id="customQ3Input" placeholder="Write your own friendship type...">
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="question-container">
+                        <div class="question-title">Q4. How would you like to talk with me? (Select any)</div>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="q4" value="Simple chat sometimes">
+                                <span>Simple chat sometimes</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q4" value="Chat and call both">
+                                <span>Chat and call both</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q4" value="Talk when need">
+                                <span>Talk when need</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q4" value="Sharing goals and working together">
+                                <span>Sharing goals and working together</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q4" value="Other">
+                                <span>✍️ Write your own option</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-input" id="customQ4">
+                            <input type="text" id="customQ4Input" placeholder="Write your own communication preference...">
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="question-container">
+                        <div class="question-title">Q5. Which habits describe you best? (Select any)</div>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" name="q5" value="I respect Everyone">
+                                <span>I respect Everyone</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q5" value="I speak truth mostly">
+                                <span>I speak truth mostly</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q5" value="I am improving myself day by day">
+                                <span>I am improving myself day by day</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q5" value="I am sometimes confused but learning">
+                                <span>I am sometimes confused but learning</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" name="q5" value="Other">
+                                <span>✍️ Write your own option</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-input" id="customQ5">
+                            <input type="text" id="customQ5Input" placeholder="Write your own habits...">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Personal Message Section -->
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-comment-dots"></i> Share Your Thoughts</h2>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Personal Message (Optional)</label>
+                        <textarea id="message" rows="4" placeholder="Share your thoughts about friendship, life, or anything you'd like..."></textarea>
+                    </div>
+                    
+                    <div class="shayari">
+                        <p>"मैं असत्य को avoid करता हूं और love infinite करता हूं, क्या आप मेरा दोस्त बनोगे? मैं दोस्ती के लिए आपको invite करता हूं"</p>
+                    </div>
+                </div>
+                
+                <!-- My Core Values Section -->
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> My Core Values</h2>
+                    <p>These are the principles that guide my life and relationships:</p>
+                    
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <i class="fas fa-comment-dots"></i>
+                            <h3>Truth First 🗣</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-balance-scale"></i>
+                            <h3>Justice Always ⚖</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-dove"></i>
+                            <h3>Mercy to All 🕊</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-hands-helping"></i>
+                            <h3>Help the Helpless ❤️</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-globe-americas"></i>
+                            <h3>Love All 🌍</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Forgive Often 💚</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Kindness Daily 🤝</h3>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Learning Forever 📚</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="submit-btn-container">
+                    <button type="button" class="submit-btn" id="submitBtn"><i class="fas fa-paper-plane"></i> Submit Friendship</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="response-container" id="responseContainer">
+            <h2 class="response-title" id="responseTitle">Thank You! ❤️</h2>
+            <div class="response-message" id="responseMessage"></div>
+        </div>
+    </div>
+    
+ <script src="besti.js"></script>
+
+</body>
+</html>
