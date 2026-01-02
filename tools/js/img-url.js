@@ -14,7 +14,7 @@ const toastMessage = document.getElementById('toastMessage');
 
 let CLOUD_NAME, UPLOAD_PRESET, API_KEY;
 
-fetch('cloudinary-config.json')
+fetch('cloud-config.json')
     .then(res => res.json())
     .then(data => {
         CLOUD_NAME = data.cloudName;
