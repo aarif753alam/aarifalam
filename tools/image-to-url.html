@@ -437,144 +437,147 @@
         }
     </style>
   <style>
+ .magic-btn {
+    position: relative;
+    display: block;
+    background: linear-gradient(45deg, #FF512F, #DD2476, #FF512F);
+    background-size: 200% 200%;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    text-decoration: none;
+    text-align: center;
+    margin: 50px auto;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease, filter 0.3s ease;
+    box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
+    animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating animation (uses transform ONLY here) */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Glow border */
+.magic-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #FF512F, #DD2476, #3a7bd5, #00d2ff);
+    background-size: 400% 400%;
+    border-radius: 50px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s;
+    animation: gradientMove 3s ease infinite;
+}
+
+.magic-btn:hover::before {
+    opacity: 1;
+}
+
+/* ACTIVE STATE — FIXED (NO TRANSFORM) */
+.magic-btn:active {
+    box-shadow: 0 5px 15px rgba(221, 36, 118, 0.6);
+    filter: brightness(0.95);
+}
+
+/* Shine effect */
+.magic-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+    transition: all 0.8s;
+}
+
+.magic-btn:hover::after {
+    left: 130%;
+}
+
+/* Icon animation */
+.magic-btn span {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+    font-size: 20px;
+}
+
+.magic-btn:hover span {
+    transform: translateX(5px) scale(1.2);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0% { box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4); }
+    50% { box-shadow: 0 10px 30px rgba(221, 36, 118, 0.7); }
+    100% { box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4); }
+}
+
+.magic-btn:hover {
+    animation:
+        gradientMove 3s ease infinite,
+        float 3s ease-in-out infinite,
+        pulse 1.5s ease infinite;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
     .magic-btn {
-        position: relative;
-        display: block;
-        background: linear-gradient(45deg, #FF512F, #DD2476, #FF512F);
-        background-size: 200% 200%;
-        color: white;
-        border: none;
-        padding: 20px 40px;
-        font-size: 18px;
-        font-weight: 600;
-        border-radius: 50px;
-        cursor: pointer;
-        width: 100%;
-        max-width: 320px;
-        text-decoration: none;
-        text-align: center;
-        margin: 50px auto;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
-        animation: gradientMove 4s ease infinite;
+        padding: 18px 32px;
+        font-size: 17px;
+        max-width: 280px;
     }
-    
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 360px) {
+    .magic-btn {
+        padding: 16px 28px;
+        font-size: 16px;
+        max-width: 250px;
     }
-    
-    .magic-btn::before {
-        content: '';
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        background: linear-gradient(45deg, #FF512F, #DD2476, #3a7bd5, #00d2ff);
-        background-size: 400% 400%;
-        border-radius: 50px;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.5s;
-        animation: gradientMove 3s ease infinite;
-    }
-    
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
     .magic-btn:hover::before {
-        opacity: 1;
+        opacity: 0;
     }
-    
-    .magic-btn:active {
-        transform: scale(0.95);
-        box-shadow: 0 5px 15px rgba(221, 36, 118, 0.6);
+
+    .magic-btn:hover::after {
+        left: -60%;
     }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+
+    .magic-btn:hover span {
+        transform: none;
     }
-    
-    .magic-btn {
+
+    .magic-btn:hover {
         animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
     }
-    
-    /* Shine effect */
-    .magic-btn::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -60%;
-        width: 20%;
-        height: 200%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: rotate(30deg);
-        transition: all 0.8s;
-    }
-    
-    .magic-btn:hover::after {
-        left: 130%;
-    }
-    
-    /* Icon animation */
-    .magic-btn span {
-        display: inline-block;
-        margin-right: 8px;
-        transition: transform 0.3s ease;
-        font-size: 20px;
-    }
-    
-    .magic-btn:hover span {
-        transform: translateX(5px) scale(1.2);
-    }
-    
-    /* Pulse animation on hover */
-    @keyframes pulse {
-        0% { box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4); }
-        50% { box-shadow: 0 10px 30px rgba(221, 36, 118, 0.7); }
-        100% { box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4); }
-    }
-    
-    .magic-btn:hover {
-        animation: gradientMove 3s ease infinite, float 3s ease-in-out infinite, pulse 1.5s ease infinite;
-    }
-    
-    /* Responsive */
-    @media (max-width: 480px) {
-        .magic-btn {
-            padding: 18px 32px;
-            font-size: 17px;
-            max-width: 280px;
-        }
-    }
-    
-    @media (max-width: 360px) {
-        .magic-btn {
-            padding: 16px 28px;
-            font-size: 16px;
-            max-width: 250px;
-        }
-    }
-    
-    /* Disable hover effects on touch devices */
-    @media (hover: none) {
-        .magic-btn:hover::before {
-            opacity: 0;
-        }
-        
-        .magic-btn:hover::after {
-            left: -60%;
-        }
-        
-        .magic-btn:hover span {
-            transform: none;
-        }
-        
-        .magic-btn:hover {
-            animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
-        }
-    }
+}
 </style>
   
  </head>
@@ -604,7 +607,7 @@
                         </li>
                         <li><a href="/Game/index.html"><i class="fas fa-gamepad"></i>Aarif GAME</a></li>
 
-                        <li><a href="/pdf/index.html"><i class="fas fa-file-pdf" aria-hidden="true"></i> Aarif PDF</a></li>
+                        <li><a href="/pdf/index.html"><i class="fas fa-file-pdf" aria-hidden="true"></i>Fast PDF</a></li>
                         <li><a href="/footer/contact-us/contact.html"><i class="fas fa-handshake"></i>Contact us</a></li>
                       </ul>
                    </nav>
@@ -627,11 +630,11 @@
             </div>
             <span class="header-0105-tool-name">Image to URL</span>
         </a>
-        <a href="/Game/word-meaning-game.html" class="header-0105-tool-item">
+        <a href="https://aarifalam.life/pdf/merge-pdf" class="header-0105-tool-item">
             <div class="header-0105-tool-icon">
-                <i class="fas fa-gamepad"></i>
+                <i class="fas fa-object-group"></i>
             </div>
-            <span class="header-0105-tool-name">Word Meaning Game</span>
+            <span class="header-0105-tool-name">Merge PDFs</span>
         </a>
         <a href="/pdf/image-to-pdf.html" class="header-0105-tool-item">
             <div class="header-0105-tool-icon">
@@ -692,17 +695,17 @@
     <span class="header-0105-tool-name">Blog</span>
    </a>
 
-    <a href="/Game/index.html" class="header-0105-mobile-tool-item">
+    <a href="https://aarifalam.life/pdf/remove-pdf-page" class="header-0105-mobile-tool-item">
         <div class="header-0105-tool-icon">
-            <i class="fas fa-gamepad"></i>
+            <i class="fas fa-trash-alt"></i>
         </div>
-        <span class="header-0105-tool-name">Game Zone</span>
+        <span class="header-0105-tool-name">Remove PDF page</span>
    </a>
-    <a href="/Game/word-meaning-page.html" class="header-0105-mobile-tool-item">
+    <a href="https://aarifalam.life/footer/contact-us/contact" class="header-0105-mobile-tool-item">
         <div class="header-0105-tool-icon">
             <i class="fas fa-language"></i>
         </div>
-        <span class="header-0105-tool-name">Word Meaning Game</span>
+        <span class="header-0105-tool-name">Contact me, need member</span>
     </a>
 
     <a href="/tools/image-to-url.html" class="header-0105-mobile-tool-item">
@@ -731,7 +734,7 @@
         <span class="header-0105-tool-name">Image to PDF</span>
     </a>
 
-    <a href="/tools/greeting-card.html" class="header-0105-mobile-tool-item">
+    <a href="/card/index.html" class="header-0105-mobile-tool-item">
         <div class="header-0105-tool-icon">
             <i class="fas fa-gift"></i>
         </div>
@@ -815,9 +818,9 @@
         </div>
     </div>
 
-  <a href="/card/index.html" class="magic-btn">
+  <a href="https://aarifalam.life/footer/contact-us/contact" class="magic-btn">
     <span>🚀</span>
-    Create greeting card
+    Contact me for your website or any question
 </a>
             <p class="description">Find answers to common questions about converting your images to shareable URLs</p>        
         <div class="faq-container-advanced">
@@ -1030,42 +1033,70 @@ Image to url valid for life time, if you need this tool for you website then con
     });
 </script>
   
-<script>
-const button = document.querySelector('.magic-btn');
-let isLocked = false;
-
-button.addEventListener('click', function (e) {
-    if (isLocked) return;
-    isLocked = true;
-
-    // Ripple effect (uses existing CSS)
-    const ripple = document.createElement('span');
-    const rect = this.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-
-    this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-
-    // Single vibration (Android safe)
-    if (navigator.vibrate) {
-        navigator.vibrate(20);
-    }
-
-    // Loading state
-    const originalHTML = this.innerHTML;
-    this.innerHTML = '<span>⏳</span> Opening...';
-    this.style.pointerEvents = 'none';
-
-    setTimeout(() => {
-        this.innerHTML = originalHTML;
-        this.style.pointerEvents = 'auto';
-        isLocked = false;
-    }, 1500);
-});
+  <script>
+    // Add click effects
+    const button = document.querySelector('.magic-btn');
+    
+    button.addEventListener('click', function(e) {
+        // Create ripple effect
+        let ripple = document.createElement('span');
+        let rect = this.getBoundingClientRect();
+        let size = Math.max(rect.width, rect.height);
+        let x = e.clientX - rect.left - size / 2;
+        let y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            width: ${size}px;
+            height: ${size}px;
+            top: ${y}px;
+            left: ${x}px;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        
+        this.appendChild(ripple);
+        
+        // Add CSS for ripple if not already there
+        if (!document.querySelector('#rippleEffect')) {
+            let style = document.createElement('style');
+            style.id = 'rippleEffect';
+            style.textContent = `
+                @keyframes rippleEffect {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Remove ripple after animation
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+        
+        // Add vibration on mobile
+        if (navigator.vibrate) {
+            navigator.vibrate(30);
+        }
+        
+        // Add loading state
+        const originalText = this.innerHTML;
+        this.innerHTML = '<span>⏳</span> Opening...';
+        this.style.pointerEvents = 'none';
+        
+        // Reset after 1.5 seconds
+        setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.pointerEvents = 'auto';
+        }, 1500);
+    });
 </script>
   
     <script src="js/img-url.js"></script>
@@ -1074,6 +1105,7 @@ button.addEventListener('click', function (e) {
     <script src="../main/js/main-header.js"></script>
 </body>
 </html>
+
 
 
 
