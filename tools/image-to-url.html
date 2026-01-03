@@ -457,6 +457,10 @@
     overflow: hidden;
     transition: box-shadow 0.4s ease, filter 0.3s ease;
     box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
+
+    /* ✅ GPU STABLE */
+    will-change: transform;
+
     animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
 }
 
@@ -467,10 +471,19 @@
     100% { background-position: 0% 50%; }
 }
 
-/* Floating animation (uses transform ONLY here) */
+/* ✅ FIXED FLOAT (REDUCED + GPU SAFE) */
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -3px, 0);
+    }
+}
+
+/* Pause animation during loading */
+.magic-btn.loading {
+    animation-play-state: paused;
 }
 
 /* Glow border */
@@ -494,7 +507,7 @@
     opacity: 1;
 }
 
-/* ACTIVE STATE — FIXED (NO TRANSFORM) */
+/* Active state (NO TRANSFORM) */
 .magic-btn:active {
     box-shadow: 0 5px 15px rgba(221, 36, 118, 0.6);
     filter: brightness(0.95);
@@ -560,20 +573,11 @@
     }
 }
 
-/* Disable hover effects on touch devices */
+/* Touch devices */
 @media (hover: none) {
-    .magic-btn:hover::before {
-        opacity: 0;
-    }
-
-    .magic-btn:hover::after {
-        left: -60%;
-    }
-
-    .magic-btn:hover span {
-        transform: none;
-    }
-
+    .magic-btn:hover::before { opacity: 0; }
+    .magic-btn:hover::after { left: -60%; }
+    .magic-btn:hover span { transform: none; }
     .magic-btn:hover {
         animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
     }
@@ -1033,70 +1037,65 @@ Image to url valid for life time, if you need this tool for you website then con
     });
 </script>
   
-  <script>
-    // Add click effects
-    const button = document.querySelector('.magic-btn');
-    
-    button.addEventListener('click', function(e) {
-        // Create ripple effect
-        let ripple = document.createElement('span');
-        let rect = this.getBoundingClientRect();
-        let size = Math.max(rect.width, rect.height);
-        let x = e.clientX - rect.left - size / 2;
-        let y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
-            transform: scale(0);
-            animation: rippleEffect 0.6s linear;
-            width: ${size}px;
-            height: ${size}px;
-            top: ${y}px;
-            left: ${x}px;
-            pointer-events: none;
-            z-index: 1;
-        `;
-        
-        this.appendChild(ripple);
-        
-        // Add CSS for ripple if not already there
-        if (!document.querySelector('#rippleEffect')) {
-            let style = document.createElement('style');
-            style.id = 'rippleEffect';
-            style.textContent = `
-                @keyframes rippleEffect {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+<script>
+const button = document.querySelector('.magic-btn');
+
+button.addEventListener('click', function (e) {
+    // Prevent default link jump for smooth animation
+    e.preventDefault();
+
+    // Create ripple
+    const ripple = document.createElement('span');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+
+    ripple.style.position = 'absolute';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    ripple.style.background = 'rgba(255,255,255,0.6)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.zIndex = '1';
+    ripple.style.animation = 'rippleEffect 0.6s linear';
+
+    this.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 600);
+
+    // Mobile vibration (short and safe)
+    if (navigator.vibrate) navigator.vibrate(20);
+
+    // Pause float animation during "loading"
+    this.classList.add('loading');
+
+    // Optional: show temporary loading text without changing layout
+    const original = this.querySelector('span').innerHTML;
+    const textSpan = document.createElement('span');
+    textSpan.style.marginLeft = '8px';
+    textSpan.textContent = 'Opening...';
+    this.appendChild(textSpan);
+
+    setTimeout(() => {
+        this.classList.remove('loading');
+        textSpan.remove();
+        // Navigate after ripple completes
+        window.location.href = this.getAttribute('href');
+    }, 400); // keep short for fast UX
+});
+
+// Inject ripple animation ONCE
+if (!document.getElementById('rippleEffectStyle')) {
+    const style = document.createElement('style');
+    style.id = 'rippleEffectStyle';
+    style.textContent = `
+        @keyframes rippleEffect {
+            from { transform: scale(0); opacity: 0.7; }
+            to { transform: scale(4); opacity: 0; }
         }
-        
-        // Remove ripple after animation
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-        
-        // Add vibration on mobile
-        if (navigator.vibrate) {
-            navigator.vibrate(30);
-        }
-        
-        // Add loading state
-        const originalText = this.innerHTML;
-        this.innerHTML = '<span>⏳</span> Opening...';
-        this.style.pointerEvents = 'none';
-        
-        // Reset after 1.5 seconds
-        setTimeout(() => {
-            this.innerHTML = originalText;
-            this.style.pointerEvents = 'auto';
-        }, 1500);
-    });
+    `;
+    document.head.appendChild(style);
+}
 </script>
   
     <script src="js/img-url.js"></script>
@@ -1105,6 +1104,7 @@ Image to url valid for life time, if you need this tool for you website then con
     <script src="../main/js/main-header.js"></script>
 </body>
 </html>
+
 
 
 
