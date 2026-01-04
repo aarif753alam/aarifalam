@@ -14,16 +14,30 @@ const toastMessage = document.getElementById('toastMessage');
 
 let CLOUD_NAME, UPLOAD_PRESET, API_KEY;
 
-fetch('cloud-config.json')
-    .then(res => res.json())
-    .then(data => {
-        CLOUD_NAME = data.cloudName;
-        UPLOAD_PRESET = data.uploadPreset;
-        API_KEY = data.apiKey;
-
-        console.log("Cloudinary config loaded:", CLOUD_NAME, UPLOAD_PRESET, API_KEY);
-    })
-    .catch(err => console.error("Failed to load Cloudinary config:", err));
+// Fetch Cloudinary config from your Worker
+fetch('https://cloud-config.kumar8948rahul.workers.dev/', {
+    mode: 'cors',
+    credentials: 'omit' // or 'include' if you need cookies
+})
+.then(res => {
+    if (!res.ok) {
+        if (res.status === 403) {
+            throw new Error('Access denied: This tool only works on authorized domains please contact - aarifalam0105@gmail.com');
+        }
+        throw new Error('Failed to fetch config');
+    }
+    return res.json();
+})
+.then(data => {
+    CLOUD_NAME = data.cloudName;
+    UPLOAD_PRESET = data.uploadPreset;
+    API_KEY = data.apiKey;
+    console.log("Cloudinary config loaded:", CLOUD_NAME, UPLOAD_PRESET, API_KEY);
+})
+.catch(err => {
+    console.error("Failed to load Cloudinary config:", err);
+    showToast(err.message || 'Failed to load Cloudinary configuration', 'error');
+});
 
 // Store selected files
 let selectedFiles = [];
@@ -34,7 +48,42 @@ document.addEventListener('DOMContentLoaded', () => {
     checkScheduledDeletions();
     addPulseAnimation();
     addScrollToTopButton();
+    initializeHistoryNotification(); // Added: Initialize notification system
 });
+
+// ========== HISTORY NOTIFICATION SYSTEM ==========
+function initializeHistoryNotification() {
+    // Initial check for history on page load
+    updateHistoryNotification();
+    
+    // Check for history every 2 seconds
+    setInterval(updateHistoryNotification, 2000);
+}
+
+function updateHistoryNotification() {
+    const history = JSON.parse(localStorage.getItem('imageUrls')) || [];
+    const hasHistory = history.length > 0;
+    
+    if (hasHistory) {
+        historyBtn.classList.add('has-history');
+    } else {
+        historyBtn.classList.remove('has-history');
+    }
+}
+
+// Show notification when new images are uploaded
+function showHistoryNotification() {
+    historyBtn.classList.add('has-history');
+}
+
+// Remove notification when history modal is opened
+historyBtn.addEventListener('click', () => {
+    historyBtn.classList.remove('has-history');
+    historyModal.style.display = 'flex';
+    loadHistory();
+});
+
+// ========== END HISTORY NOTIFICATION ==========
 
 // File selection handler
 fileInput.addEventListener('change', handleFileSelect);
@@ -66,16 +115,6 @@ dropArea.addEventListener('drop', (e) => {
 
 // Upload button handler - UPDATED with animation
 uploadBtn.addEventListener('click', uploadImagesWithAnimation);
-
-// History modal handlers
-historyBtn.addEventListener('click', () => {
-    historyModal.style.display = 'flex';
-    loadHistory();
-});
-
-closeModal.addEventListener('click', () => {
-    historyModal.style.display = 'none';
-});
 
 // Close modal when clicking outside
 window.addEventListener('click', (e) => {
@@ -112,6 +151,9 @@ function handleFiles(files) {
             preview.className = 'image-preview';
             preview.innerHTML = `
                 <img src="${e.target.result}" alt="Preview ${index + 1}">
+                <button class="remove-btn" onclick="removePreview(${index})">
+                    <i class="fas fa-times"></i>
+                </button>
             `;
             imagePreviews.appendChild(preview);
         };
@@ -120,6 +162,35 @@ function handleFiles(files) {
     });
     
     showToast(`${selectedFiles.length} image(s) selected`, 'success');
+}
+
+// Remove preview from selection
+function removePreview(index) {
+    selectedFiles.splice(index, 1);
+    
+    // Recreate previews
+    imagePreviews.innerHTML = '';
+    selectedFiles.forEach((file, newIndex) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const preview = document.createElement('div');
+            preview.className = 'image-preview';
+            preview.innerHTML = `
+                <img src="${e.target.result}" alt="Preview ${newIndex + 1}">
+                <button class="remove-btn" onclick="removePreview(${newIndex})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            imagePreviews.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+    });
+    
+    if (selectedFiles.length === 0) {
+        showToast('All images removed', 'info');
+    } else {
+        showToast(`${selectedFiles.length} image(s) remaining`, 'success');
+    }
 }
 
 // Function to animate progress bar with simulated progress
@@ -208,20 +279,33 @@ function addScrollToTopButton() {
     const scrollToTopBtn = document.createElement('button');
     scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
     scrollToTopBtn.style.position = 'fixed';
-    scrollToTopBtn.style.bottom = '80px';
-    scrollToTopBtn.style.right = '20px';
+    scrollToTopBtn.style.bottom = '100px';
+    scrollToTopBtn.style.right = '30px';
     scrollToTopBtn.style.width = '50px';
     scrollToTopBtn.style.height = '50px';
     scrollToTopBtn.style.borderRadius = '50%';
-    scrollToTopBtn.style.background = 'var(--primary)';
+    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
     scrollToTopBtn.style.color = 'white';
     scrollToTopBtn.style.border = 'none';
-    scrollToTopBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    scrollToTopBtn.style.boxShadow = '0 4px 15px rgba(67, 97, 238, 0.3)';
     scrollToTopBtn.style.cursor = 'pointer';
     scrollToTopBtn.style.zIndex = '99';
     scrollToTopBtn.style.display = 'none';
     scrollToTopBtn.style.alignItems = 'center';
     scrollToTopBtn.style.justifyContent = 'center';
+    scrollToTopBtn.style.fontSize = '1.2rem';
+    scrollToTopBtn.style.transition = 'all 0.3s ease';
+    
+    scrollToTopBtn.addEventListener('mouseenter', () => {
+        scrollToTopBtn.style.transform = 'translateY(-3px)';
+        scrollToTopBtn.style.boxShadow = '0 6px 20px rgba(67, 97, 238, 0.5)';
+    });
+    
+    scrollToTopBtn.addEventListener('mouseleave', () => {
+        scrollToTopBtn.style.transform = 'translateY(0)';
+        scrollToTopBtn.style.boxShadow = '0 4px 15px rgba(67, 97, 238, 0.3)';
+    });
+    
     scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -240,6 +324,11 @@ function addScrollToTopButton() {
 
 // Enhanced upload function with animation and auto-scroll
 async function uploadImagesWithAnimation() {
+    if (!CLOUD_NAME || !UPLOAD_PRESET) {
+        showToast('Cloudinary configuration not loaded yet. Please wait...', 'error');
+        return;
+    }
+    
     if (selectedFiles.length === 0) {
         showToast('Please select at least one image first', 'error');
         return;
@@ -267,6 +356,7 @@ async function uploadImagesWithAnimation() {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', UPLOAD_PRESET);
+        formData.append('api_key', API_KEY);
         
         try {
             const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
@@ -298,6 +388,11 @@ async function uploadImagesWithAnimation() {
     
     // Save to history
     saveToHistory(results.filter(r => !r.error));
+    
+    // Show history notification
+    if (results.filter(r => !r.error).length > 0) {
+        showHistoryNotification();
+    }
     
     // Reset selected files
     selectedFiles = [];
@@ -365,10 +460,12 @@ function enhancedCopyToClipboard(text, button = null) {
             const originalHtml = button.innerHTML;
             button.innerHTML = '<i class="fas fa-check"></i>';
             button.style.background = 'var(--success)';
+            button.style.color = 'white';
             
             setTimeout(() => {
                 button.innerHTML = originalHtml;
                 button.style.background = '';
+                button.style.color = '';
             }, 2000);
         }
     }).catch(err => {
@@ -384,7 +481,7 @@ function copyToClipboard(text) {
 
 // Schedule image deletion from Cloudinary
 function scheduleDeletion(publicId, url) {
-    if (confirm("This image will be deleted from your local storage in 1 hour. The URL will working after deletion. Do you want to proceed?")) {
+    if (confirm("This image will be deleted from your local storage in 1 hour. The URL will stop working after deletion. Do you want to proceed?")) {
         // Calculate deletion time (1 hour from now)
         const deletionTime = new Date();
         deletionTime.setHours(deletionTime.getHours() + 1);
@@ -424,13 +521,16 @@ function updateDeletionUI(url, deletionTime) {
                 deleteBtn.title = `Scheduled for deletion at ${deletionTime.toLocaleString()}`;
                 deleteBtn.onclick = null;
                 deleteBtn.style.cursor = 'default';
+                deleteBtn.style.background = 'var(--warning)';
+                deleteBtn.style.color = 'white';
             }
             
             // Add deletion info
             const deletionInfo = document.createElement('p');
-            deletionInfo.style.color = '#ff6b6b';
+            deletionInfo.style.color = '#ff9e00';
             deletionInfo.style.fontSize = '0.9rem';
-            deletionInfo.textContent = `Scheduled for deletion at ${deletionTime.toLocaleString()}`;
+            deletionInfo.style.marginTop = '5px';
+            deletionInfo.innerHTML = `<i class="fas fa-clock"></i> Scheduled for deletion at ${deletionTime.toLocaleString()}`;
             item.querySelector('.url-details').appendChild(deletionInfo);
         }
     });
@@ -446,48 +546,62 @@ function updateDeletionUI(url, deletionTime) {
                 deleteBtn.title = `Scheduled for deletion at ${deletionTime.toLocaleString()}`;
                 deleteBtn.onclick = null;
                 deleteBtn.style.cursor = 'default';
+                deleteBtn.style.background = 'var(--warning)';
+                deleteBtn.style.color = 'white';
             }
             
             // Add deletion info if not already present
             if (!item.querySelector('.deletion-info')) {
                 const deletionInfo = document.createElement('p');
                 deletionInfo.className = 'deletion-info';
-                deletionInfo.style.color = '#ff6b6b';
+                deletionInfo.style.color = '#ff9e00';
                 deletionInfo.style.fontSize = '0.9rem';
-                deletionInfo.textContent = `Scheduled for deletion at ${deletionTime.toLocaleString()}`;
+                deletionInfo.style.marginTop = '5px';
+                deletionInfo.innerHTML = `<i class="fas fa-clock"></i> Scheduled for deletion at ${deletionTime.toLocaleString()}`;
                 item.querySelector('.url-details').appendChild(deletionInfo);
             }
         }
     });
 }
 
-// Delete image from Cloudinary
+// Delete image from Cloudinary via Worker
 async function deleteImageFromCloudinary(publicId, url) {
     try {
-        // In a real application, you would need to call a server-side endpoint
-        // to handle the deletion as it requires your API secret which should not
-        // be exposed in client-side code
+        // Call your Worker to handle deletion
+        const response = await fetch('https://cloud-config.kumar8948rahul.workers.dev/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                publicId: publicId,
+                cloudName: CLOUD_NAME
+            })
+        });
         
-        // For demo purposes, we'll simulate the deletion
-        console.log(`Deleting image with public ID: ${publicId}`);
+        const data = await response.json();
         
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Remove from deletion requests
-        const deletionRequests = JSON.parse(localStorage.getItem('deletionRequests')) || [];
-        const updatedRequests = deletionRequests.filter(req => req.publicId !== publicId);
-        localStorage.setItem('deletionRequests', JSON.stringify(updatedRequests));
-        
-        // Remove from history
-        let history = JSON.parse(localStorage.getItem('imageUrls')) || [];
-        history = history.filter(item => item.url !== url);
-        localStorage.setItem('imageUrls', JSON.stringify(history));
-        
-        // Update UI
-        removeImageFromUI(url);
-        
-        showToast('Image deleted successfully', 'success');
+        if (data.success) {
+            // Remove from deletion requests
+            const deletionRequests = JSON.parse(localStorage.getItem('deletionRequests')) || [];
+            const updatedRequests = deletionRequests.filter(req => req.publicId !== publicId);
+            localStorage.setItem('deletionRequests', JSON.stringify(updatedRequests));
+            
+            // Remove from history
+            let history = JSON.parse(localStorage.getItem('imageUrls')) || [];
+            history = history.filter(item => item.url !== url);
+            localStorage.setItem('imageUrls', JSON.stringify(history));
+            
+            // Update UI
+            removeImageFromUI(url);
+            
+            // Update history notification
+            updateHistoryNotification();
+            
+            showToast('Image deleted successfully', 'success');
+        } else {
+            throw new Error(data.error || 'Failed to delete image');
+        }
     } catch (error) {
         console.error('Error deleting image:', error);
         showToast('Failed to delete image', 'error');
@@ -612,9 +726,11 @@ function loadHistory() {
                 <img src="${item.url}" alt="History image">
                 <div class="url-details">
                     <strong>${item.name}</strong>
-                    <p>${formattedDate}</p>
+                    <p><i class="fas fa-calendar"></i> ${formattedDate}</p>
                     ${scheduledDeletion ? 
-                        `<p style="color: #ff6b6b; font-size: 0.9rem;">Scheduled for deletion at ${new Date(scheduledDeletion.deletionTime).toLocaleString()}</p>` : 
+                        `<p style="color: #ff9e00; font-size: 0.9rem; margin-top: 5px;">
+                            <i class="fas fa-clock"></i> Scheduled for deletion at ${new Date(scheduledDeletion.deletionTime).toLocaleString()}
+                        </p>` : 
                         ''}
                 </div>
                 <div class="url-actions">
@@ -622,7 +738,7 @@ function loadHistory() {
                         <i class="fas fa-copy"></i>
                     </button>
                     ${scheduledDeletion ? 
-                        `<button class="action-btn" title="Scheduled for deletion" style="cursor: default;">
+                        `<button class="action-btn" title="Scheduled for deletion" style="cursor: default; background: var(--warning); color: white;">
                             <i class="fas fa-clock"></i>
                         </button>` : 
                         `<button class="action-btn delete-btn" onclick="scheduleDeletion('${item.publicId}', '${item.url}')">
@@ -640,6 +756,7 @@ function removeFromHistory(url) {
     history = history.filter(item => item.url !== url);
     localStorage.setItem('imageUrls', JSON.stringify(history));
     loadHistory();
+    updateHistoryNotification();
 }
 
 // Show toast notification
@@ -647,10 +764,16 @@ function showToast(message, type = 'success') {
     toastMessage.textContent = message;
     
     if (type === 'error') {
-        toast.style.background = '#e63946';
+        toast.style.background = 'linear-gradient(135deg, #e63946, #d90429)';
         toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span id="toastMessage">${message}</span>`;
+    } else if (type === 'warning') {
+        toast.style.background = 'linear-gradient(135deg, #ff9e00, #ff9100)';
+        toast.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <span id="toastMessage">${message}</span>`;
+    } else if (type === 'info') {
+        toast.style.background = 'linear-gradient(135deg, #4cc9f0, #3a86ff)';
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> <span id="toastMessage">${message}</span>`;
     } else {
-        toast.style.background = 'var(--dark)';
+        toast.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
         toast.innerHTML = `<i class="fas fa-check-circle"></i> <span id="toastMessage">${message}</span>`;
     }
     
@@ -659,5 +782,4 @@ function showToast(message, type = 'success') {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
-
 }
