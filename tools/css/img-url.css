@@ -335,20 +335,20 @@ h1 {
 }
 
 .url-history {
-    max-height: 500px;
+    max-height: 720px;
     overflow-y: auto;
     padding-right: 15px;
     margin-top: 10px;
 }
 
 .url-history::-webkit-scrollbar {
-    width: 8px;
+    width: 20px;
 }
 
 .url-history::-webkit-scrollbar-track {
     background: rgba(67, 97, 238, 0.05);
-    border-radius: 10px;
-    margin: 5px 0;
+    border-radius: 15px;
+    margin: 10px 0;
 }
 
 .url-history::-webkit-scrollbar-thumb {
@@ -887,3 +887,4 @@ h1 {
         text-align: center;
     }
 }
+
