@@ -14,49 +14,57 @@ const toastMessage = document.getElementById('toastMessage');
 
 let CLOUD_NAME, UPLOAD_PRESET, API_KEY;
 
-// Fetch Cloudinary config from your Worker
-fetch('https://cloud-config.kumar8948rahul.workers.dev', {
-    mode: 'cors',
-    credentials: 'omit' // or 'include' if you need cookies
-})
-.then(res => {
-    if (!res.ok) {
-        if (res.status === 403) {
-            throw new Error('Access denied: This tool only works on authorized domains please contact - aarifalam0105@gmail.com');
-        }
-        throw new Error('Failed to fetch config');
-    }
-    return res.json();
-})
-.then(data => {
-    CLOUD_NAME = data.cloudName;
-    UPLOAD_PRESET = data.uploadPreset;
-    API_KEY = data.apiKey;
-    console.log("Cloudinary config loaded:", CLOUD_NAME, UPLOAD_PRESET, API_KEY);
-})
-.catch(err => {
-    console.error("Failed to load Cloudinary config:", err);
-    showToast(err.message || 'Failed to load Cloudinary configuration', 'error');
-});
-
 // Store selected files
 let selectedFiles = [];
 
+// Daily upload limit
+const DAILY_UPLOAD_LIMIT = 20;
+
 // Initialize from local storage
 document.addEventListener('DOMContentLoaded', () => {
+    loadCloudinaryConfig();
     loadHistory();
     checkScheduledDeletions();
     addPulseAnimation();
     addScrollToTopButton();
-    initializeHistoryNotification(); // Added: Initialize notification system
+    initializeHistoryNotification();
 });
+
+// ========== CLOUDINARY CONFIG LOADING ==========
+function loadCloudinaryConfig() {
+    // Load config from your Worker
+    fetch('https://cloud-config.kumar8948rahul.workers.dev/', {
+        mode: 'cors',
+        credentials: 'omit'
+    })
+    .then(res => {
+        if (!res.ok) {
+            if (res.status === 403) {
+                throw new Error('Access denied: This tool only works on authorized domains. Please contact aarifalam0105@gmail.com');
+            }
+            throw new Error('Failed to fetch config from Worker');
+        }
+        return res.json();
+    })
+    .then(data => {
+        if (data.cloudName && data.uploadPreset && data.apiKey) {
+            CLOUD_NAME = data.cloudName;
+            UPLOAD_PRESET = data.uploadPreset;
+            API_KEY = data.apiKey;
+            console.log("Cloudinary config loaded from Worker:", CLOUD_NAME);
+        } else {
+            throw new Error('Invalid config received from Worker');
+        }
+    })
+    .catch(err => {
+        console.error("Failed to load Cloudinary config:", err);
+        showToast('Failed to load Cloudinary configuration. Please refresh the page.', 'error');
+    });
+}
 
 // ========== HISTORY NOTIFICATION SYSTEM ==========
 function initializeHistoryNotification() {
-    // Initial check for history on page load
     updateHistoryNotification();
-    
-    // Check for history every 2 seconds
     setInterval(updateHistoryNotification, 2000);
 }
 
@@ -71,24 +79,23 @@ function updateHistoryNotification() {
     }
 }
 
-// Show notification when new images are uploaded
 function showHistoryNotification() {
     historyBtn.classList.add('has-history');
 }
 
-// Remove notification when history modal is opened
 historyBtn.addEventListener('click', () => {
     historyBtn.classList.remove('has-history');
     historyModal.style.display = 'flex';
     loadHistory();
 });
 
-// ========== END HISTORY NOTIFICATION ==========
+closeModal.addEventListener('click', () => {
+    historyModal.style.display = 'none';
+});
 
-// File selection handler
+// ========== FILE HANDLING ==========
 fileInput.addEventListener('change', handleFileSelect);
 
-// Drag and drop handlers
 dropArea.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropArea.style.borderColor = '#4361ee';
@@ -98,14 +105,14 @@ dropArea.addEventListener('dragover', (e) => {
 
 dropArea.addEventListener('dragleave', () => {
     dropArea.style.borderColor = '#4361ee';
-    dropArea.style.backgroundColor = 'transparent';
+    dropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.03)';
     dropArea.classList.remove('dragover');
 });
 
 dropArea.addEventListener('drop', (e) => {
     e.preventDefault();
     dropArea.style.borderColor = '#4361ee';
-    dropArea.style.backgroundColor = 'transparent';
+    dropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.03)';
     dropArea.classList.remove('dragover');
     
     if (e.dataTransfer.files.length) {
@@ -113,25 +120,70 @@ dropArea.addEventListener('drop', (e) => {
     }
 });
 
-// Upload button handler - UPDATED with animation
 uploadBtn.addEventListener('click', uploadImagesWithAnimation);
 
-// Close modal when clicking outside
 window.addEventListener('click', (e) => {
     if (e.target === historyModal) {
         historyModal.style.display = 'none';
     }
 });
 
-// Handle file selection
+// ========== UPLOAD LIMIT CHECKING ==========
+function checkDailyUploadLimit() {
+    const today = new Date().toDateString();
+    const uploads = JSON.parse(localStorage.getItem('dailyUploads') || '{}');
+    
+    if (!uploads[today]) {
+        uploads[today] = 0;
+        localStorage.setItem('dailyUploads', JSON.stringify(uploads));
+    }
+    
+    return uploads[today];
+}
+
+function incrementDailyUploadCount(count) {
+    const today = new Date().toDateString();
+    const uploads = JSON.parse(localStorage.getItem('dailyUploads') || '{}');
+    
+    if (!uploads[today]) {
+        uploads[today] = 0;
+    }
+    
+    uploads[today] += count;
+    localStorage.setItem('dailyUploads', JSON.stringify(uploads));
+}
+
 function handleFileSelect(e) {
     handleFiles(e.target.files);
 }
 
-// Process selected files
 function handleFiles(files) {
-    selectedFiles = Array.from(files);
+    const fileList = Array.from(files);
     
+    // Check daily upload limit
+    const todayUploads = checkDailyUploadLimit();
+    const remainingUploads = DAILY_UPLOAD_LIMIT - todayUploads;
+    
+    if (fileList.length > remainingUploads) {
+        showToast(`Daily limit exceeded! You can only upload ${remainingUploads} more image(s) today.`, 'error');
+        if (remainingUploads > 0) {
+            // Add only allowed number of files
+            selectedFiles = [...selectedFiles, ...fileList.slice(0, remainingUploads)];
+        }
+    } else {
+        // Add all files
+        selectedFiles = [...selectedFiles, ...fileList];
+    }
+    
+    updatePreviews();
+    
+    const remainingAfterAdd = DAILY_UPLOAD_LIMIT - (todayUploads + selectedFiles.length);
+    if (selectedFiles.length > 0) {
+        showToast(`${selectedFiles.length} image(s) selected (${remainingAfterAdd} remaining today)`, 'success');
+    }
+}
+
+function updatePreviews() {
     // Clear previous previews
     imagePreviews.innerHTML = '';
     
@@ -160,31 +212,11 @@ function handleFiles(files) {
         
         reader.readAsDataURL(file);
     });
-    
-    showToast(`${selectedFiles.length} image(s) selected`, 'success');
 }
 
-// Remove preview from selection
 function removePreview(index) {
     selectedFiles.splice(index, 1);
-    
-    // Recreate previews
-    imagePreviews.innerHTML = '';
-    selectedFiles.forEach((file, newIndex) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const preview = document.createElement('div');
-            preview.className = 'image-preview';
-            preview.innerHTML = `
-                <img src="${e.target.result}" alt="Preview ${newIndex + 1}">
-                <button class="remove-btn" onclick="removePreview(${newIndex})">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            imagePreviews.appendChild(preview);
-        };
-        reader.readAsDataURL(file);
-    });
+    updatePreviews();
     
     if (selectedFiles.length === 0) {
         showToast('All images removed', 'info');
@@ -193,7 +225,7 @@ function removePreview(index) {
     }
 }
 
-// Function to animate progress bar with simulated progress
+// ========== ANIMATIONS & UI ==========
 function animateProgressBar() {
     let progress = 0;
     const interval = setInterval(() => {
@@ -206,7 +238,6 @@ function animateProgressBar() {
     }, 30);
 }
 
-// Function to scroll to the Generated URLs section with smooth animation
 function scrollToResults() {
     const resultsSection = document.querySelector('.main-content .card:nth-child(2)');
     if (resultsSection) {
@@ -215,7 +246,6 @@ function scrollToResults() {
             block: 'start'
         });
         
-        // Add a highlight effect to draw attention
         resultsSection.style.transition = 'all 0.5s ease';
         resultsSection.style.boxShadow = '0 0 0 3px rgba(67, 97, 238, 0.3)';
         
@@ -225,14 +255,12 @@ function scrollToResults() {
     }
 }
 
-// Function to highlight the copy button with a pulsing animation
 function highlightCopyButtons() {
     const copyButtons = document.querySelectorAll('.action-btn, .copy-btn');
     copyButtons.forEach(button => {
         button.style.animation = 'pulse 2s infinite';
     });
     
-    // Remove animation after 5 seconds
     setTimeout(() => {
         copyButtons.forEach(button => {
             button.style.animation = '';
@@ -240,7 +268,6 @@ function highlightCopyButtons() {
     }, 5000);
 }
 
-// Add pulse animation to CSS
 function addPulseAnimation() {
     const style = document.createElement('style');
     style.textContent = `
@@ -274,7 +301,6 @@ function addPulseAnimation() {
     document.head.appendChild(style);
 }
 
-// Add scroll to top button
 function addScrollToTopButton() {
     const scrollToTopBtn = document.createElement('button');
     scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -284,7 +310,7 @@ function addScrollToTopButton() {
     scrollToTopBtn.style.width = '50px';
     scrollToTopBtn.style.height = '50px';
     scrollToTopBtn.style.borderRadius = '50%';
-    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    scrollToTopBtn.style.background = 'linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%)';
     scrollToTopBtn.style.color = 'white';
     scrollToTopBtn.style.border = 'none';
     scrollToTopBtn.style.boxShadow = '0 4px 15px rgba(67, 97, 238, 0.3)';
@@ -312,7 +338,6 @@ function addScrollToTopButton() {
     
     document.body.appendChild(scrollToTopBtn);
     
-    // Show/hide scroll-to-top button based on scroll position
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
             scrollToTopBtn.style.display = 'flex';
@@ -322,10 +347,12 @@ function addScrollToTopButton() {
     });
 }
 
-// Enhanced upload function with animation and auto-scroll
+// ========== MAIN UPLOAD FUNCTION ==========
 async function uploadImagesWithAnimation() {
-    if (!CLOUD_NAME || !UPLOAD_PRESET) {
-        showToast('Cloudinary configuration not loaded yet. Please wait...', 'error');
+    // Check daily upload limit
+    const todayUploads = checkDailyUploadLimit();
+    if (todayUploads >= DAILY_UPLOAD_LIMIT) {
+        showToast(`Daily upload limit reached! You can upload ${DAILY_UPLOAD_LIMIT} images per day.`, 'error');
         return;
     }
     
@@ -334,19 +361,23 @@ async function uploadImagesWithAnimation() {
         return;
     }
     
-    // Add processing class to button
-    uploadBtn.classList.add('processing');
+    if (!CLOUD_NAME || !UPLOAD_PRESET) {
+        showToast('Cloudinary configuration not loaded. Please refresh the page.', 'error');
+        return;
+    }
     
-    // Disable button during processing
+    // Check if upload would exceed daily limit
+    if (todayUploads + selectedFiles.length > DAILY_UPLOAD_LIMIT) {
+        const remaining = DAILY_UPLOAD_LIMIT - todayUploads;
+        showToast(`You can only upload ${remaining} more image(s) today.`, 'error');
+        return;
+    }
+    
+    uploadBtn.classList.add('processing');
     uploadBtn.disabled = true;
     
-    // Start progress animation
     animateProgressBar();
-    
-    // Clear previous results
     resultContainer.innerHTML = '';
-    
-    // Reset progress bar to 0% initially
     progressBar.style.width = '0%';
     
     const results = [];
@@ -374,7 +405,6 @@ async function uploadImagesWithAnimation() {
             const publicId = data.public_id;
             results.push({ file: file.name, url, publicId });
             
-            // Update progress bar based on actual upload progress
             progressBar.style.width = `${((i + 1) / selectedFiles.length) * 100}%`;
             
         } catch (error) {
@@ -383,35 +413,37 @@ async function uploadImagesWithAnimation() {
         }
     }
     
-    // Display results
     displayResults(results);
     
-    // Save to history
-    saveToHistory(results.filter(r => !r.error));
-    
-    // Show history notification
-    if (results.filter(r => !r.error).length > 0) {
+    const successfulUploads = results.filter(r => !r.error);
+    if (successfulUploads.length > 0) {
+        saveToHistory(successfulUploads);
         showHistoryNotification();
+        incrementDailyUploadCount(successfulUploads.length);
     }
     
-    // Reset selected files
     selectedFiles = [];
     imagePreviews.innerHTML = '';
     
-    // Remove processing class and re-enable button
     uploadBtn.classList.remove('processing');
     uploadBtn.disabled = false;
     
-    // Scroll to results section
     setTimeout(() => {
         scrollToResults();
         highlightCopyButtons();
     }, 500);
     
-    showToast('Images uploaded successfully!', 'success');
+    const successfulCount = successfulUploads.length;
+    const failedCount = results.length - successfulCount;
+    
+    let message = 'Upload completed! ';
+    if (successfulCount > 0) message += `${successfulCount} image(s) uploaded successfully. `;
+    if (failedCount > 0) message += `${failedCount} image(s) failed.`;
+    
+    showToast(message, successfulCount > 0 ? 'success' : 'error');
 }
 
-// Display upload results
+// ========== RESULTS DISPLAY ==========
 function displayResults(results) {
     if (results.length === 0) return;
     
@@ -450,13 +482,12 @@ function displayResults(results) {
     });
 }
 
-// Enhanced copy function with visual feedback
+// ========== CLIPBOARD FUNCTIONS ==========
 function enhancedCopyToClipboard(text, button = null) {
     navigator.clipboard.writeText(text).then(() => {
         showToast('URL copied to clipboard!', 'success');
         
         if (button) {
-            // Add visual feedback to the button
             const originalHtml = button.innerHTML;
             button.innerHTML = '<i class="fas fa-check"></i>';
             button.style.background = 'var(--success)';
@@ -474,19 +505,16 @@ function enhancedCopyToClipboard(text, button = null) {
     });
 }
 
-// Keep original function for backward compatibility
 function copyToClipboard(text) {
     enhancedCopyToClipboard(text);
 }
 
-// Schedule image deletion from Cloudinary
+// ========== DELETION FUNCTIONS ==========
 function scheduleDeletion(publicId, url) {
-    if (confirm("This image will be deleted from your local storage in 1 hour. The URL will stop working after deletion. Do you want to proceed?")) {
-        // Calculate deletion time (1 hour from now)
+    if (confirm("This image will be deleted from Cloudinary in 1 hour. The URL will stop working after deletion. Do you want to proceed?")) {
         const deletionTime = new Date();
         deletionTime.setHours(deletionTime.getHours() + 1);
         
-        // Save deletion request to localStorage
         const deletionRequests = JSON.parse(localStorage.getItem('deletionRequests')) || [];
         deletionRequests.push({
             publicId: publicId,
@@ -496,21 +524,17 @@ function scheduleDeletion(publicId, url) {
         
         localStorage.setItem('deletionRequests', JSON.stringify(deletionRequests));
         
-        // Update UI to show scheduled deletion
         updateDeletionUI(url, deletionTime);
         
         showToast('Image scheduled for deletion in 1 hour', 'success');
         
-        // Set timeout for actual deletion
         setTimeout(() => {
             deleteImageFromCloudinary(publicId, url);
-        }, 3600000); // 1 hour in milliseconds
+        }, 3600000);
     }
 }
 
-// Update UI to show scheduled deletion
 function updateDeletionUI(url, deletionTime) {
-    // Update in result container
     const urlItems = document.querySelectorAll('.url-item');
     urlItems.forEach(item => {
         const urlText = item.querySelector('.url-text');
@@ -525,7 +549,6 @@ function updateDeletionUI(url, deletionTime) {
                 deleteBtn.style.color = 'white';
             }
             
-            // Add deletion info
             const deletionInfo = document.createElement('p');
             deletionInfo.style.color = '#ff9e00';
             deletionInfo.style.fontSize = '0.9rem';
@@ -535,7 +558,6 @@ function updateDeletionUI(url, deletionTime) {
         }
     });
     
-    // Update in history modal if open
     const historyItems = document.querySelectorAll('#urlHistory .url-item');
     historyItems.forEach(item => {
         const urlText = item.querySelector('.url-text');
@@ -550,7 +572,6 @@ function updateDeletionUI(url, deletionTime) {
                 deleteBtn.style.color = 'white';
             }
             
-            // Add deletion info if not already present
             if (!item.querySelector('.deletion-info')) {
                 const deletionInfo = document.createElement('p');
                 deletionInfo.className = 'deletion-info';
@@ -564,7 +585,6 @@ function updateDeletionUI(url, deletionTime) {
     });
 }
 
-// Delete image from Cloudinary via Worker
 async function deleteImageFromCloudinary(publicId, url) {
     try {
         // Call your Worker to handle deletion
@@ -592,25 +612,20 @@ async function deleteImageFromCloudinary(publicId, url) {
             history = history.filter(item => item.url !== url);
             localStorage.setItem('imageUrls', JSON.stringify(history));
             
-            // Update UI
             removeImageFromUI(url);
-            
-            // Update history notification
             updateHistoryNotification();
             
-            showToast('Image deleted successfully', 'success');
+            showToast('Image deleted successfully from Cloudinary', 'success');
         } else {
             throw new Error(data.error || 'Failed to delete image');
         }
     } catch (error) {
         console.error('Error deleting image:', error);
-        showToast('Failed to delete image', 'error');
+        showToast('Failed to delete image: ' + error.message, 'error');
     }
 }
 
-// Remove image from UI
 function removeImageFromUI(url) {
-    // Remove from result container
     const urlItems = document.querySelectorAll('.url-item');
     urlItems.forEach(item => {
         const urlText = item.querySelector('.url-text');
@@ -619,7 +634,6 @@ function removeImageFromUI(url) {
         }
     });
     
-    // Remove from history modal
     const historyItems = document.querySelectorAll('#urlHistory .url-item');
     historyItems.forEach(item => {
         const urlText = item.querySelector('.url-text');
@@ -628,7 +642,6 @@ function removeImageFromUI(url) {
         }
     });
     
-    // If no items left, show empty state
     if (document.querySelectorAll('.url-item').length === 0) {
         resultContainer.innerHTML = `
             <div class="empty-state">
@@ -648,7 +661,6 @@ function removeImageFromUI(url) {
     }
 }
 
-// Check for scheduled deletions on page load
 function checkScheduledDeletions() {
     const deletionRequests = JSON.parse(localStorage.getItem('deletionRequests')) || [];
     const now = new Date();
@@ -657,13 +669,10 @@ function checkScheduledDeletions() {
         const deletionTime = new Date(request.deletionTime);
         
         if (deletionTime <= now) {
-            // Time for deletion
             deleteImageFromCloudinary(request.publicId, request.url);
         } else {
-            // Still waiting for deletion, update UI
             updateDeletionUI(request.url, deletionTime);
             
-            // Set timeout for remaining time
             const timeRemaining = deletionTime - now;
             setTimeout(() => {
                 deleteImageFromCloudinary(request.publicId, request.url);
@@ -672,14 +681,13 @@ function checkScheduledDeletions() {
     });
 }
 
-// Save URLs to local storage
+// ========== HISTORY FUNCTIONS ==========
 function saveToHistory(results) {
     if (results.length === 0) return;
     
     let history = JSON.parse(localStorage.getItem('imageUrls')) || [];
     
     results.forEach(result => {
-        // Avoid duplicates
         if (!history.some(item => item.url === result.url)) {
             history.unshift({
                 url: result.url,
@@ -690,13 +698,10 @@ function saveToHistory(results) {
         }
     });
     
-    // Keep only the last 50 items
     history = history.slice(0, 50);
-    
     localStorage.setItem('imageUrls', JSON.stringify(history));
 }
 
-// Load history from local storage
 function loadHistory() {
     const history = JSON.parse(localStorage.getItem('imageUrls')) || [];
     urlHistory.innerHTML = '';
@@ -711,14 +716,12 @@ function loadHistory() {
         return;
     }
     
-    // Check for any scheduled deletions
     const deletionRequests = JSON.parse(localStorage.getItem('deletionRequests')) || [];
     
     history.forEach(item => {
         const date = new Date(item.timestamp);
         const formattedDate = date.toLocaleString();
         
-        // Check if this image is scheduled for deletion
         const scheduledDeletion = deletionRequests.find(req => req.publicId === item.publicId);
         
         urlHistory.innerHTML += `
@@ -750,7 +753,6 @@ function loadHistory() {
     });
 }
 
-// Remove item from history
 function removeFromHistory(url) {
     let history = JSON.parse(localStorage.getItem('imageUrls')) || [];
     history = history.filter(item => item.url !== url);
@@ -759,22 +761,26 @@ function removeFromHistory(url) {
     updateHistoryNotification();
 }
 
-// Show toast notification
+// ========== TOAST NOTIFICATION ==========
 function showToast(message, type = 'success') {
     toastMessage.textContent = message;
     
-    if (type === 'error') {
-        toast.style.background = 'linear-gradient(135deg, #e63946, #d90429)';
-        toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span id="toastMessage">${message}</span>`;
-    } else if (type === 'warning') {
-        toast.style.background = 'linear-gradient(135deg, #ff9e00, #ff9100)';
-        toast.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <span id="toastMessage">${message}</span>`;
-    } else if (type === 'info') {
-        toast.style.background = 'linear-gradient(135deg, #4cc9f0, #3a86ff)';
-        toast.innerHTML = `<i class="fas fa-info-circle"></i> <span id="toastMessage">${message}</span>`;
-    } else {
-        toast.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
-        toast.innerHTML = `<i class="fas fa-check-circle"></i> <span id="toastMessage">${message}</span>`;
+    switch(type) {
+        case 'error':
+            toast.style.background = 'linear-gradient(135deg, #e63946, #d90429)';
+            toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span id="toastMessage">${message}</span>`;
+            break;
+        case 'warning':
+            toast.style.background = 'linear-gradient(135deg, #ff9e00, #ff9100)';
+            toast.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <span id="toastMessage">${message}</span>`;
+            break;
+        case 'info':
+            toast.style.background = 'linear-gradient(135deg, #4cc9f0, #3a86ff)';
+            toast.innerHTML = `<i class="fas fa-info-circle"></i> <span id="toastMessage">${message}</span>`;
+            break;
+        default:
+            toast.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> <span id="toastMessage">${message}</span>`;
     }
     
     toast.classList.add('show');
@@ -783,4 +789,3 @@ function showToast(message, type = 'success') {
         toast.classList.remove('show');
     }, 3000);
 }
-
