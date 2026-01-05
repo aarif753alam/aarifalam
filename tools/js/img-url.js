@@ -15,7 +15,7 @@ const toastMessage = document.getElementById('toastMessage');
 let CLOUD_NAME, UPLOAD_PRESET, API_KEY;
 
 // Fetch Cloudinary config from your Worker
-fetch('https://cloud-config.kumar8948rahul.workers.dev/', {
+fetch('https://cloud-config.kumar8948rahul.workers.dev', {
     mode: 'cors',
     credentials: 'omit' // or 'include' if you need cookies
 })
@@ -783,3 +783,4 @@ function showToast(message, type = 'success') {
         toast.classList.remove('show');
     }, 3000);
 }
+
