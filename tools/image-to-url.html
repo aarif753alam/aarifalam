@@ -157,7 +157,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Compact Profile Widget */
         .profile-widget {
             display: flex;
             align-items: center;
@@ -205,7 +204,6 @@
             transition: all 0.1s ease;
         }
         
-        /* Glow effect */
         .profile-widget::before {
             content: '';
             position: absolute;
@@ -349,7 +347,6 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         
-        /* Sparkle effect */
         .sparkle {
             position: absolute;
             width: 4px;
@@ -365,7 +362,6 @@
             50% { opacity: 1; transform: scale(1); }
         }
         
-        /* Click ripple effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -382,7 +378,6 @@
             }
         }
         
-        /* Responsive design */
         @media (max-width: 768px) {
             .card-content {
                 flex-direction: column;
@@ -458,20 +453,17 @@
     transition: box-shadow 0.4s ease, filter 0.3s ease;
     box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
 
-    /* ✅ GPU STABLE */
     will-change: transform;
 
     animation: gradientMove 4s ease infinite, float 3s ease-in-out infinite;
 }
 
-/* Gradient animation */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ✅ FIXED FLOAT (REDUCED + GPU SAFE) */
 @keyframes float {
     0%, 100% {
         transform: translate3d(0, 0, 0);
@@ -481,12 +473,10 @@
     }
 }
 
-/* Pause animation during loading */
 .magic-btn.loading {
     animation-play-state: paused;
 }
 
-/* Glow border */
 .magic-btn::before {
     content: '';
     position: absolute;
@@ -507,13 +497,11 @@
     opacity: 1;
 }
 
-/* Active state (NO TRANSFORM) */
 .magic-btn:active {
     box-shadow: 0 5px 15px rgba(221, 36, 118, 0.6);
     filter: brightness(0.95);
 }
 
-/* Shine effect */
 .magic-btn::after {
     content: '';
     position: absolute;
@@ -530,7 +518,6 @@
     left: 130%;
 }
 
-/* Icon animation */
 .magic-btn span {
     display: inline-block;
     margin-right: 8px;
@@ -542,7 +529,6 @@
     transform: translateX(5px) scale(1.2);
 }
 
-/* Pulse animation */
 @keyframes pulse {
     0% { box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4); }
     50% { box-shadow: 0 10px 30px rgba(221, 36, 118, 0.7); }
@@ -556,7 +542,6 @@
         pulse 1.5s ease infinite;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
     .magic-btn {
         padding: 18px 32px;
@@ -573,7 +558,6 @@
     }
 }
 
-/* Touch devices */
 @media (hover: none) {
     .magic-btn:hover::before { opacity: 0; }
     .magic-btn:hover::after { left: -60%; }
@@ -958,6 +942,7 @@ Image to url valid for life time, if you need this tool for you website then con
     </div>
 </div>
 
+<div style="display:none">aa0105-aa-etc</div>
 
   <div class="container">
         <div class="header">
@@ -979,6 +964,91 @@ Image to url valid for life time, if you need this tool for you website then con
   </div>
 </div>
 
+  <button class="report-aa-fab" id="report-aa-fab">
+  <span class="report-aa-fab-icon">💡</span>
+</button>
+
+<div class="report-aa-notification" id="report-aa-notification">
+  <span class="report-aa-notification-icon">✨</span>
+<span>Hello! Do you need any tools or help with an issue?</span>
+</div>
+
+<div class="report-aa-modal" id="report-aa-modal">
+  <div class="report-aa-color-flow"></div>
+  
+  <div class="report-aa-modal-content">
+    <div class="report-aa-header">
+      <h3><span>✨</span> Share Your Amazing Ideas/Feedback</h3>
+      <button class="report-aa-close" id="report-aa-close">×</button>
+    </div>
+    
+    <div class="report-aa-body">
+      <div class="report-aa-loading" id="report-aa-loading">
+        <div class="report-aa-spinner"></div>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px;">Loading...</p>
+      </div>
+      
+      <div id="report-aa-form-container">
+        <div style="
+          background: rgba(255, 255, 255, 0.05); 
+          padding: 30px; 
+          border-radius: 20px; 
+          margin-bottom: 35px; 
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+        ">
+          <p style="margin-bottom: 15px; color: rgba(255, 255, 255, 0.9); font-size: 18px; line-height: 1.6;">
+            <strong style="background: linear-gradient(135deg, #667eea, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎯 Have a brilliant idea?</strong><br>
+             Do you need a website for your business, want to report a bug, or suggest a new feature?          
+          </p>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 15px; line-height: 1.5;">
+            <strong>📞 Want us to contact you?</strong><br>
+            Just include your email or phone number in the message below.
+          </p>
+        </div>
+        
+        <div class="report-aa-textarea-wrapper">
+          <textarea 
+            class="report-aa-textarea" 
+            id="report-aa-message" 
+            placeholder="💭 Type your brilliant ideas, feedback, or suggestions here..."
+            rows="7"></textarea>
+        </div>
+        
+        <input 
+          class="report-aa-input" 
+          type="text" 
+          id="report-aa-screenshot" 
+          placeholder="🖼️ Optional: Paste screenshot URL">
+        
+        <button 
+          class="report-aa-submit-btn" 
+          id="report-aa-submit-btn">
+          <span id="report-aa-submit-text">🚀 Submit Feedback</span>
+        </button>
+        
+        <div class="report-aa-info" id="report-aa-info">
+          <div id="report-aa-count-display">Loading...</div>
+          <div class="report-aa-info-progress">
+            <div class="report-aa-info-progress-bar" id="report-aa-progress-bar"></div>
+          </div>
+          <div id="report-aa-limit-text" style="font-size: 14px; opacity: 0.7;"></div>
+        </div>
+      </div>
+      
+      <div class="report-aa-success" id="report-aa-success">
+        <div class="report-aa-success-icon">✅</div>
+        <h3>Thank You! 🎉</h3>
+        <p>Your feedback has been submitted successfully!</p>
+        <p>If you included contact details, we'll connect with you soon.</p>
+        <p style="margin-top: 25px; font-size: 15px; opacity: 0.8;">
+          <em>✨ This message will close automatically...</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <p>
     <a href="/footer/privacy-policy.html">Privacy</a> |
@@ -986,10 +1056,9 @@ Image to url valid for life time, if you need this tool for you website then con
     <a href="/footer/about.html">About</a> |
     <a href="/footer/contact-us/contact.html">Contact</a>
   </p>
-  <p>© 2025 AarifAlam.life | All rights reserved.</p>
+  <p>© 2026 AarifAlam.life | All rights reserved.</p>
 </footer>
        <script>
-    // Create sparkles
     const card = document.getElementById('profileCard');
     
     for (let i = 0; i < 8; i++) {
@@ -1001,7 +1070,6 @@ Image to url valid for life time, if you need this tool for you website then con
         card.appendChild(sparkle);
     }
     
-    // Add ripple effect on click
     card.addEventListener('click', function(e) {
         const ripple = document.createElement('div');
         ripple.className = 'ripple';
@@ -1014,7 +1082,6 @@ Image to url valid for life time, if you need this tool for you website then con
         }, 600);
     });
     
-    // Add subtle hover tilt effect
     card.addEventListener('mousemove', function(e) {
         const rect = this.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -1041,10 +1108,8 @@ Image to url valid for life time, if you need this tool for you website then con
 const button = document.querySelector('.magic-btn');
 
 button.addEventListener('click', function (e) {
-    // Prevent default link jump for smooth animation
     e.preventDefault();
 
-    // Create ripple
     const ripple = document.createElement('span');
     const rect = this.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
@@ -1063,13 +1128,10 @@ button.addEventListener('click', function (e) {
 
     setTimeout(() => ripple.remove(), 600);
 
-    // Mobile vibration (short and safe)
     if (navigator.vibrate) navigator.vibrate(20);
 
-    // Pause float animation during "loading"
     this.classList.add('loading');
 
-    // Optional: show temporary loading text without changing layout
     const original = this.querySelector('span').innerHTML;
     const textSpan = document.createElement('span');
     textSpan.style.marginLeft = '8px';
@@ -1079,12 +1141,10 @@ button.addEventListener('click', function (e) {
     setTimeout(() => {
         this.classList.remove('loading');
         textSpan.remove();
-        // Navigate after ripple completes
         window.location.href = this.getAttribute('href');
-    }, 400); // keep short for fast UX
+    }, 400); 
 });
 
-// Inject ripple animation ONCE
 if (!document.getElementById('rippleEffectStyle')) {
     const style = document.createElement('style');
     style.id = 'rippleEffectStyle';
@@ -1097,13 +1157,15 @@ if (!document.getElementById('rippleEffectStyle')) {
     document.head.appendChild(style);
 }
 </script>
-  
     <script src="js/img-url.js"></script>
     <script src="js/img-url-faq.js"></script>
     <script src="https://aarifalam.life/blog/js/video-frame.js"></script>
     <script src="../main/js/main-header.js"></script>
+    <script src="../main/js/report-aa0105.js"></script>
+    <script src="https://aarifalam.life/main/js/ideas-feedback.js"></script>
 </body>
 </html>
+
 
 
 
