@@ -492,24 +492,6 @@
     <strong style="color:#ffffff;">I love everyone ❤️</strong>
   </div>
 </div>
-
-<div class="container">
-  <div class="header">
-    <div class="profile-widget" id="profileCard" onclick="window.location='footer/contact-us/contact.html'">
-      <div class="card-content">
-        <div class="profile-photo">
-          <img src="/blog/images/aarifalam0105.jpg" alt="Aarif Alam Profile Photo">
-        </div>
-        <div class="profile-info">
-          <div class="profile-name">Do you need a Website?</div>
-          <div class="profile-title">
-            Powerful. Modern. Website-grade quality.
-            <span class="highlight">Custom-coded websites: blogs, PDF tools, image tools & more</span>
-          </div>
-        </div>
-        <button class="profile-button" type="button">Contact me</button>
-      </div>
-    </div>
     
     <h1>Creative Tools</h1>
     <p>Free and safe AI tools, creative resources, blogs, and games to learn and have fun.</p>
@@ -882,7 +864,7 @@
 
 <div class="report-aa-notification" id="report-aa-notification">
   <span class="report-aa-notification-icon">✨</span>
-<span>Hello! Do you need any tools or help with an issue?</span>
+<span>Hello 👋 Sir </span>
 </div>
 
 <div class="report-aa-modal" id="report-aa-modal">
@@ -1044,7 +1026,7 @@
 
 <script>
   const header = document.querySelector('.main-header');
-  const loveBanner = document.querySelector('.love-banner');
+  const loveBanner = document.querySelecor('.love-banner');
   let lastScroll = 0;
   const scrollThreshold = 10;
 
@@ -1062,52 +1044,6 @@
     }
     
     lastScroll = currentScroll;
-  });
-</script>
-
-<script>
-  const card = document.getElementById('profileCard');
-  
-  for (let i = 0; i < 8; i++) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    sparkle.style.left = Math.random() * 100 + '%';
-    sparkle.style.top = Math.random() * 100 + '%';
-    sparkle.style.animationDelay = Math.random() * 3 + 's';
-    card.appendChild(sparkle);
-  }
-  
-  card.addEventListener('click', function(e) {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple';
-    ripple.style.left = e.offsetX + 'px';
-    ripple.style.top = e.offsetY + 'px';
-    this.appendChild(ripple);
-    
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-  });
-  
-  card.addEventListener('mousemove', function(e) {
-    const rect = this.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const angleY = (x - centerX) / 25;
-    const angleX = (centerY - y) / 25;
-    
-    this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-8px) scale(1.02)`;
-  });
-  
-  card.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(-8px) scale(1.02)';
-    setTimeout(() => {
-      this.style.transform = '';
-    }, 150);
   });
 </script>
 
