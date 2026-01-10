@@ -1048,15 +1048,15 @@
 
 <script>
   const header = document.querySelector('.main-header');
-  const loveBanner = document.querySelecor('.love-banner');
+  const loveBanner = document.querySelector('.love-banner');
   let lastScroll = 0;
   const scrollThreshold = 10;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (Math.abs(currentScroll - lastScroll) < scrollThreshold) return;
-    
+
     if (currentScroll > lastScroll && currentScroll > header.offsetHeight) {
       header.style.transform = 'translateY(-100%)';
       loveBanner.style.transform = 'translateY(-100%)';
@@ -1064,56 +1064,59 @@
       header.style.transform = 'translateY(0)';
       loveBanner.style.transform = 'translateY(0)';
     }
-    
+
     lastScroll = currentScroll;
   });
 </script>
 
-       <script>
-    const card = document.getElementById('profileCard');
-    
-    for (let i = 0; i < 8; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 100 + '%';
-        sparkle.style.top = Math.random() * 100 + '%';
-        sparkle.style.animationDelay = Math.random() * 3 + 's';
-        card.appendChild(sparkle);
-    }
-    
-    card.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.className = 'ripple';
-        ripple.style.left = e.offsetX + 'px';
-        ripple.style.top = e.offsetY + 'px';
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-    
-    card.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const angleY = (x - centerX) / 25;
-        const angleX = (centerY - y) / 25;
-        
-        this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-8px) scale(1.02)`;
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(-8px) scale(1.02)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 150);
-    });
-       </script>
+<script>
+  // Create sparkles
+  const card = document.getElementById('profileCard');
+
+  for (let i = 0; i < 8; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 100 + '%';
+    sparkle.style.animationDelay = Math.random() * 3 + 's';
+    card.appendChild(sparkle);
+  }
+
+  // Add ripple effect on click
+  card.addEventListener('click', function(e) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = e.offsetX + 'px';
+    ripple.style.top = e.offsetY + 'px';
+    this.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  });
+
+  // Add subtle hover tilt effect
+  card.addEventListener('mousemove', function(e) {
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const angleY = (x - centerX) / 25;
+    const angleX = (centerY - y) / 25;
+
+    this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-8px) scale(1.02)`;
+  });
+
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(-8px) scale(1.02)';
+    setTimeout(() => {
+      this.style.transform = '';
+    }, 150);
+  });
+</script>
   
 <script>
 if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),slideInterval=setInterval(()=>{let e=(currentSlide+1)%testimonials.length;showSlide(e)},5e3)}dots.forEach((t,a)=>{t.addEventListener("click",()=>{clearInterval(slideInterval),showSlide(a),e()})}),showSlide(0),e()}const backToTop=document.getElementById("backToTop");backToTop&&(window.addEventListener("scroll",()=>{backToTop.classList.toggle("visible",window.scrollY>300)}),backToTop.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})})),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){let t=this.getAttribute("href");if("#"===t)return;let a=document.querySelector(t);if(a&&(e.preventDefault(),window.scrollTo({top:a.offsetTop-80,behavior:"smooth"}),function(){let e={creatorName:"@aarifalam0105",checkInterval:5e3,originalUrl:"https://aarifalam.life/"},t=()=>{try{let t=document.getElementById("creator-watermark");return!!t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(a){return!1}},a=()=>{let t=`
@@ -1151,3 +1154,4 @@ if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),s
 </script>
 </body>
 </html>
+
