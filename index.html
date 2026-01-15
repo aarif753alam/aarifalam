@@ -62,8 +62,11 @@
   }
 }
 </script>
-
   
+<script>
+  document.addEventListener("contextmenu",e=>e.preventDefault(),!1),document.addEventListener("dblclick",e=>e.preventDefault(),!1),document.addEventListener("keydown",function(e){("F12"===e.key||e.ctrlKey&&e.shiftKey&&["I","J","C"].includes(e.key)||e.ctrlKey&&"U"===e.key)&&e.preventDefault()},!1);
+</script>
+
 <script>
 !function(){try{if(window.top!==window.self){function t(t){"flex"===document.getElementById("contactModal").style.display&&t.preventDefault()}document.head.innerHTML=`
                 <meta charset="UTF-8">
@@ -139,9 +142,10 @@
                         </div>
                     `,t.style.background="rgba(16, 185, 129, 0.1)",t.style.borderColor="rgba(16, 185, 129, 0.3)",setTimeout(()=>{t.innerHTML=a,t.style.background="",t.style.borderColor=""},2e3)}).catch(t=>{console.error("Failed to copy: ",t)})},document.addEventListener("keydown",t=>{"Escape"===t.key&&hideContactModal()}),document.getElementById("contactModal").addEventListener("click",function(t){t.target===this&&hideContactModal()}),document.addEventListener("touchstart",function(){},{passive:!0}),document.querySelectorAll(".action-btn, .contact-option").forEach(t=>{t.addEventListener("contextmenu",t=>t.preventDefault())})}}catch(a){console.error("Frame protection error:",a)}}();
 </script>
+  
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8802060779563003"
-     crossorigin="anonymous"></script>
+     crossorigin="anonymous"></script>  
   
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX2CV48SMH"></script>
 <script>
@@ -152,8 +156,7 @@
   gtag('config', 'G-XX2CV48SMH');
 </script>
 
-<!--here my css Preconnect and prefetch for performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><!-- Favicon and Apple Touch Icon --><link rel="icon" href="images/logo/favicon.ico" sizes="any" type="image/x-icon"><link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png"> <!-- my complete css and Fonts ,Icons --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="main/css/main.css"> <link rel="stylesheet" href="main/css/question-answer.css"><link rel="stylesheet" href="main/css/FeaturesSection.css"> <link rel="stylesheet" href="main/css/LovBnr.css"> <link rel="stylesheet" href="main/css/subscribe-page.css"> <link rel="stylesheet" href="main/css/footer.css"> <link rel="stylesheet" href="main/css/header.css"><link rel="stylesheet" href="main/css/effects.css"><link rel="stylesheet" href="main/css/tools.css"><link rel="stylesheet" href="main/css/main-word-meaning.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><!-- Favicon and Apple Touch Icon --><link rel="icon" href="images/logo/favicon.ico" sizes="any" type="image/x-icon"><link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png"> <!-- my complete css and Fonts ,Icons --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="main/css/main.css"> <link rel="stylesheet" href="main/css/question-answer.css"><link rel="stylesheet" href="main/css/FeaturesSection.css"> <link rel="stylesheet" href="main/css/LovBnr.css"> <link rel="stylesheet" href="main/css/subscribe-page.css"> <link rel="stylesheet" href="main/css/footer.css"> <link rel="stylesheet" href="main/css/header.css"><link rel="stylesheet" href="main/css/effects.css"><link rel="stylesheet" href="main/css/tools.css"><link rel="stylesheet" href="main/css/main-word-meaning.css">
 
    <style>
 @keyframes fadeWatermark {
@@ -171,7 +174,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Compact Profile Widget */
         .profile-widget {
             display: flex;
             align-items: center;
@@ -219,7 +221,6 @@
             transition: all 0.1s ease;
         }
 
-        /* Glow effect */
         .profile-widget::before {
             content: '';
             position: absolute;
@@ -363,7 +364,6 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
-        /* Sparkle effect */
         .sparkle {
             position: absolute;
             width: 4px;
@@ -379,7 +379,6 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* Click ripple effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -396,7 +395,6 @@
             }
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .card-content {
                 flex-direction: column;
@@ -452,7 +450,6 @@
     </style>
  </head>
 <body>
-<!-- Scroll Progress Indicator -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <header class="main-header">
@@ -465,14 +462,12 @@
         <span class="logo-text">AarifAlam.Life</span>
       </a>
 
-      <!-- Search Box -->
       <div class="header-search">
         <input type="text" id="searchInput" placeholder="Search knowledge..." aria-label="Search">
         <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
         <div class="search-results" id="searchResults"></div>
       </div>
 
-      <!-- Mobile Search Toggle Button -->
       <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Toggle search">
         <i class="fas fa-search"></i>
       </button>
@@ -1160,7 +1155,3 @@ if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),s
 </script>
 </body>
 </html>
-
-
-
-
