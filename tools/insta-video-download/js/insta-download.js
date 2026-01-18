@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 
     const config = {
-        workerUrl: 'https://instagram-downloader.aarifalam.workers.dev',
+        workerUrl: 'https://instagram-downloader.aarifalam0105.workers.dev/',
         allowedDomains: ['aarifalam.life', 'aarifalam.pages.dev'],
         maxUrlLength: 500,
         instagramPatterns: [
@@ -783,3 +783,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the application
     init();
 });
+
