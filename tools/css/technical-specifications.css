@@ -1,0 +1,151 @@
+/* TECHNICAL SPECIFICATIONS CSS */
+.technical-specs-section {
+    background: #f8fafc;
+    padding: 3rem 1rem;
+    border-radius: 16px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    border: 1px solid #e2e8f0;
+}
+
+.technical-specs-section h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.technical-specs-section .section-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.specs-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.specs-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.specs-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.specs-content h3 {
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.specs-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.specs-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    position: relative;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.specs-content li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.use-cases {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.use-cases h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.use-case-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.use-case {
+    background: #f1f5f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    transition: background 0.3s;
+}
+
+.use-case:hover {
+    background: #e2e8f0;
+}
+
+.use-case h4 {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.use-case p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .specs-grid, .use-case-cards {
+        grid-template-columns: 1fr;
+    }
+    .specs-card {
+        flex-direction: column;
+    }
+    .specs-icon {
+        align-self: flex-start;
+    }
+}

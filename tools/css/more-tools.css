@@ -1,0 +1,331 @@
+/* TOOLS SECTION -  More Free Tools */
+.ar-tools-section {
+    background: #ffffff;
+    padding: 3.5rem 1.25rem;
+    margin: 2.5rem auto;
+    max-width: 1200px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.ar-tools-title {
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: #1e293b;
+    font-size: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ar-tools-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 3.25rem;
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* Tools Grid */
+.ar-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.ar-tool-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    gap: 1.5rem;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ar-tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.ar-tool-card:hover::before {
+    opacity: 1;
+}
+
+.ar-tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
+    text-decoration: none;
+}
+
+/* Tool Icons with Colors */
+.ar-tool-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+    transition: all 0.35s ease;
+}
+
+.ar-tool-card:hover .ar-tool-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.ar-tool-icon-blue {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1d4ed8;
+}
+
+.ar-tool-icon-cyan {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0c4a6e;
+}
+
+.ar-tool-icon-red {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+}
+
+.ar-tool-icon-green {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #166534;
+}
+
+.ar-tool-icon-purple {
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    color: #7c3aed;
+}
+
+.ar-tool-icon-amber {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+}
+
+/* Tool Content */
+.ar-tool-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ar-tool-heading {
+    margin: 0 0 0.85rem 0;
+    color: #1e293b;
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.3;
+}
+
+.ar-tool-desc {
+    color: #64748b;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.ar-tool-link {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s;
+    padding: 0.5rem 0;
+    letter-spacing: 0.3px;
+}
+
+.ar-tool-card:hover .ar-tool-link {
+    gap: 0.85rem;
+    color: #2563eb;
+}
+
+.ar-tool-arrow {
+    font-size: 0.85rem;
+    transition: transform 0.25s;
+}
+
+.ar-tool-card:hover .ar-tool-arrow {
+    transform: translateX(4px);
+}
+
+/* Workflow Tips */
+.ar-workflow-tips {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1.5px solid #e2e8f0;
+}
+
+.ar-workflow-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #1e293b;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ar-workflow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.ar-workflow-step {
+    display: flex;
+    gap: 2rem;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 14px;
+    border-left: 4px solid #3b82f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ar-workflow-step:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.ar-step-number {
+    background: #3b82f6;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.ar-step-blue { background: #3b82f6; }
+.ar-step-green { background: #10b981; }
+.ar-step-purple { background: #8b5cf6; }
+
+.ar-step-content {
+    flex: 1;
+}
+
+.ar-step-heading {
+    margin: 0 0 0.75rem 0;
+    color: #1e293b;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ar-step-tools {
+    color: #475569;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.ar-step-tools strong {
+    color: #1e293b;
+}
+
+.ar-step-detail {
+    color: #64748b;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ar-tools-section {
+        padding: 2.5rem 1rem;
+        margin: 2rem auto;
+    }
+    
+    .ar-tools-title {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .ar-tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .ar-tool-card {
+        padding: 1.75rem;
+        gap: 1.25rem;
+    }
+    
+    .ar-tool-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+    
+    .ar-workflow-step {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.75rem;
+    }
+    
+    .ar-step-number {
+        align-self: flex-start;
+    }
+    
+    .ar-workflow-tips {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ar-tools-title {
+        font-size: 1.6rem;
+    }
+    
+    .ar-tool-heading {
+        font-size: 1.25rem;
+    }
+    
+    .ar-step-heading {
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,131 @@
+/* NEW CSS for SEO Content Sections */
+.seo-content-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Guide Section */
+.guide-section h2, .benefits-section h2, .faq-section h2 {
+    color: #2d3748;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.step {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Benefits Section */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.benefit-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card i {
+    font-size: 2rem;
+    color: #3b82f6;
+    margin-bottom: 1rem;
+}
+
+/* FAQ Section */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question:hover {
+    background: #f1f5f9;
+}
+
+.faq-answer {
+    padding: 0 1.25rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer.active {
+    padding: 1.25rem;
+    max-height: 500px;
+}
+
+.faq-answer p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .steps, .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    .seo-content-section {
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+}
