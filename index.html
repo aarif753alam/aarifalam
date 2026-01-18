@@ -63,6 +63,300 @@
 }
 </script>
 
+    <script>
+  (function() {
+    'use strict';
+
+    /**
+     * DETERRENCE LAYER - CLIENT-SIDE ONLY
+     * 
+     * Purpose: To discourage non-technical users from casual copying,
+     * source inspection, or content extraction.
+     * 
+     * IMPORTANT: This is DETERRENCE only, NOT security.
+     * Determined users can bypass all client-side restrictions.
+     * This must not be relied upon for actual content protection.
+     */
+
+    // Configuration - adjust these as needed
+    const CONFIG = {
+        // Log attempts in console (visible to users who inspect)
+        logAttempts: true,
+        // Message to display in console
+        consoleMessage: 'Content interaction is restricted for casual copying.',
+        // Allow text selection for accessibility tools
+        allowAccessibilitySelection: true,
+        // Time threshold for mobile long-press (milliseconds)
+        longPressThreshold: 800
+    };
+
+    // State management
+    let lastTouchStart = 0;
+    let longPressTimer = null;
+    let isAccessibilityMode = false;
+
+    /**
+     * Safe event listener wrapper
+     * Ensures we don't interfere with existing handlers
+     */
+    function safeAddEvent(target, event, handler, options) {
+        try {
+            target.addEventListener(event, handler, options);
+        } catch (e) {
+            if (CONFIG.logAttempts) {
+                console.warn('Deterrence: Could not add event for', event, e.message);
+            }
+        }
+    }
+
+    /**
+     * Check if event is from an accessibility tool
+     * Many screen readers and accessibility tools use specific patterns
+     */
+    function isAccessibilityEvent(event) {
+        // Check for screen reader or accessibility cues
+        const isAriaPressed = event.target?.getAttribute?.('aria-pressed');
+        const isAriaSelected = event.target?.getAttribute?.('aria-selected');
+        const hasAriaLive = event.target?.closest?.('[aria-live]');
+        
+        // Keyboard navigation for accessibility
+        if (event.key === 'Tab' || event.key === 'Escape') {
+            return true;
+        }
+        
+        return isAriaPressed || isAriaSelected || hasAriaLive || isAccessibilityMode;
+    }
+
+    /**
+     * Log deterrent action (for transparency)
+     */
+    function logDeterrent(action, event) {
+        if (!CONFIG.logAttempts) return;
+        
+        console.log(`%c🔒 Deterrence: ${action}`, 
+            'color: #ff6b6b; font-weight: bold;');
+        console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,
+            'color: #4ecdc4; font-style: italic;');
+    }
+
+    /**
+     * Prevent context menu (right-click)
+     */
+    function handleContextMenu(event) {
+        if (isAccessibilityEvent(event)) {
+            return; // Allow for accessibility
+        }
+        
+        event.preventDefault();
+        logDeterrent('Context menu blocked', event);
+        return false;
+    }
+
+    /**
+     * Prevent text selection for copying
+     */
+    function handleSelection(event) {
+        if (CONFIG.allowAccessibilitySelection && isAccessibilityEvent(event)) {
+            return; // Allow selection for accessibility tools
+        }
+        
+        if (window.getSelection().toString().length > 100) {
+            // Only prevent large selections (likely copying)
+            event.preventDefault();
+            window.getSelection().removeAllRanges();
+            logDeterrent('Text selection blocked', event);
+        }
+    }
+
+    /**
+     * Prevent drag start (image/content dragging)
+     */
+    function handleDragStart(event) {
+        if (isAccessibilityEvent(event)) return;
+        
+        event.preventDefault();
+        logDeterrent('Drag operation blocked', event);
+        return false;
+    }
+
+    /**
+     * Handle keyboard shortcuts for inspection/copying
+     */
+    function handleKeyDown(event) {
+        // Skip if from accessibility tool
+        if (isAccessibilityEvent(event)) return;
+        
+        const isCtrl = event.ctrlKey || event.metaKey;
+        const isShift = event.shiftKey;
+        const key = event.key.toLowerCase();
+        
+        // Common inspection/copy shortcuts to deter
+        const blockedCombos = [
+            // Dev tools
+            isCtrl && isShift && ['i', 'j', 'c', 'k'].includes(key),
+            isCtrl && ['u', 's', 'p'].includes(key),
+            key === 'f12',
+            
+            // Copy/cut/select all
+            isCtrl && ['c', 'x', 'a'].includes(key),
+            
+            // Save/page shortcuts
+            isCtrl && ['s', 'p'].includes(key)
+        ];
+        
+        // Block PrintScreen key
+        if (key === 'printscreen') {
+            event.preventDefault();
+            logDeterrent('Screenshot prevented', event);
+            return;
+        }
+        
+        // Block other combinations
+        if (blockedCombos.some(Boolean)) {
+            event.preventDefault();
+            logDeterrent(`Shortcut ${event.key} blocked`, event);
+            
+            // Show brief visual feedback (non-intrusive)
+            const feedback = document.createElement('div');
+            feedback.textContent = '🔒';
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                font-size: 24px;
+                opacity: 0;
+                z-index: 10000;
+                transition: opacity 0.3s;
+                pointer-events: none;
+            `;
+            document.body.appendChild(feedback);
+            
+            // Fade in and out
+            requestAnimationFrame(() => {
+                feedback.style.opacity = '0.7';
+                setTimeout(() => {
+                    feedback.style.opacity = '0';
+                    setTimeout(() => feedback.remove(), 300);
+                }, 500);
+            });
+        }
+    }
+
+    /**
+     * Mobile: Handle long-press (touch and hold)
+     */
+    function handleTouchStart(event) {
+        if (isAccessibilityEvent(event)) return;
+        
+        lastTouchStart = Date.now();
+        
+        // Set timer for long press
+        longPressTimer = setTimeout(() => {
+            event.preventDefault();
+            logDeterrent('Long-press prevented', event);
+            
+            // Gentle vibration feedback (if supported)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }, CONFIG.longPressThreshold);
+    }
+
+    function handleTouchEnd() {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            longPressTimer = null;
+        }
+    }
+
+    function handleTouchMove() {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            longPressTimer = null;
+        }
+    }
+
+    /**
+     * Detect accessibility mode
+     */
+    function detectAccessibilityMode() {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        
+        // Check for screen reader usage patterns
+        const hasScreenReaderClass = document.documentElement.classList.contains(
+            'sr-only'
+        ) || document.body.classList.contains('sr-only');
+        
+        // Set accessibility mode
+        isAccessibilityMode = prefersReducedMotion || hasScreenReaderClass;
+    }
+
+    /**
+     * Initialize deterrent layer
+     */
+    function initDeterrence() {
+        // Skip if JavaScript is disabled (fails gracefully)
+        if (typeof document === 'undefined' || !document.addEventListener) {
+            return;
+        }
+        
+        // Detect accessibility requirements
+        detectAccessibilityMode();
+        
+        // Add event listeners
+        safeAddEvent(document, 'contextmenu', handleContextMenu);
+        safeAddEvent(document, 'selectstart', handleSelection);
+        safeAddEvent(document, 'dragstart', handleDragStart);
+        safeAddEvent(document, 'keydown', handleKeyDown);
+        
+        // Mobile touch events
+        safeAddEvent(document, 'touchstart', handleTouchStart, { passive: false });
+        safeAddEvent(document, 'touchend', handleTouchEnd, { passive: true });
+        safeAddEvent(document, 'touchmove', handleTouchMove, { passive: true });
+        
+        // Listen for accessibility changes
+        safeAddEvent(window, 'focus', detectAccessibilityMode);
+        
+        // Initial console message
+        if (CONFIG.logAttempts) {
+            console.log(CONFIG.consoleMessage);
+            console.log('This site uses client-side deterrents against casual copying.');
+            console.log('All content remains accessible to search engines and crawlers.');
+        }
+    }
+
+    /**
+     * Clean up function (for framework compatibility)
+     */
+    function cleanup() {
+        // Remove all our event listeners if needed
+        // Note: In practice, this runs until page unload
+        // This function is provided for framework integration
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+        }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        safeAddEvent(document, 'DOMContentLoaded', initDeterrence);
+    } else {
+        // DOM already loaded
+        initDeterrence();
+    }
+
+    // Expose cleanup for frameworks (if needed)
+    if (typeof window !== 'undefined') {
+        window.__deterrenceCleanup = cleanup;
+    }
+
+    // End of deterrence layer
+})();
+</script>
+
 <script>
 !function(){try{if(window.top!==window.self){function t(t){"flex"===document.getElementById("contactModal").style.display&&t.preventDefault()}document.head.innerHTML=`
                 <meta charset="UTF-8">
@@ -1114,602 +1408,6 @@
     }, 150);
   });
 </script>
-
-  <script>
-  (function() {
-    'use strict';
-
-    /**
-     * DETERRENCE LAYER - CLIENT-SIDE ONLY
-     * 
-     * Purpose: To discourage non-technical users from casual copying,
-     * source inspection, or content extraction.
-     * 
-     * IMPORTANT: This is DETERRENCE only, NOT security.
-     * Determined users can bypass all client-side restrictions.
-     * This must not be relied upon for actual content protection.
-     */
-
-    // Configuration - adjust these as needed
-    const CONFIG = {
-        // Log attempts in console (visible to users who inspect)
-        logAttempts: true,
-        // Message to display in console
-        consoleMessage: 'Content interaction is restricted for casual copying.',
-        // Allow text selection for accessibility tools
-        allowAccessibilitySelection: true,
-        // Time threshold for mobile long-press (milliseconds)
-        longPressThreshold: 800
-    };
-
-    // State management
-    let lastTouchStart = 0;
-    let longPressTimer = null;
-    let isAccessibilityMode = false;
-
-    /**
-     * Safe event listener wrapper
-     * Ensures we don't interfere with existing handlers
-     */
-    function safeAddEvent(target, event, handler, options) {
-        try {
-            target.addEventListener(event, handler, options);
-        } catch (e) {
-            if (CONFIG.logAttempts) {
-                console.warn('Deterrence: Could not add event for', event, e.message);
-            }
-        }
-    }
-
-    /**
-     * Check if event is from an accessibility tool
-     * Many screen readers and accessibility tools use specific patterns
-     */
-    function isAccessibilityEvent(event) {
-        // Check for screen reader or accessibility cues
-        const isAriaPressed = event.target?.getAttribute?.('aria-pressed');
-        const isAriaSelected = event.target?.getAttribute?.('aria-selected');
-        const hasAriaLive = event.target?.closest?.('[aria-live]');
-        
-        // Keyboard navigation for accessibility
-        if (event.key === 'Tab' || event.key === 'Escape') {
-            return true;
-        }
-        
-        return isAriaPressed || isAriaSelected || hasAriaLive || isAccessibilityMode;
-    }
-
-    /**
-     * Log deterrent action (for transparency)
-     */
-    function logDeterrent(action, event) {
-        if (!CONFIG.logAttempts) return;
-        
-        console.log(`%c🔒 Deterrence: ${action}`, 
-            'color: #ff6b6b; font-weight: bold;');
-        console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,
-            'color: #4ecdc4; font-style: italic;');
-    }
-
-    /**
-     * Prevent context menu (right-click)
-     */
-    function handleContextMenu(event) {
-        if (isAccessibilityEvent(event)) {
-            return; // Allow for accessibility
-        }
-        
-        event.preventDefault();
-        logDeterrent('Context menu blocked', event);
-        return false;
-    }
-
-    /**
-     * Prevent text selection for copying
-     */
-    function handleSelection(event) {
-        if (CONFIG.allowAccessibilitySelection && isAccessibilityEvent(event)) {
-            return; // Allow selection for accessibility tools
-        }
-        
-        if (window.getSelection().toString().length > 100) {
-            // Only prevent large selections (likely copying)
-            event.preventDefault();
-            window.getSelection().removeAllRanges();
-            logDeterrent('Text selection blocked', event);
-        }
-    }
-
-    /**
-     * Prevent drag start (image/content dragging)
-     */
-    function handleDragStart(event) {
-        if (isAccessibilityEvent(event)) return;
-        
-        event.preventDefault();
-        logDeterrent('Drag operation blocked', event);
-        return false;
-    }
-
-    /**
-     * Handle keyboard shortcuts for inspection/copying
-     */
-    function handleKeyDown(event) {
-        // Skip if from accessibility tool
-        if (isAccessibilityEvent(event)) return;
-        
-        const isCtrl = event.ctrlKey || event.metaKey;
-        const isShift = event.shiftKey;
-        const key = event.key.toLowerCase();
-        
-        // Common inspection/copy shortcuts to deter
-        const blockedCombos = [
-            // Dev tools
-            isCtrl && isShift && ['i', 'j', 'c', 'k'].includes(key),
-            isCtrl && ['u', 's', 'p'].includes(key),
-            key === 'f12',
-            
-            // Copy/cut/select all
-            isCtrl && ['c', 'x', 'a'].includes(key),
-            
-            // Save/page shortcuts
-            isCtrl && ['s', 'p'].includes(key)
-        ];
-        
-        // Block PrintScreen key
-        if (key === 'printscreen') {
-            event.preventDefault();
-            logDeterrent('Screenshot prevented', event);
-            return;
-        }
-        
-        // Block other combinations
-        if (blockedCombos.some(Boolean)) {
-            event.preventDefault();
-            logDeterrent(`Shortcut ${event.key} blocked`, event);
-            
-            // Show brief visual feedback (non-intrusive)
-            const feedback = document.createElement('div');
-            feedback.textContent = '🔒';
-            feedback.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                font-size: 24px;
-                opacity: 0;
-                z-index: 10000;
-                transition: opacity 0.3s;
-                pointer-events: none;
-            `;
-            document.body.appendChild(feedback);
-            
-            // Fade in and out
-            requestAnimationFrame(() => {
-                feedback.style.opacity = '0.7';
-                setTimeout(() => {
-                    feedback.style.opacity = '0';
-                    setTimeout(() => feedback.remove(), 300);
-                }, 500);
-            });
-        }
-    }
-
-    /**
-     * Mobile: Handle long-press (touch and hold)
-     */
-    function handleTouchStart(event) {
-        if (isAccessibilityEvent(event)) return;
-        
-        lastTouchStart = Date.now();
-        
-        // Set timer for long press
-        longPressTimer = setTimeout(() => {
-            event.preventDefault();
-            logDeterrent('Long-press prevented', event);
-            
-            // Gentle vibration feedback (if supported)
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-        }, CONFIG.longPressThreshold);
-    }
-
-    function handleTouchEnd() {
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-            longPressTimer = null;
-        }
-    }
-
-    function handleTouchMove() {
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-            longPressTimer = null;
-        }
-    }
-
-    /**
-     * Detect accessibility mode
-     */
-    function detectAccessibilityMode() {
-        // Check for reduced motion preference
-        const prefersReducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-        ).matches;
-        
-        // Check for screen reader usage patterns
-        const hasScreenReaderClass = document.documentElement.classList.contains(
-            'sr-only'
-        ) || document.body.classList.contains('sr-only');
-        
-        // Set accessibility mode
-        isAccessibilityMode = prefersReducedMotion || hasScreenReaderClass;
-    }
-
-    /**
-     * Initialize deterrent layer
-     */
-    function initDeterrence() {
-        // Skip if JavaScript is disabled (fails gracefully)
-        if (typeof document === 'undefined' || !document.addEventListener) {
-            return;
-        }
-        
-        // Detect accessibility requirements
-        detectAccessibilityMode();
-        
-        // Add event listeners
-        safeAddEvent(document, 'contextmenu', handleContextMenu);
-        safeAddEvent(document, 'selectstart', handleSelection);
-        safeAddEvent(document, 'dragstart', handleDragStart);
-        safeAddEvent(document, 'keydown', handleKeyDown);
-        
-        // Mobile touch events
-        safeAddEvent(document, 'touchstart', handleTouchStart, { passive: false });
-        safeAddEvent(document, 'touchend', handleTouchEnd, { passive: true });
-        safeAddEvent(document, 'touchmove', handleTouchMove, { passive: true });
-        
-        // Listen for accessibility changes
-        safeAddEvent(window, 'focus', detectAccessibilityMode);
-        
-        // Initial console message
-        if (CONFIG.logAttempts) {
-            console.log(CONFIG.consoleMessage);
-            console.log('This site uses client-side deterrents against casual copying.');
-            console.log('All content remains accessible to search engines and crawlers.');
-        }
-    }
-
-    /**
-     * Clean up function (for framework compatibility)
-     */
-    function cleanup() {
-        // Remove all our event listeners if needed
-        // Note: In practice, this runs until page unload
-        // This function is provided for framework integration
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-        }
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        safeAddEvent(document, 'DOMContentLoaded', initDeterrence);
-    } else {
-        // DOM already loaded
-        initDeterrence();
-    }
-
-    // Expose cleanup for frameworks (if needed)
-    if (typeof window !== 'undefined') {
-        window.__deterrenceCleanup = cleanup;
-    }
-
-    // End of deterrence layer
-})();
-</script>
-
-  <!-- domain redirect -->
-  <script>
-(function() {
-    'use strict';
-
-    /**
-     * VIEW-SOURCE REDIRECTION LAYER - CLIENT-SIDE ONLY
-     * 
-     * Purpose: To discourage casual viewing of page source via view-source: protocol
-     * by redirecting to the main domain with a warning message.
-     * 
-     * IMPORTANT: This is DETERRENCE only, NOT security.
-     * Determined users can bypass this by disabling JavaScript or using other methods.
-     */
-
-    // Configuration
-    const CONFIG = {
-        redirectDelay: 5000, // 5 seconds in milliseconds
-        mainDomain: 'https://aarifalam.life',
-        warningMessage: 'Viewing page source is restricted. Redirecting to main site...',
-        consoleWarning: '🔒 Source viewing is restricted. Redirecting to main domain...'
-    };
-
-    /**
-     * Check if current page is being viewed via view-source: protocol
-     */
-    function isViewSourcePage() {
-        // Method 1: Check if URL starts with view-source:
-        if (window.location.protocol === 'view-source:') {
-            return true;
-        }
-        
-        // Method 2: Check document content for view-source indicators
-        // Some browsers don't expose the protocol directly
-        const bodyContent = document.body ? document.body.innerHTML : '';
-        const docType = document.doctype ? document.doctype.name : '';
-        
-        // Check for raw HTML indicators
-        const isRawHTML = docType.toLowerCase().includes('html') && 
-                         bodyContent.includes('<!--') && 
-                         bodyContent.includes('<html');
-        
-        // Additional check for view-source patterns
-        const isLikelyViewSource = document.documentElement.outerHTML.includes('view-source') ||
-                                  window.self !== window.top;
-        
-        return isRawHTML || isLikelyViewSource;
-    }
-
-    /**
-     * Check if current URL is a subdomain or different path of main domain
-     */
-    function isRelatedToMainDomain() {
-        try {
-            const currentHost = window.location.hostname;
-            const mainHost = new URL(CONFIG.mainDomain).hostname;
-            
-            // Check if current host is main domain or subdomain
-            return currentHost === mainHost || 
-                   currentHost.endsWith('.' + mainHost) ||
-                   currentHost.includes('aarifalam');
-        } catch (e) {
-            return false;
-        }
-    }
-
-    /**
-     * Create warning message overlay
-     */
-    function createWarningOverlay() {
-        // Remove any existing overlay first
-        const existingOverlay = document.getElementById('view-source-warning');
-        if (existingOverlay) {
-            existingOverlay.remove();
-        }
-        
-        // Create overlay
-        const overlay = document.createElement('div');
-        overlay.id = 'view-source-warning';
-        
-        // Styling - non-intrusive but clear
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            color: white;
-            z-index: 2147483647; /* Maximum z-index */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        `;
-        
-        // Create warning content
-        const warningContent = document.createElement('div');
-        warningContent.style.cssText = `
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 10px;
-            border: 2px solid #ff6b6b;
-        `;
-        
-        // Warning icon
-        const warningIcon = document.createElement('div');
-        warningIcon.innerHTML = '⚠️';
-        warningIcon.style.cssText = `
-            font-size: 48px;
-            margin-bottom: 20px;
-        `;
-        
-        // Warning message
-        const message = document.createElement('h2');
-        message.textContent = CONFIG.warningMessage;
-        message.style.cssText = `
-            color: #ff6b6b;
-            margin: 0 0 20px 0;
-            font-size: 24px;
-        `;
-        
-        // Countdown display
-        const countdown = document.createElement('div');
-        countdown.id = 'redirect-countdown';
-        countdown.textContent = `Redirecting in 5 seconds...`;
-        countdown.style.cssText = `
-            color: #4ecdc4;
-            font-size: 18px;
-            margin: 20px 0;
-            font-weight: bold;
-        `;
-        
-        // Note about deterrence
-        const note = document.createElement('p');
-        note.textContent = 'Note: This is a client-side deterrent only. Technical users can bypass this.';
-        note.style.cssText = `
-            color: #aaa;
-            font-size: 14px;
-            margin: 20px 0 0 0;
-            font-style: italic;
-        `;
-        
-        // Manual redirect link
-        const manualLink = document.createElement('a');
-        manualLink.href = CONFIG.mainDomain;
-        manualLink.textContent = 'Click here to redirect now';
-        manualLink.style.cssText = `
-            display: inline-block;
-            background: #4ecdc4;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: background 0.3s;
-        `;
-        manualLink.onmouseover = function() {
-            this.style.background = '#3dbcb4';
-        };
-        manualLink.onmouseout = function() {
-            this.style.background = '#4ecdc4';
-        };
-        
-        // Assemble overlay
-        warningContent.appendChild(warningIcon);
-        warningContent.appendChild(message);
-        warningContent.appendChild(countdown);
-        warningContent.appendChild(note);
-        warningContent.appendChild(manualLink);
-        overlay.appendChild(warningContent);
-        
-        return overlay;
-    }
-
-    /**
-     * Start countdown and redirect
-     */
-    function startRedirectCountdown() {
-        let secondsLeft = CONFIG.redirectDelay / 1000;
-        const countdownElement = document.getElementById('redirect-countdown');
-        
-        // Update countdown every second
-        const countdownInterval = setInterval(() => {
-            secondsLeft--;
-            
-            if (countdownElement) {
-                countdownElement.textContent = `Redirecting in ${secondsLeft} second${secondsLeft !== 1 ? 's' : ''}...`;
-            }
-            
-            if (secondsLeft <= 0) {
-                clearInterval(countdownInterval);
-                performRedirect();
-            }
-        }, 1000);
-        
-        // Set initial countdown
-        if (countdownElement) {
-            countdownElement.textContent = `Redirecting in ${secondsLeft} seconds...`;
-        }
-    }
-
-    /**
-     * Perform the actual redirect
-     */
-    function performRedirect() {
-        try {
-            // Log redirection
-            console.warn(CONFIG.consoleWarning);
-            
-            // Use replace instead of assign to prevent back navigation
-            window.location.replace(CONFIG.mainDomain);
-        } catch (error) {
-            // Fallback to href if replace fails
-            console.error('Redirect failed:', error);
-            window.location.href = CONFIG.mainDomain;
-        }
-    }
-
-    /**
-     * Initialize view-source protection
-     */
-    function initViewSourceProtection() {
-        // Skip if JavaScript is disabled (fails gracefully)
-        if (typeof window === 'undefined' || !window.location) {
-            return;
-        }
-        
-        // Check if this is a view-source page AND related to our domain
-        if (isViewSourcePage() && isRelatedToMainDomain()) {
-            // Log warning to console
-            console.warn(CONFIG.consoleWarning);
-            console.warn('This is a deterrent measure. Technical users can view source via other methods.');
-            
-            // Create and show warning overlay
-            const overlay = createWarningOverlay();
-            document.documentElement.appendChild(overlay);
-            
-            // Start countdown
-            startRedirectCountdown();
-            
-            // Prevent any interaction with the underlying page
-            document.body.style.overflow = 'hidden';
-            document.body.style.pointerEvents = 'none';
-            document.body.style.userSelect = 'none';
-            
-            // Add meta refresh as backup for non-JS scenarios
-            const metaRefresh = document.createElement('meta');
-            metaRefresh.httpEquiv = 'refresh';
-            metaRefresh.content = `${CONFIG.redirectDelay / 1000}; url=${CONFIG.mainDomain}`;
-            document.head.appendChild(metaRefresh);
-        }
-    }
-
-    /**
-     * Clean up function
-     */
-    function cleanup() {
-        // Remove overlay if exists
-        const overlay = document.getElementById('view-source-warning');
-        if (overlay) {
-            overlay.remove();
-        }
-        
-        // Restore body styles
-        document.body.style.overflow = '';
-        document.body.style.pointerEvents = '';
-        document.body.style.userSelect = '';
-        
-        // Remove meta refresh
-        const metaRefresh = document.querySelector('meta[http-equiv="refresh"]');
-        if (metaRefresh && metaRefresh.content.includes(CONFIG.mainDomain)) {
-            metaRefresh.remove();
-        }
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initViewSourceProtection);
-    } else {
-        // DOM already loaded
-        initViewSourceProtection();
-    }
-
-    // Expose cleanup for frameworks
-    if (typeof window !== 'undefined') {
-        if (!window.__deterrenceCleanup) {
-            window.__deterrenceCleanup = {};
-        }
-        window.__deterrenceCleanup.viewSource = cleanup;
-    }
-
-    // End of view-source protection layer
-})();
-  </script>
   
 <script>
 if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),slideInterval=setInterval(()=>{let e=(currentSlide+1)%testimonials.length;showSlide(e)},5e3)}dots.forEach((t,a)=>{t.addEventListener("click",()=>{clearInterval(slideInterval),showSlide(a),e()})}),showSlide(0),e()}const backToTop=document.getElementById("backToTop");backToTop&&(window.addEventListener("scroll",()=>{backToTop.classList.toggle("visible",window.scrollY>300)}),backToTop.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})})),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){let t=this.getAttribute("href");if("#"===t)return;let a=document.querySelector(t);if(a&&(e.preventDefault(),window.scrollTo({top:a.offsetTop-80,behavior:"smooth"}),function(){let e={creatorName:"@aarifalam0105",checkInterval:5e3,originalUrl:"https://aarifalam.life/"},t=()=>{try{let t=document.getElementById("creator-watermark");return!!t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(a){return!1}},a=()=>{let t=`
