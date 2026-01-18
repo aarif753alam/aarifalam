@@ -1,201 +1,107 @@
+// insta-download.js
+
 document.addEventListener('DOMContentLoaded', function() {
-    'use strict';
+    // DOM Elements
+    const urlInput = document.getElementById('urlInput');
+    const pasteBtn = document.getElementById('pasteBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resultContainer = document.getElementById('resultContainer');
+    const errorContainer = document.getElementById('errorContainer');
+    const closeResult = document.getElementById('closeResult');
+    const closeError = document.getElementById('closeError');
+    const retryBtn = document.getElementById('retryBtn');
+    const videoPreview = document.getElementById('videoPreview');
+    const qualityLabel = document.getElementById('qualityLabel');
+    const durationLabel = document.getElementById('durationLabel');
+    const sizeLabel = document.getElementById('sizeLabel');
+    const downloadVideoBtn = document.getElementById('downloadVideoBtn');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const notification = document.getElementById('notification');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // Worker URLs (fallback options)
+    const WORKER_URLS = [
+        'https://instagram-downloader.aarifalam0105.workers.dev/',
+        'https://your-backup-worker.workers.dev/' // Add backup worker if needed
+    ];
+    
+    // State
+    let currentVideoData = null;
+    let isProcessing = false;
+    let retryCount = 0;
+    const MAX_RETRIES = 2;
+    const CACHE_KEY = 'insta_video_cache';
+    const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
 
-    const config = {
-        workerUrl: 'https://instagram-downloader.aarifalam0105.workers.dev/',
-        allowedDomains: ['aarifalam.life', 'aarifalam.pages.dev'],
-        maxUrlLength: 500,
-        instagramPatterns: [
-            /https?:\/\/(?:www\.)?instagram\.com\/(?:p|reel|tv|stories)\/([A-Za-z0-9_-]+)/i,
-            /https?:\/\/(?:www\.)?instagram\.com\/stories\/[^\/]+\/(\d+)/i,
-            /https?:\/\/instagr\.am\/(?:p|reel|tv|stories)\/([A-Za-z0-9_-]+)/i
-        ]
-    };
-
-    const state = {
-        isProcessing: false,
-        currentVideoData: null,
-        apiEndpoint: config.workerUrl,
-        currentUrl: '',
-        errorRetryCount: 0
-    };
-
-    const elements = {
-        urlInput: document.getElementById('urlInput'),
-        downloadBtn: document.getElementById('downloadBtn'),
-        pasteBtn: document.getElementById('pasteBtn'),
-        resultContainer: document.getElementById('resultContainer'),
-        errorContainer: document.getElementById('errorContainer'),
-        closeResult: document.getElementById('closeResult'),
-        closeError: document.getElementById('closeError'),
-        retryBtn: document.getElementById('retryBtn'),
-        videoPreview: document.getElementById('videoPreview'),
-        qualityLabel: document.getElementById('qualityLabel'),
-        durationLabel: document.getElementById('durationLabel'),
-        sizeLabel: document.getElementById('sizeLabel'),
-        downloadVideoBtn: document.getElementById('downloadVideoBtn'),
-        copyLinkBtn: document.getElementById('copyLinkBtn'),
-        errorMessage: document.getElementById('errorMessage'),
-        notification: document.getElementById('notification'),
-        supportedFormats: document.querySelector('.supported-formats'),
-        actionButtons: document.querySelector('.action-buttons')
-    };
+    // Initialize
+    init();
 
     function init() {
         setupEventListeners();
-        validateDomain();
-        setupInputValidation();
-        setupKeyboardNavigation();
-        elements.urlInput.focus();
-        
-        // Show initial notification
-        setTimeout(() => {
-            showNotification('✨ Welcome to AarifAlam Instagram Downloader!', 4000);
-        }, 500);
-    }
-
-    function validateDomain() {
-        const currentDomain = window.location.hostname;
-        const isAllowed = config.allowedDomains.some(domain => 
-            currentDomain === domain || currentDomain.endsWith('.' + domain)
-        );
-        
-        if (!isAllowed) {
-            elements.urlInput.disabled = true;
-            elements.downloadBtn.disabled = true;
-            showError('This tool only works on aarifalam.life and aarifalam.pages.dev');
-            return false;
-        }
-        return true;
+        checkClipboardPermission();
+        loadFromLocalStorage();
+        setupServiceWorker();
     }
 
     function setupEventListeners() {
-        // Main download button
-        elements.downloadBtn.addEventListener('click', handleDownloadRequest);
-        
         // Paste button
-        elements.pasteBtn.addEventListener('click', handlePaste);
+        pasteBtn.addEventListener('click', handlePaste);
+        
+        // Download button
+        downloadBtn.addEventListener('click', handleDownload);
+        
+        // Enter key in input
+        urlInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleDownload();
+            }
+        });
+        
+        // Input validation on change
+        urlInput.addEventListener('input', validateUrlInput);
         
         // Close buttons
-        elements.closeResult.addEventListener('click', () => hideElement(elements.resultContainer));
-        elements.closeError.addEventListener('click', () => hideElement(elements.errorContainer));
+        closeResult.addEventListener('click', () => {
+            resultContainer.classList.add('hidden');
+        });
+        
+        closeError.addEventListener('click', () => {
+            errorContainer.classList.add('hidden');
+        });
         
         // Retry button
-        elements.retryBtn.addEventListener('click', handleRetry);
-        
-        // Download video button
-        elements.downloadVideoBtn.addEventListener('click', handleVideoDownload);
+        retryBtn.addEventListener('click', () => {
+            errorContainer.classList.add('hidden');
+            handleDownload();
+        });
         
         // Copy link button
-        elements.copyLinkBtn.addEventListener('click', handleCopyLink);
+        copyLinkBtn.addEventListener('click', handleCopyLink);
         
-        // Enter key on input
-        elements.urlInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') handleDownloadRequest();
-        });
-        
-        // Network status monitoring
-        window.addEventListener('online', () => {
-            showNotification('✅ You are back online', 2000);
-        });
-        
-        window.addEventListener('offline', () => {
-            showError('⚠️ You are offline. Please check your internet connection.');
-        });
-        
-        // Click outside to close modals
-        document.addEventListener('click', function(e) {
-            if (!elements.resultContainer.classList.contains('hidden') && 
-                !e.target.closest('.result-container') && 
-                !e.target.closest('#downloadBtn')) {
-                hideElement(elements.resultContainer);
-            }
-            
-            if (!elements.errorContainer.classList.contains('hidden') && 
-                !e.target.closest('.error-container') && 
-                !e.target.closest('#downloadBtn')) {
-                hideElement(elements.errorContainer);
-            }
-        });
-    }
-
-    function setupInputValidation() {
-        elements.urlInput.addEventListener('input', function() {
-            const url = this.value.trim();
-            const isValid = validateInstagramUrl(url);
-            
-            if (url && isValid) {
-                this.style.borderColor = '#10b981';
-            } else if (url && !isValid) {
-                this.style.borderColor = '#ef4444';
-            } else {
-                this.style.borderColor = '';
-            }
-            
-            elements.downloadBtn.disabled = !isValid || state.isProcessing;
-            updatePasteButtonState();
-        });
-        
-        elements.urlInput.addEventListener('focus', function() {
-            this.style.transform = 'translateY(-1px)';
-            this.style.boxShadow = '0 0 0 3px rgba(99, 102, 241, 0.1)';
-        });
-        
-        elements.urlInput.addEventListener('blur', function() {
-            this.style.transform = '';
-            this.style.boxShadow = '';
-        });
-    }
-
-    function setupKeyboardNavigation() {
-        document.addEventListener('keydown', function(e) {
-            // Escape to close modals
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (!elements.resultContainer.classList.contains('hidden')) {
-                    hideElement(elements.resultContainer);
-                    elements.urlInput.focus();
-                }
-                if (!elements.errorContainer.classList.contains('hidden')) {
-                    hideElement(elements.errorContainer);
-                    elements.urlInput.focus();
-                }
-            }
-            
-            // Ctrl+K to focus input
-            if (e.ctrlKey && e.key === 'k') {
-                e.preventDefault();
-                elements.urlInput.focus();
-                elements.urlInput.select();
-            }
-            
-            // Ctrl+V with focus check
-            if (e.ctrlKey && e.key === 'v') {
-                setTimeout(() => {
-                    const url = elements.urlInput.value.trim();
-                    if (validateInstagramUrl(url)) {
-                        handleDownloadRequest();
-                    }
-                }, 100);
+                resultContainer.classList.add('hidden');
+                errorContainer.classList.add('hidden');
             }
         });
         
-        // Accessibility
-        elements.urlInput.setAttribute('aria-label', 'Instagram URL input field');
-        elements.downloadBtn.setAttribute('aria-label', 'Get Instagram video');
-        elements.downloadBtn.setAttribute('role', 'button');
-        elements.pasteBtn.setAttribute('aria-label', 'Paste from clipboard');
+        // Auto-focus input on page load
+        setTimeout(() => urlInput.focus(), 100);
+        
+        // Check URL in input field on page load
+        if (urlInput.value.trim()) {
+            validateUrlInput();
+        }
     }
 
-    function validateInstagramUrl(url) {
-        if (!url || url.length > config.maxUrlLength) return false;
-        
-        try {
-            const urlObj = new URL(url);
-            if (!['http:', 'https:'].includes(urlObj.protocol)) return false;
-            
-            return config.instagramPatterns.some(pattern => pattern.test(url));
-        } catch {
-            return false;
+    function checkClipboardPermission() {
+        if (navigator.permissions && navigator.permissions.query) {
+            navigator.permissions.query({name: 'clipboard-read'}).then(result => {
+                if (result.state === 'granted' || result.state === 'prompt') {
+                    pasteBtn.disabled = false;
+                }
+            });
         }
     }
 
@@ -203,494 +109,501 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const text = await navigator.clipboard.readText();
             if (text) {
-                elements.urlInput.value = text;
-                elements.urlInput.dispatchEvent(new Event('input'));
-                showNotification('📋 URL pasted from clipboard', 1500);
-                elements.urlInput.focus();
+                urlInput.value = text.trim();
+                urlInput.focus();
+                showNotification('URL pasted from clipboard', 'success');
+                validateUrlInput();
                 
-                // Auto-validate after paste
-                setTimeout(() => {
-                    if (validateInstagramUrl(text)) {
-                        handleDownloadRequest();
-                    }
-                }, 300);
+                // Auto-detect Instagram URL and trigger download
+                if (isValidInstagramUrl(text.trim())) {
+                    setTimeout(() => {
+                        if (confirm('Instagram URL detected! Do you want to download the video?')) {
+                            handleDownload();
+                        }
+                    }, 500);
+                }
             }
         } catch (err) {
-            console.error('Failed to read clipboard:', err);
-            
-            // Fallback for older browsers
-            if (navigator.userAgent.match(/ipad|iphone/i)) {
-                showError('⚠️ Please long-press and paste in the input field');
-            } else {
-                showError('❌ Unable to access clipboard. Please paste manually.');
-            }
+            console.log('Clipboard API not available, using fallback');
+            urlInput.focus();
+            document.execCommand('paste');
+            showNotification('URL pasted', 'success');
+            validateUrlInput();
         }
     }
 
-    function updatePasteButtonState() {
-        const hasText = elements.urlInput.value.trim().length > 0;
-        elements.pasteBtn.innerHTML = hasText 
-            ? '<i class="fas fa-redo"></i> Clear'
-            : '<i class="fas fa-paste"></i> Paste';
+    function validateUrlInput() {
+        const url = urlInput.value.trim();
+        const isValid = isValidInstagramUrl(url);
         
-        if (hasText) {
-            elements.pasteBtn.onclick = () => {
-                elements.urlInput.value = '';
-                elements.urlInput.dispatchEvent(new Event('input'));
-                showNotification('✏️ Input cleared', 1000);
-                elements.urlInput.focus();
-            };
+        if (url && isValid) {
+            downloadBtn.disabled = false;
+            downloadBtn.classList.remove('disabled');
+            urlInput.classList.remove('error');
+        } else if (url && !isValid) {
+            urlInput.classList.add('error');
+            downloadBtn.disabled = true;
+            downloadBtn.classList.add('disabled');
         } else {
-            elements.pasteBtn.onclick = handlePaste;
+            urlInput.classList.remove('error');
+            downloadBtn.disabled = false;
+            downloadBtn.classList.remove('disabled');
+        }
+        
+        return isValid;
+    }
+
+    function isValidInstagramUrl(url) {
+        if (!url) return false;
+        
+        const cleanedUrl = cleanInstagramUrl(url.trim());
+        
+        const patterns = [
+            /^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[A-Za-z0-9_-]+\/?/i,
+            /^https?:\/\/(www\.)?instagram\.com\/stories\/[^/]+\/\d+\/?/i,
+            /^https?:\/\/(www\.)?instagram\.com\/[^/]+\/reel\/[A-Za-z0-9_-]+\/?/i,
+            /^https?:\/\/instagr\.am\/(p|reel|tv)\/[A-Za-z0-9_-]+\/?/i
+        ];
+        
+        return patterns.some(pattern => pattern.test(cleanedUrl));
+    }
+
+    function cleanInstagramUrl(url) {
+        try {
+            // Remove tracking parameters
+            const urlObj = new URL(url);
+            const paramsToRemove = [
+                'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+                'igsh', 'igs', 'igshid', '__tn__', 'e', 'share_sheet',
+                'fbclid', 'd', 'm', 's', 't', 'hl', 'app'
+            ];
+            
+            paramsToRemove.forEach(param => {
+                urlObj.searchParams.delete(param);
+            });
+            
+            // Keep only pathname for Instagram posts
+            if (urlObj.pathname.includes('/p/') || urlObj.pathname.includes('/reel/') || urlObj.pathname.includes('/tv/')) {
+                return `${urlObj.origin}${urlObj.pathname}`;
+            }
+            
+            return urlObj.toString();
+        } catch {
+            return url;
         }
     }
 
-    async function handleDownloadRequest() {
-        const url = elements.urlInput.value.trim();
-        state.currentUrl = url;
+    async function handleDownload() {
+        const url = urlInput.value.trim();
         
-        if (!validateInstagramUrl(url)) {
-            showError('❌ Please enter a valid Instagram URL\n\nExamples:\n• https://instagram.com/p/ABC123\n• https://instagram.com/reel/XYZ456\n• https://instagram.com/stories/user/789');
-            elements.urlInput.focus();
+        if (!url) {
+            showError('Please enter an Instagram URL');
+            urlInput.focus();
             return;
         }
         
-        if (state.isProcessing) return;
+        if (!isValidInstagramUrl(url)) {
+            showError('Please enter a valid Instagram URL. Supported formats:\n• Posts: instagram.com/p/...\n• Reels: instagram.com/reel/...\n• Stories: instagram.com/stories/...\n• IGTV: instagram.com/tv/...');
+            urlInput.classList.add('error');
+            urlInput.focus();
+            return;
+        }
         
-        state.isProcessing = true;
-        state.errorRetryCount = 0;
-        updateUIState(true);
-        hideElement(elements.errorContainer);
+        if (isProcessing) return;
+        
+        // Clean URL
+        const cleanUrl = cleanInstagramUrl(url);
+        urlInput.value = cleanUrl;
+        
+        // Save to local storage
+        saveToLocalStorage(cleanUrl);
+        
+        // Check cache first
+        const cachedData = getFromCache(cleanUrl);
+        if (cachedData) {
+            currentVideoData = cachedData;
+            displayResult(cachedData);
+            showNotification('Loaded from cache', 'info');
+            return;
+        }
+        
+        // Show loading state
+        setLoadingState(true);
+        
+        // Hide previous results/errors
+        resultContainer.classList.add('hidden');
+        errorContainer.classList.add('hidden');
         
         try {
-            showNotification('⏳ Fetching video data from Instagram...', 2000);
-            
-            const videoData = await fetchVideoData(url);
+            // Call worker API with retry logic
+            const videoData = await fetchVideoDataWithRetry(cleanUrl);
             
             if (videoData.success) {
-                displayVideoResult(videoData);
-                showNotification('✅ Video ready for download!', 3000);
+                currentVideoData = videoData;
+                saveToCache(cleanUrl, videoData);
+                displayResult(videoData);
+                trackSuccess(cleanUrl);
             } else {
-                throw new Error(videoData.error || 'Failed to extract video');
+                throw new Error(videoData.error || 'Instagram video not found or private');
             }
-            
         } catch (error) {
             console.error('Download error:', error);
             
-            // Check for specific error types
-            if (error.message.includes('network') || error.message.includes('fetch')) {
-                showError('🌐 Network error. Please check your internet connection and try again.');
-            } else if (error.message.includes('private') || error.message.includes('login')) {
-                showError('🔒 This video is private or requires login. Only public videos can be downloaded.');
-            } else if (error.message.includes('not found') || error.message.includes('404')) {
-                showError('🔍 Video not found. The link might be broken or the video was removed.');
-            } else if (error.message.includes('rate limit') || error.message.includes('too many')) {
-                showError('⏰ Rate limited. Please wait a few minutes before trying again.');
-            } else {
-                showError(`❌ ${error.message || 'Failed to fetch video. Please try again.'}`);
+            // User-friendly error messages
+            let errorMsg = error.message;
+            
+            if (error.message.includes('Network error') || error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
+                errorMsg = 'Please check your internet connection and try again.';
+            } else if (error.message.includes('404') || error.message.includes('not found')) {
+                errorMsg = 'Video not found. It may have been removed or is private.';
+            } else if (error.message.includes('timeout')) {
+                errorMsg = 'Request timeout. Instagram might be slow. Please try again.';
+            } else if (error.message.includes('403') || error.message.includes('blocked')) {
+                errorMsg = 'Access blocked. Try again in a few minutes.';
+            } else if (error.message.includes('500') || error.message.includes('Internal server')) {
+                errorMsg = 'Server error. Please try again later.';
+            } else if (error.message.includes('Invalid Instagram URL')) {
+                errorMsg = 'Invalid Instagram URL. Please check the link and try again.';
             }
             
-            state.errorRetryCount++;
-            
-            // Auto-retry logic for network errors
-            if (state.errorRetryCount < 2 && navigator.onLine) {
-                setTimeout(() => {
-                    if (validateInstagramUrl(state.currentUrl)) {
-                        handleDownloadRequest();
-                    }
-                }, 2000);
-            }
+            showError(errorMsg);
         } finally {
-            state.isProcessing = false;
-            updateUIState(false);
+            setLoadingState(false);
+            retryCount = 0;
         }
     }
 
-    function updateUIState(isLoading) {
-        if (isLoading) {
-            elements.downloadBtn.classList.add('loading');
-            elements.downloadBtn.disabled = true;
-            elements.urlInput.disabled = true;
-            elements.pasteBtn.disabled = true;
-            elements.downloadBtn.setAttribute('aria-busy', 'true');
-            elements.downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        } else {
-            elements.downloadBtn.classList.remove('loading');
-            elements.urlInput.disabled = false;
-            elements.pasteBtn.disabled = false;
-            elements.downloadBtn.setAttribute('aria-busy', 'false');
-            
-            const isValid = validateInstagramUrl(elements.urlInput.value.trim());
-            elements.downloadBtn.disabled = !isValid;
-            elements.downloadBtn.innerHTML = '<i class="fas fa-download"></i> Get Video';
-        }
-    }
-
-    async function fetchVideoData(url) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000);
-        
+    async function fetchVideoDataWithRetry(url, retryIndex = 0) {
         try {
-            const response = await fetch(state.apiEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Origin': window.location.origin
-                },
-                body: JSON.stringify({ 
-                    url: url,
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent.slice(0, 100)
-                }),
-                signal: controller.signal,
-                mode: 'cors',
-                credentials: 'omit'
-            });
-            
-            clearTimeout(timeoutId);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                let errorMessage = `Server error: ${response.status}`;
-                
-                try {
-                    const errorData = JSON.parse(errorText);
-                    errorMessage = errorData.error || errorMessage;
-                } catch {
-                    errorMessage = errorText || errorMessage;
-                }
-                
-                throw new Error(errorMessage);
-            }
-            
-            const data = await response.json();
-            return data;
-            
+            const workerUrl = WORKER_URLS[retryIndex % WORKER_URLS.length];
+            return await fetchVideoData(url, workerUrl);
         } catch (error) {
-            clearTimeout(timeoutId);
-            
-            if (error.name === 'AbortError') {
-                throw new Error('Request timeout. The server is taking too long to respond.');
+            if (retryCount < MAX_RETRIES) {
+                retryCount++;
+                showNotification(`Retrying... (${retryCount}/${MAX_RETRIES})`, 'info');
+                await new Promise(resolve => setTimeout(resolve, 1000 * retryCount)); // Exponential backoff
+                return fetchVideoDataWithRetry(url, retryIndex + 1);
             }
             throw error;
         }
     }
 
-    function displayVideoResult(videoData) {
-        state.currentVideoData = videoData;
+    async function fetchVideoData(url, workerUrl) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 second timeout
         
-        // Format quality text
-        const dimensions = videoData.dimensions || {};
-        const qualityText = dimensions.height && dimensions.width 
-            ? `${dimensions.height}p (${dimensions.width}×${dimensions.height})`
-            : videoData.quality || 'HD';
-        
-        // Format duration
-        const durationText = videoData.duration 
-            ? formatDuration(videoData.duration)
-            : 'Loading...';
-        
-        // Format file size
-        const sizeText = videoData.size 
-            ? formatFileSize(videoData.size)
-            : 'Calculating...';
-        
-        // Update UI
-        elements.qualityLabel.textContent = qualityText;
-        elements.durationLabel.textContent = durationText;
-        elements.sizeLabel.textContent = sizeText;
-        elements.qualityLabel.style.color = '#10b981';
-        elements.durationLabel.style.color = '#10b981';
-        elements.sizeLabel.style.color = '#10b981';
-        
-        // Update video preview
-        updateVideoPreview(videoData);
-        
-        // Update download button with filename
-        const filename = generateFilename(videoData);
-        elements.downloadVideoBtn.setAttribute('download', filename);
-        elements.downloadVideoBtn.setAttribute('title', `Download: ${filename}`);
-        
-        // Show result container with animation
-        showElement(elements.resultContainer);
-        
-        // Smooth scroll to result if needed
-        if (window.innerWidth < 768) {
-            elements.resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        try {
+            const response = await fetch(workerUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ url: url }),
+                signal: controller.signal,
+                mode: 'cors',
+                cache: 'no-cache'
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                const statusText = response.statusText || 'Unknown error';
+                throw new Error(`Server returned ${response.status}: ${statusText}`);
+            }
+            
+            const data = await response.json();
+            
+            // Validate response structure
+            if (!data || typeof data !== 'object') {
+                throw new Error('Invalid response from server');
+            }
+            
+            return data;
+        } catch (error) {
+            clearTimeout(timeoutId);
+            
+            // Enhanced error handling
+            if (error.name === 'AbortError') {
+                throw new Error('Request timeout. Instagram might be slow or the video is too large.');
+            }
+            
+            if (error.name === 'TypeError') {
+                if (error.message.includes('fetch') || error.message.includes('network')) {
+                    throw new Error('Network error. Please check your internet connection.');
+                }
+                if (error.message.includes('Failed to parse')) {
+                    throw new Error('Failed to process Instagram response.');
+                }
+            }
+            
+            throw error;
         }
-        
-        // Focus on download button for accessibility
-        setTimeout(() => {
-            elements.downloadVideoBtn.focus();
-        }, 300);
     }
 
-    function updateVideoPreview(videoData) {
-        elements.videoPreview.innerHTML = '';
+    function displayResult(videoData) {
+        // Update video info with fallbacks
+        qualityLabel.textContent = videoData.quality || 'HD';
+        durationLabel.textContent = formatDuration(videoData.duration || 0);
+        sizeLabel.textContent = formatFileSize(videoData.size || 0);
         
-        // Create video element for preview
-        const video = document.createElement('video');
-        video.src = videoData.videoUrl;
-        video.controls = true;
-        video.preload = 'metadata';
-        video.style.width = '100%';
-        video.style.height = '100%';
-        video.style.objectFit = 'contain';
-        video.style.borderRadius = 'var(--radius-lg)';
-        video.style.backgroundColor = '#000';
-        video.setAttribute('title', 'Instagram Video Preview');
-        video.setAttribute('playsinline', '');
+        // Set download link
+        if (videoData.videoUrl) {
+            const filename = generateFilename(videoData);
+            downloadVideoBtn.href = videoData.videoUrl;
+            downloadVideoBtn.download = filename;
+            downloadVideoBtn.setAttribute('download', filename);
+            
+            // Create video preview
+            createVideoPreview(videoData);
+        }
         
-        // Add loading state
-        video.addEventListener('waiting', () => {
-            elements.videoPreview.innerHTML = `
-                <div class="preview-placeholder" style="text-align: center; padding: 2rem;">
-                    <div class="loading-spinner" style="width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
-                    <p style="color: #64748b; font-weight: 500;">Loading preview...</p>
+        // Show alternative URLs if available
+        if (videoData.alternativeUrls && videoData.alternativeUrls.length > 0) {
+            createAlternativeDownloads(videoData.alternativeUrls);
+        }
+        
+        // Show result container
+        resultContainer.classList.remove('hidden');
+        
+        // Scroll to result smoothly
+        setTimeout(() => {
+            resultContainer.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }, 300);
+        
+        // Auto-focus download button for accessibility
+        setTimeout(() => {
+            downloadVideoBtn.focus();
+        }, 350);
+    }
+
+    function createVideoPreview(videoData) {
+        videoPreview.innerHTML = '';
+        
+        if (videoData.thumbnail) {
+            // Create thumbnail with play button
+            const thumbnailContainer = document.createElement('div');
+            thumbnailContainer.className = 'thumbnail-container';
+            thumbnailContainer.style.cursor = 'pointer';
+            thumbnailContainer.title = 'Click to preview video';
+            
+            const thumbnailImg = document.createElement('img');
+            thumbnailImg.src = videoData.thumbnail;
+            thumbnailImg.alt = 'Video thumbnail';
+            thumbnailImg.className = 'thumbnail-image';
+            thumbnailImg.loading = 'lazy';
+            thumbnailImg.style.width = '100%';
+            thumbnailImg.style.borderRadius = '8px';
+            
+            const playButton = document.createElement('div');
+            playButton.className = 'play-button';
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+            playButton.style.position = 'absolute';
+            playButton.style.top = '50%';
+            playButton.style.left = '50%';
+            playButton.style.transform = 'translate(-50%, -50%)';
+            playButton.style.width = '60px';
+            playButton.style.height = '60px';
+            playButton.style.background = 'rgba(225, 48, 108, 0.9)';
+            playButton.style.borderRadius = '50%';
+            playButton.style.display = 'flex';
+            playButton.style.alignItems = 'center';
+            playButton.style.justifyContent = 'center';
+            playButton.style.color = 'white';
+            playButton.style.fontSize = '24px';
+            
+            thumbnailContainer.appendChild(thumbnailImg);
+            thumbnailContainer.appendChild(playButton);
+            videoPreview.appendChild(thumbnailContainer);
+            
+            // Add click event to show video player
+            thumbnailContainer.addEventListener('click', () => {
+                showVideoPlayer(videoData.videoUrl);
+            });
+            
+            // Preload video for better UX
+            preloadVideo(videoData.videoUrl);
+            
+        } else {
+            // Fallback to simple preview
+            videoPreview.innerHTML = `
+                <div class="preview-placeholder" style="text-align: center; padding: 40px 20px; color: #666;">
+                    <i class="fas fa-film" style="font-size: 48px; margin-bottom: 10px; color: #ddd;"></i>
+                    <p style="margin-bottom: 15px;">Video preview available after download</p>
+                    <button class="view-video-btn" style="background: #E1306C; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+                        View Video
+                    </button>
                 </div>
             `;
+            
+            const viewBtn = videoPreview.querySelector('.view-video-btn');
+            viewBtn.addEventListener('click', () => {
+                showVideoPlayer(videoData.videoUrl);
+            });
+        }
+    }
+
+    function createAlternativeDownloads(urls) {
+        const altContainer = document.createElement('div');
+        altContainer.className = 'alternative-downloads';
+        altContainer.style.marginTop = '15px';
+        altContainer.style.padding = '15px';
+        altContainer.style.background = '#f8f9fa';
+        altContainer.style.borderRadius = '8px';
+        
+        const title = document.createElement('p');
+        title.textContent = 'Alternative Qualities:';
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '10px';
+        title.style.color = '#333';
+        
+        altContainer.appendChild(title);
+        
+        urls.forEach((url, index) => {
+            const btn = document.createElement('a');
+            btn.href = url;
+            btn.download = `instagram_video_alt${index + 1}.mp4`;
+            btn.className = 'alt-download-btn';
+            btn.textContent = `Quality ${index + 1}`;
+            btn.style.display = 'inline-block';
+            btn.style.margin = '5px';
+            btn.style.padding = '8px 15px';
+            btn.style.background = '#6c757d';
+            btn.style.color = 'white';
+            btn.style.textDecoration = 'none';
+            btn.style.borderRadius = '6px';
+            btn.style.fontSize = '14px';
+            
+            altContainer.appendChild(btn);
         });
         
-        video.addEventListener('canplay', () => {
-            elements.videoPreview.innerHTML = '';
-            elements.videoPreview.appendChild(video);
-        });
-        
-        video.addEventListener('error', () => {
-            // Fallback to thumbnail
-            if (videoData.thumbnail) {
-                const img = document.createElement('img');
-                img.src = videoData.thumbnail;
-                img.alt = 'Video thumbnail';
-                img.style.width = '100%';
-                img.style.height = '100%';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = 'var(--radius-lg)';
-                elements.videoPreview.appendChild(img);
-            } else {
-                elements.videoPreview.innerHTML = `
-                    <div class="preview-placeholder">
-                        <i class="fas fa-film" style="font-size: 3rem; color: #94a3b8;"></i>
-                        <p style="margin-top: 1rem; color: #64748b;">Preview not available</p>
-                    </div>
-                `;
-            }
-        });
-        
-        // Try to load video
-        video.load();
+        videoPreview.parentNode.insertBefore(altContainer, videoPreview.nextSibling);
     }
 
-    async function handleVideoDownload() {
-        if (!state.currentVideoData) return;
+    function showVideoPlayer(videoUrl) {
+        const playerModal = document.createElement('div');
+        playerModal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        `;
         
-        try {
-            // Show loading state on download button
-            const originalHTML = elements.downloadVideoBtn.innerHTML;
-            elements.downloadVideoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
-            elements.downloadVideoBtn.disabled = true;
-            elements.copyLinkBtn.disabled = true;
-            
-            showNotification('⏳ Starting download...', 2000);
-            
-            // Create a hidden iframe for download
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = state.currentVideoData.videoUrl;
-            document.body.appendChild(iframe);
-            
-            // Also provide direct download link
-            const a = document.createElement('a');
-            a.href = state.currentVideoData.videoUrl;
-            a.download = generateFilename(state.currentVideoData);
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            
-            // Track download
-            trackDownload(state.currentVideoData);
-            
-            // Success notification
-            showNotification('✅ Download started! Check your downloads folder.', 3000);
-            
-            // Re-enable buttons after delay
-            setTimeout(() => {
-                elements.downloadVideoBtn.innerHTML = originalHTML;
-                elements.downloadVideoBtn.disabled = false;
-                elements.copyLinkBtn.disabled = false;
-            }, 1500);
-            
-        } catch (error) {
-            console.error('Download failed:', error);
-            
-            // Fallback: Copy link to clipboard and show instructions
-            try {
-                await navigator.clipboard.writeText(state.currentVideoData.videoUrl);
-                showNotification('📋 Video link copied! Paste in browser to download.', 4000);
-            } catch {
-                showError('❌ Could not start download. Please try:\n1. Right-click the "Copy Link" button\n2. Select "Save link as..."\n3. Save the video file');
-            }
-            
-            // Reset button state
-            elements.downloadVideoBtn.innerHTML = '<i class="fas fa-download"></i> Download Video';
-            elements.downloadVideoBtn.disabled = false;
-            elements.copyLinkBtn.disabled = false;
-        }
-    }
-
-    async function handleCopyLink() {
-        if (!state.currentVideoData) return;
+        playerModal.innerHTML = `
+            <div style="max-width: 900px; width: 100%; background: white; border-radius: 12px; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+                    <h4 style="margin: 0; color: #333;">Video Preview</h4>
+                    <button class="close-player-btn" style="background: none; border: none; font-size: 20px; color: #666; cursor: pointer; padding: 5px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div style="padding: 20px;">
+                    <video controls autoplay playsinline style="width: 100%; border-radius: 8px; background: #000;">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div style="padding: 15px 20px; background: #f8f9fa; border-top: 1px solid #dee2e6; text-align: center;">
+                    <a href="${videoUrl}" class="download-btn" download="${generateFilename(currentVideoData)}" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-download"></i> Download Video
+                    </a>
+                </div>
+            </div>
+        `;
         
-        try {
-            await navigator.clipboard.writeText(state.currentVideoData.videoUrl);
-            
-            // Visual feedback
-            const originalHTML = elements.copyLinkBtn.innerHTML;
-            elements.copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            elements.copyLinkBtn.style.background = '#10b981';
-            elements.copyLinkBtn.style.color = 'white';
-            elements.copyLinkBtn.style.borderColor = '#10b981';
-            
-            showNotification('📋 Video link copied to clipboard!', 2000);
-            
-            // Reset button after delay
-            setTimeout(() => {
-                elements.copyLinkBtn.innerHTML = originalHTML;
-                elements.copyLinkBtn.style.background = '';
-                elements.copyLinkBtn.style.color = '';
-                elements.copyLinkBtn.style.borderColor = '';
-            }, 2000);
-            
-        } catch (err) {
-            console.error('Failed to copy:', err);
-            
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = state.currentVideoData.videoUrl;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showNotification('📋 Link copied (fallback method)', 2000);
-            } catch {
-                showError('❌ Failed to copy link. Please copy manually from below:');
-                
-                // Show link in error message for manual copy
-                elements.errorMessage.innerHTML = `
-                    Copy this link manually:<br>
-                    <code style="background: #f1f5f9; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; display: inline-block; max-width: 100%; overflow-x: auto;">
-                        ${state.currentVideoData.videoUrl.slice(0, 100)}...
-                    </code>
-                `;
-                showElement(elements.errorContainer);
-            }
-            document.body.removeChild(textArea);
-        }
-    }
-
-    function handleRetry() {
-        hideElement(elements.errorContainer);
-        elements.urlInput.focus();
-        elements.urlInput.select();
+        document.body.appendChild(playerModal);
+        document.body.style.overflow = 'hidden';
         
-        if (state.currentUrl && validateInstagramUrl(state.currentUrl)) {
-            setTimeout(() => {
-                handleDownloadRequest();
-            }, 500);
-        }
-    }
-
-    function showError(message) {
-        elements.errorMessage.textContent = message;
-        elements.errorMessage.style.whiteSpace = 'pre-line';
-        showElement(elements.errorContainer);
-        
-        // Add retry button if we have a valid URL
-        if (state.currentUrl && validateInstagramUrl(state.currentUrl)) {
-            elements.retryBtn.style.display = 'inline-flex';
-        } else {
-            elements.retryBtn.style.display = 'none';
-        }
-        
-        // Focus on retry button or input
+        // Focus the video for keyboard navigation
         setTimeout(() => {
-            if (elements.retryBtn.style.display !== 'none') {
-                elements.retryBtn.focus();
-            } else {
-                elements.urlInput.focus();
-            }
+            const video = playerModal.querySelector('video');
+            if (video) video.focus();
         }, 100);
         
-        // Auto-hide after 10 seconds
-        setTimeout(() => {
-            if (!elements.errorContainer.classList.contains('hidden')) {
-                hideElement(elements.errorContainer);
+        // Close functionality
+        const closeBtn = playerModal.querySelector('.close-player-btn');
+        const closePlayer = () => {
+            const video = playerModal.querySelector('video');
+            if (video) {
+                video.pause();
+                video.src = '';
             }
-        }, 10000);
-    }
-
-    function showElement(element) {
-        element.classList.remove('hidden');
-        element.style.display = 'block';
-        element.setAttribute('aria-hidden', 'false');
+            playerModal.remove();
+            document.body.style.overflow = '';
+        };
         
-        // Add fade-in animation
-        element.style.animation = 'fadeInUp 0.3s ease-out';
-    }
-
-    function hideElement(element) {
-        element.classList.add('hidden');
-        element.setAttribute('aria-hidden', 'true');
-    }
-
-    function showNotification(message, duration = 3000) {
-        // Update notification content with icon if not present
-        if (!message.includes('✨') && !message.includes('✅') && !message.includes('⚠️') && 
-            !message.includes('❌') && !message.includes('⏳') && !message.includes('📋')) {
-            message = '💡 ' + message;
-        }
-        
-        elements.notification.innerHTML = `
-            <i class="fas fa-info-circle" style="color: #6366f1; font-size: 1.2rem;"></i>
-            <span>${message}</span>
-        `;
-        elements.notification.classList.add('show');
-        
-        // Add animation
-        elements.notification.style.animation = 'fadeInUp 0.3s ease-out';
-        
-        // Auto-hide
-        const timeoutId = setTimeout(() => {
-            elements.notification.classList.remove('show');
-        }, duration);
-        
-        // Keep notification on hover
-        elements.notification.addEventListener('mouseenter', () => {
-            clearTimeout(timeoutId);
+        closeBtn.addEventListener('click', closePlayer);
+        playerModal.addEventListener('click', (e) => {
+            if (e.target === playerModal) closePlayer();
         });
         
-        elements.notification.addEventListener('mouseleave', () => {
+        // Close on ESC
+        const handleEsc = (e) => {
+            if (e.key === 'Escape') closePlayer();
+        };
+        document.addEventListener('keydown', handleEsc);
+    }
+
+    function preloadVideo(videoUrl) {
+        // Use link preload for better performance
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'video';
+        link.href = videoUrl;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+        
+        // Also create video element for cache
+        const video = document.createElement('video');
+        video.preload = 'auto';
+        video.src = videoUrl;
+        video.style.display = 'none';
+        document.body.appendChild(video);
+        
+        // Remove after a while
+        setTimeout(() => {
+            if (link.parentNode) link.remove();
+            if (video.parentNode) video.remove();
+        }, 5000);
+    }
+
+    function handleCopyLink() {
+        if (!currentVideoData || !currentVideoData.videoUrl) return;
+        
+        const videoUrl = currentVideoData.videoUrl;
+        
+        navigator.clipboard.writeText(videoUrl).then(() => {
+            showNotification('Video link copied to clipboard!', 'success');
+            
+            // Visual feedback
+            copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            copyLinkBtn.style.background = '#28a745';
+            
             setTimeout(() => {
-                elements.notification.classList.remove('show');
-            }, 1000);
+                copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Link';
+                copyLinkBtn.style.background = '';
+            }, 2000);
+        }).catch(err => {
+            console.error('Copy failed:', err);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = videoUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showNotification('Link copied!', 'success');
         });
-    }
-
-    function generateFilename(videoData) {
-        const now = new Date();
-        const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
-        const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, '');
-        
-        let quality = 'HD';
-        if (videoData.dimensions && videoData.dimensions.height) {
-            quality = `${videoData.dimensions.height}p`;
-        } else if (videoData.quality) {
-            quality = videoData.quality.replace(/\s+/g, '-');
-        }
-        
-        return `instagram_${dateStr}_${timeStr}_${quality}.mp4`;
     }
 
     function formatDuration(seconds) {
@@ -702,8 +615,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (hours > 0) {
             return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        } else {
+        } else if (minutes > 0) {
             return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        } else {
+            return `${secs} seconds`;
         }
     }
 
@@ -722,65 +637,263 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${size.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
     }
 
-    function trackDownload(videoData) {
-        const trackingData = {
-            timestamp: new Date().toISOString(),
-            quality: videoData.quality,
-            dimensions: videoData.dimensions,
-            duration: videoData.duration,
-            size: videoData.size,
-            source: window.location.hostname,
-            userAgent: navigator.userAgent.slice(0, 100)
-        };
+    function generateFilename(videoData) {
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        const quality = (videoData.quality || 'HD').replace('p', '');
+        const dimensions = videoData.dimensions ? 
+            `${videoData.dimensions.width}x${videoData.dimensions.height}` : '';
         
-        console.log('📊 Download tracked:', trackingData);
-        
-        // Send beacon if available
-        if (navigator.sendBeacon) {
-            try {
-                navigator.sendBeacon(`${config.workerUrl}/track`, JSON.stringify(trackingData));
-            } catch (e) {
-                console.log('Beacon sending failed:', e);
+        let baseName = 'instagram_video';
+        if (videoData.originalUrl) {
+            const match = videoData.originalUrl.match(/\/(p|reel|tv|stories)\/([^\/?]+)/);
+            if (match && match[2]) {
+                baseName = `instagram_${match[1]}_${match[2]}`;
             }
+        }
+        
+        return `${baseName}_${quality}_${dimensions}_${timestamp}.mp4`.replace(/_{2,}/g, '_');
+    }
+
+    function setLoadingState(loading) {
+        isProcessing = loading;
+        downloadBtn.disabled = loading;
+        
+        if (loading) {
+            downloadBtn.classList.add('loading');
+            urlInput.disabled = true;
+            pasteBtn.disabled = true;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        } else {
+            downloadBtn.classList.remove('loading');
+            urlInput.disabled = false;
+            pasteBtn.disabled = false;
+            downloadBtn.innerHTML = '<span class="btn-text">Get Video</span>';
         }
     }
 
-    // Add CSS for spinner animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+    function showError(message) {
+        errorMessage.textContent = message;
+        errorContainer.classList.remove('hidden');
+        
+        // Auto-hide error after 10 seconds
+        setTimeout(() => {
+            if (!errorContainer.classList.contains('hidden')) {
+                errorContainer.classList.add('hidden');
+            }
+        }, 10000);
+        
+        // Scroll to error
+        setTimeout(() => {
+            errorContainer.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }, 100);
+    }
+
+    function showNotification(message, type = 'info') {
+        notification.textContent = message;
+        notification.className = `notification ${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            transform: translateY(100px);
+            opacity: 0;
+        `;
+        
+        if (type === 'success') {
+            notification.style.background = '#28a745';
+        } else if (type === 'error') {
+            notification.style.background = '#dc3545';
+        } else {
+            notification.style.background = '#17a2b8';
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        notification.classList.add('show');
+        notification.style.transform = 'translateY(0)';
+        notification.style.opacity = '1';
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateY(100px)';
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 300);
+        }, 3000);
+    }
+
+    // Cache functions
+    function getFromCache(url) {
+        try {
+            const cache = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
+            const cachedItem = cache[url];
+            
+            if (cachedItem && Date.now() - cachedItem.timestamp < CACHE_DURATION) {
+                return cachedItem.data;
+            } else if (cachedItem) {
+                // Remove expired cache
+                delete cache[url];
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        } catch (e) {
+            // Clear corrupt cache
+            localStorage.removeItem(CACHE_KEY);
+        }
+        return null;
+    }
+
+    function saveToCache(url, data) {
+        try {
+            const cache = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
+            cache[url] = {
+                data: data,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+        } catch (e) {
+            // Ignore cache errors
+        }
+    }
+
+    function saveToLocalStorage(url) {
+        try {
+            localStorage.setItem('lastInstaUrl', url);
+            localStorage.setItem('lastInstaTimestamp', Date.now().toString());
+        } catch (e) {
+            // Ignore storage errors
+        }
+    }
+
+    function loadFromLocalStorage() {
+        try {
+            const lastUrl = localStorage.getItem('lastInstaUrl');
+            const lastTimestamp = parseInt(localStorage.getItem('lastInstaTimestamp') || '0');
+            
+            // Only load if within 24 hours
+            if (lastUrl && Date.now() - lastTimestamp < 24 * 60 * 60 * 1000) {
+                urlInput.value = lastUrl;
+                validateUrlInput();
             }
+        } catch (e) {
+            // Ignore storage errors
+        }
+    }
+
+    function setupServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => {
+                    console.log('ServiceWorker registration failed:', err);
+                });
+            });
+        }
+    }
+
+    function trackSuccess(url) {
+        // Analytics tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'video_download_success', {
+                event_category: 'instagram',
+                event_label: 'download_success',
+                value: 1
+            });
         }
         
-        .preview-placeholder {
+        // Log success
+        console.log('Video downloaded successfully:', {
+            url: url,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+    }
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + V to paste
+        if ((e.ctrlKey || e.metaKey) && e.key === 'v' && document.activeElement !== urlInput) {
+            urlInput.focus();
+            setTimeout(handlePaste, 10);
+        }
+        
+        // Ctrl/Cmd + D to download
+        if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+            e.preventDefault();
+            handleDownload();
+        }
+    });
+
+    // Add URL parameter support
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlFromParam = urlParams.get('url');
+    if (urlFromParam && isValidInstagramUrl(urlFromParam)) {
+        urlInput.value = decodeURIComponent(urlFromParam);
+        validateUrlInput();
+        
+        // Auto-download if auto parameter is present
+        if (urlParams.get('auto') === 'true') {
+            setTimeout(() => {
+                if (confirm('Auto-download Instagram video?')) {
+                    handleDownload();
+                }
+            }, 500);
+        }
+    }
+
+    // Add share functionality
+    if (navigator.share) {
+        const shareBtn = document.createElement('button');
+        shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share';
+        shareBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #E1306C;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
+            z-index: 100;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: #64748b;
-        }
+            gap: 8px;
+        `;
         
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
+        shareBtn.addEventListener('click', () => {
+            navigator.share({
+                title: 'Instagram Video Downloader',
+                text: 'Download Instagram videos for free!',
+                url: window.location.href
+            });
+        });
+        
+        document.body.appendChild(shareBtn);
+    }
+
+    // Performance monitoring
+    let performanceData = {
+        startTime: Date.now(),
+        requests: 0,
+        successes: 0,
+        failures: 0
+    };
+
+    window.addEventListener('beforeunload', () => {
+        if (performanceData.requests > 0) {
+            const successRate = (performanceData.successes / performanceData.requests * 100).toFixed(1);
+            console.log(`Performance: ${performanceData.requests} requests, ${successRate}% success rate`);
         }
-    `;
-    document.head.appendChild(style);
-
-    // Initialize the application
-    init();
+    });
 });
-
