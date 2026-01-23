@@ -72,7 +72,299 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8802060779563003"
      crossorigin="anonymous"></script>
 
+    <script>
+  (function() {
+    'use strict';
 
+    /**
+     * DETERRENCE LAYER - CLIENT-SIDE ONLY
+     * 
+     * Purpose: To discourage non-technical users from casual copying,
+     * source inspection, or content extraction.
+     * 
+     * IMPORTANT: This is DETERRENCE only, NOT security.
+     * Determined users can bypass all client-side restrictions.
+     * This must not be relied upon for actual content protection.
+     */
+
+    // Configuration - adjust these as needed
+    const CONFIG = {
+        // Log attempts in console (visible to users who inspect)
+        logAttempts: true,
+        // Message to display in console
+        consoleMessage: 'Content interaction is restricted for casual copying.',
+        // Allow text selection for accessibility tools
+        allowAccessibilitySelection: true,
+        // Time threshold for mobile long-press (milliseconds)
+        longPressThreshold: 800
+    };
+
+    // State management
+    let lastTouchStart = 0;
+    let longPressTimer = null;
+    let isAccessibilityMode = false;
+
+    /**
+     * Safe event listener wrapper
+     * Ensures we don't interfere with existing handlers
+     */
+    function safeAddEvent(target, event, handler, options) {
+        try {
+            target.addEventListener(event, handler, options);
+        } catch (e) {
+            if (CONFIG.logAttempts) {
+                console.warn('Deterrence: Could not add event for', event, e.message);
+            }
+        }
+    }
+
+    /**
+     * Check if event is from an accessibility tool
+     * Many screen readers and accessibility tools use specific patterns
+     */
+    function isAccessibilityEvent(event) {
+        // Check for screen reader or accessibility cues
+        const isAriaPressed = event.target?.getAttribute?.('aria-pressed');
+        const isAriaSelected = event.target?.getAttribute?.('aria-selected');
+        const hasAriaLive = event.target?.closest?.('[aria-live]');
+        
+        // Keyboard navigation for accessibility
+        if (event.key === 'Tab' || event.key === 'Escape') {
+            return true;
+        }
+        
+        return isAriaPressed || isAriaSelected || hasAriaLive || isAccessibilityMode;
+    }
+
+    /**
+     * Log deterrent action (for transparency)
+     */
+    function logDeterrent(action, event) {
+        if (!CONFIG.logAttempts) return;
+        
+        console.log(`%c🔒 Deterrence: ${action}`, 
+            'color: #ff6b6b; font-weight: bold;');
+        console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,
+            'color: #4ecdc4; font-style: italic;');
+    }
+
+    /**
+     * Prevent context menu (right-click)
+     */
+    function handleContextMenu(event) {
+        if (isAccessibilityEvent(event)) {
+            return; // Allow for accessibility
+        }
+        
+        event.preventDefault();
+        logDeterrent('Context menu blocked', event);
+        return false;
+    }
+
+    /**
+     * Prevent text selection for copying
+     */
+    function handleSelection(event) {
+        if (CONFIG.allowAccessibilitySelection && isAccessibilityEvent(event)) {
+            return; // Allow selection for accessibility tools
+        }
+        
+        if (window.getSelection().toString().length > 100) {
+            // Only prevent large selections (likely copying)
+            event.preventDefault();
+            window.getSelection().removeAllRanges();
+            logDeterrent('Text selection blocked', event);
+        }
+    }
+
+    /**
+     * Prevent drag start (image/content dragging)
+     */
+    function handleDragStart(event) {
+        if (isAccessibilityEvent(event)) return;
+        
+        event.preventDefault();
+        logDeterrent('Drag operation blocked', event);
+        return false;
+    }
+
+    /**
+     * Handle keyboard shortcuts for inspection/copying
+     */
+    function handleKeyDown(event) {
+        // Skip if from accessibility tool
+        if (isAccessibilityEvent(event)) return;
+        
+        const isCtrl = event.ctrlKey || event.metaKey;
+        const isShift = event.shiftKey;
+        const key = event.key.toLowerCase();
+        
+        // Common inspection/copy shortcuts to deter
+        const blockedCombos = [
+            // Dev tools
+            isCtrl && isShift && ['i', 'j', 'c', 'k'].includes(key),
+            isCtrl && ['u', 's', 'p'].includes(key),
+            key === 'f12',
+            
+            // Copy/cut/select all
+            isCtrl && ['c', 'x', 'a'].includes(key),
+            
+            // Save/page shortcuts
+            isCtrl && ['s', 'p'].includes(key)
+        ];
+        
+        // Block PrintScreen key
+        if (key === 'printscreen') {
+            event.preventDefault();
+            logDeterrent('Screenshot prevented', event);
+            return;
+        }
+        
+        // Block other combinations
+        if (blockedCombos.some(Boolean)) {
+            event.preventDefault();
+            logDeterrent(`Shortcut ${event.key} blocked`, event);
+            
+            // Show brief visual feedback (non-intrusive)
+            const feedback = document.createElement('div');
+            feedback.textContent = '🔒';
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                font-size: 24px;
+                opacity: 0;
+                z-index: 10000;
+                transition: opacity 0.3s;
+                pointer-events: none;
+            `;
+            document.body.appendChild(feedback);
+            
+            // Fade in and out
+            requestAnimationFrame(() => {
+                feedback.style.opacity = '0.7';
+                setTimeout(() => {
+                    feedback.style.opacity = '0';
+                    setTimeout(() => feedback.remove(), 300);
+                }, 500);
+            });
+        }
+    }
+
+    /**
+     * Mobile: Handle long-press (touch and hold)
+     */
+    function handleTouchStart(event) {
+        if (isAccessibilityEvent(event)) return;
+        
+        lastTouchStart = Date.now();
+        
+        // Set timer for long press
+        longPressTimer = setTimeout(() => {
+            event.preventDefault();
+            logDeterrent('Long-press prevented', event);
+            
+            // Gentle vibration feedback (if supported)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }, CONFIG.longPressThreshold);
+    }
+
+    function handleTouchEnd() {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            longPressTimer = null;
+        }
+    }
+
+    function handleTouchMove() {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            longPressTimer = null;
+        }
+    }
+
+    /**
+     * Detect accessibility mode
+     */
+    function detectAccessibilityMode() {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        
+        // Check for screen reader usage patterns
+        const hasScreenReaderClass = document.documentElement.classList.contains(
+            'sr-only'
+        ) || document.body.classList.contains('sr-only');
+        
+        // Set accessibility mode
+        isAccessibilityMode = prefersReducedMotion || hasScreenReaderClass;
+    }
+
+    /**
+     * Initialize deterrent layer
+     */
+    function initDeterrence() {
+        // Skip if JavaScript is disabled (fails gracefully)
+        if (typeof document === 'undefined' || !document.addEventListener) {
+            return;
+        }
+        
+        // Detect accessibility requirements
+        detectAccessibilityMode();
+        
+        // Add event listeners
+        safeAddEvent(document, 'contextmenu', handleContextMenu);
+        safeAddEvent(document, 'selectstart', handleSelection);
+        safeAddEvent(document, 'dragstart', handleDragStart);
+        safeAddEvent(document, 'keydown', handleKeyDown);
+        
+        // Mobile touch events
+        safeAddEvent(document, 'touchstart', handleTouchStart, { passive: false });
+        safeAddEvent(document, 'touchend', handleTouchEnd, { passive: true });
+        safeAddEvent(document, 'touchmove', handleTouchMove, { passive: true });
+        
+        // Listen for accessibility changes
+        safeAddEvent(window, 'focus', detectAccessibilityMode);
+        
+        // Initial console message
+        if (CONFIG.logAttempts) {
+            console.log(CONFIG.consoleMessage);
+            console.log('This site uses client-side deterrents against casual copying.');
+            console.log('All content remains accessible to search engines and crawlers.');
+        }
+    }
+
+    /**
+     * Clean up function (for framework compatibility)
+     */
+    function cleanup() {
+        // Remove all our event listeners if needed
+        // Note: In practice, this runs until page unload
+        // This function is provided for framework integration
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+        }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        safeAddEvent(document, 'DOMContentLoaded', initDeterrence);
+    } else {
+        // DOM already loaded
+        initDeterrence();
+    }
+
+    // Expose cleanup for frameworks (if needed)
+    if (typeof window !== 'undefined') {
+        window.__deterrenceCleanup = cleanup;
+    }
+
+    // End of deterrence layer
+})();
+</script>
   <script>
 !function(){try{if(window.top!==window.self){function t(t){"flex"===document.getElementById("contactModal").style.display&&t.preventDefault()}document.head.innerHTML=`
                 <meta charset="UTF-8">
@@ -875,10 +1167,97 @@ Image to url valid for life time, if you need this tool for you website then con
         }, 150);
     });
 </script>
+
+  <script>
+// daily-limit.js (AUTO ENFORCED)
+(function () {
+
+    const DAILY_LIMIT = 10;
+    const STORAGE_KEY = 'imageUploadDailyLimit';
+
+    function today() {
+        return new Date().toDateString();
+    }
+
+    function read() {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    }
+
+    function write(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function remaining() {
+        const data = read();
+        if (data.date !== today()) return DAILY_LIMIT;
+        return Math.max(0, DAILY_LIMIT - (data.count || 0));
+    }
+
+    function consume(n) {
+        const data = read();
+        if (data.date !== today()) {
+            data.date = today();
+            data.count = 0;
+        }
+        data.count += n;
+        write(data);
+    }
+
+    function show(msg) {
+        alert(msg);
+    }
+
+    /* ==========================
+       HARD ENFORCEMENT LOGIC
+    ========================== */
+
+    // 1️⃣ Intercept file input selection
+    document.addEventListener('change', function (e) {
+        if (!e.target || e.target.type !== 'file') return;
+
+        const files = Array.from(e.target.files);
+        const allowed = remaining();
+
+        if (allowed <= 0) {
+            e.target.value = '';
+            show('Daily limit reached. Max 10 images per day.');
+            return;
+        }
+
+        if (files.length > allowed) {
+            const dt = new DataTransfer();
+            files.slice(0, allowed).forEach(f => dt.items.add(f));
+            e.target.files = dt.files;
+
+            show(`Only ${allowed} image(s) allowed today. Extra images removed.`);
+        }
+    }, true);
+
+    // 2️⃣ Intercept upload button click
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'uploadBtn') {
+
+            const allowed = remaining();
+            if (allowed <= 0) {
+                e.preventDefault();
+                show('Daily upload limit reached (10 images).');
+                return false;
+            }
+
+            // Count actual selected files
+            const input = document.querySelector('input[type="file"]');
+            if (!input || !input.files) return;
+
+            const count = Math.min(input.files.length, allowed);
+            consume(count);
+        }
+    }, true);
+
+})();
+</script>
     <script src="js/img-url.js"></script>
     <script src="js/img-url-faq.js"></script>
     <script src="../main/js/main-header.js"></script>
     <script src="https://aarifalam.life/blog/js/video-frame.js"></script>
 </body>
 </html>
-
