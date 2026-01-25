@@ -51,7 +51,7 @@
       "https://x.com/aarifalam0105/"
     ],
     "knowsAbout": [
-      "AI Tools",
+      "Image Tools",
       "PDF Converters",
       "Image Converters",
       "Creative Resources",
@@ -64,162 +64,7 @@
 </script>
 
     <script>
-  (function() {
-    'use strict';
-
-    /**
-     * DETERRENCE LAYER - CLIENT-SIDE ONLY
-     * 
-     * Purpose: To discourage non-technical users from casual copying,
-     * source inspection, or content extraction.
-     * 
-     * IMPORTANT: This is DETERRENCE only, NOT security.
-     * Determined users can bypass all client-side restrictions.
-     * This must not be relied upon for actual content protection.
-     */
-
-    // Configuration - adjust these as needed
-    const CONFIG = {
-        // Log attempts in console (visible to users who inspect)
-        logAttempts: true,
-        // Message to display in console
-        consoleMessage: 'Content interaction is restricted for casual copying.',
-        // Allow text selection for accessibility tools
-        allowAccessibilitySelection: true,
-        // Time threshold for mobile long-press (milliseconds)
-        longPressThreshold: 800
-    };
-
-    // State management
-    let lastTouchStart = 0;
-    let longPressTimer = null;
-    let isAccessibilityMode = false;
-
-    /**
-     * Safe event listener wrapper
-     * Ensures we don't interfere with existing handlers
-     */
-    function safeAddEvent(target, event, handler, options) {
-        try {
-            target.addEventListener(event, handler, options);
-        } catch (e) {
-            if (CONFIG.logAttempts) {
-                console.warn('Deterrence: Could not add event for', event, e.message);
-            }
-        }
-    }
-
-    /**
-     * Check if event is from an accessibility tool
-     * Many screen readers and accessibility tools use specific patterns
-     */
-    function isAccessibilityEvent(event) {
-        // Check for screen reader or accessibility cues
-        const isAriaPressed = event.target?.getAttribute?.('aria-pressed');
-        const isAriaSelected = event.target?.getAttribute?.('aria-selected');
-        const hasAriaLive = event.target?.closest?.('[aria-live]');
-        
-        // Keyboard navigation for accessibility
-        if (event.key === 'Tab' || event.key === 'Escape') {
-            return true;
-        }
-        
-        return isAriaPressed || isAriaSelected || hasAriaLive || isAccessibilityMode;
-    }
-
-    /**
-     * Log deterrent action (for transparency)
-     */
-    function logDeterrent(action, event) {
-        if (!CONFIG.logAttempts) return;
-        
-        console.log(`%c🔒 Deterrence: ${action}`, 
-            'color: #ff6b6b; font-weight: bold;');
-        console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,
-            'color: #4ecdc4; font-style: italic;');
-    }
-
-    /**
-     * Prevent context menu (right-click)
-     */
-    function handleContextMenu(event) {
-        if (isAccessibilityEvent(event)) {
-            return; // Allow for accessibility
-        }
-        
-        event.preventDefault();
-        logDeterrent('Context menu blocked', event);
-        return false;
-    }
-
-    /**
-     * Prevent text selection for copying
-     */
-    function handleSelection(event) {
-        if (CONFIG.allowAccessibilitySelection && isAccessibilityEvent(event)) {
-            return; // Allow selection for accessibility tools
-        }
-        
-        if (window.getSelection().toString().length > 100) {
-            // Only prevent large selections (likely copying)
-            event.preventDefault();
-            window.getSelection().removeAllRanges();
-            logDeterrent('Text selection blocked', event);
-        }
-    }
-
-    /**
-     * Prevent drag start (image/content dragging)
-     */
-    function handleDragStart(event) {
-        if (isAccessibilityEvent(event)) return;
-        
-        event.preventDefault();
-        logDeterrent('Drag operation blocked', event);
-        return false;
-    }
-
-    /**
-     * Handle keyboard shortcuts for inspection/copying
-     */
-    function handleKeyDown(event) {
-        // Skip if from accessibility tool
-        if (isAccessibilityEvent(event)) return;
-        
-        const isCtrl = event.ctrlKey || event.metaKey;
-        const isShift = event.shiftKey;
-        const key = event.key.toLowerCase();
-        
-        // Common inspection/copy shortcuts to deter
-        const blockedCombos = [
-            // Dev tools
-            isCtrl && isShift && ['i', 'j', 'c', 'k'].includes(key),
-            isCtrl && ['u', 's', 'p'].includes(key),
-            key === 'f12',
-            
-            // Copy/cut/select all
-            isCtrl && ['c', 'x', 'a'].includes(key),
-            
-            // Save/page shortcuts
-            isCtrl && ['s', 'p'].includes(key)
-        ];
-        
-        // Block PrintScreen key
-        if (key === 'printscreen') {
-            event.preventDefault();
-            logDeterrent('Screenshot prevented', event);
-            return;
-        }
-        
-        // Block other combinations
-        if (blockedCombos.some(Boolean)) {
-            event.preventDefault();
-            logDeterrent(`Shortcut ${event.key} blocked`, event);
-            
-            // Show brief visual feedback (non-intrusive)
-            const feedback = document.createElement('div');
-            feedback.textContent = '🔒';
-            feedback.style.cssText = `
+ !function(){"use strict";let e={logAttempts:!0,consoleMessage:"Content interaction is restricted for casual copying.",allowAccessibilitySelection:!0,longPressThreshold:800},t=0,n=null,o=!1;function s(t,n,o,s){try{t.addEventListener(n,o,s)}catch(i){e.logAttempts&&console.warn("Deterrence: Could not add event for",n,i.message)}}function i(e){let t=e.target?.getAttribute?.("aria-pressed"),n=e.target?.getAttribute?.("aria-selected"),s=e.target?.closest?.("[aria-live]");return"Tab"===e.key||"Escape"===e.key||t||n||s||o}function c(t,n){e.logAttempts&&(console.log(`%c🔒 Deterrence: ${t}`,"color: #ff6b6b; font-weight: bold;"),console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,"color: #4ecdc4; font-style: italic;"))}function r(e){if(!i(e))return e.preventDefault(),c("Context menu blocked",e),!1}function l(t){!(e.allowAccessibilitySelection&&i(t))&&window.getSelection().toString().length>100&&(t.preventDefault(),window.getSelection().removeAllRanges(),c("Text selection blocked",t))}function a(e){if(!i(e))return e.preventDefault(),c("Drag operation blocked",e),!1}function u(e){if(i(e))return;let t=e.ctrlKey||e.metaKey,n=e.shiftKey,o=e.key.toLowerCase(),s=[t&&n&&["i","j","c","k"].includes(o),t&&["u","s","p"].includes(o),"f12"===o,t&&["c","x","a"].includes(o),t&&["s","p"].includes(o)];if("printscreen"===o){e.preventDefault(),c("Screenshot prevented",e);return}if(s.some(Boolean)){e.preventDefault(),c(`Shortcut ${e.key} blocked`,e);let r=document.createElement("div");r.textContent="\uD83D\uDD12",r.style.cssText=`
                 position: fixed;
                 top: 20px;
                 right: 20px;
@@ -228,133 +73,7 @@
                 z-index: 10000;
                 transition: opacity 0.3s;
                 pointer-events: none;
-            `;
-            document.body.appendChild(feedback);
-            
-            // Fade in and out
-            requestAnimationFrame(() => {
-                feedback.style.opacity = '0.7';
-                setTimeout(() => {
-                    feedback.style.opacity = '0';
-                    setTimeout(() => feedback.remove(), 300);
-                }, 500);
-            });
-        }
-    }
-
-    /**
-     * Mobile: Handle long-press (touch and hold)
-     */
-    function handleTouchStart(event) {
-        if (isAccessibilityEvent(event)) return;
-        
-        lastTouchStart = Date.now();
-        
-        // Set timer for long press
-        longPressTimer = setTimeout(() => {
-            event.preventDefault();
-            logDeterrent('Long-press prevented', event);
-            
-            // Gentle vibration feedback (if supported)
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-        }, CONFIG.longPressThreshold);
-    }
-
-    function handleTouchEnd() {
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-            longPressTimer = null;
-        }
-    }
-
-    function handleTouchMove() {
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-            longPressTimer = null;
-        }
-    }
-
-    /**
-     * Detect accessibility mode
-     */
-    function detectAccessibilityMode() {
-        // Check for reduced motion preference
-        const prefersReducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-        ).matches;
-        
-        // Check for screen reader usage patterns
-        const hasScreenReaderClass = document.documentElement.classList.contains(
-            'sr-only'
-        ) || document.body.classList.contains('sr-only');
-        
-        // Set accessibility mode
-        isAccessibilityMode = prefersReducedMotion || hasScreenReaderClass;
-    }
-
-    /**
-     * Initialize deterrent layer
-     */
-    function initDeterrence() {
-        // Skip if JavaScript is disabled (fails gracefully)
-        if (typeof document === 'undefined' || !document.addEventListener) {
-            return;
-        }
-        
-        // Detect accessibility requirements
-        detectAccessibilityMode();
-        
-        // Add event listeners
-        safeAddEvent(document, 'contextmenu', handleContextMenu);
-        safeAddEvent(document, 'selectstart', handleSelection);
-        safeAddEvent(document, 'dragstart', handleDragStart);
-        safeAddEvent(document, 'keydown', handleKeyDown);
-        
-        // Mobile touch events
-        safeAddEvent(document, 'touchstart', handleTouchStart, { passive: false });
-        safeAddEvent(document, 'touchend', handleTouchEnd, { passive: true });
-        safeAddEvent(document, 'touchmove', handleTouchMove, { passive: true });
-        
-        // Listen for accessibility changes
-        safeAddEvent(window, 'focus', detectAccessibilityMode);
-        
-        // Initial console message
-        if (CONFIG.logAttempts) {
-            console.log(CONFIG.consoleMessage);
-            console.log('This site uses client-side deterrents against casual copying.');
-            console.log('All content remains accessible to search engines and crawlers.');
-        }
-    }
-
-    /**
-     * Clean up function (for framework compatibility)
-     */
-    function cleanup() {
-        // Remove all our event listeners if needed
-        // Note: In practice, this runs until page unload
-        // This function is provided for framework integration
-        if (longPressTimer) {
-            clearTimeout(longPressTimer);
-        }
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        safeAddEvent(document, 'DOMContentLoaded', initDeterrence);
-    } else {
-        // DOM already loaded
-        initDeterrence();
-    }
-
-    // Expose cleanup for frameworks (if needed)
-    if (typeof window !== 'undefined') {
-        window.__deterrenceCleanup = cleanup;
-    }
-
-    // End of deterrence layer
-})();
+            `,document.body.appendChild(r),requestAnimationFrame(()=>{r.style.opacity="0.7",setTimeout(()=>{r.style.opacity="0",setTimeout(()=>r.remove(),300)},500)})}}function d(o){i(o)||(t=Date.now(),n=setTimeout(()=>{o.preventDefault(),c("Long-press prevented",o),navigator.vibrate&&navigator.vibrate(50)},e.longPressThreshold))}function f(){n&&(clearTimeout(n),n=null)}function p(){n&&(clearTimeout(n),n=null)}function g(){let e=window.matchMedia("(prefers-reduced-motion: reduce)").matches,t=document.documentElement.classList.contains("sr-only")||document.body.classList.contains("sr-only");o=e||t}function y(){"undefined"!=typeof document&&document.addEventListener&&(g(),s(document,"contextmenu",r),s(document,"selectstart",l),s(document,"dragstart",a),s(document,"keydown",u),s(document,"touchstart",d,{passive:!1}),s(document,"touchend",f,{passive:!0}),s(document,"touchmove",p,{passive:!0}),s(window,"focus",g),e.logAttempts&&(console.log(e.consoleMessage),console.log("This site uses client-side deterrents against casual copying."),console.log("All content remains accessible to search engines and crawlers.")))}"loading"===document.readyState?s(document,"DOMContentLoaded",y):y(),"undefined"!=typeof window&&(window.__deterrenceCleanup=function e(){n&&clearTimeout(n)})}();
 </script>
 
 <script>
@@ -806,17 +525,27 @@
       </div>
     </div>
 
-    <h1>Powerful Creative Tools</h1>
-    <p>Free and safe AI tools, Creative resources,PDF tools, Image tools, Blogs</p>
+    <h1>Powerful Super Fast Creative Tools - Blog, Images and PDF etc.</h1>
+    <p>AI powdered fast and free creative tools, Creative resources, PDF tools, Image tools, Blogs</p>
   </div>
   
+  <h2>Our Creative Tools</h2> <!-- NEW -->
+
   <div class="tools-grid" id="toolsContainer">
     <a href="pdf/index.html" class="tool-card" data-tool="pdf-tool">
       <div class="tool-icon tool-pdf">
         <i class="fas fa-file-pdf"></i>
       </div>
       <h3>PDF Tool</h3>
-      <p>Aarif PDF (ilovepdf)</p>
+      <p>Aarif PDF (super-fast)</p>
+    </a>
+
+   <a href="image-tools/index.html" class="tool-card" data-tool="image-pdf">
+      <div class="tool-icon tool-image-pdf">
+        <i class="fas fa-image"></i>
+      </div>
+      <h3>Image Tools</h3>
+      <p>100% Free and fast</p>
     </a>
     
     <a href="blog/index.html" class="tool-card" data-tool="my-blog">
@@ -832,41 +561,25 @@
         <i class="fas fa-gamepad"></i>
       </div>
       <h3>Game Zone</h3>
-      <p>Play games</p>
+      <p>Aarif fun games</p>
     </a>
     
-    <a href="tools/image-to-url.html" class="tool-card" data-tool="image-url">
-      <div class="tool-icon tool-image">
-        <i class="fas fa-link"></i>
-      </div>
-      <h3>Image to URL</h3>
-      <p>JPG/PNG to link</p>
-    </a>
-    
-    <a href="pdf/image-to-pdf.html" class="tool-card" data-tool="image-pdf">
-      <div class="tool-icon tool-image-pdf">
-        <i class="fas fa-image"></i>
-      </div>
-      <h3>Image to PDF</h3>
-      <p>Convert to PDF</p>
-    </a>
-    
-    <a href="tools/compress-image.html" class="tool-card" data-tool="compress">
-      <div class="tool-icon tool-compress">
-        <i class="fas fa-compress"></i>
-      </div>
-      <h3>Compress Image</h3>
-      <p>4MB image convert to 1MB</p>
-    </a>
-    
-    <a href="tools/image-converter.html" class="tool-card" data-tool="image-converter">
+  <a href="blog-writer/index.html" class="tool-card" data-tool="image-converter">
       <div class="tool-icon tool-image-converter">
-        <i class="fas fa-exchange-alt"></i>
+        <i class="fas fa-pen-nib"></i>
       </div>
-      <h3>Image Converter</h3>
-      <p>JPG/PNG/WebP</p>
+      <h3>Blog Writer</h3>
+      <p>custom coded-html formate</p>
     </a>
-    
+
+    <a href="tools/word-count.html" class="tool-card" data-tool="image-url">
+      <div class="tool-icon tool-image">
+        <i class="fas fa-file-alt"></i>
+      </div>
+      <h3>word counter</h3>
+      <p>word count online</p>
+    </a>
+
     <a href="card/index.html" class="tool-card" data-tool="greeting-card">
       <div class="tool-icon tool-greeting">
         <i class="fas fa-gift"></i>
@@ -882,33 +595,40 @@
       <h3>Drawing Pad</h3>
       <p>Create art</p>
     </a>
-    
-    <a href="tools/image-rename.html" class="tool-card" data-tool="image-rename">
-      <div class="tool-icon tools-image-rename">
-        <i class="fas fa-edit"></i>
+
+    <a href="footer/contact-us/contact.html" class="tool-card" data-tool="compress">
+      <div class="tool-icon tool-compress">
+        <i class="fas fa-phone"></i>
       </div>
-      <h3>Sequence Rename</h3>
-      <p>Image rename</p>
+      <h3>Contact</h3>
+      <p>Web-Developer</p>
     </a>
+    
+  <a href="/footer/contact-us/feedback.html" class="tool-card" data-tool="image-rename">
+    <div class="tool-icon tools-image-rename">
+  <i class="fas fa-comment-dots"></i>
+  </div>
+  <h3>Feedback</h3>
+  <p>Share your feedback</p>
+</a>
   </div>
   
   <div class="tagline">
-    Explore all our tools and share your experience with me through feedback.
-  </div>
+I care about your privacy! Most tools run right in your browser, so nothing is saved on a server. 🌟 Try all our 100% free tools and let me know what you think in the feedback.  </div>
 </div>
 
 <div class="icon-links">
   <a href="blog/index.html" class="icon-circle">
     <img src="main/blog.png" alt="BLOG" class="icon-img">
-    <span class="icon-label">MY BLOG</span>
+    <span class="icon-label">My Blog</span>
   </a>
   <a href="Game/index.html" class="icon-circle">
     <img src="main/game-zone.png" alt="GAMES" class="icon-img">
-    <span class="icon-label">FUN GAME</span>
+    <span class="icon-label">Fun Game</span>
   </a>
   <a href="footer/contact-us/contact.html" class="icon-circle">
     <img src="main/editing.png" alt="EDITING" class="icon-img">
-    <span class="icon-label">FOR EDITING</span>
+    <span class="icon-label">Editor</span>
   </a>
 </div>
 
@@ -919,7 +639,7 @@
 <section class="features" id="features">
   <div class="container">
     <div class="section-title">
-      <h2>Our Powerful Features ⚡</h2>
+      <h2>Our Powerful Features⚡</h2>
     </div>
     
     <div class="features-grid">
@@ -945,14 +665,14 @@
         </div>
       </a>
       
-      <a href="tools/remove-bg.html" class="feature-card-container">
+      <a href="image-tools/index.html" class="feature-card-container">
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fas fa-eraser"></i>
+            <i class="fas fa-image"></i>
           </div>
-          <h3>Remove Background</h3>
-          <p>Quickly remove the background from any image. Perfect for creating clean photos or graphics in seconds!</p>
-          <div class="feature-more">Remove BG <i class="fas fa-image"></i></div>
+          <h3>Free Image Tools</h3>
+          <p>Fast and free image tools- compress-image, image-converter, image-to-pdf etc !</p>
+          <div class="feature-more">Explore Image Tools <i class="fas fa-image"></i></div>
         </div>
       </a>
       
@@ -1267,7 +987,7 @@
           <span class="footer-logo-text">AarifAlam</span>
         </div>
         <p class="footer-about">One Website, Endless Solutions | Learn or Enjoy.</p>
-        <h4>Thank You So Much 🩷!</h4>
+        <h3>Thank You So Much 🩷!</h3>
         
         <div class="social-links">
           <a href="https://t.me/aarifalam0105" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
@@ -1443,7 +1163,6 @@ if(testimonials.length&&dots.length){function e(){clearInterval(slideInterval),s
       <p>Original version: <a href="${e.originalUrl}" target="_blank">${e.originalUrl}</a></p>
     `,document.body.appendChild(o)};if(!t()){a();return}setInterval(()=>{t()||a()},e.checkInterval)}(),navLinks&&navLinks.classList.contains("show"))){navLinks.classList.remove("show");let o=mobileMenuBtn.querySelector("i");o.classList.remove("fa-times"),o.classList.add("fa-bars")}})});
 </script>
+  
 </body>
 </html>
-
-
