@@ -118,10 +118,22 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8802060779563003"
      crossorigin="anonymous"></script>
+
+     <script>
+ !function(){"use strict";let e={logAttempts:!0,consoleMessage:"Content interaction is restricted for casual copying.",allowAccessibilitySelection:!0,longPressThreshold:800},t=0,n=null,o=!1;function s(t,n,o,s){try{t.addEventListener(n,o,s)}catch(i){e.logAttempts&&console.warn("Deterrence: Could not add event for",n,i.message)}}function i(e){let t=e.target?.getAttribute?.("aria-pressed"),n=e.target?.getAttribute?.("aria-selected"),s=e.target?.closest?.("[aria-live]");return"Tab"===e.key||"Escape"===e.key||t||n||s||o}function c(t,n){e.logAttempts&&(console.log(`%c🔒 Deterrence: ${t}`,"color: #ff6b6b; font-weight: bold;"),console.log(`%cℹ️ This is a deterrent measure only. Technical users can bypass this.`,"color: #4ecdc4; font-style: italic;"))}function r(e){if(!i(e))return e.preventDefault(),c("Context menu blocked",e),!1}function l(t){!(e.allowAccessibilitySelection&&i(t))&&window.getSelection().toString().length>100&&(t.preventDefault(),window.getSelection().removeAllRanges(),c("Text selection blocked",t))}function a(e){if(!i(e))return e.preventDefault(),c("Drag operation blocked",e),!1}function u(e){if(i(e))return;let t=e.ctrlKey||e.metaKey,n=e.shiftKey,o=e.key.toLowerCase(),s=[t&&n&&["i","j","c","k"].includes(o),t&&["u","s","p"].includes(o),"f12"===o,t&&["c","x","a"].includes(o),t&&["s","p"].includes(o)];if("printscreen"===o){e.preventDefault(),c("Screenshot prevented",e);return}if(s.some(Boolean)){e.preventDefault(),c(`Shortcut ${e.key} blocked`,e);let r=document.createElement("div");r.textContent="\uD83D\uDD12",r.style.cssText=`
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                font-size: 24px;
+                opacity: 0;
+                z-index: 10000;
+                transition: opacity 0.3s;
+                pointer-events: none;
+            `,document.body.appendChild(r),requestAnimationFrame(()=>{r.style.opacity="0.7",setTimeout(()=>{r.style.opacity="0",setTimeout(()=>r.remove(),300)},500)})}}function d(o){i(o)||(t=Date.now(),n=setTimeout(()=>{o.preventDefault(),c("Long-press prevented",o),navigator.vibrate&&navigator.vibrate(50)},e.longPressThreshold))}function f(){n&&(clearTimeout(n),n=null)}function p(){n&&(clearTimeout(n),n=null)}function g(){let e=window.matchMedia("(prefers-reduced-motion: reduce)").matches,t=document.documentElement.classList.contains("sr-only")||document.body.classList.contains("sr-only");o=e||t}function y(){"undefined"!=typeof document&&document.addEventListener&&(g(),s(document,"contextmenu",r),s(document,"selectstart",l),s(document,"dragstart",a),s(document,"keydown",u),s(document,"touchstart",d,{passive:!1}),s(document,"touchend",f,{passive:!0}),s(document,"touchmove",p,{passive:!0}),s(window,"focus",g),e.logAttempts&&(console.log(e.consoleMessage),console.log("This site uses client-side deterrents against casual copying."),console.log("All content remains accessible to search engines and crawlers.")))}"loading"===document.readyState?s(document,"DOMContentLoaded",y):y(),"undefined"!=typeof window&&(window.__deterrenceCleanup=function e(){n&&clearTimeout(n)})}();
+</script>
     
     <style>
 :root {
-    /* Light Theme Colors */
     --primary: #6c63ff;
     --primary-dark: #4d44db;
     --secondary: #ff6584;
@@ -702,7 +714,6 @@ body {
 </style>
 
 
-/* extra css */
 <style>
 /* === ENHANCED CARD FEEL & INTERACTION === */
 /* Add these styles to your existing CSS */
@@ -2404,6 +2415,7 @@ const allowedDomains = [
   }
 })();
 </script>
+    
     <script>
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".tool-card").forEach(e=>{e.addEventListener("click",function(e){let t=this.dataset.tool;console.log(`Tool clicked: ${t}`)})}),function(){let e={creatorName:"@aarifalam0105",requiredFiles:{css:"css/index-tagline.css",js:"js/pdf-header.js"},checkInterval:3e3,originalUrl:"https://aarifalam.life/"},t=()=>{let t=document.createElement("div");t.id="__css_valid_"+Math.random().toString(36).substr(2,9),t.setAttribute("data-creator",e.creatorName),t.style.display="none",document.body.appendChild(t);let r=document.createElement("div");r.id="__js_valid_"+Math.random().toString(36).substr(2,9),r.setAttribute("data-creator",e.creatorName),r.style.display="none",document.body.appendChild(r)},r=()=>{try{let t=!1;document.querySelectorAll('link[rel="stylesheet"]').forEach(r=>{r.href.includes(e.requiredFiles.css.split("/").pop())&&(t=!0)});let r=!1;return Array.from(document.scripts).forEach(t=>{t.src&&t.src.includes(e.requiredFiles.js.split("/").pop())&&(r=!0)}),t&&r}catch(a){return!1}},a=()=>{try{let t=document.getElementById("creator-watermark");return t&&t.textContent.includes(e.creatorName)&&"none"!==getComputedStyle(t).display}catch(r){return!1}},l=()=>{document.body.classList.add("body-blocked");let t=document.createElement("div");t.className="blocked-message",t.innerHTML=`
       <h1>⚠️ Unauthorized Modification Detected</h1>
