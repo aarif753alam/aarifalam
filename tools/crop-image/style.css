@@ -1,0 +1,1068 @@
+/* style.css - Enhanced Mobile-Friendly Cropper.js Integration */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    color: #1e293b;
+    line-height: 1.5;
+    margin-top: 60px;
+
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 0 16px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+    color: #4f46e5;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    max-width: 500px;
+    margin: 0 auto 20px;
+    line-height: 1.5;
+}
+
+.app-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 2px solid #e2e8f0;
+    width: 100%;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 16px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+    
+    .main-content {
+        padding: 14px;
+        gap: 16px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .app-card {
+        border-radius: 16px;
+        border-width: 1.5px;
+    }
+}
+
+.upload-section, .preview-section {
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Prevent flex overflow */
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+}
+
+.section-title i {
+    color: #4f46e5;
+    font-size: 1rem;
+}
+
+.upload-area {
+    border: 3px dashed #94a3b8;
+    border-radius: 16px;
+    padding: 32px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area:hover {
+    border-color: #4f46e5;
+    background: #f1f5f9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.upload-area.has-image {
+    border-style: solid;
+    border-color: #4f46e5;
+    padding: 0;
+    overflow: visible;
+    background: #f1f5f9;
+    border-width: 2px;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    color: #64748b;
+    margin-bottom: 12px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.upload-area:hover .upload-icon {
+    transform: scale(1.1);
+    color: #4f46e5;
+}
+
+.upload-text {
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 6px;
+    z-index: 1;
+    font-weight: 600;
+}
+
+.upload-subtext {
+    color: #64748b;
+    font-size: 0.85rem;
+    z-index: 1;
+    max-width: 90%;
+}
+
+#preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+/* When cropper is active, ensure proper display */
+.cropper-active #preview {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.preview-area {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f8fafc;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    position: relative;
+    border: 3px solid #cbd5e1;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.preview-area.cropped {
+    border-color: #10b981;
+    border-width: 3px;
+}
+
+.placeholder-preview {
+    text-align: center;
+    color: #64748b;
+    padding: 20px;
+}
+
+.placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    opacity: 0.6;
+    color: #94a3b8;
+}
+
+.placeholder-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+#croppedPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+    border-radius: 12px;
+}
+
+#croppedPreview.cropped-visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.controls-section {
+    background: #f8fafc;
+    border-top: 2px solid #e2e8f0;
+    padding: 24px;
+}
+
+@media (max-width: 768px) {
+    .controls-section {
+        padding: 20px 16px;
+    }
+}
+
+.crop-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .crop-controls {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.3;
+}
+
+.control-label i {
+    color: #4f46e5;
+    font-size: 0.85rem;
+}
+
+.dimension-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    .dimension-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.dimension-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.dimension-input label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+input[type="number"], input[type="range"] {
+    width: 100%;
+}
+
+.number-input {
+    padding: 10px 12px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background: white;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.number-input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    transform: translateY(-1px);
+}
+
+.ratio-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.ratio-btn {
+    padding: 10px 8px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    background: white;
+    color: #475569;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.ratio-btn:hover {
+    border-color: #4f46e5;
+    color: #4f46e5;
+    transform: translateY(-1px);
+}
+
+.ratio-btn.active {
+    background: #4f46e5;
+    border-color: #4f46e5;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.slider-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    min-width: 45px;
+    font-weight: 500;
+}
+
+.slider {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #cbd5e1;
+    border-radius: 3px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4f46e5;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4f46e5;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.btn {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    min-height: 48px;
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px 16px;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    border: 2px solid transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+    border: 2px solid transparent;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+}
+
+.btn-secondary {
+    background: white;
+    color: #475569;
+    border: 2px solid #cbd5e1;
+}
+
+.btn-secondary:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid #e2e8f0;
+    font-size: 0.85rem;
+    color: #64748b;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 480px) {
+    .info-section {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.info-value {
+    font-weight: 700;
+    color: #334155;
+    font-size: 0.9rem;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-container {
+        min-height: 200px;
+    }
+}
+
+/* Hide custom crop overlay when cropper is active */
+.cropper-active .crop-overlay {
+    display: none !important;
+}
+
+.crop-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.crop-box {
+    position: absolute;
+    border: 3px solid #4f46e5;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    cursor: move;
+    pointer-events: all;
+    border-radius: 4px;
+}
+
+.crop-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #4f46e5;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: all;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.handle-nw { top: -8px; left: -8px; cursor: nw-resize; }
+.handle-ne { top: -8px; right: -8px; cursor: ne-resize; }
+.handle-sw { bottom: -8px; left: -8px; cursor: sw-resize; }
+.handle-se { bottom: -8px; right: -8px; cursor: se-resize; }
+.handle-n { top: -8px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
+.handle-s { bottom: -8px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
+.handle-w { left: -8px; top: 50%; transform: translateY(-50%); cursor: w-resize; }
+.handle-e { right: -8px; top: 50%; transform: translateY(-50%); cursor: e-resize; }
+
+footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 16px;
+    color: #64748b;
+    font-size: 0.85rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+.file-input {
+    display: none;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    z-index: 100;
+    display: none;
+    backdrop-filter: blur(4px);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top: 3px solid #4f46e5;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== Enhanced Cropper.js Styles ===== */
+.cropper-container {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 5 !important;
+    border-radius: 12px;
+}
+
+.cropper-view-box {
+    outline: 3px solid #4f46e5 !important;
+    outline-color: rgba(79, 70, 229, 0.95) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 0 1px white;
+}
+
+.cropper-face {
+    background-color: transparent !important;
+    opacity: 0.1 !important;
+}
+
+.cropper-line {
+    background-color: #4f46e5 !important;
+    opacity: 0.6;
+}
+
+.cropper-point {
+    background-color: #4f46e5 !important;
+    border: 3px solid white !important;
+    width: 14px !important;
+    height: 14px !important;
+    opacity: 1 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cropper-point.point-se {
+    width: 18px !important;
+    height: 18px !important;
+    background-color: #7c3aed !important;
+}
+
+.cropper-modal {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    opacity: 0.6 !important;
+}
+
+.cropper-container img {
+    max-width: none !important;
+    max-height: none !important;
+    display: block !important;
+    opacity: 1 !important;
+    border-radius: 8px;
+}
+
+/* Cropper action buttons */
+.cropper-actions {
+    display: none;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cropper-active .cropper-actions {
+    display: flex;
+}
+
+.cropper-action-btn {
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.2s;
+}
+
+.cropper-action-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+}
+
+/* Reselect button styling */
+#reselectImageBtn {
+    align-self: center;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    background: white;
+    border: 2px solid #cbd5e1;
+    color: #475569;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#reselectImageBtn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#reselectImageBtn i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+#reselectImageBtn:hover i {
+    transform: rotate(180deg);
+}
+
+/* Responsive adjustments for cropper */
+@media (max-width: 768px) {
+    .upload-area, .preview-area {
+        min-height: 250px;
+    }
+    
+    .cropper-actions {
+        gap: 6px;
+    }
+    
+    .cropper-action-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    #reselectImageBtn {
+        max-width: 100%;
+        margin-top: 10px;
+        padding: 12px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-area, .preview-area {
+        min-height: 200px;
+    }
+    
+    .cropper-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .cropper-action-btn {
+        justify-content: center;
+    }
+    
+    .cropper-view-box {
+        outline-width: 2px !important;
+    }
+    
+    .cropper-point {
+        width: 12px !important;
+        height: 12px !important;
+        border-width: 2px !important;
+    }
+}
+
+/* Fix for cropper in upload area */
+.upload-area.has-image .image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f5f9;
+    border-radius: 14px;
+}
+
+/* Ensure preview area works with cropped images */
+.preview-area.cropper-preview {
+    background: transparent;
+}
+
+/* Hide original crop elements when cropper is active */
+.cropper-active .crop-handle,
+.cropper-active .crop-box {
+    display: none !important;
+}
+
+/* Additional utility classes */
+.cropper-active {
+    cursor: default;
+}
+
+.upload-disabled {
+    opacity: 0.7 !important;
+    pointer-events: none !important;
+}
+
+.upload-disabled:hover {
+    border-color: #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    transform: none !important;
+}
+
+/* ===== Mobile Touch Optimizations ===== */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none !important;
+    }
+    
+    .upload-area:hover {
+        transform: none !important;
+    }
+    
+    .ratio-btn:hover {
+        transform: none !important;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .crop-handle {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .app-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .btn, .cropper-actions, .upload-area {
+        display: none !important;
+    }
+    
+    #croppedPreview {
+        max-width: 100% !important;
+    }
+}
+
+/* ===== Accessibility Improvements ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for accessibility */
+.number-input:focus-visible,
+.btn:focus-visible,
+.ratio-btn:focus-visible {
+    outline: 3px solid #4f46e5;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn-primary, .btn-success {
+        border: 2px solid #000;
+    }
+    
+    .cropper-view-box {
+        outline: 3px solid #000 !important;
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: #f1f5f9;
+    }
+    
+    .app-card {
+        background: #334155;
+        border-color: #475569;
+    }
+    
+    .upload-area, .preview-area {
+        background: #1e293b;
+        border-color: #475569;
+    }
+    
+    .upload-text {
+        color: #e2e8f0;
+    }
+    
+    .upload-subtext {
+        color: #94a3b8;
+    }
+}
+
+/* ===== Performance Optimizations ===== */
+.cropper-container {
+    contain: layout paint;
+}
+
+.image-container {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Add these styles to your existing style.css */
+
+/* Fix the image preview box issue */
+.upload-area.has-image .image-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #f1f5f9 !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+}
+
+/* Ensure the uploaded image doesn't show broken image icon */
+#imagePreview {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    display: none !important;
+    border-radius: 8px !important;
+}
+
+/* When Cropper is active, show the image properly */
+.cropper-active #imagePreview {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: static !important;
+}
+
+/* Hide the uploaded image initially, let Cropper handle it */
+.upload-area.has-image #imagePreview {
+    display: none;
+}
+
+/* Only show image when Cropper is properly initialized */
+.cropper-container ~ #imagePreview {
+    display: block;
+}
+
+/* Remove the duplicate image preview that shows broken image */
+.upload-area.has-image:not(.cropper-active) .image-container::before {
+    content: none !important;
+}
+
+/* Logo-style preview when no image is selected */
+.upload-area:not(.has-image) .image-container {
+    display: none;
+}
+
+/* Ensure proper image container for Cropper */
+.cropper-container {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
