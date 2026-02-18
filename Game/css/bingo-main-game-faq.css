@@ -1,0 +1,282 @@
+/* FAQ Styles – matching game theme */
+.faq-container-advanced {
+    max-width: 900px;
+    margin: 40px auto 20px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    background: rgba(20, 30, 45, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #ecf0f1;
+}
+
+.faq-toggle-btn {
+    width: 100%;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+
+.faq-toggle-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #8e44ad);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.faq-toggle-btn::after {
+    content: '+';
+    font-size: 2.5rem;
+    margin-left: 15px;
+    transition: transform 0.4s;
+    font-weight: 300;
+}
+
+.faq-toggle-btn.active::after {
+    transform: rotate(135deg);
+    color: #f1c40f;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0,0,0,0.2);
+    /* Remove any default padding/margin that could cause spacing */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.faq-content.active {
+    max-height: 1200px; /* Reduced significantly to prevent blank space */
+    overflow-y: auto; /* Add scrollbar if content exceeds */
+}
+
+/* Custom scrollbar for better appearance */
+.faq-content.active::-webkit-scrollbar {
+    width: 8px;
+}
+
+.faq-content.active::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+}
+
+.faq-content.active::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.faq-content.active::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
+.faq-container-advanced h3 {
+    padding: 18px 25px;
+    margin: 0;
+    background: rgba(0,0,0,0.3);
+    color: #f1c40f;
+    font-size: 1.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.faq-container-advanced h3 i {
+    margin-right: 12px;
+    color: #3498db;
+}
+
+.faq-item-advanced {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.faq-item-advanced:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    padding: 20px 25px 20px 70px;
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+    transition: all 0.3s ease;
+    min-height: 60px;
+    box-sizing: border-box;
+}
+
+.faq-question:hover {
+    color: #3498db;
+    background: rgba(52,152,219,0.1);
+}
+
+.faq-question::before {
+    content: 'Q:';
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #3498db;
+    font-size: 1.4rem;
+    background: rgba(52,152,219,0.2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #9b59b6;
+    transition: transform 0.3s;
+    font-weight: 300;
+}
+
+.faq-item-advanced.active .faq-question::after {
+    transform: translateY(-50%) rotate(45deg);
+    color: #e74c3c;
+}
+
+.faq-item-advanced.active .faq-question {
+    color: #f1c40f;
+    background: rgba(0,0,0,0.3);
+}
+
+.faq-answer {
+    padding: 0 25px 0 70px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    background: rgba(0,0,0,0.2);
+    line-height: 1.7;
+    color: #bdc3c7;
+    font-size: 1rem;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.faq-item-advanced.active .faq-answer {
+    max-height: 300px; /* Reduced to prevent excessive space */
+    padding: 0 25px 20px 70px;
+}
+
+.faq-answer p {
+    margin: 0 0 10px 0;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}
+
+.faq-answer::before {
+    content: 'A:';
+    position: absolute;
+    left: 25px;
+    top: 0;
+    font-weight: bold;
+    color: #2ecc71;
+    font-size: 1.4rem;
+    background: rgba(46,204,113,0.2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faq-answer a {
+    color: #f1c40f;
+    text-decoration: none;
+    border-bottom: 1px dotted #f1c40f;
+}
+
+.faq-answer a:hover {
+    color: #e67e22;
+}
+
+@media (max-width: 600px) {
+    .faq-toggle-btn { 
+        font-size: 1.4rem; 
+        padding: 15px; 
+    }
+    
+    .faq-question { 
+        font-size: 1rem; 
+        padding: 15px 15px 15px 55px; 
+        min-height: 50px;
+    }
+    
+    .faq-question::before { 
+        left: 15px; 
+        width: 30px; 
+        height: 30px; 
+        font-size: 1.2rem; 
+    }
+    
+    .faq-answer { 
+        font-size: 0.9rem; 
+    }
+    
+    .faq-item-advanced.active .faq-answer { 
+        padding: 0 15px 15px 50px; 
+        max-height: 350px; /* Adjusted for mobile */
+    }
+    
+    .faq-answer::before { 
+        left: 15px; 
+        width: 30px; 
+        height: 30px; 
+        font-size: 1.2rem; 
+    }
+    
+    .faq-content.active {
+        max-height: 1000px; /* Adjusted for mobile */
+    }
+}
+
+/* Animation for smooth opening */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faq-content.active .faq-item-advanced {
+    animation: fadeIn 0.5s ease forwards;
+}
