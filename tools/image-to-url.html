@@ -723,6 +723,47 @@
                 font-size: 0.9rem;
             }
         }
+
+          /*  remove button */
+          .remove-preview-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e63946;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.remove-preview-btn:hover {
+    transform: scale(1.1);
+    background: #c1121f;
+}
+
+.remove-preview-btn i {
+    pointer-events: none;
+}
+
+.empty-preview {
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+    font-style: italic;
+    grid-column: 1 / -1;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 10px 0;
+}
     </style> 
  </head>
 <body>
@@ -1181,6 +1222,7 @@ Image to url valid for life time, if you need this tool for you website then con
     <script src="https://aarifalam.life/blog/js/video-frame.js"></script>
 </body>
 </html>
+
 
 
 
