@@ -981,15 +981,14 @@
                     <input type="checkbox" id="faq1">
                     <label for="faq1" class="faq-question">How this Image to URL Converter works</label>
                     <div class="faq-answer">
-                        Hi friend, it's very simple. You upload your image, we create a link to it which you can share anywhere. No hassle of signing up, just drag and drop your photo.
-                    </div>
+                Hi guys, it's very simple. Upload your image and we'll instantly create a shareable link for it. No sign-up required—just drag and drop your photo. Your image URL works for a long time, and you can easily view all your image URLs in the history.                    </div>
                 </div>
 
                 <div class="faq-item-advanced">
                     <input type="checkbox" id="faq2">
                     <label for="faq2" class="faq-question">Is this service really free?</label>
                     <div class="faq-answer">
-                        Yes, absolutely. No hidden charges, nothing. You can convert as many images as you want without paying a single rupee.
+                  Yes, absolutely. No hidden charges. You can convert as many images as you want without paying a penny, and you get a free, long-lasting, shareable image-to-URL link.
                     </div>
                 </div>
 
@@ -997,7 +996,7 @@
                     <input type="checkbox" id="faq3">
                     <label for="faq3" class="faq-question">What image formats can I convert to URL?</label>
                     <div class="faq-answer">
-                        We support almost all common formats like jpg, png, gif, webp. If just images, we create a shareable link for you.
+               We support almost all common image formats, including JPG, PNG, GIF, and WebP. Simply upload your image and we'll create a shareable URL for it.     
                     </div>
                 </div>
 
@@ -1005,8 +1004,7 @@
                     <input type="checkbox" id="faq4">
                     <label for="faq4" class="faq-question">How long is my image URL active?</label>
                     <div class="faq-answer">
-                        Can people see my uploaded photos?
-                        Only if you give them a link. Images are not public anywhere. They are private unless you share the URL.
+                  Your image URL remains active for a long time. When you upload an image, our tool instantly generates a permanent, shareable image URL that you can use anytime and anywhere.
                     </div>
                 </div>
 
@@ -1014,7 +1012,7 @@
                     <input type="checkbox" id="faq5">
                     <label for="faq5" class="faq-question">What is the maximum size of image I can upload?</label>
                     <div class="faq-answer">
-                        We handle larger sizes too, but it's best to keep it under 10 MB for faster uploads. Photos taken with a regular phone camera also work.
+                        We handle larger sizes too, but it's best to keep it under 20 MB for faster uploads. Photos taken with a regular phone camera also work.
                     </div>
                 </div>
 
@@ -1022,7 +1020,7 @@
                     <input type="checkbox" id="faq6">
                     <label for="faq6" class="faq-question">How to share converted images?</label>
                     <div class="faq-answer">
-                        It's very simple. After uploading, click the copy button next to the image URL and paste it anywhere, such as WhatsApp, email, forums, etc.
+                It's very simple. After you upload your image, copy the generated image URL and paste it anywhere you want, such as WhatsApp, email, forums, or social media platforms.
                     </div>
                 </div>
 
@@ -1030,7 +1028,7 @@
                     <input type="checkbox" id="faq7">
                     <label for="faq7" class="faq-question">Can I upload multiple images at once?</label>
                     <div class="faq-answer">
-                        Yes, of course. You can select or drag-drop multiple images at once. We convert all of them at once.
+              Yes, you can upload multiple images at once using drag and drop or file selection. Our tool instantly converts all uploaded images and creates long-lasting, shareable image URLs for each file. You can also view all your created image URLs in the History section and copy them at any time.      
                     </div>
                 </div>
 
@@ -1109,7 +1107,7 @@ Image to url valid for life time, if you need this tool for you website then con
         </div>
 
         <div class="profile-info">
-            <div class="profile-name">Do you NEED a Website</div>
+            <div class="profile-name">Do you NEED Your Own Image url tools</div>
             <div class="profile-title">All tools exact like my website large and modern❤️. | PDF Tools, Blog page, Image Tools, more others. - Unlimited free api</div>
         </div>
 
@@ -1130,6 +1128,7 @@ Image to url valid for life time, if you need this tool for you website then con
   </p>
   <p>© 2026 AarifAlam.life | All rights reserved.</p>
 </footer>
+  
        <script>
     const card = document.getElementById('profileCard');
     
@@ -1176,99 +1175,13 @@ Image to url valid for life time, if you need this tool for you website then con
     });
 </script>
 
-  <script>
-// daily-limit.js (AUTO ENFORCED)
-(function () {
-
-    const DAILY_LIMIT = 10;
-    const STORAGE_KEY = 'imageUploadDailyLimit';
-
-    function today() {
-        return new Date().toDateString();
-    }
-
-    function read() {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    }
-
-    function write(data) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
-
-    function remaining() {
-        const data = read();
-        if (data.date !== today()) return DAILY_LIMIT;
-        return Math.max(0, DAILY_LIMIT - (data.count || 0));
-    }
-
-    function consume(n) {
-        const data = read();
-        if (data.date !== today()) {
-            data.date = today();
-            data.count = 0;
-        }
-        data.count += n;
-        write(data);
-    }
-
-    function show(msg) {
-        alert(msg);
-    }
-
-    /* ==========================
-       HARD ENFORCEMENT LOGIC
-    ========================== */
-
-    // 1️⃣ Intercept file input selection
-    document.addEventListener('change', function (e) {
-        if (!e.target || e.target.type !== 'file') return;
-
-        const files = Array.from(e.target.files);
-        const allowed = remaining();
-
-        if (allowed <= 0) {
-            e.target.value = '';
-            show('Daily limit reached. Max 10 images per day.');
-            return;
-        }
-
-        if (files.length > allowed) {
-            const dt = new DataTransfer();
-            files.slice(0, allowed).forEach(f => dt.items.add(f));
-            e.target.files = dt.files;
-
-            show(`Only ${allowed} image(s) allowed today. Extra images removed.`);
-        }
-    }, true);
-
-    // 2️⃣ Intercept upload button click
-    document.addEventListener('click', function (e) {
-        if (e.target && e.target.id === 'uploadBtn') {
-
-            const allowed = remaining();
-            if (allowed <= 0) {
-                e.preventDefault();
-                show('Daily upload limit reached (10 images).');
-                return false;
-            }
-
-            // Count actual selected files
-            const input = document.querySelector('input[type="file"]');
-            if (!input || !input.files) return;
-
-            const count = Math.min(input.files.length, allowed);
-            consume(count);
-        }
-    }, true);
-
-})();
-</script>
     <script src="js/img-url.js"></script>
     <script src="js/img-url-faq.js"></script>
     <script src="../main/js/main-header.js"></script>
     <script src="https://aarifalam.life/blog/js/video-frame.js"></script>
 </body>
 </html>
+
 
 
 
